@@ -8,9 +8,7 @@
 	<nav aria-label="Global" class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex items-center flex-wrap sm:flex-nowrap">
 			<a href="/" class="logo mr-3 text-4xl font-bold">
-				whatsgreener
-				<!-- <span class="text-green-700">whats</span><span class="text-green-500"
-					>greener</span> -->
+				<img src="/whatsgreener-logo-site.png" alt="whatsgreener" width="220" />
 			</a>
 			<a
 				href="#githublink"

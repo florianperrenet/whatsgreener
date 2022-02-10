@@ -1,6 +1,12 @@
-# WhatsGreener
+<p align="center">
+<a href="https://whatsgreener.xyz">
+  <img src="static/whatsgreener-logo-github.png" width="350px" />
+</a>
+</p>
 
-Site can be seen at: [whatsgreener.xyz](https://whatsgreener.xyz).
+<p align="center">
+  <a href="https://whatsgreener.xyz" target="_blank">whatsgreener.xyz</a>
+</p>
 
 
 ## Developing
