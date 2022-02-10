@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://whatsgreener.xyz" target="_blank">whatsgreener.xyz</a>
+  <a href="https://whatsgreener.xyz">whatsgreener.xyz</a>
 </p>
 
 
