@@ -1,37 +1,8 @@
-// /* @tailwind base;
-// @tailwind components;
-// @tailwind utilities; */
-
-// @import "normalize.css";
+@import url('https://rsms.me/inter/inter.css');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-// @layer base {
-//   h1 {
-//     @apply text-4xl mb-3;
-//   }
-//   h2 {
-//     @apply text-2xl mb-2;
-//   }
-//   h3 {
-//     @apply text-xl mb-2;
-//   }
-//   p {
-//     @apply mb-3 text-lg;
-//   }
-
-//   p + h3, p + h2 {
-//     @apply mt-5;
-//   }
-//   p + table {
-//     @apply mt-5;
-//   }
-// }
-
-
-
 
 
 @layer utilities {
@@ -39,90 +10,3 @@
     max-width: 85rem;
   }
 }
-
-
-// .text-left {
-//     text-align: left;
-// }
-
-// .text-right {
-//     text-align: right;
-// }
-
-// .text-center {
-//     text-align: center;
-// }
-
-
-// .mx-auto {
-//   margin-left: auto;
-//   margin-right: auto;
-// }
-
-// .w-full {
-//   width: 100%;
-// }
-
-// .table {
-//   border-collapse: collapse;
-//   caption-side: bottom;
-//   font-family: "Work Sans";
-//   margin-bottom: 2rem;
-  
-//   th,
-//   td {
-//     padding: .2rem;
-//     vertical-align: top;
-//     border-top: 1px solid #eee;
-//   }
-  
-//   thead th {
-//     vertical-align: bottom;
-//     border-bottom: 2px solid #eee;
-//     background-color: #000;
-//     color: white;
-//   }
-  
-//   tbody + tbody {
-//     border-top: 2px solid #eee;
-//   }
-  
-//   .special {
-//     background-color: #eee;
-//   }
-  
-//   .divider {
-//     text-align: center;
-//     background-color: #eee;
-//   }
-  
-//   caption {
-//     padding: 10px 0;
-//   }
-// }
-
-
-// .table-bordered {
-//   border: 1px solid #eee;
-  
-//   th,
-//   td {
-//     border: 1px solid #eee;
-//   }
-  
-//   thead {
-//     th,
-//     td {
-//       border-bottom-width: 2px;
-//     }
-//   }
-
-  
-//   .text-middle {
-//     vertical-align: middle;
-//   }
-// }
-// .table-overflow {
-//   display: block;
-//   overflow-x: auto;
-// }
