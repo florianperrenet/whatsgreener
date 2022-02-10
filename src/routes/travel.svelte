@@ -15,8 +15,13 @@
 
 <SidebarLayout>
   <div slot="sidebar">
-    <Input text="Distance (km)" type="number" bind:value={base.distance} />
-    <Input text="Weight (kg)" type="number" bind:value={base.weight} />
+    <Input
+      text="Distance (km)"
+      type="number"
+      bind:value={base.distance}
+      min="1"
+    />
+    <Input text="Weight (kg)" type="number" bind:value={base.weight} min="1" />
     <Select
       text="Diet"
       bind:selected={base.diet}

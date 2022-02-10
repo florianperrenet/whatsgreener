@@ -77,7 +77,7 @@
   A greenhouse gas (GHG) is a gas that absorbs and emits radiant energy within
   the thermal infrared range, causing the greenhouse effect. <Cite
     to="wikipedia-greenhouse_gas"
-  />
+  /> Common greenhouse gases are:
 </p>
 
 <Table

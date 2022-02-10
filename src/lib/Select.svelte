@@ -1,7 +1,14 @@
+<script context="module">
+  let counter = 0;
+</script>
+
 <script>
   export let text;
   export let options = [];
   export let selected = null;
+
+  const selectId = "select_" + counter++;
+
   let show = false;
 
   function select(option) {
@@ -35,10 +42,10 @@
   use:clickOutside
   on:click_outside={handleClickOutside}
 >
-  <label class="block text-sm font-medium text-gray-700">
+  <label for={selectId} class="block text-sm font-medium text-gray-700">
     {text}
   </label>
-  <div class="mt-1 relative">
+  <div id={selectId} class="mt-1 relative">
     <button
       type="button"
       class="relative w-full bg-white border rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
