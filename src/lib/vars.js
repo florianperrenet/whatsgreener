@@ -2541,15 +2541,16 @@ export const diets_distribution_table = (() => {
 
         const type_grouped = {};
         for (const [gkey, gvalue] of Object.entries(value.grouped)) {
+            const val = [
+                gkey,
+                `${gvalue.amount} ${gvalue.unit}`,
+                gvalue.kcal,
+                (gvalue.percentage.times(dec("100"))).toFixed(2),
+            ];
             if (gvalue.type in type_grouped) {
-                type_grouped[gvalue.type].push([
-                    gkey,
-                    `${gvalue.amount} ${gvalue.unit}`,
-                    gvalue.kcal,
-                    (gvalue.percentage.times(dec("100"))).toFixed(2),
-                ]);
+                type_grouped[gvalue.type].push(val);
             } else {
-                type_grouped[gvalue.type] = [];
+                type_grouped[gvalue.type] = [val];
             }
         }
         let kcal_total = dec("0");
@@ -2579,8 +2580,8 @@ export const diets_footprint_table = (() => {
         for (const [key, value] of Object.entries(dietvalue.footprint_per_kcal)) {
             data[diet].push([
                 key,
-                (value.mean * 1000).toFixed(2),
-                (value.median * 1000).toFixed(2),
+                (value.mean.times(dec("1000"))).toFixed(2),
+                (value.median.times(dec("1000"))).toFixed(2),
             ]);
         }
 
@@ -2817,13 +2818,13 @@ export const exercises = (() => {
             speed: dec("6"),
             met: dec("5"),
         },
-        runningSlow: {
-            name: "Running slow",
+        joggingSlow: {
+            name: "Jogging slow",
             speed: dec("10"),
             met: dec("10"),
         },
-        runningFast: {
-            name: "Running fast",
+        joggingFast: {
+            name: "Jogging fast",
             speed: dec("15"),
             met: dec("15"),
         },

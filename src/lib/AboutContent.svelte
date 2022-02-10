@@ -75,9 +75,9 @@
 <h3>Greenhouse gases</h3>
 <p>
   A greenhouse gas (GHG) is a gas that absorbs and emits radiant energy within
-  the thermal infrared range, causing the greenhouse effect. <Cite
+  the thermal infrared range, causing the greenhouse effect <Cite
     to="wikipedia-greenhouse_gas"
-  /> Common greenhouse gases are:
+  />. Common greenhouse gases are:
 </p>
 
 <Table
@@ -198,13 +198,17 @@
 <h2>Travel</h2>
 
 <h3>Constants</h3>
-<div>atmosphericTemperature (&#8451;) = 20</div>
-<div>bodyTemperature (&#8451;) = 37</div>
+<div class="text-sm">
+  {@html math("\\textup{atmosphericTemperature (℃) = 20}")}
+  {@html math("\\textup{bodyTemperature (℃) = 37}")}
+</div>
 
 <h3>Variables</h3>
-<div>bodyWeight (kg) = 70</div>
+<div class="text-sm">
+  {@html math("\\textup{bodyWeight (kg) = 70}")}
+</div>
 
-<h3>Exercise (Walking, Running, Cycling)</h3>
+<h3>Exercise (Walking, Jogging, Cycling)</h3>
 <p>
   <strong>Important.</strong>
   Exercise is based on excess energy expenditure i.e. exercise is compared to being
@@ -303,7 +307,7 @@ The difference could be 10%.
 <p>
   According to source <Cite to="ncbi-air_usage" /> and source <Cite
     to="bbc-air_usage"
-  /> we breathe around 6000 L/h during exer- cise. Using the Air usage of Running
+  /> we breathe around 6000 L/h during exer- cise. Using the Air usage of Jogging
   fast would result in 51.22 ·70 (kg) = 3585.4 L/h. Our result is almost half. The
   sources either used a different bodyweight or a differ- ent exercise intensity.
   MET oxygen demand calculation does have limitations
