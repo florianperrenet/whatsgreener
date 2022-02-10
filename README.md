@@ -9,6 +9,7 @@ Site can be seen at: [whatsgreener.xyz](https://whatsgreener.xyz).
 # install dependencies
 npm run install
 
+# serve with hot reload at localhost:3000
 npm run dev
 
 # or start the server and open the app in a new browser tab
