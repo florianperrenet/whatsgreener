@@ -7,13 +7,20 @@
 >
 	<nav aria-label="Global" class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex items-center flex-wrap sm:flex-nowrap">
-			<a href="/" class="logo mr-3 text-4xl font-bold">
+			<a href="/" class="mr-3 text-4xl font-bold">
 				<img src="/whatsgreener-logo-site.png" alt="whatsgreener" width="220" />
 			</a>
 			<a
-				href="#githublink"
+				href="https://github.com/florianperrenet/whatsgreener"
 				class="text-xs leading-5 font-semibold bg-slate-400/10 rounded-full py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20 dark:highlight-white/5"
+				target="_blank"
 			>
+				<img
+					src="/static/GitHub-Mark-32px.png"
+					alt="github mark"
+					width="16"
+					class="mr-1"
+				/>
 				v0.0.1-BETA
 			</a>
 
@@ -48,9 +55,3 @@
 		</div>
 	</nav>
 </header>
-
-<style>
-	.logo {
-		font-family: "Cardo";
-	}
-</style>

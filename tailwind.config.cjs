@@ -8,13 +8,6 @@ module.exports = {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
     },
-    // fontFamily: {
-    //   // 'serif': ['Lora'],
-    //   'serif': ['Merriweather'],
-    //   // 'serif': ['Noto Serif'],
-    //   'sans': ['Source Sans Pro'],
-    //   // 'serif': ['Source Serif Pro'],
-    // }
   },
   plugins: [
     require('@tailwindcss/typography'),

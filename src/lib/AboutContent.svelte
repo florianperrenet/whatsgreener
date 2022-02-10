@@ -61,7 +61,10 @@
   If you find a mistake or see an improvement, please let me know by <a
     href="mailto:florian@whatsgreener.xyz">email</a
   >
-  or edit directly on <a href="https://github.com">github</a>.
+  or edit directly on
+  <a href="https://github.com/florianperrenet/whatsgreener" target="_blank"
+    >github</a
+  >.
 </p>
 
 <!-- <h3>Thoughts</h3>
