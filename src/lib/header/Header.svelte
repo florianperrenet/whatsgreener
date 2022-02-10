@@ -8,7 +8,7 @@
 	<nav aria-label="Global" class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex items-center flex-wrap sm:flex-nowrap">
 			<a href="/" class="mr-3 text-4xl font-bold">
-				<img src="/whatsgreener-logo-site.png" alt="whatsgreener" width="220" />
+				<img src="whatsgreener-logo-site.png" alt="whatsgreener" width="220" />
 			</a>
 			<a
 				href="https://github.com/florianperrenet/whatsgreener"
@@ -16,7 +16,7 @@
 				target="_blank"
 			>
 				<img
-					src="/static/GitHub-Mark-32px.png"
+					src="GitHub-Mark-32px.png"
 					alt="github mark"
 					width="16"
 					class="mr-1"
