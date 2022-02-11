@@ -3014,6 +3014,15 @@ export const travel = (distance, weight, diet) => {
                 }
             }
         }
+        // TODO actual impact calculation
+        let impact = dec("0");
+        const cdL = activity.emits["carbon_dioxide-gas-L"];
+        const cdKg = activity.emits["carbon_dioxide-gas-kg"];
+        if ('amount' in cdL)
+            impact = impact.add(cdL.amount);
+        if ('amount' in cdKg)
+            impact = impact.add(cdKg.amount);
+        activity.impact = impact;
     }
 
     return activities;

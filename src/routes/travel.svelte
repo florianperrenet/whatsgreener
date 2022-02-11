@@ -3,6 +3,7 @@
   import Input from "$lib/Input.svelte";
   import Select from "$lib/Select.svelte";
   import Toggle from "$lib/Toggle.svelte";
+  import ImpactBar from "$lib/ImpactBar.svelte";
   import { diets, food, travel } from "$lib/vars";
 
   const base = {
@@ -11,6 +12,24 @@
     diet: "meat_fish",
     sort: "Highest impact",
   };
+
+  const sortOn = {
+    "Lowest impact": (a, b) => {
+      return a.impact - b.impact;
+    },
+    "Highest impact": (a, b) => {
+      return b.impact - a.impact;
+    },
+  };
+
+  function travelValues(distance, weight, diet, sort) {
+    const values = Object.values(travel(distance, weight, diet));
+
+    if (sort === "Lowest impact") return values.sort(sortOn["Lowest impact"]);
+    if (sort === "Highest impact") return values.sort(sortOn["Highest impact"]);
+
+    return values;
+  }
 </script>
 
 <SidebarLayout>
@@ -42,12 +61,19 @@
   </div>
   <div slot="content">
     <div class="mb-10 text-4xl font-extrabold text-slate-900">Travel</div>
-    <div>Terminology</div>
-    <div class="mb-5">
-      MET: Metabolic Equivalent of Task (exercise intensity)
+    <div class="font-bold">Terminology</div>
+    <div class="text-base b-5 mb-10">
+      <div>
+        <span class="font-medium">MET:</span> Metabolic Equivalent of Task (exercise
+        intensity)
+      </div>
+      <div><span class="font-medium">WGI:</span> WhatsGreenerImpact</div>
+      <div>
+        <span class="font-medium">RWGI:</span> RelativeWhatsGreenerImpact
+      </div>
     </div>
 
-    {#each Object.values(travel(base.distance, base.weight, base.diet)) as option}
+    {#each travelValues(base.distance, base.weight, base.diet, base.sort) as option}
       <div class="mb-2" impact={option.impact} travelTime={option.travelTime}>
         <div class="text-base flex gap-x-5">
           <div class="font-semibold">{option.name}</div>
@@ -56,6 +82,10 @@
           <div>
             Travel time: {option.travelTime} hours
           </div>
+        </div>
+
+        <div class="mt-1 mb-2">
+          <ImpactBar value={option.impact} />
         </div>
 
         <div class="text-sm pl-10">
