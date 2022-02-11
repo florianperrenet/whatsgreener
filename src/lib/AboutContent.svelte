@@ -78,39 +78,21 @@
   A greenhouse gas (GHG) is a gas that absorbs and emits radiant energy within
   the thermal infrared range, causing the greenhouse effect <Cite
     to="wikipedia-greenhouse_gas"
-  />. Common greenhouse gases are:
+  />. Most common greenhouse gases are <Cite
+    to="wikipedia-greenhouse_gas_most_abundant"
+  />:
 </p>
 
-<Table
-  grid={{
-    align: "lr",
-    columns: ["Name", "Formula"],
-    rows: [
-      "High data availability",
-      ["Water vapor", "H2O"],
-      ["Carbon dioxide", "CO2"],
-      ["Methane", "MH4"],
-      ["Nitrous oxide", "N2O"],
-      "Low data availability",
-      ["Ozone", "O3"],
-      ["Chlorofluorocarbons", "CFCs and HCFCs"],
-      ["Hydrofluorocarbons", "HFCs"],
-      ["Perfluorocarbons", "(CF4, C2F6, etc.), SF6, and NF3"],
-      ".. other",
-    ],
-  }}
-  label="table:major_greenhouse_gases"
-  >Most abundant greenhouse gases in Earth's atmosphere, listed in decreasing
-  order of average global mole fraction. <Cite
-    to="wikipedia-greenhouse_gas_most_abundant"
-  /></Table
->
+<ul>
+  <li>Water vapor, {@html chem("H2O")}</li>
+  <li>Carbon dioxide, {@html chem("CO2")}</li>
+  <li>Methane, {@html chem("CH4")}</li>
+  <li>Nitrous oxide, {@html chem("N2O")}</li>
+</ul>
 
 <p>
-  WhatsGreener tries to gather <i>all</i> emissions but relies on data provided
-  from studies. Some studies provide specific greenhouse emissions, for example
-  only <Katex ce="CO2" />. If this is the case we try to connect different
-  studies to get them <i>all</i>!
+  But the abundance does not say anything about the impact of a particular gas.
+  Therefore we need to look at their Global warming potential.
 </p>
 
 <h3>Global warming potential (GWP)</h3>
