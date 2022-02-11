@@ -69,19 +69,30 @@
     <div class="mb-10 text-4xl font-extrabold text-slate-900">Travel</div>
     <div class="font-bold">Terminology</div>
     <div class="text-base b-5 mb-10">
-      Add as links to calculation
       <div>
-        <span class="font-medium">MET:</span> Metabolic Equivalent of Task (exercise
-        intensity)
-      </div>
-      <div><span class="font-medium">WGI:</span> WhatsGreenerImpact</div>
-      <div>
-        <span class="font-medium">RWGI:</span> RelativeWhatsGreenerImpact
+        <span class="font-medium">MET:</span>
+        <a href="/calculations#ref-met">
+          Metabolic Equivalent of Task (exercise intensity)
+        </a>
       </div>
       <div>
-        <span class="font-medium">CTC:</span> CostToCompensate
+        <span class="font-medium">WGI:</span>
+        <a href="/calculations#impact_score">WhatsGreenerImpact</a>
       </div>
-      <div><span class="font-medium">carbon_eq</span> CO2-eq100</div>
+      <div>
+        <span class="font-medium">RWGI:</span>
+        <a href="/calculations#relativewhatsgreenerimpact"
+          >RelativeWhatsGreenerImpact</a
+        >
+      </div>
+      <div>
+        <span class="font-medium">CTC:</span>
+        <a href="/calculations#costtocompensate">CostToCompensate</a>
+      </div>
+      <div>
+        <span class="font-medium">carbon_eq:</span>
+        <a href="/calculations#ref-co2-eq100">CO2-eq100</a>
+      </div>
     </div>
 
     {#each travelValues(base.distance, base.weight, base.diet, base.sort) as option}

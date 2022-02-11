@@ -32,9 +32,10 @@
       throwOnError: false,
     });
   }
-  function math(s) {
+  function math(s, align) {
     return katex.renderToString(s, {
       displayMode: true,
+      fleqn: align === "left",
       throwOnError: false,
     });
   }
@@ -112,7 +113,7 @@
   studies to get them <i>all</i>!
 </p>
 
-<h4>Global warming potential (GWP)</h4>
+<h3>Global warming potential (GWP)</h3>
 <p>
   The contribution of each gas to the greenhouse effect is determined by the
   characteristics of that gas, its abundance, and any indirect effects it may
@@ -155,34 +156,56 @@
   full>Major Greenhouse Gases AR6 (2021).</Table
 >
 
+<p>
+  De kwantummechanica leert dat monoatomische gassen zoals argon (Ar) en
+  diatomische gassen zoals stikstof (N2) of zuurstof (O2) zonder dipoolmoment
+  geen absorptielijnen hebben in hun infraroodspectrum, waardoor ze geen
+  warmtestraling kunnen absorberen en niet aan het broeikaseffect kunnen
+  bijdragen Waterdamp
+</p>
+
+<h4>Exceptions</h4>
+<ul>
+  <li>Water vapor</li>
+  <li>Nitrogen</li>
+  <li>Argon</li>
+  <li>Oxygen</li>
+</ul>
+
 <h3>Water</h3>
 <p>
   There are three types of water footprints. <Cite
     to="waterfootprint-waterfootprint"
   />
 </p>
+
+<h4>Green water footprint</h4>
 <p>
-  <strong>Green water footprint</strong> is water from precipitation that is stored
-  in the root zone of the soil and evaporated, transpired or incorporated by plants.
-  It is particularly relevant for agricultural, horticultural and forestry products.
+  is water from precipitation that is stored in the root zone of the soil and
+  evaporated, transpired or incorporated by plants. It is particularly relevant
+  for agricultural, horticultural and forestry products.
 </p>
+
+<h4>Blue water footprint</h4>
 <p>
-  <strong>Blue water footprint</strong> is water that has been sourced from surface
-  or groundwater resources and is either evaporated, incorporated into a product
-  or taken from one body of water and returned to another, or returned at a different
-  time. Irrigated agriculture, industry and domestic water use can each have a blue
-  water footprint.
+  is water that has been sourced from surface or groundwater resources and is
+  either evaporated, incorporated into a product or taken from one body of water
+  and returned to another, or returned at a different time. Irrigated
+  agriculture, industry and domestic water use can each have a blue water
+  footprint.
 </p>
+
+<h4>Grey water footprint</h4>
 <p>
-  <strong>Grey water footprint</strong> is the amount of fresh water required to
-  assimilate pollutants to meet specific water quality standards. The grey water
-  footprint considers point-source pollution discharged to a freshwater resource
-  directly through a pipe or indirectly through runoff or leaching from the soil,
-  impervious surfaces, or other diffuse sources.
+  is the amount of fresh water required to assimilate pollutants to meet
+  specific water quality standards. The grey water footprint considers
+  point-source pollution discharged to a freshwater resource directly through a
+  pipe or indirectly through runoff or leaching from the soil, impervious
+  surfaces, or other diffuse sources.
 </p>
 
 <p>
-  <strong>(Black?) water footprint - Drinking water - EIGEN</strong>
+  <strong>(Fresh?) water footprint - Drinking water - EIGEN</strong>
 </p>
 
 <p>
@@ -199,13 +222,13 @@
 
 <h3>Constants</h3>
 <div class="text-sm">
-  {@html math("\\textup{atmosphericTemperature (℃) = 20}")}
-  {@html math("\\textup{bodyTemperature (℃) = 37}")}
+  {@html math("\\textup{atmosphericTemperature (℃) = 20}", "left")}
+  {@html math("\\textup{bodyTemperature (℃) = 37}", "left")}
 </div>
 
 <h3>Variables</h3>
 <div class="text-sm">
-  {@html math("\\textup{bodyWeight (kg) = 70}")}
+  {@html math("\\textup{bodyWeight (kg) = 70}", "left")}
 </div>
 
 <h3>Exercise (Walking, Jogging, Cycling)</h3>
@@ -215,6 +238,7 @@
   at rest (sitting).
 </p>
 
+<div id="ref-met" />
 <div class="text-sm">
   {@html math(
     "\\textup{MET (metabolic equivalent of task)} = \\textup{kcal/kg/h}"
