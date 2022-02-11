@@ -1978,68 +1978,68 @@ export const diets = (() => {
                 }],
                 lunch: [{
                     product: "cheese",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "egg",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "bread",
-                    amount: dec("100"),
+                    amount: dec("75"),
                 }, {
                     product: "pig_meat",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "poultry_meat",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "lamb_mutton",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "fish",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }],
                 dinner: [{
                     product: "olive_oil",
-                    amount: dec("100"),
+                    amount: dec("10"),
                 }, {
                     product: "maize",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "brassicas",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "potatoes",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "rice",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "tofu",
-                    amount: dec("100"),
+                    amount: dec("10"),
                 }, {
                     product: "tomatoes",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "onions_leeks",
-                    amount: dec("100"),
+                    amount: dec("10"),
                 }, {
                     product: "root_vegetables",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "pig_meat",
-                    amount: dec("100"),
+                    amount: dec("40"),
                 }, {
                     product: "poultry_meat",
-                    amount: dec("100"),
+                    amount: dec("40"),
                 }, {
                     product: "lamb_mutton",
-                    amount: dec("100"),
+                    amount: dec("40"),
                 }, {
                     product: "fish",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "cheese",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }],
                 snacks: [{
                     product: "banana",
@@ -2049,7 +2049,7 @@ export const diets = (() => {
                     amount: APPLE_WEIGHT,
                 }, {
                     product: "groundnuts",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "berries_grapes",
                     amount: dec("100"),
@@ -2070,68 +2070,62 @@ export const diets = (() => {
                 }],
                 lunch: [{
                     product: "cheese",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "egg",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "bread",
-                    amount: dec("100"),
+                    amount: dec("75"),
                 }, {
                     product: "pig_meat",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "poultry_meat",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "lamb_mutton",
-                    amount: dec("100"),
-                }, {
-                    product: "fish",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }],
                 dinner: [{
                     product: "olive_oil",
-                    amount: dec("100"),
+                    amount: dec("10"),
                 }, {
                     product: "maize",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "brassicas",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "potatoes",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "rice",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "tofu",
-                    amount: dec("100"),
+                    amount: dec("10"),
                 }, {
                     product: "tomatoes",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "onions_leeks",
-                    amount: dec("100"),
+                    amount: dec("10"),
                 }, {
                     product: "root_vegetables",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "pig_meat",
-                    amount: dec("100"),
+                    amount: dec("40"),
                 }, {
                     product: "poultry_meat",
-                    amount: dec("100"),
+                    amount: dec("40"),
                 }, {
                     product: "lamb_mutton",
-                    amount: dec("100"),
-                }, {
-                    product: "fish",
-                    amount: dec("100"),
+                    amount: dec("40"),
                 }, {
                     product: "cheese",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }],
                 snacks: [{
                     product: "banana",
@@ -2141,11 +2135,12 @@ export const diets = (() => {
                     amount: APPLE_WEIGHT,
                 }, {
                     product: "groundnuts",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "berries_grapes",
                     amount: dec("100"),
                 }],
+
             },
         },
         fish: {
@@ -2170,24 +2165,15 @@ export const diets = (() => {
                     product: "bread",
                     amount: dec("100"),
                 }, {
-                    product: "pig_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "poultry_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "lamb_mutton",
-                    amount: dec("100"),
-                }, {
                     product: "fish",
                     amount: dec("100"),
                 }],
                 dinner: [{
                     product: "olive_oil",
-                    amount: dec("100"),
+                    amount: dec("10"),
                 }, {
                     product: "maize",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "brassicas",
                     amount: dec("100"),
@@ -2196,7 +2182,7 @@ export const diets = (() => {
                     amount: dec("100"),
                 }, {
                     product: "rice",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "tofu",
                     amount: dec("100"),
@@ -2210,20 +2196,11 @@ export const diets = (() => {
                     product: "root_vegetables",
                     amount: dec("100"),
                 }, {
-                    product: "pig_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "poultry_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "lamb_mutton",
-                    amount: dec("100"),
-                }, {
                     product: "fish",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }, {
                     product: "cheese",
-                    amount: dec("100"),
+                    amount: dec("20"),
                 }],
                 snacks: [{
                     product: "banana",
@@ -2233,7 +2210,7 @@ export const diets = (() => {
                     amount: APPLE_WEIGHT,
                 }, {
                     product: "groundnuts",
-                    amount: dec("100"),
+                    amount: dec("30"),
                 }, {
                     product: "berries_grapes",
                     amount: dec("100"),
@@ -2254,32 +2231,20 @@ export const diets = (() => {
                 }],
                 lunch: [{
                     product: "cheese",
-                    amount: dec("100"),
+                    amount: dec("80"),
                 }, {
                     product: "egg",
                     amount: dec("100"),
                 }, {
                     product: "bread",
                     amount: dec("100"),
-                }, {
-                    product: "pig_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "poultry_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "lamb_mutton",
-                    amount: dec("100"),
-                }, {
-                    product: "fish",
-                    amount: dec("100"),
                 }],
                 dinner: [{
                     product: "olive_oil",
-                    amount: dec("100"),
+                    amount: dec("10"),
                 }, {
                     product: "maize",
-                    amount: dec("100"),
+                    amount: dec("10"),
                 }, {
                     product: "brassicas",
                     amount: dec("100"),
@@ -2288,7 +2253,7 @@ export const diets = (() => {
                     amount: dec("100"),
                 }, {
                     product: "rice",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "tofu",
                     amount: dec("100"),
@@ -2302,20 +2267,8 @@ export const diets = (() => {
                     product: "root_vegetables",
                     amount: dec("100"),
                 }, {
-                    product: "pig_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "poultry_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "lamb_mutton",
-                    amount: dec("100"),
-                }, {
-                    product: "fish",
-                    amount: dec("100"),
-                }, {
                     product: "cheese",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }],
                 snacks: [{
                     product: "banana",
@@ -2325,7 +2278,7 @@ export const diets = (() => {
                     amount: APPLE_WEIGHT,
                 }, {
                     product: "groundnuts",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "berries_grapes",
                     amount: dec("100"),
@@ -2338,40 +2291,22 @@ export const diets = (() => {
             grouped: {},
             overview: {
                 breakfast: [{
-                    product: "milk",
+                    product: "soymilk",
                     amount: dec("100"),
                 }, {
                     product: "oatmeal",
                     amount: dec("200"),
                 }],
                 lunch: [{
-                    product: "cheese",
-                    amount: dec("100"),
-                }, {
-                    product: "egg",
-                    amount: dec("100"),
-                }, {
                     product: "bread",
-                    amount: dec("100"),
-                }, {
-                    product: "pig_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "poultry_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "lamb_mutton",
-                    amount: dec("100"),
-                }, {
-                    product: "fish",
                     amount: dec("100"),
                 }],
                 dinner: [{
                     product: "olive_oil",
-                    amount: dec("100"),
+                    amount: dec("10"),
                 }, {
                     product: "maize",
-                    amount: dec("100"),
+                    amount: dec("50"),
                 }, {
                     product: "brassicas",
                     amount: dec("100"),
@@ -2392,21 +2327,6 @@ export const diets = (() => {
                     amount: dec("100"),
                 }, {
                     product: "root_vegetables",
-                    amount: dec("100"),
-                }, {
-                    product: "pig_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "poultry_meat",
-                    amount: dec("100"),
-                }, {
-                    product: "lamb_mutton",
-                    amount: dec("100"),
-                }, {
-                    product: "fish",
-                    amount: dec("100"),
-                }, {
-                    product: "cheese",
                     amount: dec("100"),
                 }],
                 snacks: [{
