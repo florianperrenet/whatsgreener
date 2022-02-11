@@ -23,7 +23,11 @@
 		<div class="flex justify-center mt-6">
 			<ul class="text-2xl list-disc list-inside">
 				<li class="mb-2">
-					<a href="#" class="after:content-['_↗']">Open source</a>
+					<a
+						href="https://github.com/florianperrenet/whatsgreener"
+						class="after:content-['_↗']"
+						target="_blank">Open source</a
+					>
 				</li>
 				<li>
 					<a href="/calculations" class="after:content-['_↗']"
