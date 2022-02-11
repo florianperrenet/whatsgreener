@@ -2879,6 +2879,25 @@ function fpk_toval(fpk) {
 }
 
 const footprintFoodEating = (diet, kcal) => {
+    let foodEmissions;
+
+    // diet can be only a specific food
+    if (diet in food) {
+        const footprint = food[diet].footprint;
+        const per_kcal_grouped = {};
+        for (const [key, value] of Object.entries(footprint)) {
+            per_kcal_grouped[key] = {
+                mean: value.per_kcal.mean,
+                median: value.per_kcal.median,
+                unit: value.unit,
+                state: value.state,
+            };
+        }
+        foodEmissions = per_kcal_grouped;
+    } else if (diet in diets) {
+        foodEmissions = diets[diet].footprint_per_kcal;
+    }
+
     const data = {
         in: {
             kcalIn: {
@@ -2893,15 +2912,12 @@ const footprintFoodEating = (diet, kcal) => {
             foodEmissions: {
                 name: "Food emissions",
                 value: multiply_dict_tovals(
-                    fpk_toval(diets[diet].footprint_per_kcal), kcal
+                    fpk_toval(foodEmissions), kcal
                 ),
             },
         },
     };
-
-    // console.log(data.out.foodEmissions.value)
     addConsumesEmits(data);
-
     return data;
 }
 
