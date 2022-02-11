@@ -17,6 +17,37 @@ function plusminus_fmt(l) {
 }
 
 
+const gwp = {
+    // Major Greenhouse Gases AR6 (2021)
+    // gwp100 is default
+    carbon_dioxide: {
+        name: "Carbon dioxide",
+        formula: "CO2",
+        lifetime: dec("0"),
+        gwp20: dec("1"),
+        gwp100: dec("1"),
+        gwp500: dec("1"),
+    },
+    methane: {
+        name: "Methane",
+        formula: "CH4",
+        lifetime: dec("11.8"),
+        gwp20: dec("81.2"),
+        gwp100: dec("27.9"),
+        gwp500: dec("7.95"),
+    },
+    nitrous_oxide: {
+        name: "Nitrous oxide",
+        formula: "N2O",
+        lifetime: dec("109"),
+        gwp20: dec("273"),
+        gwp100: dec("273"),
+        gwp500: dec("130"),
+    },
+};
+
+
+
 function toval(name, amount, percentage, precision, unit, state, reference) {
     // TODO: potential idea to show increase factor from _amount to amount
     const _amount = amount;
@@ -3007,21 +3038,51 @@ export const travel = (distance, weight, diet) => {
             for (const k of keys) {
                 for (const [key, val] of Object.entries(value[k])) {
                     if (key in activity[k]) {
-                        activity[k][key].amount = activity[k][key].amount.add(val);
+                        activity[k][key].amount = activity[k][key].amount.add(val.amount);
                     } else {
                         activity[k][key] = val;
                     }
                 }
             }
         }
+
+
+        activity.consumesEq = {};
+        activity.emitsEq = {};
+
+
+        let carbon_eq_emits = dec("0");
+        for (const [key, value] of Object.entries(activity.emits)) {
+            if (value.name in gwp) {
+                // calc equivalent
+                carbon_eq_emits = carbon_eq_emits.add(value.amount.times(gwp[value.name].gwp100));
+            } else {
+                activity.emitsEq[key] = value;
+            }
+        }
+        if (carbon_eq_emits.gt(dec("0"))) {
+            activity.emitsEq["carbon_eq-gas-L"] = toval("carbon_eq", carbon_eq_emits, null, 2, "L", "gas");
+        }
+
+
+        activity.consumesEq = activity.consumes;
+        // activity.emitsEq = activity.emits;
+
+        // // convertToCorrectUnits
+        // const removeKeys = [];
+        // for (const [key, value] of Object.entries(activity.emits)) {
+        //     if (value.state === 'gas' && value.unit !== 'L') {
+        //         // add if possible then remove
+        //     }
+        // }
+
+
         // TODO actual impact calculation
         let impact = dec("0");
-        const cdL = activity.emits["carbon_dioxide-gas-L"];
-        const cdKg = activity.emits["carbon_dioxide-gas-kg"];
-        if ('amount' in cdL)
-            impact = impact.add(cdL.amount);
-        if ('amount' in cdKg)
-            impact = impact.add(cdKg.amount);
+        const cdL = activity.emitsEq;
+
+        if ("carbon_eq-gas-L" in cdL && 'amount' in cdL["carbon_eq-gas-L"])
+            impact = impact.add(cdL["carbon_eq-gas-L"].amount);
         activity.impact = impact;
     }
 

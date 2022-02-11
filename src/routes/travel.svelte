@@ -20,13 +20,19 @@
     "Highest impact": (a, b) => {
       return b.impact - a.impact;
     },
+    "Fastest travel time": (a, b) => {
+      return a.travelTime - b.travelTime;
+    },
   };
 
   function travelValues(distance, weight, diet, sort) {
     const values = Object.values(travel(distance, weight, diet));
 
     if (sort === "Lowest impact") return values.sort(sortOn["Lowest impact"]);
-    if (sort === "Highest impact") return values.sort(sortOn["Highest impact"]);
+    else if (sort === "Highest impact")
+      return values.sort(sortOn["Highest impact"]);
+    else if (sort === "Fastest travel time")
+      return values.sort(sortOn["Fastest travel time"]);
 
     return values;
   }
@@ -57,12 +63,13 @@
       ]}
     />
     <hr class="mt-8 mb-4" />
-    <Toggle text="Advanced">text</Toggle>
+    <Toggle text="Advanced">todo</Toggle>
   </div>
   <div slot="content">
     <div class="mb-10 text-4xl font-extrabold text-slate-900">Travel</div>
     <div class="font-bold">Terminology</div>
     <div class="text-base b-5 mb-10">
+      Add as links to calculation
       <div>
         <span class="font-medium">MET:</span> Metabolic Equivalent of Task (exercise
         intensity)
@@ -74,11 +81,12 @@
       <div>
         <span class="font-medium">CTC:</span> CostToCompensate
       </div>
+      <div><span class="font-medium">carbon_eq</span> CO2-eq100</div>
     </div>
 
     {#each travelValues(base.distance, base.weight, base.diet, base.sort) as option}
       <div class="mb-2" impact={option.impact} travelTime={option.travelTime}>
-        <div class="text-base flex gap-x-5">
+        <div class="text-base flex justify-between gap-x-5">
           <div class="font-semibold">{option.name}</div>
           <div>Speed: {option.speedKmh} km/h</div>
           <div>MET: {option.met}</div>
@@ -103,7 +111,7 @@
               <div>{value.name} ({value.activity})</div>
             {/each}
           </div>
-          {#each ["consumes", "emits"] as content}
+          {#each ["consumesEq", "emitsEq"] as content}
             <div>{content}</div>
             {#each Object.values(option[content]) as value}
               <div class="pl-5">
@@ -131,12 +139,12 @@
       </div>
     {/each}
 
-    <div>
+    <!-- <div>
       <pre>{JSON.stringify(
           travel(base.distance, base.weight, base.diet),
           null,
           2
         )}</pre>
-    </div>
+    </div> -->
   </div>
 </SidebarLayout>
