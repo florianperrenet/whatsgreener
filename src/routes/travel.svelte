@@ -71,6 +71,9 @@
       <div>
         <span class="font-medium">RWGI:</span> RelativeWhatsGreenerImpact
       </div>
+      <div>
+        <span class="font-medium">CTC:</span> CostToCompensate
+      </div>
     </div>
 
     {#each travelValues(base.distance, base.weight, base.diet, base.sort) as option}
@@ -82,10 +85,16 @@
           <div>
             Travel time: {option.travelTime} hours
           </div>
+          <div>CTC: $40</div>
         </div>
 
         <div class="mt-1 mb-2">
           <ImpactBar value={option.impact} />
+          <div class="text-sm">RWGI: 2x better than car</div>
+          <div class="text-sm">
+            <span class="text-white">RWGI:</span> 3x better than flying
+          </div>
+          <div class="text-sm"><span class="text-white">RWGI:</span> etc.</div>
         </div>
 
         <div class="text-sm pl-10">
