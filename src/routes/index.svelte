@@ -11,7 +11,7 @@
 
 <div class="relative w-full bg-white">
 	<div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8 pt-40">
-		<h1 class="font-extrabold text-6xl text-slate-900 mb-10">
+		<h1 class="font-extrabold text-6xl text-slate-900 mb-10 leading-tight">
 			A proper footprint <br /> comparison tool.
 		</h1>
 		<div class="flex mt-6">
@@ -27,20 +27,20 @@
 				</li>
 			</ul>
 		</div>
-		<div class="mt-16 text-sm">
+		<div class="mt-20 text-sm">
 			<a href="/travel" class="font-bold text-lg">
 				Compare Travel &nbsp;->
-				<div class="border-b-2 border-gray-900 w-12 h-3" />
+				<div class="border-b-4 border-gray-900 w-12 h-3" />
 			</a>
 			<div class="h-10" />
 			<a href="/food" class="font-bold text-lg">
 				Compare Food &nbsp;->
-				<div class="border-b-2 border-gray-900 w-14 h-3" />
+				<div class="border-b-4 border-gray-900 w-14 h-3" />
 			</a>
 			<div class="h-10" />
 			<a href="/calculations" class="font-bold text-lg">
 				View Calculations &nbsp;->
-				<div class="border-b-2 border-gray-900 w-16 h-3" />
+				<div class="border-b-4 border-gray-900 w-16 h-3" />
 			</a>
 		</div>
 
