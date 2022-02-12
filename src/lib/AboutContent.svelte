@@ -215,9 +215,8 @@
 
 <h3>Exercise (Walking, Jogging, Cycling)</h3>
 <p>
-  <strong>Important.</strong>
-  Exercise is based on excess energy expenditure i.e. exercise is compared to being
-  at rest (sitting).
+  Exercise is based on excess energy expenditure i.e. exercise is compared to
+  being at rest (sitting).
 </p>
 
 <div id="ref-met" />
@@ -252,14 +251,14 @@
   full>Composition of Air by volume..</Table
 >
 
-<pre>{JSON.stringify(breathing(dec("1")), null, 2)}</pre>
+<!-- <pre>{JSON.stringify(breathing(dec("1")), null, 2)}</pre> -->
 
 <div class="text-sm">
   {@html math(
-    "breathingOxygenConsumption(inhaledAir) = inhaledAir \\cdot 0.0615"
+    "\\textup{breathingOxygenConsumption(inhaledAir) = inhaledAir} \\cdot 0.0615"
   )}
   {@html math(
-    "breathingWaterVaporEmission(exhaledAir) = exhaledAir \\cdot 0.0315"
+    "\\textup{breathingWaterVaporEmission(exhaledAir) = exhaledAir} \\cdot 0.0315"
   )}
 </div>
 
@@ -757,7 +756,7 @@ kcal per kg -->
     }}
     bordered
     full
-    label="">Typical daily consumption</Table
+    label="">Typical daily {diet} consumption</Table
   >
   <Table
     grid={{
@@ -767,7 +766,7 @@ kcal per kg -->
     }}
     bordered
     full
-    label="">kcal distribution</Table
+    label="">{diet} kcal distribution</Table
   >
   <Table
     grid={{
@@ -777,7 +776,7 @@ kcal per kg -->
     }}
     bordered
     full
-    label="">Footprint per 1000 kcal</Table
+    label="">{diet} footprint per 1000 kcal</Table
   >
 {/each}
 
@@ -799,6 +798,9 @@ kcal per kg -->
 
 <h2>Solutions to compensate footprint</h2>
 <p>ladida</p>
+
+<h2>Cost to compensate</h2>
+<p>Ladiddad</p>
 
 <hr />
 <h2>References</h2>

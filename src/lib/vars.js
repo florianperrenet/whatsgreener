@@ -1967,26 +1967,26 @@ export const food_table = (() => {
     ];
     let rows = [];
 
-    // let add_cols = true;
-    // for (const value of Object.values(food)) {
-    //     const footprint_vals = [];
-    //     for (const [fpkey, fpval] of Object.entries(value.footprint)) {
-    //         footprint_vals.push(fpval.per_kg.median);
-    //         if (add_cols) {
-    //             columns.push(fpkey);
-    //         }
-    //     }
+    let add_cols = true;
+    for (const value of Object.values(food)) {
+        const footprint_vals = [];
+        for (const [fpkey, fpval] of Object.entries(value.footprint)) {
+            footprint_vals.push(fpval.per_kg.median);
+            if (add_cols) {
+                columns.push(fpkey);
+            }
+        }
 
-    //     add_cols = false;
+        add_cols = false;
 
-    //     rows.push([
-    //         value.name,
-    //         value.composition.per_100g.kcal,
-    //         value.composition.per_100g.protein,
-    //         value.composition.per_100g.fat,
-    //         ...footprint_vals,
-    //     ]);
-    // }
+        rows.push([
+            value.name,
+            value.composition.per_100g.kcal,
+            value.composition.per_100g.protein,
+            value.composition.per_100g.fat,
+            ...footprint_vals,
+        ]);
+    }
     let align = "l";
     for (const col of columns)
         align += "r";
@@ -2556,9 +2556,9 @@ export const airComposition = () => {
             oxygen: toval("oxygen", null, dec("20.95"), 5, "L", 'gas'),
             argon: toval("argon", null, dec("0.93"), 5, "L", 'gas'),
             carbon_dioxide: toval("carbon_dioxide", null, dec("0.0004"), 5, "L", 'gas'),
-            water_vapor: plusminus(
-                toval("water_vapor", null, dec("2.5"), 5, "L", 'gas'),
-                toval("water_vapor", null, dec("2.5"), 5, "L", 'gas'),
+            water: plusminus(
+                toval("water", null, dec("2.5"), 5, "L", 'gas'),
+                toval("water", null, dec("2.5"), 5, "L", 'gas'),
             ),
         },
         exhaled: {
@@ -2573,9 +2573,9 @@ export const airComposition = () => {
                 toval("carbon_dioxide", null, dec("4.65"), 5, "L", 'gas'),
                 toval("carbon_dioxide", null, dec("0.65"), 5, "L", 'gas'),
             ),
-            water_vapor: plusminus(
-                toval("water_vapor", null, dec("5.65"), 5, "L", 'gas'),
-                toval("water_vapor", null, dec("0.65"), 5, "L", 'gas'),
+            water: plusminus(
+                toval("water", null, dec("5.65"), 5, "L", 'gas'),
+                toval("water", null, dec("0.65"), 5, "L", 'gas'),
             ),
         },
     }
@@ -2591,17 +2591,17 @@ export const airCompositionTable = (() => {
         "Exhaled air",
     ];
     const rows = [];
-    // const atmosphericKeys = Object.keys(air_composition.atmospheric);
-    // const exhaledKeys = Object.keys(air_composition.exhaled);
-    // if (atmosphericKeys !== exhaledKeys)
-    //     throw "expected to be equal";
-    // for (const key of row_keys) {
-    //     rows.push([
-    //         key,
-    //         air_composition.atmospheric[key],
-    //         air_composition.exhaled[key],
-    //     ]);
-    // }
+
+    const aircomposition = airComposition();
+    const keys = ["temperature", "nitrogen", "oxygen", 'argon', 'carbon_dioxide', 'water'];
+    for (const key of keys) {
+        console.log(key)
+        rows.push([
+            key,
+            aircomposition.atmospheric[key],
+            aircomposition.exhaled[key],
+        ]);
+    }
     return { align, columns, rows };
 })();
 
@@ -3050,22 +3050,24 @@ export const travel = (distance, weight, diet) => {
         activity.consumesEq = {};
         activity.emitsEq = {};
 
-
-        let carbon_eq_emits = dec("0");
-        for (const [key, value] of Object.entries(activity.emits)) {
-            if (value.name in gwp) {
-                // calc equivalent
-                carbon_eq_emits = carbon_eq_emits.add(value.amount.times(gwp[value.name].gwp100));
-            } else {
-                activity.emitsEq[key] = value;
+        const keys = ["consumes", "emits"];
+        for (const k of keys) {
+            let carbon_eq_sum = dec("0");
+            for (const [key, value] of Object.entries(activity[k])) {
+                if (value.name in gwp) {
+                    // calc equivalent
+                    carbon_eq_sum = carbon_eq_sum.add(value.amount.times(gwp[value.name].gwp100));
+                } else {
+                    activity[k + "Eq"][key] = value;
+                }
+            }
+            if (carbon_eq_sum.gt(dec("0"))) {
+                activity[k + "Eq"]["carbon_eq-gas-L"] = toval("carbon_eq", carbon_eq_sum, null, 2, "L", "gas");
             }
         }
-        if (carbon_eq_emits.gt(dec("0"))) {
-            activity.emitsEq["carbon_eq-gas-L"] = toval("carbon_eq", carbon_eq_emits, null, 2, "L", "gas");
-        }
 
 
-        activity.consumesEq = activity.consumes;
+        // activity.consumesEq = activity.consumes;
         // activity.emitsEq = activity.emits;
 
         // // convertToCorrectUnits
