@@ -109,11 +109,9 @@
 
         <div class="mt-1 mb-2">
           <ImpactBar value={option.impact} />
-          <div class="text-sm">RWGI: 2x better than car</div>
-          <div class="text-sm">
-            <span class="text-white">RWGI:</span> 3x better than flying
-          </div>
-          <div class="text-sm"><span class="text-white">RWGI:</span> etc.</div>
+          {#each Object.entries(option.rwgi) as [key, value]}
+            <div class="text-sm">{value.toFixed(2)}x better than {key}</div>
+          {/each}
         </div>
 
         <div class="text-sm pl-10">

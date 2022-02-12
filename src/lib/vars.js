@@ -2954,6 +2954,8 @@ const footprintFoodEating = (diet, kcal) => {
 
 
 export const travel = (distance, weight, diet) => {
+    const impacts = [];
+
     function time_per_km(speed_kmh) {
         return dec('60').div(speed_kmh).div(dec('60'));
     }
@@ -3032,7 +3034,7 @@ export const travel = (distance, weight, diet) => {
     }
 
 
-    for (const activity of Object.values(activities)) {
+    for (const [activitykey, activity] of Object.entries(activities)) {
         for (const value of Object.values(activity.footprint)) {
             const keys = ["consumes", "emits"];
             for (const k of keys) {
@@ -3086,7 +3088,34 @@ export const travel = (distance, weight, diet) => {
         if ("carbon_eq-gas-L" in cdL && 'amount' in cdL["carbon_eq-gas-L"])
             impact = impact.add(cdL["carbon_eq-gas-L"].amount);
         activity.impact = impact;
+
+        activity.rwgi = {};
+
+        impacts.push([activitykey, impact]);
     }
+
+    // calculate the RelativeWhatsGreenerImpact
+    let impactLen = impacts.length;
+    for (const [curkey, curvalue] of impacts) {
+        // for (let index = 0; index < impactLen; index++) {
+
+        // loop over every item except itself
+        for (const [cmpkey, cmpvalue] of impacts) {
+            if (cmpkey === curkey) continue;
+            activities[curkey].rwgi[cmpkey] = cmpvalue.div(curvalue);
+        }
+
+        // // loop over every next item
+        // for (let cmpindex = index + 1; cmpindex < impactLen; cmpindex++) {
+        //     const [cmpkey, cmpvalue] = impacts[cmpindex];
+
+        //     activities[curkey].rwgi[cmpkey] = cmpvalue.div(curvalue);
+        // }
+    }
+
+    // for (const [activity, impact] of impacts) {
+    //     console.log(activity, impact)
+    // }
 
     return activities;
 };
