@@ -27,10 +27,10 @@
 				</li>
 			</ul>
 		</div>
-		<div class="mt-12 text-sm">
+		<div class="mt-16 text-sm">
 			<a href="/travel" class="font-bold text-lg">
 				Compare Travel &nbsp;->
-				<div class="border-b-2 border-gray-900 w-14 h-3" />
+				<div class="border-b-2 border-gray-900 w-12 h-3" />
 			</a>
 			<div class="h-10" />
 			<a href="/food" class="font-bold text-lg">
@@ -40,12 +40,12 @@
 			<div class="h-10" />
 			<a href="/calculations" class="font-bold text-lg">
 				View Calculations &nbsp;->
-				<div class="border-b-2 border-gray-900 w-14 h-3" />
+				<div class="border-b-2 border-gray-900 w-16 h-3" />
 			</a>
 		</div>
 
 		<div class="absolute top-20 bottom-0 right-0 w-1/2 z-10">
-			<div class="h-4/6 w-full bg-gray-100 rounded-lg" />
+			<div class="h-4/6 w-full bg-gray-100 rounded-lg shadow-lg" />
 		</div>
 	</div>
 
