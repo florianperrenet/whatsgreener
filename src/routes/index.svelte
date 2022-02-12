@@ -27,7 +27,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="mt-20 text-sm">
+		<div class="mt-16 text-sm">
 			<a href="/travel" class="font-bold text-lg">
 				Compare Travel &nbsp;->
 				<div class="border-b-4 border-gray-900 w-12 h-3" />
@@ -45,8 +45,35 @@
 		</div>
 
 		<div class="absolute top-20 bottom-0 right-0 w-1/2">
-			<div class="h-4/6 w-full bg-gray-100 rounded-lg shadow-lg" />
+			<div
+				class="w-full bg-gray-100 rounded-lg shadow-lg"
+				style="height: 700px;"
+			/>
 		</div>
+
+		<!-- <div class="h-40" />
+
+		<hr class="mt-10 mb-10" />
+
+		<div class="mb-10">
+			<h2 class="font-bold text-4xl text-slate-900">Compare Food</h2>
+		</div>
+
+		<div
+			class="w-full bg-gray-200 rounded-lg shadow-lg mb-20"
+			style="height: 700px;"
+		/>
+
+		<hr class="my-10" />
+
+		<div class="mb-10">
+			<h2 class="font-bold text-4xl text-slate-900">View Calculations</h2>
+		</div>
+
+		<div
+			class="w-full bg-gray-200 rounded-lg shadow-lg mb-20"
+			style="height: 700px;"
+		/> -->
 	</div>
 
 	<!-- <div
