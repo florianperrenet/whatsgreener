@@ -102,7 +102,7 @@
           <div>Speed: {option.speedKmh} km/h</div>
           <div>MET: {option.met}</div>
           <div>
-            Travel time: {option.travelTime} hours
+            Travel time: {option.travelTime.toFixed(2)} hours
           </div>
           <div>CTC: $40</div>
         </div>
@@ -111,6 +111,10 @@
           <ImpactBar value={option.impact} />
           {#each Object.entries(option.rwgi) as [key, value]}
             <div class="text-sm">{value.toFixed(2)}x better than {key}</div>
+          {/each}
+          <div class="h-2" />
+          {#each Object.entries(option.rtt) as [key, value]}
+            <div class="text-sm">{value.toFixed(2)}x faster than {key}</div>
           {/each}
         </div>
 
