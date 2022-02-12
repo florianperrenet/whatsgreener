@@ -153,55 +153,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1.6"),
-                        median: dec("1.3"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("1.6"),
+                            median: dec("1.3"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("3.9"),
-                        median: dec("2.7"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("3.9"),
+                            median: dec("2.7"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("648"),
-                        median: dec("419"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("648"),
+                            median: dec("419"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("33386"),
-                        median: dec("12822"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("7.2"),
-                        median: dec("5.4"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("33386"),
+                    //         median: dec("12822"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("7.2"),
+                    //         median: dec("5.4"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -217,55 +221,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1.7"),
-                        median: dec("1.2"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("1.7"),
+                            median: dec("1.2"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("2.9"),
-                        median: dec("1.8"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("2.9"),
+                            median: dec("1.8"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("216"),
-                        median: dec("44"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("216"),
+                            median: dec("44"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("10863"),
-                        median: dec("350"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("4"),
-                        median: dec("2.4"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("10863"),
+                    //         median: dec("350"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("4"),
+                    //         median: dec("2.4"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -281,55 +289,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("2.5"),
-                        median: dec("2.6"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("2.5"),
+                            median: dec("2.6"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("7.6"),
-                        median: dec("7.7"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("7.6"),
+                            median: dec("7.7"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("482"),
-                        median: dec("670"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("482"),
+                            median: dec("670"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("18786"),
-                        median: dec("24456"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("11.2"),
-                        median: dec("10.1"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("18786"),
+                    //         median: dec("24456"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("11.2"),
+                    //         median: dec("10.1"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -345,55 +357,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("4.5"),
-                        median: dec("3.7"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("4.5"),
+                            median: dec("3.7"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("2.8"),
-                        median: dec("2.2"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("2.8"),
+                            median: dec("2.2"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("2248"),
-                        median: dec("1575"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("2248"),
+                            median: dec("1575"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("49576"),
-                        median: dec("4626"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("35.1"),
-                        median: dec("9.3"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("49576"),
+                    //         median: dec("4626"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("35.1"),
+                    //         median: dec("9.3"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -409,55 +425,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.5"),
-                        median: dec("0.5"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.5"),
+                            median: dec("0.5"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.9"),
-                        median: dec("0.8"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.9"),
+                            median: dec("0.8"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("59"),
-                        median: dec("3"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("59"),
+                            median: dec("3"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("2754"),
-                        median: dec("78"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("3.5"),
-                        median: dec("4.4"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("2754"),
+                    //         median: dec("78"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("3.5"),
+                    //         median: dec("4.4"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -473,55 +493,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1"),
-                        median: dec("0.8"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("1"),
+                            median: dec("0.8"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("7.5"),
-                        median: dec("6.7"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("7.5"),
+                            median: dec("6.7"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("397"),
-                        median: dec("0"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("397"),
+                            median: dec("0"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("27948"),
-                        median: dec("0"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("7.5"),
-                        median: dec("1.7"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("27948"),
+                    //         median: dec("0"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("7.5"),
+                    //         median: dec("1.7"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -537,55 +561,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.4"),
-                        median: dec("-1.3"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.4"),
+                            median: dec("-1.3"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("13"),
-                        median: dec("8.7"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("13"),
+                            median: dec("8.7"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("4134"),
-                        median: dec("1823"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("4134"),
+                            median: dec("1823"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("229890"),
-                        median: dec("129364"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("19.2"),
-                        median: dec("14.5"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("229890"),
+                    //         median: dec("129364"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("19.2"),
+                    //         median: dec("14.5"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -601,55 +629,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("3.2"),
-                        median: dec("3.3"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("3.2"),
+                            median: dec("3.3"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("9.1"),
-                        median: dec("7.9"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("9.1"),
+                            median: dec("7.9"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1852"),
-                        median: dec("900"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("1852"),
+                            median: dec("900"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("61798"),
-                        median: dec("44352"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("14.1"),
-                        median: dec("17.1"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("61798"),
+                    //         median: dec("44352"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("14.1"),
+                    //         median: dec("17.1"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -665,55 +697,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1"),
-                        median: dec("0.9"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("1"),
+                            median: dec("0.9"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.7"),
-                        median: dec("0.6"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.7"),
+                            median: dec("0.6"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("28"),
-                        median: dec("1"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("28"),
+                            median: dec("1"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("956"),
-                        median: dec("6"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1.1"),
-                        median: dec("1.2"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("956"),
+                    //         median: dec("6"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("1.1"),
+                    //         median: dec("1.2"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -729,55 +765,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("3.2"),
-                        median: dec("2.6"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("3.2"),
+                            median: dec("2.6"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("3.5"),
-                        median: dec("3.4"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("3.5"),
+                            median: dec("3.4"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("149"),
-                        median: dec("7"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("149"),
+                            median: dec("7"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("5113"),
-                        median: dec("32"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("6.2"),
-                        median: dec("6.6"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("5113"),
+                    //         median: dec("32"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("6.2"),
+                    //         median: dec("6.6"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -793,55 +833,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("5.4"),
-                        median: dec("5.1"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("5.4"),
+                            median: dec("5.1"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("26.3"),
-                        median: dec("17.3"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("26.3"),
+                            median: dec("17.3"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("2142"),
-                        median: dec("318"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("2142"),
+                            median: dec("318"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("177480"),
-                        median: dec("24396"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("37.3"),
-                        median: dec("39.1"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("177480"),
+                    //         median: dec("24396"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("37.3"),
+                    //         median: dec("39.1"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -857,55 +901,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("2.1"),
-                        median: dec("0.7"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("2.1"),
+                            median: dec("0.7"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.8"),
-                        median: dec("0.2"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.8"),
+                            median: dec("0.2"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("370"),
-                        median: dec("77"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("370"),
+                            median: dec("77"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("5336"),
-                        median: dec("4481"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("7.5"),
-                        median: dec("1.9"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("5336"),
+                    //         median: dec("4481"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("7.5"),
+                    //         median: dec("1.9"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -921,55 +969,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.5"),
-                        median: dec("0.4"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.5"),
+                            median: dec("0.4"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.4"),
-                        median: dec("0.3"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.4"),
+                            median: dec("0.3"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("14"),
-                        median: dec("2"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("14"),
+                            median: dec("2"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("932"),
-                        median: dec("57"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("3.2"),
-                        median: dec("1.6"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("932"),
+                    //         median: dec("57"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("3.2"),
+                    //         median: dec("1.6"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -985,55 +1037,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.4"),
-                        median: dec("0.4"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.4"),
+                            median: dec("0.4"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.3"),
-                        median: dec("0.3"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.3"),
+                            median: dec("0.3"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("28"),
-                        median: dec("10"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("28"),
+                            median: dec("10"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("929"),
-                        median: dec("38"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1.6"),
-                        median: dec("1"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("929"),
+                    //         median: dec("38"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("1.6"),
+                    //         median: dec("1"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1049,55 +1105,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.5"),
-                        median: dec("0.4"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.5"),
+                            median: dec("0.4"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.6"),
-                        median: dec("0.3"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.6"),
+                            median: dec("0.3"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("119"),
-                        median: dec("55"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("119"),
+                            median: dec("55"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("8455"),
-                        median: dec("2483"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("5"),
-                        median: dec("5.7"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("8455"),
+                    //         median: dec("2483"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("5"),
+                    //         median: dec("5.7"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1113,55 +1173,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.4"),
-                        median: dec("0.3"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.4"),
+                            median: dec("0.3"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.9"),
-                        median: dec("0.7"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.9"),
+                            median: dec("0.7"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("83"),
-                        median: dec("37"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("83"),
+                            median: dec("37"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("4663"),
-                        median: dec("1346"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("2.2"),
-                        median: dec("1.7"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("4663"),
+                    //         median: dec("1346"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("2.2"),
+                    //         median: dec("1.7"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1177,55 +1241,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.9"),
-                        median: dec("0.8"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.9"),
+                            median: dec("0.8"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1.9"),
-                        median: dec("1.4"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("1.9"),
+                            median: dec("1.4"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("115"),
-                        median: dec("1"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("115"),
+                            median: dec("1"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("662"),
-                        median: dec("31"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("3.3"),
-                        median: dec("2.1"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("662"),
+                    //         median: dec("31"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("3.3"),
+                    //         median: dec("2.1"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1241,55 +1309,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.4"),
-                        median: dec("0.4"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.4"),
+                            median: dec("0.4"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("0.6"),
-                        median: dec("0.5"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("0.6"),
+                            median: dec("0.5"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("180"),
-                        median: dec("115"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("180"),
+                            median: dec("115"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("12949"),
-                        median: dec("1025"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1.5"),
-                        median: dec("2"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("12949"),
+                    //         median: dec("1025"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("1.5"),
+                    //         median: dec("2"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1305,55 +1377,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1.5"),
-                        median: dec("1.4"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("1.5"),
+                            median: dec("1.4"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("2.4"),
-                        median: dec("2.6"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("2.4"),
+                            median: dec("2.6"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("420"),
-                        median: dec("404"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("420"),
+                            median: dec("404"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("21162"),
-                        median: dec("16245"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("6.1"),
-                        median: dec("1"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("21162"),
+                    //         median: dec("16245"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("6.1"),
+                    //         median: dec("1"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1369,55 +1445,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("99.5"),
-                        median: dec("60.4"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("99.5"),
+                            median: dec("60.4"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("326.2"),
-                        median: dec("170.4"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("326.2"),
+                            median: dec("170.4"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1451"),
-                        median: dec("740"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("1451"),
+                            median: dec("740"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("34733"),
-                        median: dec("441"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("301.4"),
-                        median: dec("320.7"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("34733"),
+                    //         median: dec("441"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("301.4"),
+                    //         median: dec("320.7"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1433,55 +1513,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("39.7"),
-                        median: dec("40.6"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("39.7"),
+                            median: dec("40.6"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("369.8"),
-                        median: dec("127.4"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("369.8"),
+                            median: dec("127.4"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1803"),
-                        median: dec("461"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("1803"),
+                            median: dec("461"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("141925"),
-                        median: dec("259"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("97.1"),
-                        median: dec("101.9"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("141925"),
+                    //         median: dec("259"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("97.1"),
+                    //         median: dec("101.9"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1497,55 +1581,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("12.3"),
-                        median: dec("10.6"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("12.3"),
+                            median: dec("10.6"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("17.4"),
-                        median: dec("13.4"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("17.4"),
+                            median: dec("13.4"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("1796"),
-                        median: dec("1810"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("1796"),
+                            median: dec("1810"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("66867"),
-                        median: dec("54243"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("76.4"),
-                        median: dec("53.5"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("66867"),
+                    //         median: dec("54243"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("76.4"),
+                    //         median: dec("53.5"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1561,55 +1649,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("9.9"),
-                        median: dec("7.5"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("9.9"),
+                            median: dec("7.5"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("12.2"),
-                        median: dec("11"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("12.2"),
+                            median: dec("11"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("660"),
-                        median: dec("370"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("660"),
+                            median: dec("370"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("14178"),
-                        median: dec("334"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("48.7"),
-                        median: dec("34.5"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("14178"),
+                    //         median: dec("334"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("48.7"),
+                    //         median: dec("34.5"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1625,55 +1717,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("3.2"),
-                        median: dec("2.7"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("3.2"),
+                            median: dec("2.7"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("9"),
-                        median: dec("2.1"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("9"),
+                            median: dec("2.1"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("628"),
-                        median: dec("197"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("628"),
+                            median: dec("197"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("19786"),
-                        median: dec("9776"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("10.7"),
-                        median: dec("10.7"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("19786"),
+                    //         median: dec("9776"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("10.7"),
+                    //         median: dec("10.7"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1689,55 +1785,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("23.9"),
-                        median: dec("18.6"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("23.9"),
+                            median: dec("18.6"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("87.8"),
-                        median: dec("20.2"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("87.8"),
+                            median: dec("20.2"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("5605"),
-                        median: dec("1559"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("5605"),
+                            median: dec("1559"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("180851"),
-                        median: dec("80463"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("98.4"),
-                        median: dec("99.5"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("180851"),
+                    //         median: dec("80463"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("98.4"),
+                    //         median: dec("99.5"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1753,55 +1853,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("4.7"),
-                        median: dec("4.2"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("4.7"),
+                            median: dec("4.2"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("6.3"),
-                        median: dec("5.7"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("6.3"),
+                            median: dec("5.7"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("578"),
-                        median: dec("633"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("578"),
+                            median: dec("633"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("17983"),
-                        median: dec("18621"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("21.8"),
-                        median: dec("21.3"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("17983"),
+                    //         median: dec("18621"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("21.8"),
+                    //         median: dec("21.3"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1817,55 +1921,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("13.6"),
-                        median: dec("7.9"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("13.6"),
+                            median: dec("7.9"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("8.4"),
-                        median: dec("5.6"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("8.4"),
+                            median: dec("5.6"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("3691"),
-                        median: dec("1581"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("3691"),
+                            median: dec("1581"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("41572"),
-                        median: dec("8483"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("235.1"),
-                        median: dec("243.6"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("41572"),
+                    //         median: dec("8483"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("235.1"),
+                    //         median: dec("243.6"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1881,55 +1989,59 @@ export const food = (() => {
                 },
             },
             footprint: {
-                carbon_dioxide: {
-                    unit: "kg",
-                    state: "gas",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("26.9"),
-                        median: dec("14.7"),
+                emits: {
+                    carbon_dioxide: {
+                        unit: "kg",
+                        state: "gas",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("26.9"),
+                            median: dec("14.7"),
+                        },
                     },
                 },
-                land_use: {
-                    unit: "m2",
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("3"),
-                        median: dec("0.8"),
+                consumes: {
+                    land: {
+                        unit: "m2",
+                        state: null,
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("3"),
+                            median: dec("0.8"),
+                        },
                     },
-                },
-                water_use: {
-                    unit: "L",
-                    state: "liquid",
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("3515"),
-                        median: dec("1208"),
+                    water: {
+                        unit: "L",
+                        state: "liquid",
+                        per_kcal: {},
+                        per_protein: {},
+                        per_kg: {
+                            mean: dec("3515"),
+                            median: dec("1208"),
+                        },
                     },
-                },
-                weighted_water_use: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("127259"),
-                        median: dec("48738"),
-                    },
-                },
-                water_pollution: {
-                    unit: null,
-                    state: null,
-                    per_kcal: {},
-                    per_protein: {},
-                    per_kg: {
-                        mean: dec("227.2"),
-                        median: dec("141.3"),
-                    },
+                    // weighted_water_use: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("127259"),
+                    //         median: dec("48738"),
+                    //     },
+                    // },
+                    // water_pollution: {
+                    //     unit: null,
+                    //     state: null,
+                    //     per_kcal: {},
+                    //     per_protein: {},
+                    //     per_kg: {
+                    //         mean: dec("227.2"),
+                    //         median: dec("141.3"),
+                    //     },
+                    // },
                 },
             },
         },
@@ -1943,17 +2055,19 @@ export const food = (() => {
         }
         // add footprint per_g
         // add footprint per_kcal
-        for (const [k, v] of Object.entries(value.footprint)) {
-            v.per_g = {
-                mean: v.per_kg.mean.div(dec("1000")),
-                median: v.per_kg.median.div(dec("1000")),
-            };
+        for (const key of Object.keys(value.footprint)) {
+            for (const [k, v] of Object.entries(value.footprint[key])) {
+                v.per_g = {
+                    mean: v.per_kg.mean.div(dec("1000")),
+                    median: v.per_kg.median.div(dec("1000")),
+                };
 
-            const gkcal = value.composition.per_g.kcal;
-            v.per_kcal = {
-                mean: v.per_g.mean.div(gkcal),
-                median: v.per_g.median.div(gkcal),
-            };
+                const gkcal = value.composition.per_g.kcal;
+                v.per_kcal = {
+                    mean: v.per_g.mean.div(gkcal),
+                    median: v.per_g.median.div(gkcal),
+                };
+            }
         }
     }
 
@@ -1967,26 +2081,26 @@ export const food_table = (() => {
     ];
     let rows = [];
 
-    let add_cols = true;
-    for (const value of Object.values(food)) {
-        const footprint_vals = [];
-        for (const [fpkey, fpval] of Object.entries(value.footprint)) {
-            footprint_vals.push(fpval.per_kg.median);
-            if (add_cols) {
-                columns.push(fpkey);
-            }
-        }
+    // let add_cols = true;
+    // for (const value of Object.values(food)) {
+    //     const footprint_vals = [];
+    //     for (const [fpkey, fpval] of Object.entries(value.footprint)) {
+    //         footprint_vals.push(fpval.per_kg.median);
+    //         if (add_cols) {
+    //             columns.push(fpkey);
+    //         }
+    //     }
 
-        add_cols = false;
+    //     add_cols = false;
 
-        rows.push([
-            value.name,
-            value.composition.per_100g.kcal,
-            value.composition.per_100g.protein,
-            value.composition.per_100g.fat,
-            ...footprint_vals,
-        ]);
-    }
+    //     rows.push([
+    //         value.name,
+    //         value.composition.per_100g.kcal,
+    //         value.composition.per_100g.protein,
+    //         value.composition.per_100g.fat,
+    //         ...footprint_vals,
+    //     ]);
+    // }
     let align = "l";
     for (const col of columns)
         align += "r";
@@ -2412,26 +2526,30 @@ export const diets = (() => {
         value.kcalsum = kcalsum;
 
         // footprint_per_kcal
-        value.footprint_per_kcal = {};
+        value.footprint_per_kcal = {
+            consumes: {},
+            emits: {},
+        };
 
         // calc percentage
         for (const [k, v] of Object.entries(value.grouped)) {
             v.percentage = v.kcal.div(value.kcalsum);
 
             const product = food[k];
-            for (const [x, y] of Object.entries(product.footprint)) {
-                if (x in value.footprint_per_kcal) {
-                    value.footprint_per_kcal[x].mean = value.footprint_per_kcal[x].mean.add(product.footprint[x].per_kcal.mean.times(v.percentage));
-                    value.footprint_per_kcal[x].median = value.footprint_per_kcal[x].median.add(product.footprint[x].per_kcal.median.times(v.percentage));
-                } else {
-                    value.footprint_per_kcal[x] = {
-                        mean: product.footprint[x].per_kcal.mean.times(v.percentage),
-                        median: product.footprint[x].per_kcal.median.times(v.percentage),
-                        unit: product.footprint[x].unit,
-                        state: product.footprint[x].state,
-                    };
+            for (const key of Object.keys(product.footprint)) {
+                for (const [x, y] of Object.entries(product.footprint[key])) {
+                    if (x in value.footprint_per_kcal[key]) {
+                        value.footprint_per_kcal[key][x].mean = value.footprint_per_kcal[key][x].mean.add(product.footprint[key][x].per_kcal.mean.times(v.percentage));
+                        value.footprint_per_kcal[key][x].median = value.footprint_per_kcal[key][x].median.add(product.footprint[key][x].per_kcal.median.times(v.percentage));
+                    } else {
+                        value.footprint_per_kcal[key][x] = {
+                            mean: product.footprint[key][x].per_kcal.mean.times(v.percentage),
+                            median: product.footprint[key][x].per_kcal.median.times(v.percentage),
+                            unit: product.footprint[key][x].unit,
+                            state: product.footprint[key][x].state,
+                        };
+                    }
                 }
-
             }
         }
     }
@@ -2453,29 +2571,29 @@ export const diets_table = (() => {
 
     for (const [key, value] of Object.entries(diets)) {
         data[key] = [];
-        let totalkcalsum = dec("0");
+        // let totalkcalsum = dec("0");
 
-        for (const [meal, mealval] of Object.entries(value.overview)) {
-            const tmpdata = [];
-            for (const item of mealval) {
-                tmpdata.push([
-                    item.product,
-                    `${item.amount} ${item.unit}`,
-                    item.kcal,
-                ]);
-            }
+        // for (const [meal, mealval] of Object.entries(value.overview)) {
+        //     const tmpdata = [];
+        //     for (const item of mealval) {
+        //         tmpdata.push([
+        //             item.product,
+        //             `${item.amount} ${item.unit}`,
+        //             item.kcal,
+        //         ]);
+        //     }
 
-            let kcalsum = dec("0");
-            tmpdata.map((x) => { kcalsum = kcalsum.add(x[2]) });
+        //     let kcalsum = dec("0");
+        //     tmpdata.map((x) => { kcalsum = kcalsum.add(x[2]) });
 
-            data[key].push(`${capitalize(meal)} (${kcalsum}kcal)`);
+        //     data[key].push(`${capitalize(meal)} (${kcalsum}kcal)`);
 
-            tmpdata.map((x) => data[key].push(x));
+        //     tmpdata.map((x) => data[key].push(x));
 
-            totalkcalsum = totalkcalsum.add(kcalsum);
-        }
+        //     totalkcalsum = totalkcalsum.add(kcalsum);
+        // }
 
-        data[key].push(`Total ${totalkcalsum}kcal`);
+        // data[key].push(`Total ${totalkcalsum}kcal`);
     }
 
     return { align, columns, ...data }
@@ -2490,33 +2608,33 @@ export const diets_distribution_table = (() => {
     for (const [key, value] of Object.entries(diets)) {
         data[key] = [];
 
-        const type_grouped = {};
-        for (const [gkey, gvalue] of Object.entries(value.grouped)) {
-            const val = [
-                gkey,
-                `${gvalue.amount} ${gvalue.unit}`,
-                gvalue.kcal,
-                (gvalue.percentage.times(dec("100"))).toFixed(2),
-            ];
-            if (gvalue.type in type_grouped) {
-                type_grouped[gvalue.type].push(val);
-            } else {
-                type_grouped[gvalue.type] = [val];
-            }
-        }
-        let kcal_total = dec("0");
-        for (const [k, v] of Object.entries(type_grouped)) {
-            // if (!v.length) continue;
-            let kcal_group = dec("0");
-            v.map((x) => kcal_group = kcal_group.add(x[2]));
-            // console.log(v)
-            data[key].push(`${capitalize(k)} (${kcal_group}kcal)`);
-            data[key].push(...v);
+        // const type_grouped = {};
+        // for (const [gkey, gvalue] of Object.entries(value.grouped)) {
+        //     const val = [
+        //         gkey,
+        //         `${gvalue.amount} ${gvalue.unit}`,
+        //         gvalue.kcal,
+        //         (gvalue.percentage.times(dec("100"))).toFixed(2),
+        //     ];
+        //     if (gvalue.type in type_grouped) {
+        //         type_grouped[gvalue.type].push(val);
+        //     } else {
+        //         type_grouped[gvalue.type] = [val];
+        //     }
+        // }
+        // let kcal_total = dec("0");
+        // for (const [k, v] of Object.entries(type_grouped)) {
+        //     // if (!v.length) continue;
+        //     let kcal_group = dec("0");
+        //     v.map((x) => kcal_group = kcal_group.add(x[2]));
+        //     // console.log(v)
+        //     data[key].push(`${capitalize(k)} (${kcal_group}kcal)`);
+        //     data[key].push(...v);
 
-            kcal_total = kcal_total.add(kcal_group);
-        }
+        //     kcal_total = kcal_total.add(kcal_group);
+        // }
 
-        data[key].push(`Total ${kcal_total}kcal`)
+        // data[key].push(`Total ${kcal_total}kcal`)
     }
     return { align, columns, ...data };
 })();
@@ -2526,17 +2644,17 @@ export const diets_footprint_table = (() => {
     const columns = ["Parameter", "Mean", "Median"];
     const data = {};
 
-    for (const [diet, dietvalue] of Object.entries(diets)) {
-        data[diet] = [];
-        for (const [key, value] of Object.entries(dietvalue.footprint_per_kcal)) {
-            data[diet].push([
-                key,
-                (value.mean.times(dec("1000"))).toFixed(2),
-                (value.median.times(dec("1000"))).toFixed(2),
-            ]);
-        }
+    // for (const [diet, dietvalue] of Object.entries(diets)) {
+    //     data[diet] = [];
+    //     for (const [key, value] of Object.entries(dietvalue.footprint_per_kcal)) {
+    //         data[diet].push([
+    //             key,
+    //             (value.mean.times(dec("1000"))).toFixed(2),
+    //             (value.median.times(dec("1000"))).toFixed(2),
+    //         ]);
+    //     }
 
-    }
+    // }
     return { align, columns, ...data };
 })();
 
@@ -2936,6 +3054,7 @@ const footprintFoodEating = (diet, kcal) => {
                 amount: kcal,
                 value: {
                     kcal: toval("kcal", kcal, null, 2, null, null, null),
+                    ...multiply_dict_tovals(fpk_toval(foodEmissions.consumes), kcal),
                 },
             },
         },
@@ -2943,7 +3062,7 @@ const footprintFoodEating = (diet, kcal) => {
             foodEmissions: {
                 name: "Food emissions",
                 value: multiply_dict_tovals(
-                    fpk_toval(foodEmissions), kcal
+                    fpk_toval(foodEmissions.emits), kcal
                 ),
             },
         },

@@ -124,7 +124,7 @@
 </script>
 
 <svelte:head>
-	<title>About</title>
+	<title>Calculations</title>
 </svelte:head>
 
 <svelte:window

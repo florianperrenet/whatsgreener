@@ -38,6 +38,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Travel</title>
+</svelte:head>
+
 <SidebarLayout>
   <div slot="sidebar">
     <Input

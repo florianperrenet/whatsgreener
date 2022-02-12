@@ -39,6 +39,12 @@
       throwOnError: false,
     });
   }
+  function inlinemath(s) {
+    return katex.renderToString(s, {
+      displayMode: false,
+      throwOnError: false,
+    });
+  }
 </script>
 
 <div class="text-4xl font-extrabold text-slate-900">Calculations</div>
@@ -73,6 +79,19 @@
 <hr />
 <h2>Quick deepdive</h2>
 
+<h3>Non-greenhouse gases</h3>
+<p>
+  Nitrogen {@html chem("N2")}, Oxygen {@html chem("O2")} and Argon {@html chem(
+    "Ar"
+  )} are not greenhouse gases because molecules containing two atoms of the same
+  element such as {@html chem("N2")} and {@html chem("O2")} have no net change in
+  the distribution of their electrical charges when they vibrate, and monatomic gases
+  such as {@html chem("Ar")} do not have vibrational modes. Hence they are almost
+  totally unaffected by infrared radiation. Some molecules containing just two atoms
+  of different elements, such as carbon monoxide {@html chem("CO")} and hydrogen
+  chloride {@html chem("HCl")}, do absorb infrared radiation.
+</p>
+
 <h3>Greenhouse gases</h3>
 <p>
   A greenhouse gas (GHG) is a gas that absorbs and emits radiant energy within
@@ -91,36 +110,24 @@
 </ul>
 
 <p>
-  But the abundance does not say anything about the impact of a particular gas.
-  Therefore we need to look at their Global warming potential.
+  But the abundance does not say anything about the environmental impact of a
+  particular gas. In order to compare we look at their Global warming potential.
 </p>
 
 <h3>Global warming potential (GWP)</h3>
+<!-- 1740 page number 1842 table 1483 water vapor ar5 vergelijken met ar6 kan ar5
+  wel gequote worden? -->
 <p>
   The contribution of each gas to the greenhouse effect is determined by the
   characteristics of that gas, its abundance, and any indirect effects it may
   cause. For example, the direct radiative effect of a mass of methane is about
-  84 times stronger than the same mass of carbon dioxide over a 20-year time
-  frame but it is present in much smaller concentrations so that its total
-  direct radiative effect has so far been smaller, in part due to its shorter
-  atmospheric lifetime in the absence of additional carbon sequestration. <Cite
-    to="wikipedia-greenhouse_gas_impacts"
-  />
+  81 times stronger than the same mass of carbon dioxide over a 20-year time
+  frame. <Cite to="wikipedia-greenhouse_gas_impacts" />
 </p>
 <p>
-  To compare the gases, their <Katex ce="CO2-eq" /> is calculated for different timeframes.
-</p>
-
-<p>
-  GWP has been proposed to take better account (than GTP) of short-lived climate
-  pollutants (SLCP) such as methane, relating a change in the rate of emissions
-  of SLCPs to a fixed quantity of <Katex ce="CO2" />.
-</p>
-
-<p>
-  Paris Rulebook suggests to use 100-year time-horizon GWP values. page 282.
-  Therefore GWP 100 (<Katex ce="CO2-eq100" />) will be used as default in
-  comparisons.
+  To compare the gases, their {@html chem("CO2eq")} is calculated for different timeframes.
+  Paris Rulebook suggests to use 100-year time-horizon GWP values. <!-- page 282. -->
+  Which will be used as default in comparisons.
 </p>
 
 <Table
@@ -131,6 +138,7 @@
       ["Carbon dioxide, CO2", "-", 1, 1, 1],
       ["Methane, CH4", 11.8, 81.2, 27.9, 7.95],
       ["Nitrous oxide, N2O", 109, 273, 273, 130],
+      "... Other",
     ],
   }}
   label="table:major_greenhouse_gases"
@@ -139,20 +147,47 @@
 >
 
 <p>
-  De kwantummechanica leert dat monoatomische gassen zoals argon (Ar) en
-  diatomische gassen zoals stikstof (N2) of zuurstof (O2) zonder dipoolmoment
-  geen absorptielijnen hebben in hun infraroodspectrum, waardoor ze geen
-  warmtestraling kunnen absorberen en niet aan het broeikaseffect kunnen
-  bijdragen Waterdamp
+  Carbon dioxide has a variable atmospheric lifetime, and cannot be specified
+  precisely. Although more than half of the {@html chem("CO2")} emitted is removed
+  from the atmosphere within a century, some fraction (about 20%) of emitted {@html chem(
+    "CO2"
+  )} remains in the atmosphere for many thousands of years <Cite
+    to="wikipedia-greenhouse_gas_atmospheric_lifetime"
+  />.
 </p>
 
-<h4>Exceptions</h4>
-<ul>
-  <li>Water vapor</li>
-  <li>Nitrogen</li>
-  <li>Argon</li>
-  <li>Oxygen</li>
-</ul>
+<!-- https://en.wikipedia.org/wiki/Global_warming_potential#Water_vapour -->
+<h4>Water vapor</h4>
+<p>
+  Water vapour does contribute to anthropogenic global warming, but as the GWP
+  is defined, it is negligible for H2O.
+</p>
+<p>
+  H2O is the strongest greenhouse gas, because it has a profound infrared
+  absorption spectrum with more and broader absorption bands than CO2. Its
+  concentration in the atmosphere is limited by air temperature, so that
+  radiative forcing by water vapour increases with global warming (positive
+  feedback). But the GWP definition excludes indirect effects. GWP definition is
+  also based on emissions, and anthropogenic emissions of water vapour (cooling
+  towers, irrigation) are removed via precipitation within weeks, so its GWP is
+  negligible.
+</p>
+
+<h4>GWP over GTP</h4>
+<p>
+  The Global Temperature change Potential (GTP) is another way to compare gases.
+  While GWP estimates heat absorbed, GTP estimates the resulting rise in average
+  surface temperature of the world, over the next 20, 50 or 100 years, caused by
+  a greenhouse gas, relative to the temperature rise which the same mass of CO2
+  would cause.[5] Calculation of GTP requires modeling how the world, especially
+  the oceans, will absorb heat.[17] GTP is published in the same IPCC tables
+  with GWP.[5]
+</p>
+<p>
+  GWP* has been proposed to take better account of short-lived climate
+  pollutants (SLCP) such as methane, relating a change in the rate of emissions
+  of SLCPs to a fixed quantity of CO2.
+</p>
 
 <h3>Water</h3>
 <p>
@@ -163,14 +198,14 @@
 
 <h4>Green water footprint</h4>
 <p>
-  is water from precipitation that is stored in the root zone of the soil and
+  Is water from precipitation that is stored in the root zone of the soil and
   evaporated, transpired or incorporated by plants. It is particularly relevant
   for agricultural, horticultural and forestry products.
 </p>
 
 <h4>Blue water footprint</h4>
 <p>
-  is water that has been sourced from surface or groundwater resources and is
+  Is water that has been sourced from surface or groundwater resources and is
   either evaporated, incorporated into a product or taken from one body of water
   and returned to another, or returned at a different time. Irrigated
   agriculture, industry and domestic water use can each have a blue water
@@ -179,7 +214,7 @@
 
 <h4>Grey water footprint</h4>
 <p>
-  is the amount of fresh water required to assimilate pollutants to meet
+  Is the amount of fresh water required to assimilate pollutants to meet
   specific water quality standards. The grey water footprint considers
   point-source pollution discharged to a freshwater resource directly through a
   pipe or indirectly through runoff or leaching from the soil, impervious
@@ -187,15 +222,12 @@
 </p>
 
 <p>
-  <strong>(Fresh?) water footprint - Drinking water - EIGEN</strong>
+  <strong>(Fresh?) water footprint</strong>
 </p>
 
+<h3>Water vapor</h3>
 <p>
-  1740 page number 1842 table 1483 water vapor ar5 vergelijken met ar6 kan ar5
-  wel gequote worden? Water vapor. link %
-  https://en.wikipedia.org/wiki/Global_warming_potential#Water_vapour Land use.
-  tidadadadada Petrol use. tidaoeduao Punishments. aoeu Other emissions. like
-  rubber, other solids (nitrogen from poop), etc.
+  It's not in GWP but what to do with it instead? Needs at least some scoring.
 </p>
 
 <hr />
@@ -234,8 +266,8 @@
 </div>
 
 <Table grid={exercises_table} label="table:energy_oxygen_usage" full
-  >METs <Cite to="energy_usage" /> and Oxygen demands <Cite
-    to="oxygen_usage"
+  >METs <Cite to="runningtools-energy_usage" /> and Oxygen demands <Cite
+    to="wikipedia-oxygen_usage"
   />.</Table
 >
 
@@ -243,12 +275,12 @@
 <!-- celcius &#8451; -->
 
 <h3>Air (breathing)</h3>
-<p>respiratory (air breathing) is meestal 300 mL per dag..</p>
+<p>respiratory (air breathing) is meestal 300 mL per dag.</p>
 
 <Table
   grid={airCompositionTable}
   label="table:composition_of_air_by_volume"
-  full>Composition of Air by volume..</Table
+  full>Composition of Air by volume.</Table
 >
 
 <!-- <pre>{JSON.stringify(breathing(dec("1")), null, 2)}</pre> -->
@@ -741,12 +773,9 @@ kcal per kg -->
 <Table grid={food_table} bordered full label="" overflow />
 
 <h3>Diets</h3>
-<p>
-  General diet Goal = 2500 kcal a day percentage from that (so it applies to
-  both genders) no statistics used no sources used
-</p>
+<p>no statistics used no sources used</p>
 
-{#each Object.entries(diets) as [diet, value]}
+<!-- {#each Object.entries(diets) as [diet, value]}
   <h3>{value.name}</h3>
   <Table
     grid={{
@@ -778,7 +807,7 @@ kcal per kg -->
     full
     label="">{diet} footprint per 1000 kcal</Table
   >
-{/each}
+{/each} -->
 
 <!-- interesting foods highly purchased in supermarkets - appel - banaan - avocado - peer
   - kosten per kg - afstand (location of growth) - kcal - voedingswaarde - uitstoot

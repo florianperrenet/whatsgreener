@@ -3,6 +3,10 @@ export const bibliography = {
         title: "wikipedia greenhouse gas",
         url: "https://en.wikipedia.org/wiki/Greenhouse_gas",
     },
+    "wikipedia-greenhouse_gas_atmospheric_lifetime": {
+        title: "wikipedia greenhouse gas atmospheric lifetime",
+        url: "https://en.wikipedia.org/wiki/Greenhouse_gas#Atmospheric_lifetime",
+    },
     "wikipedia-greenhouse_gas_impacts": {
         title: "wikipedia greenhouse gas impacts",
         url: "https://en.wikipedia.org/wiki/Greenhouse_gas#Impacts_on_the_overall_greenhouse_effect",
