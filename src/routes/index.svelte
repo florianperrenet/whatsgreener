@@ -44,12 +44,12 @@
 			</a>
 		</div>
 
-		<div class="absolute top-20 bottom-0 right-0 w-1/2 z-10">
+		<div class="absolute top-20 bottom-0 right-0 w-1/2">
 			<div class="h-4/6 w-full bg-gray-100 rounded-lg shadow-lg" />
 		</div>
 	</div>
 
-	<div
+	<!-- <div
 		style="background: url(''); background-size: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0; opacity: 1; z-index: 0;"
-	/>
+	/> -->
 </div>
