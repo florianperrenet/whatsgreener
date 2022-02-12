@@ -9,52 +9,47 @@
 	<title>Home</title>
 </svelte:head>
 
-<div class="relative w-full">
-	<!-- <div
-		class="relative w-full"
-		style="background: url('https://nachhaltig-vorsorgen.zurich.de/static/media/start.b4042ca8.svg'); background-position-y: 70%; background-repeat: no-repeat;"
-		> -->
-	<!-- <div class="relative w-full"> -->
-	<div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8 pt-40 z-10">
-		<h1 class="font-extrabold text-5xl text-slate-900 text-center">
-			<!-- A proper footprint comparison tool. -->
-			A proper footprint calculator.
+<div class="relative w-full bg-white">
+	<div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8 pt-40">
+		<h1 class="font-extrabold text-6xl text-slate-900 mb-10">
+			A proper footprint <br /> comparison tool.
 		</h1>
-		<div class="flex justify-center mt-6">
+		<div class="flex mt-6">
 			<ul class="text-2xl list-disc list-inside">
 				<li class="mb-2">
 					<a
 						href="https://github.com/florianperrenet/whatsgreener"
-						class="after:content-['_↗']"
 						target="_blank">Open source</a
 					>
 				</li>
 				<li>
-					<a href="/calculations" class="after:content-['_↗']"
-						>No bias, pure facts</a
-					>
+					<a href="/calculations">No bias, pure facts</a>
 				</li>
-				<!-- <li class="after:content-['_↗']">Fact checkable.</li> -->
-				<!-- <li>Community driven research.</li> -->
 			</ul>
 		</div>
-		<div class="mt-12 flex justify-center space-x-6 text-sm">
-			<a
-				sveltekit:prefetch
-				href="/travel"
-				class="bg-sky-500 font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto text-white"
-				>Travel</a
-			>
-			<a
-				sveltekit:prefetch
-				href="/food"
-				class="bg-sky-500 font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto text-white"
-				>Food</a
-			>
+		<div class="mt-12 text-sm">
+			<a href="/travel" class="font-bold text-lg">
+				Compare Travel &nbsp;->
+				<div class="border-b-2 border-gray-900 w-14 h-3" />
+			</a>
+			<div class="h-10" />
+			<a href="/food" class="font-bold text-lg">
+				Compare Food &nbsp;->
+				<div class="border-b-2 border-gray-900 w-14 h-3" />
+			</a>
+			<div class="h-10" />
+			<a href="/calculations" class="font-bold text-lg">
+				View Calculations &nbsp;->
+				<div class="border-b-2 border-gray-900 w-14 h-3" />
+			</a>
+		</div>
+
+		<div class="absolute top-20 bottom-0 right-0 w-1/2 z-10">
+			<div class="h-4/6 w-full bg-gray-100 rounded-lg" />
 		</div>
 	</div>
+
 	<div
-		class="absolute top-0 left-0 h-full w-full"
-		style="z-index: -1; background: url('https://images.unsplash.com/photo-1500314144216-35ed69e42b7b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'); background-position-y: 70%; background-repeat: no-repeat; background-size: cover;"
+		style="background: url(''); background-size: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0; opacity: 1; z-index: 0;"
 	/>
 </div>
