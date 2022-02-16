@@ -112,6 +112,7 @@
   </div>
   <div slot="content">
     <div class="mb-10 text-4xl font-extrabold text-slate-900">Travel</div>
+    <div class="lead">Usage impact</div>
     <!-- <div class="font-bold">Terminology</div>
     <div class="text-base b-5 mb-10">
       <div>
