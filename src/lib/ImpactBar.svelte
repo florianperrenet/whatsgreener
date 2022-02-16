@@ -18,7 +18,7 @@
 </script>
 
 <div class="flex items-center overflow-hidden">
-  <div class="flex-none mr-2 text-sm">WGI: {value.toFixed(2)}</div>
+  <!-- <div class="flex-none mr-2 text-sm">Impact: {value.toFixed(2)}</div> -->
   <div class="flex-initial w-full bg-gray-200 rounded-full h-2.5">
     <div
       class="h-2.5 rounded-full"

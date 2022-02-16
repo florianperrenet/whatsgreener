@@ -2,6 +2,10 @@
   import SidebarLayout from "$lib/SidebarLayout.svelte";
 </script>
 
+<svelte:head>
+  <title>Food</title>
+</svelte:head>
+
 <SidebarLayout>
   <div slot="sidebar" />
   <div slot="content">

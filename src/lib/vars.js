@@ -53,15 +53,8 @@ function toval(name, amount, percentage, precision, unit, state, reference) {
     const _amount = amount;
     const _percentage = percentage;
 
-    if (percentage == null) {
-        // amount = percentage;
-        // percentage = dec("100");
-    }
-    else if (amount == null) {
-        amount = percentage.div(dec("100"));
-    } else {
-        throw "percentage and amount cannot both be null";
-    }
+    if (amount == null)
+        amount = percentage.div(dec("100"))
 
     return {
         _amount,  // original value
@@ -2081,26 +2074,27 @@ export const food_table = (() => {
     ];
     let rows = [];
 
-    // let add_cols = true;
-    // for (const value of Object.values(food)) {
-    //     const footprint_vals = [];
-    //     for (const [fpkey, fpval] of Object.entries(value.footprint)) {
-    //         footprint_vals.push(fpval.per_kg.median);
-    //         if (add_cols) {
-    //             columns.push(fpkey);
-    //         }
-    //     }
+    let add_cols = true;
+    for (const value of Object.values(food)) {
+        // const footprint_vals = [];
+        // for (const [fpkey, fpval] of Object.entries(value.footprint)) {
+        //     footprint_vals.push(fpval.per_kg.median);
+        //     if (add_cols) {
+        //         columns.push(fpkey);
+        //     }
+        // }
 
-    //     add_cols = false;
+        add_cols = false;
 
-    //     rows.push([
-    //         value.name,
-    //         value.composition.per_100g.kcal,
-    //         value.composition.per_100g.protein,
-    //         value.composition.per_100g.fat,
-    //         ...footprint_vals,
-    //     ]);
-    // }
+        rows.push([
+            value.name,
+            value.composition.per_100g.kcal,
+            value.composition.per_100g.protein,
+            value.composition.per_100g.fat,
+            // ...footprint_vals,
+        ]);
+    }
+
     let align = "l";
     for (const col of columns)
         align += "r";
@@ -2571,29 +2565,29 @@ export const diets_table = (() => {
 
     for (const [key, value] of Object.entries(diets)) {
         data[key] = [];
-        // let totalkcalsum = dec("0");
+        let totalkcalsum = dec("0");
 
-        // for (const [meal, mealval] of Object.entries(value.overview)) {
-        //     const tmpdata = [];
-        //     for (const item of mealval) {
-        //         tmpdata.push([
-        //             item.product,
-        //             `${item.amount} ${item.unit}`,
-        //             item.kcal,
-        //         ]);
-        //     }
+        for (const [meal, mealval] of Object.entries(value.overview)) {
+            const tmpdata = [];
+            for (const item of mealval) {
+                tmpdata.push([
+                    item.product,
+                    `${item.amount} ${item.unit}`,
+                    item.kcal,
+                ]);
+            }
 
-        //     let kcalsum = dec("0");
-        //     tmpdata.map((x) => { kcalsum = kcalsum.add(x[2]) });
+            let kcalsum = dec("0");
+            tmpdata.map((x) => { kcalsum = kcalsum.add(x[2]) });
 
-        //     data[key].push(`${capitalize(meal)} (${kcalsum}kcal)`);
+            data[key].push(`${capitalize(meal)} (${kcalsum}kcal)`);
 
-        //     tmpdata.map((x) => data[key].push(x));
+            tmpdata.map((x) => data[key].push(x));
 
-        //     totalkcalsum = totalkcalsum.add(kcalsum);
-        // }
+            totalkcalsum = totalkcalsum.add(kcalsum);
+        }
 
-        // data[key].push(`Total ${totalkcalsum}kcal`);
+        data[key].push(`Total ${totalkcalsum}kcal`);
     }
 
     return { align, columns, ...data }
@@ -2608,53 +2602,57 @@ export const diets_distribution_table = (() => {
     for (const [key, value] of Object.entries(diets)) {
         data[key] = [];
 
-        // const type_grouped = {};
-        // for (const [gkey, gvalue] of Object.entries(value.grouped)) {
-        //     const val = [
-        //         gkey,
-        //         `${gvalue.amount} ${gvalue.unit}`,
-        //         gvalue.kcal,
-        //         (gvalue.percentage.times(dec("100"))).toFixed(2),
-        //     ];
-        //     if (gvalue.type in type_grouped) {
-        //         type_grouped[gvalue.type].push(val);
-        //     } else {
-        //         type_grouped[gvalue.type] = [val];
-        //     }
-        // }
-        // let kcal_total = dec("0");
-        // for (const [k, v] of Object.entries(type_grouped)) {
-        //     // if (!v.length) continue;
-        //     let kcal_group = dec("0");
-        //     v.map((x) => kcal_group = kcal_group.add(x[2]));
-        //     // console.log(v)
-        //     data[key].push(`${capitalize(k)} (${kcal_group}kcal)`);
-        //     data[key].push(...v);
+        const type_grouped = {};
+        for (const [gkey, gvalue] of Object.entries(value.grouped)) {
+            const val = [
+                gkey,
+                `${gvalue.amount} ${gvalue.unit}`,
+                gvalue.kcal,
+                (gvalue.percentage.times(dec("100"))).toFixed(2),
+            ];
+            if (gvalue.type in type_grouped) {
+                type_grouped[gvalue.type].push(val);
+            } else {
+                type_grouped[gvalue.type] = [val];
+            }
+        }
+        let kcal_total = dec("0");
+        for (const [k, v] of Object.entries(type_grouped)) {
+            // if (!v.length) continue;
+            let kcal_group = dec("0");
+            v.map((x) => kcal_group = kcal_group.add(x[2]));
+            // console.log(v)
+            data[key].push(`${capitalize(k)} (${kcal_group}kcal)`);
+            data[key].push(...v);
 
-        //     kcal_total = kcal_total.add(kcal_group);
-        // }
+            kcal_total = kcal_total.add(kcal_group);
+        }
 
-        // data[key].push(`Total ${kcal_total}kcal`)
+        data[key].push(`Total ${kcal_total}kcal`)
     }
     return { align, columns, ...data };
 })();
 
 export const diets_footprint_table = (() => {
     const align = "lrr";
-    const columns = ["Parameter", "Mean", "Median"];
+    const columns = ["Side", "Parameter", "Mean", "Median"];
     const data = {};
 
-    // for (const [diet, dietvalue] of Object.entries(diets)) {
-    //     data[diet] = [];
-    //     for (const [key, value] of Object.entries(dietvalue.footprint_per_kcal)) {
-    //         data[diet].push([
-    //             key,
-    //             (value.mean.times(dec("1000"))).toFixed(2),
-    //             (value.median.times(dec("1000"))).toFixed(2),
-    //         ]);
-    //     }
+    for (const [diet, dietvalue] of Object.entries(diets)) {
+        data[diet] = [];
 
-    // }
+        for (const side of Object.keys(dietvalue.footprint_per_kcal)) {
+            for (const [key, value] of Object.entries(dietvalue.footprint_per_kcal[side])) {
+                console.log(key, value)
+                data[diet].push([
+                    side,
+                    key,
+                    (value.mean.times(dec("1000"))).toFixed(2),
+                    (value.median.times(dec("1000"))).toFixed(2),
+                ]);
+            }
+        }
+    }
     return { align, columns, ...data };
 })();
 
@@ -2716,8 +2714,8 @@ export const airCompositionTable = (() => {
         console.log(key)
         rows.push([
             key,
-            aircomposition.atmospheric[key],
-            aircomposition.exhaled[key],
+            aircomposition.atmospheric[key]._percentage,
+            aircomposition.exhaled[key]._percentage,
         ]);
     }
     return { align, columns, rows };
@@ -3033,14 +3031,21 @@ const footprintFoodEating = (diet, kcal) => {
     // diet can be only a specific food
     if (diet in food) {
         const footprint = food[diet].footprint;
-        const per_kcal_grouped = {};
-        for (const [key, value] of Object.entries(footprint)) {
-            per_kcal_grouped[key] = {
-                mean: value.per_kcal.mean,
-                median: value.per_kcal.median,
-                unit: value.unit,
-                state: value.state,
-            };
+        const per_kcal_grouped = {
+            consumes: {},
+            emits: {},
+        };
+
+        const keys = ['consumes', 'emits'];
+        for (const k of keys) {
+            for (const [key, value] of Object.entries(footprint[k])) {
+                per_kcal_grouped[k][key] = {
+                    mean: value.per_kcal.mean,
+                    median: value.per_kcal.median,
+                    unit: value.unit,
+                    state: value.state,
+                };
+            }
         }
         foodEmissions = per_kcal_grouped;
     } else if (diet in diets) {
@@ -3238,7 +3243,87 @@ export const travel = (distance, weight, diet) => {
 
 
 
+export const waterGainLossesTypical = () => {
+    // based on 2.5 L/day
+    return {
+        in: {
+            drink: toval("water", dec("1.6"), dec("64"), 2, "L", "liquid", null),
+            food: toval("water", dec("0.7"), dec("28"), 2, "L", "liquid", null),
+            metabolic_water: toval("water", dec("0.2"), dec("8"), 2, "L", "liquid", null),
+        },
+        out: {
+            urine: toval("water", dec("1.5"), dec("60"), 2, "L", "liquid", null),
+            cutaneous_transpiration: toval("water", dec("0.4"), dec("16"), 2, "L", "liquid", null),
+            expired_air: toval("water", dec("0.3"), dec("12"), 2, "L", "liquid", null),
+            sweat: plusminus(
+                toval("water", dec("0.1"), dec("4"), 2, "L", "liquid", null),
+                toval("water", dec("0.2"), dec("8"), 2, "L", "liquid", null),
+            ),
+            feces: plusminus(
+                toval("water", dec("0.1"), dec("4"), 2, "L", "liquid", null),
+                toval("water", dec("0.2"), dec("8"), 2, "L", "liquid", null),
+            ),
+        },
+    };
+};
+
+
+const airPerLOxygen = dec("100").div(dec("6.15"));
+
+
+export const oxygenDemandDeltaRest = (activity) => {
+    return activities[activity].oxygenDemandDeltaRest;
+};
+
+export const inhaledAir = (activity) => {
+    // L / h / kg
+    return oxygenDemandDeltaRest(activity).times(airPerLOxygen);
+};
+
+
+export const breathingOxygenConsumption = (inhaledAir) => {
+    return inhaledAir.times(dec("0.0615"));
+};
+
+export const breathingWaterVaporEmission = (exhaledAir) => {
+    return exhaledAir.times(dec("0.0315"));
+};
+
+
+export function exhaledWaterVapor(inhaledAir) {
+    return inhaledAir.times(dec("0.0315"));
+}
+
+export function waterLossBreathing(inhaledAir) {
+    return exhaledWaterVapor(inhaledAir).times(dec("0.0007"));
+}
 
 
 
+
+export const waterGainLosses = (activity) => {
+    const inhaled = inhaledAir(activity);
+    const waterLoss = waterLossBreathing(inhaled);
+
+    return {
+        in: {
+            drink: toval("water", dec("1.6"), dec("64"), 2, "L", "liquid", null),
+            food: toval("water", dec("0.7"), dec("28"), 2, "L", "liquid", null),
+            metabolic_water: toval("water", dec("0.2"), dec("8"), 2, "L", "liquid", null),
+        },
+        out: {
+            urine: toval("water", dec("1.5"), dec("60"), 2, "L", "liquid", null),
+            cutaneous_transpiration: toval("water", dec("0.4"), dec("16"), 2, "L", "liquid", null),
+            expired_air: toval("water", waterLoss, null, 2, "L", "liquid", null),
+            sweat: plusminus(
+                toval("water", dec("0.1"), dec("4"), 2, "L", "liquid", null),
+                toval("water", dec("0.2"), dec("8"), 2, "L", "liquid", null),
+            ),
+            feces: plusminus(
+                toval("water", dec("0.1"), dec("4"), 2, "L", "liquid", null),
+                toval("water", dec("0.2"), dec("8"), 2, "L", "liquid", null),
+            ),
+        },
+    };
+};
 

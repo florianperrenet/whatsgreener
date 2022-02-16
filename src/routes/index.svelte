@@ -6,50 +6,53 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>whatsgreener, a proper footprint comparison tool.</title>
 </svelte:head>
 
 <div class="relative w-full bg-white">
 	<div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8 pt-40">
-		<h1 class="font-extrabold text-6xl text-slate-900 mb-10 leading-tight">
-			A proper footprint <br /> comparison tool.
-		</h1>
-		<div class="flex mt-6">
-			<ul class="text-2xl list-disc list-inside">
-				<li class="mb-2">
-					<a
-						href="https://github.com/florianperrenet/whatsgreener"
-						target="_blank">Open source</a
-					>
-				</li>
-				<li>
-					<a href="/calculations">No bias, pure facts</a>
-				</li>
-			</ul>
-		</div>
-		<div class="mt-16 text-sm">
-			<a href="/travel" class="font-bold text-lg">
-				Compare Travel &nbsp;->
-				<div class="border-b-4 border-gray-900 w-12 h-3" />
-			</a>
-			<div class="h-10" />
-			<a href="/food" class="font-bold text-lg">
-				Compare Food &nbsp;->
-				<div class="border-b-4 border-gray-900 w-14 h-3" />
-			</a>
-			<div class="h-10" />
-			<a href="/calculations" class="font-bold text-lg">
-				View Calculations &nbsp;->
-				<div class="border-b-4 border-gray-900 w-16 h-3" />
-			</a>
+		<div class="mb-20">
+			<h1 class="font-extrabold text-6xl text-slate-900 mb-10 leading-tight">
+				A proper footprint <br /> comparison tool.
+			</h1>
+			<div class="flex mt-6">
+				<ul class="text-2xl list-disc list-inside">
+					<li class="mb-2">
+						<a
+							href="https://github.com/florianperrenet/whatsgreener"
+							target="_blank">Open source</a
+						>
+					</li>
+					<li>
+						<a href="/calculations">No bias; pure facts</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mt-16 text-sm">
+				<a href="/travel" class="font-bold text-lg">
+					Compare Travel &nbsp;->
+					<div class="border-b-4 border-gray-900 w-12 h-3" />
+				</a>
+				<div class="h-10" />
+				<a href="/food" class="font-bold text-lg">
+					Compare Food &nbsp;->
+					<div class="border-b-4 border-gray-900 w-14 h-3" />
+				</a>
+				<div class="h-10" />
+				<a href="/calculations" class="font-bold text-lg">
+					View Calculations &nbsp;->
+					<div class="border-b-4 border-gray-900 w-16 h-3" />
+				</a>
+			</div>
 		</div>
 
-		<div class="absolute top-20 bottom-0 right-0 w-1/2">
+		<div class="xl:absolute xl:top-20 xl:bottom-0 xl:right-0 xl:w-1/2">
 			<div
 				class="w-full bg-gray-100 rounded-lg shadow-lg"
 				style="height: 700px;"
 			/>
 		</div>
+		<!-- style="background: url('/screenshot.png'); background-size: cover; height: 700px;" -->
 
 		<!-- <div class="h-40" />
 

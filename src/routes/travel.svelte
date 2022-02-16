@@ -94,73 +94,96 @@
         <a href="/calculations#costtocompensate">CostToCompensate</a>
       </div>
       <div>
+        <span class="font-medium">CTT:</span>
+        <a href="/calculations#costtocompensate">CostToTravel</a>
+      </div>
+      <div>
         <span class="font-medium">carbon_eq:</span>
         <a href="/calculations#ref-co2-eq100">CO2-eq100</a>
       </div>
     </div>
 
-    {#each travelValues(base.distance, base.weight, base.diet, base.sort) as option}
-      <div class="mb-2" impact={option.impact} travelTime={option.travelTime}>
-        <div class="text-base flex justify-between gap-x-5">
-          <div class="font-semibold">{option.name}</div>
-          <div>Speed: {option.speedKmh} km/h</div>
-          <div>MET: {option.met}</div>
-          <div>
-            Travel time: {option.travelTime.toFixed(2)} hours
-          </div>
-          <div>CTC: $40</div>
-        </div>
+    <table class="not-prose border-collapse	">
+      <thead>
+        <th class="pb-1 border-b-2 border-gray-900">Activity</th>
+        <th class="pb-1 text-center border-b-2 border-gray-900">Impact</th>
+        <th class="pb-1 text-center border-b-2 border-gray-900">Speed</th>
+        <th class="pb-1 text-center border-b-2 border-gray-900">Travel time</th>
+        <th class="pb-1 text-right border-b-2 border-gray-900">CTT</th>
+        <th class="pb-1 text-right border-b-2 border-gray-900">CTC</th>
+      </thead>
+      {#each travelValues(base.distance, base.weight, base.diet, base.sort) as option}
+        <tbody class="hover:bg-gray-100 hover:cursor-pointer">
+          <tr>
+            <td class="font-semibold pt-3">{option.name}</td>
+            <td class="text-center pt-3">{option.impact.toFixed(2)}</td>
+            <td class="text-center pt-3">{option.speedKmh} km/h</td>
+            <td class="text-center pt-3">
+              {option.travelTime.toFixed(2)} hours
+            </td>
+            <td class="text-right pt-3">$2</td>
+            <td class="text-right pt-3">$40</td>
+          </tr>
+          <tr>
+            <td colspan="6" class="py-1 pb-4 border-b border-gray-300">
+              <ImpactBar value={option.impact} />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6" class="text-sm mb-5 pb-3 pt-2">
+              <Toggle text="details">
+                <Toggle text="score details">
+                  <div class="mt-1 mb-2">
+                    {#each Object.entries(option.rwgi) as [key, value]}
+                      <div class="text-sm">
+                        {value.toFixed(2)}x better than {key}
+                      </div>
+                    {/each}
+                    <div class="h-2" />
+                    {#each Object.entries(option.rtt) as [key, value]}
+                      <div class="text-sm">
+                        {value.toFixed(2)}x faster than {key}
+                      </div>
+                    {/each}
+                  </div>
+                </Toggle>
 
-        <div class="mt-1 mb-2">
-          <ImpactBar value={option.impact} />
-          {#each Object.entries(option.rwgi) as [key, value]}
-            <div class="text-sm">{value.toFixed(2)}x better than {key}</div>
-          {/each}
-          <div class="h-2" />
-          {#each Object.entries(option.rtt) as [key, value]}
-            <div class="text-sm">{value.toFixed(2)}x faster than {key}</div>
-          {/each}
-        </div>
-
-        <div class="text-sm pl-10">
-          <div class="mb-2">
-            {#each Object.values(option.footprint) as value}
-              <div>{value.name} ({value.activity})</div>
-            {/each}
-          </div>
-          {#each ["consumesEq", "emitsEq"] as content}
-            <div>{content}</div>
-            {#each Object.values(option[content]) as value}
-              <div class="pl-5">
-                {value.name}
-                {#if value.state != null}
-                  <span class="text-gray-500">{value.state}</span>
-                {/if}
-                : {value.amount.toFixed(value.finalPrecision)}
-                {#if value.unit != null}
-                  <span class="text-sm">{value.unit}</span>
-                {/if}
-              </div>
-            {/each}
-          {/each}
-
-          <!-- <Toggle text="in depth">
-            <div>Footprint</div>
-            <div>
-              {#each Object.values(option.footprint) as footprint}
-                <pre>{JSON.stringify(footprint, null, 2)}</pre>
-              {/each}
-            </div>
-          </Toggle> -->
-        </div>
-      </div>
-    {/each}
+                <Toggle text="footprint details">
+                  <div class="text-sm pl-10">
+                    <div class="mb-2">
+                      {#each Object.values(option.footprint) as value}
+                        <div>{value.name} ({value.activity})</div>
+                      {/each}
+                    </div>
+                    {#each ["consumesEq", "emitsEq"] as content}
+                      <div>{content}</div>
+                      {#each Object.values(option[content]) as value}
+                        <div class="pl-5">
+                          {value.name}
+                          {#if value.state != null}
+                            <span class="text-gray-500">{value.state}</span>
+                          {/if}
+                          : {value.amount.toFixed(value.finalPrecision)}
+                          {#if value.unit != null}
+                            <span class="text-sm">{value.unit}</span>
+                          {/if}
+                        </div>
+                      {/each}
+                    {/each}
+                  </div>
+                </Toggle>
+              </Toggle>
+            </td>
+          </tr>
+        </tbody>
+      {/each}
+    </table>
 
     <!-- <div>
-      <pre>{JSON.stringify(
+        <pre>{JSON.stringify(
           travel(base.distance, base.weight, base.diet),
           null,
-          2
+            2
         )}</pre>
     </div> -->
   </div>

@@ -15,6 +15,7 @@
     diets_footprint_table,
     exercises_table,
     airCompositionTable,
+    waterGainLossesTypical,
   } from "$lib/vars";
 
   import katex from "katex";
@@ -274,8 +275,102 @@
 <!-- plusminus &#177; -->
 <!-- celcius &#8451; -->
 
-<h3>Air (breathing)</h3>
-<p>respiratory (air breathing) is meestal 300 mL per dag.</p>
+<h4>Eating</h4>
+<p>todo: body efficiency</p>
+<p>food that goes in ref Food heading</p>
+<div class="text-sm">
+  {@html math(
+    "\\textup{kcalBurned = MET} \\cdot \\textup{bodyWeight} \\cdot \\textup{hours}"
+  )}
+  {@html math("\\textup{1 calorie = 4.1868 J}")}
+  {@html math("\\textup{1 Calorie = 1000 calories}")}
+  {@html math("\\textup{heatProduction = kcalBurned } \\cdot 4186.8")}
+</div>
+
+<pre>
+  {@html JSON.stringify(
+    {
+      in: {
+        food: "kcal",
+      },
+      out: {
+        heat: "heat",
+        foodFootprint: "obj",
+      },
+    },
+    null,
+    2
+  )}
+</pre>
+
+<h4>Hydrating</h4>
+<p>Water consumption is about 1 L / 1000 kcal [14].</p>
+
+<p>Based on 2500 mL/day</p>
+<pre>
+  {@html JSON.stringify(waterGainLossesTypical(), null, 2)}
+</pre>
+<p>Typical daily water gains and losses. <Cite to="quora-water_loss" /></p>
+
+<p>
+  Maar grote oorzaak kan zijn door de 3.15% water vapor difference (die
+  eigenlijk gewoon stiekem 5% kan zijn!).
+</p>
+
+<p>Water consumption at rest mL/day</p>
+<pre>
+  {@html JSON.stringify(waterGainLossesTypical(), null, 2)}
+</pre>
+<p>Data based Water gains and losses.</p>
+
+<p>
+  Above values are approximations. During exercise values for ’Sweat’ and ’Ex-
+  pired air’ are higher. Value for ’Expired air’ can be used from previous
+  calculations. Which is quite similar to above (calculatie).
+</p>
+
+<div>waterConsumption (L) = excessKcal/1000</div>
+<div>waterGainDrink (L) = waterConsumption ·64%</div>
+<div>waterGainFood (L) = waterConsumption ·28%</div>
+<div>waterGainMetabolicWater (L) = waterConsumption ·8%</div>
+<div>waterLossUrine (L) = waterConsumption ·60%</div>
+<div>waterLossCutaneousTranspiration (L) = waterConsumption ·16%</div>
+<div>waterLossBreathing (L) = waterLossBreathing3</div>
+<div>waterLossFeces (L) = waterConsumption ·8%</div>
+<div>waterLossSweat (L) = iets</div>
+
+<!-- footnotes -->
+<p>
+  24h air usage at rest with 70kg is 3.55 ·70 ·24 = 5964 L. Daily water loss
+  from breathing would be waterLossBreathing(5964) = 0.146118 L. Which is
+  somewhat similar to 300 mL from Table 8. The difference may come from that we
+  used being at rest for 24h, and they may have used a slighty higher daily
+  activity.
+</p>
+
+<pre>
+  {@html JSON.stringify(
+    {
+      in: {
+        drink: "water amount",
+        food: "water amount",
+        metabolic_water: "water amount",
+      },
+      out: {
+        urine: "water amount",
+        cutaneous_transpiration: "water amount",
+        expired_air: "water amount",
+        sweat: "water amount",
+        feces: "water amount",
+      },
+    },
+    null,
+    2
+  )}
+</pre>
+
+<h4>Breathing</h4>
+<!-- <p>respiratory (air breathing) is meestal 300 mL per dag.</p> -->
 
 <Table
   grid={airCompositionTable}
@@ -353,162 +448,7 @@ The difference could be 10%.
   bodyweight and exercise intensity.
 </p>
 
-<h4>Water (Hydration)</h4>
-<table class="table">
-  <thead>
-    <tr>
-      <th colspan="4">Based on 2500 mL/day</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="3">Gains</td>
-      <td>Drink</td>
-      <td>1600 mL</td>
-      <td>64%</td>
-    </tr>
-    <tr>
-      <td>Food</td>
-      <td>700 mL</td>
-      <td>28%</td>
-    </tr>
-    <tr>
-      <td>Metabolic water</td>
-      <td>200 mL</td>
-      <td>8%</td>
-    </tr>
-
-    <tr>
-      <td rowspan="5">Losses</td>
-      <td>Urine</td>
-      <td>1500 mL</td>
-      <td>60%</td>
-    </tr>
-    <tr>
-      <td>Cutaneous transpiration</td>
-      <td>400 mL</td>
-      <td>16%</td>
-    </tr>
-    <tr>
-      <td>Expired air</td>
-      <td>300 mL</td>
-      <td>12%</td>
-    </tr>
-    <tr>
-      <td>Sweat</td>
-      <td>100 ±200 mL</td>
-      <td>4 ±8%</td>
-    </tr>
-    <tr>
-      <td>Feces</td>
-      <td>100 ±200 mL</td>
-      <td>4 ±8%</td>
-    </tr>
-  </tbody>
-  <caption
-    >Typical daily water gains and losses. <Cite
-      to="quora-water_loss"
-    /></caption
-  >
-  <label for="table:daily_water_gains_and_losses" />
-</table>
-
-<p>
-  Water consumption is 1 L/1000 kcal [14]. formula —— percentage, deviation
-  equation! not formula? Maaaaar! ligt natuurlijk ook aan de kcal / day at rest.
-  is iets van 1872 kcal en erboven is op basis van 2500, dus logish dat mijn
-  expired air waarde anders uitkomt! kom dan uit op 189 mL water loss van
-  respiration. Maar grote oorzaak kan zijn door de 3.15% water vapor difference
-  (die eigenlijk gewoon stiekem 5% kan zijn!).
-</p>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th colspan="4">Water consumption at rest mL/day</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="3">Gains</td>
-      <td>Drink</td>
-      <td class="text-right">1600 mL</td>
-      <td class="text-right">64%</td>
-    </tr>
-    <tr>
-      <td>Food</td>
-      <td class="text-right">700 mL</td>
-      <td class="text-right">28%</td>
-    </tr>
-    <tr>
-      <td>Metabolic water</td>
-      <td class="text-right">200 mL</td>
-      <td class="text-right">8%</td>
-    </tr>
-
-    <tr>
-      <td rowspan="5">Losses</td>
-      <td>Urine</td>
-      <td class="text-right">1500 mL</td>
-      <td class="text-right">60%</td>
-    </tr>
-    <tr>
-      <td>Cutaneous transpiration</td>
-      <td class="text-right">400 mL</td>
-      <td class="text-right">16%</td>
-    </tr>
-    <tr>
-      <td>Expired air</td>
-      <th class="text-right">146 mL</th>
-      <td class="text-right">equation</td>
-    </tr>
-    <tr>
-      <td>Sweat</td>
-      <td class="text-right">200 mL</td>
-      <td class="text-right">8%</td>
-    </tr>
-    <tr>
-      <td>Feces</td>
-      <th class="text-right">96 mL</th>
-      <td class="text-right">equation</td>
-    </tr>
-  </tbody>
-  <caption>Data based Water gains and losses.</caption>
-  <label for="table:daily_water_gains_and_losses" />
-</table>
-
-<p>
-  Above values are approximations. During exercise values for ’Sweat’ and ’Ex-
-  pired air’ are higher. Value for ’Expired air’ can be used from previous
-  calculations. Which is quite similar to above (calculatie).
-</p>
-
-<div>waterConsumption (L) = excessKcal/1000</div>
-<div>waterGainDrink (L) = waterConsumption ·64%</div>
-<div>waterGainFood (L) = waterConsumption ·28%</div>
-<div>waterGainMetabolicWater (L) = waterConsumption ·8%</div>
-<div>waterLossUrine (L) = waterConsumption ·60%</div>
-<div>waterLossCutaneousTranspiration (L) = waterConsumption ·16%</div>
-<div>waterLossBreathing (L) = waterLossBreathing3</div>
-<div>waterLossFeces (L) = waterConsumption ·8%</div>
-<div>waterLossSweat (L) = iets</div>
-
-<!-- footnotes -->
-<p>
-  24h air usage at rest with 70kg is 3.55 ·70 ·24 = 5964 L. Daily water loss
-  from breathing would be waterLossBreathing(5964) = 0.146118 L. Which is
-  somewhat similar to 300 mL from Table 8. The difference may come from that we
-  used being at rest for 24h, and they may have used a slighty higher daily
-  activity.
-</p>
-
-<h4>Food (eating)</h4>
-<p>skipped</p>
-
-<h4>Heat (Exercise)</h4>
-<p>skipped</p>
-
-<h4>Sweat (Perspiration)</h4>
+<h4>Sweating</h4>
 <p>
   waterLossSweat = 4% ! add ref average sweat rate army nemen (was iets van
   0.3L/h?) air temperature = 20Ta, °C ambient air movement = 1 V, m/s ambient
@@ -540,8 +480,7 @@ The difference could be 10%.
   label="table:perspiration_constituents"
   full>Perspiration constituents. <Cite to="wikipedia-perspiration" /></Table
 >
-
-<h4>Urine</h4>
+<h4>Peeing</h4>
 <p>waterLossUrine = 60% add ref OSEc corrected Pw</p>
 
 <Table
@@ -566,7 +505,7 @@ The difference could be 10%.
   full>Urine constituents. <Cite to="wikipedia-urine" /></Table
 >
 
-<h4>Feces (Poop)</h4>
+<h4>Pooping</h4>
 <p>
   Humans eliminate 128 g (median value) of fresh feces per person per day. Fresh
   feces contains around 75% water and the remaining solid fraction are mostly
@@ -650,7 +589,7 @@ The difference could be 10%.
   <label for="table:human_feces_characteristics" />
 </table>
 
-<h4>Gas (Farts)</h4>
+<h4>Farting</h4>
 <p>
   Gas in the digestive tract (that is, the esophagus, stomach, small intestine,
   and large intestine) comes from two sources:
@@ -747,7 +686,7 @@ The difference could be 10%.
   <label for="result" />
 </table>
 
-<h4>Burp (Belching)</h4>
+<h4>Burping</h4>
 <p>
   Belching comes from swallowing air from food or frood drinking soda. Burping
   is usually caused by swallowing air when eating or drinking and subse- quently
@@ -775,7 +714,7 @@ kcal per kg -->
 <h3>Diets</h3>
 <p>no statistics used no sources used</p>
 
-<!-- {#each Object.entries(diets) as [diet, value]}
+{#each Object.entries(diets) as [diet, value]}
   <h3>{value.name}</h3>
   <Table
     grid={{
@@ -797,6 +736,7 @@ kcal per kg -->
     full
     label="">{diet} kcal distribution</Table
   >
+
   <Table
     grid={{
       align: diets_footprint_table.align,
@@ -807,7 +747,7 @@ kcal per kg -->
     full
     label="">{diet} footprint per 1000 kcal</Table
   >
-{/each} -->
+{/each}
 
 <!-- interesting foods highly purchased in supermarkets - appel - banaan - avocado - peer
   - kosten per kg - afstand (location of growth) - kcal - voedingswaarde - uitstoot
@@ -829,6 +769,9 @@ kcal per kg -->
 <p>ladida</p>
 
 <h2>Cost to compensate</h2>
+<p>Ladiddad</p>
+
+<h2>Cost to travel</h2>
 <p>Ladiddad</p>
 
 <hr />
