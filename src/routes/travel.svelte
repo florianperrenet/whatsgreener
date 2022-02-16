@@ -36,6 +36,16 @@
 
     return values;
   }
+
+  const showDetails = {};
+  const showDetailIcon = {};
+
+  function toggleDetails(activityName) {
+    showDetails[activityName] = !showDetails[activityName];
+  }
+  function toggleDetailIcon(activityName) {
+    showDetailIcon[activityName] = !showDetailIcon[activityName];
+  }
 </script>
 
 <svelte:head>
@@ -103,81 +113,111 @@
       </div>
     </div>
 
-    <table class="not-prose border-collapse	">
-      <thead>
-        <th class="pb-1 border-b-2 border-gray-900">Activity</th>
-        <th class="pb-1 text-center border-b-2 border-gray-900">Impact</th>
-        <th class="pb-1 text-center border-b-2 border-gray-900">Speed</th>
-        <th class="pb-1 text-center border-b-2 border-gray-900">Travel time</th>
-        <th class="pb-1 text-right border-b-2 border-gray-900">CTT</th>
-        <th class="pb-1 text-right border-b-2 border-gray-900">CTC</th>
-      </thead>
-      {#each travelValues(base.distance, base.weight, base.diet, base.sort) as option}
-        <tbody class="hover:bg-gray-100 hover:cursor-pointer">
-          <tr>
-            <td class="font-semibold pt-3">{option.name}</td>
-            <td class="text-center pt-3">{option.impact.toFixed(2)}</td>
-            <td class="text-center pt-3">{option.speedKmh} km/h</td>
-            <td class="text-center pt-3">
-              {option.travelTime.toFixed(2)} hours
-            </td>
-            <td class="text-right pt-3">$2</td>
-            <td class="text-right pt-3">$40</td>
-          </tr>
-          <tr>
-            <td colspan="6" class="py-1 pb-4 border-b border-gray-300">
-              <ImpactBar value={option.impact} />
-            </td>
-          </tr>
-          <tr>
-            <td colspan="6" class="text-sm mb-5 pb-3 pt-2">
-              <Toggle text="details">
-                <Toggle text="score details">
-                  <div class="mt-1 mb-2">
-                    {#each Object.entries(option.rwgi) as [key, value]}
-                      <div class="text-sm">
-                        {value.toFixed(2)}x better than {key}
-                      </div>
-                    {/each}
-                    <div class="h-2" />
-                    {#each Object.entries(option.rtt) as [key, value]}
-                      <div class="text-sm">
-                        {value.toFixed(2)}x faster than {key}
-                      </div>
-                    {/each}
-                  </div>
-                </Toggle>
+    <div class="">
+      <table class="not-prose border-collapse	">
+        <thead class="bg-gray-50">
+          <th
+            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
+            >Activity</th
+          >
+          <th
+            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
+            >Impact</th
+          >
+          <th
+            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
+            >Speed</th
+          >
+          <th
+            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
+            >Travel time</th
+          >
+          <th
+            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-right border-b border-gray-200"
+            >CTT</th
+          >
+          <th
+            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-right border-b border-gray-200"
+            >CTC</th
+          >
+        </thead>
+        {#each travelValues(base.distance, base.weight, base.diet, base.sort) as option}
+          <tbody
+            class="hover:bg-gray-50 hover:cursor-pointer border-b border-gray-300"
+            on:mouseenter={toggleDetails(option.name)}
+            on:mouseleave={toggleDetails(option.name)}
+          >
+            <tr on:click={toggleDetails(option.name)}>
+              <td class="font-medium pt-3">{option.name}</td>
+              <td class="text-center pt-3">{option.impact.toFixed(2)}</td>
+              <td class="text-center pt-3">{option.speedKmh} km/h</td>
+              <td class="text-center pt-3">
+                {option.travelTime.toFixed(2)} hours
+              </td>
+              <td class="text-right pt-3">$2</td>
+              <td class="text-right pt-3">$40</td>
+            </tr>
+            <tr on:click={toggleDetails(option.name)}>
+              <td colspan="6" class="py-1 pb-4">
+                <ImpactBar value={option.impact} />
+              </td>
+            </tr>
 
-                <Toggle text="footprint details">
-                  <div class="text-sm pl-10">
-                    <div class="mb-2">
-                      {#each Object.values(option.footprint) as value}
-                        <div>{value.name} ({value.activity})</div>
-                      {/each}
-                    </div>
-                    {#each ["consumesEq", "emitsEq"] as content}
-                      <div>{content}</div>
-                      {#each Object.values(option[content]) as value}
-                        <div class="pl-5">
-                          {value.name}
-                          {#if value.state != null}
-                            <span class="text-gray-500">{value.state}</span>
-                          {/if}
-                          : {value.amount.toFixed(value.finalPrecision)}
-                          {#if value.unit != null}
-                            <span class="text-sm">{value.unit}</span>
-                          {/if}
+            {#if showDetailIcon[option.name]}
+              <tr>
+                <td colspan="6">down</td>
+              </tr>
+            {/if}
+
+            {#if showDetails[option.name]}
+              <tr>
+                <td colspan="6" class="text-sm mb-5 pb-3 pt-2">
+                  <Toggle text="score details">
+                    <div class="mt-1 mb-2">
+                      {#each Object.entries(option.rwgi) as [key, value]}
+                        <div class="text-sm">
+                          {value.toFixed(2)}x better than {key}
                         </div>
                       {/each}
-                    {/each}
-                  </div>
-                </Toggle>
-              </Toggle>
-            </td>
-          </tr>
-        </tbody>
-      {/each}
-    </table>
+                      <div class="h-2" />
+                      {#each Object.entries(option.rtt) as [key, value]}
+                        <div class="text-sm">
+                          {value.toFixed(2)}x faster than {key}
+                        </div>
+                      {/each}
+                    </div>
+                  </Toggle>
+                  <Toggle text="footprint details">
+                    <div class="text-sm pl-10">
+                      <div class="mb-2">
+                        {#each Object.values(option.footprint) as value}
+                          <div>{value.name} ({value.activity})</div>
+                        {/each}
+                      </div>
+                      {#each ["consumesEq", "emitsEq"] as content}
+                        <div>{content}</div>
+                        {#each Object.values(option[content]) as value}
+                          <div class="pl-5">
+                            {value.name}
+                            {#if value.state != null}
+                              <span class="text-gray-500">{value.state}</span>
+                            {/if}
+                            : {value.amount.toFixed(value.finalPrecision)}
+                            {#if value.unit != null}
+                              <span class="text-sm">{value.unit}</span>
+                            {/if}
+                          </div>
+                        {/each}
+                      {/each}
+                    </div>
+                  </Toggle>
+                </td>
+              </tr>
+            {/if}
+          </tbody>
+        {/each}
+      </table>
+    </div>
 
     <!-- <div>
         <pre>{JSON.stringify(
