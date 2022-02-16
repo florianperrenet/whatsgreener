@@ -5,6 +5,11 @@
   import Toggle from "$lib/Toggle.svelte";
   import ImpactBar from "$lib/ImpactBar.svelte";
   import { diets, food, travel } from "$lib/vars";
+  import Decimal from "decimal.js";
+
+  function dec(s) {
+    return new Decimal(s);
+  }
 
   const base = {
     distance: 1,
@@ -45,6 +50,32 @@
   }
   function toggleDetailIcon(activityName) {
     showDetailIcon[activityName] = !showDetailIcon[activityName];
+  }
+
+  function hoursReadable(hours) {
+    const fullhours = hours.floor();
+    const minutes = hours.minus(fullhours).times(dec("60")).round();
+
+    function withS(n) {
+      if (n.eq(dec("1"))) return "";
+      return "s";
+    }
+
+    const minuteStr = `${minutes} minute${withS(minutes)}`;
+    const hourStr = `${fullhours} hour${withS(fullhours)}`;
+
+    let str = "";
+    let hoursadded = false;
+    if (fullhours.gte(dec("1"))) {
+      str += hourStr;
+      hoursadded = true;
+    }
+    if (minutes.gte(dec("1"))) {
+      if (hoursadded) str += " ";
+      str += minuteStr;
+    }
+
+    return str;
   }
 </script>
 
@@ -117,48 +148,46 @@
       <table class="not-prose border-collapse	">
         <thead class="bg-gray-50">
           <th
-            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
+            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
             >Activity</th
           >
           <th
-            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
+            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
             >Impact</th
           >
           <th
-            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
+            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
             >Speed</th
           >
           <th
-            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
+            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
             >Travel time</th
           >
           <th
-            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-right border-b border-gray-200"
+            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-right border-b border-gray-200"
             >CTT</th
           >
           <th
-            class="py-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-right border-b border-gray-200"
+            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-right border-b border-gray-200"
             >CTC</th
           >
         </thead>
         {#each travelValues(base.distance, base.weight, base.diet, base.sort) as option}
           <tbody
             class="hover:bg-gray-50 hover:cursor-pointer border-b border-gray-300"
-            on:mouseenter={toggleDetails(option.name)}
-            on:mouseleave={toggleDetails(option.name)}
           >
             <tr on:click={toggleDetails(option.name)}>
-              <td class="font-medium pt-3">{option.name}</td>
-              <td class="text-center pt-3">{option.impact.toFixed(2)}</td>
-              <td class="text-center pt-3">{option.speedKmh} km/h</td>
-              <td class="text-center pt-3">
-                {option.travelTime.toFixed(2)} hours
+              <td class="font-medium pt-3 px-3">{option.name}</td>
+              <td class="text-center pt-3 px-3">{option.impact.toFixed(2)}</td>
+              <td class="text-center pt-3 px-3">{option.speedKmh} km/h</td>
+              <td class="text-center pt-3 px-3">
+                {hoursReadable(option.travelTime)}
               </td>
-              <td class="text-right pt-3">$2</td>
-              <td class="text-right pt-3">$40</td>
+              <td class="text-right pt-3 px-3">$2</td>
+              <td class="text-right pt-3 px-3">$40</td>
             </tr>
             <tr on:click={toggleDetails(option.name)}>
-              <td colspan="6" class="py-1 pb-4">
+              <td colspan="6" class="px-3 pt-1 pb-4">
                 <ImpactBar value={option.impact} />
               </td>
             </tr>
@@ -171,7 +200,7 @@
 
             {#if showDetails[option.name]}
               <tr>
-                <td colspan="6" class="text-sm mb-5 pb-3 pt-2">
+                <td colspan="6" class="text-sm mb-5 pb-3 pt-2 px-3">
                   <Toggle text="score details">
                     <div class="mt-1 mb-2">
                       {#each Object.entries(option.rwgi) as [key, value]}

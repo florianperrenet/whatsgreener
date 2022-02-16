@@ -14,7 +14,11 @@
 
   function handleNumberChange(e) {
     let val = e.target.value;
-    value = val === "" ? min : e.target.value;
+    if (val === "" || parseInt(val) < parseInt(min)) {
+      value = min;
+    } else {
+      value = val;
+    }
   }
 </script>
 
