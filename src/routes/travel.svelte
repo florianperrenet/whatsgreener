@@ -112,7 +112,7 @@
   </div>
   <div slot="content">
     <div class="mb-10 text-4xl font-extrabold text-slate-900">Travel</div>
-    <div class="font-bold">Terminology</div>
+    <!-- <div class="font-bold">Terminology</div>
     <div class="text-base b-5 mb-10">
       <div>
         <span class="font-medium">MET:</span>
@@ -142,10 +142,10 @@
         <span class="font-medium">carbon_eq:</span>
         <a href="/calculations#ref-co2-eq100">CO2-eq100</a>
       </div>
-    </div>
+    </div> -->
 
     <div class="">
-      <table class="not-prose border-collapse	">
+      <table class="not-prose border-collapse">
         <thead class="bg-gray-50">
           <th
             class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
