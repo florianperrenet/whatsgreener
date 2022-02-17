@@ -21,11 +21,7 @@
   import katex from "katex";
   import "katex/dist/contrib/mhchem.js";
 
-  import Decimal from "decimal.js";
-
-  function dec(s) {
-    return new Decimal(s);
-  }
+  import { dec } from "$lib/utils";
 
   function chem(s) {
     return katex.renderToString(`\\ce{${s}}`, {
@@ -60,10 +56,9 @@
   <u>everything needs to be taken into the equation</u>.
 </p>
 <p>
-  Data used in this paper is referenced from best possible sources and is
-  checked with common sense. I have no intention to misinform or to push a
-  certain bias. I want this comparison to be as true and as informative as
-  possible.
+  Data used for this comparison tool is referenced from best possible sources
+  and is checked with common sense. There is no intention to misinform or to
+  push a certain bias. The goal is to be as true and as informative as possible.
 </p>
 <p>
   If you find a mistake or see an improvement, please let me know by <a

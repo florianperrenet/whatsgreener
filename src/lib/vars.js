@@ -1,9 +1,5 @@
 import { data } from 'autoprefixer';
-import Decimal from 'decimal.js';
-
-function dec(s) {
-    return new Decimal(s);
-}
+import { dec } from "$lib/utils";
 
 function timePerKm(speed_kmh) {
     return dec('60').div(speed_kmh).div(dec('60'));
@@ -76,63 +72,67 @@ const APPLE_WEIGHT = dec("150");
 
 const capitalize = s => s && s[0].toUpperCase() + s.slice(1);
 
-export const chemicalFormulas = {
-    carbon_dioxide: {
-        name: 'Carbon dioxide',
-        formula: 'H2O',
-    },
-    methane: {
-        name: 'Methane',
-        formula: 'CH4',
-    },
-    nitrous_oxide: {
-        name: 'Nitrous oxide',
-        formula: 'N2O',
-    },
-    water: {
-        name: 'Water',
-        formula: 'H2O',
-    },
-    water_vapor: {
-        name: 'Water vapor',
-        formula: 'H2O',
-    },
-    ozone: {
-        name: 'Ozone',
-        formula: 'O3',
-    },
-    argon: {
-        name: 'Argon',
-        formula: 'Ar',
-    },
-    oxygen: {
-        name: 'Oxygen',
-        formula: 'O2',
-    },
-    hydrogen_sulfide: {
-        name: 'Hydrogen sulfide',
-        formula: 'H2S',
-    },
-    hydrogen: {
-        name: 'Hydrogen',
-        formula: 'H2',
-    },
-    methanethiol: {
-        name: 'Methanethiol',
-        formula: 'CH4S',
-    },
-    dimethylsulfide: {
-        name: 'Dimethylsulfide',
-        formula: '(CH3)2S',
-    },
-};
-// add chemical notation to formulas
-for (const value of Object.values(chemicalFormulas)) {
-    value.formula_chem = `\\ce{${value.formula}}`;
-}
+export const chemicalFormulas = (() => {
+    const data = {
+        carbon_dioxide: {
+            name: 'Carbon dioxide',
+            formula: 'H2O',
+        },
+        methane: {
+            name: 'Methane',
+            formula: 'CH4',
+        },
+        nitrous_oxide: {
+            name: 'Nitrous oxide',
+            formula: 'N2O',
+        },
+        water: {
+            name: 'Water',
+            formula: 'H2O',
+        },
+        water_vapor: {
+            name: 'Water vapor',
+            formula: 'H2O',
+        },
+        ozone: {
+            name: 'Ozone',
+            formula: 'O3',
+        },
+        argon: {
+            name: 'Argon',
+            formula: 'Ar',
+        },
+        oxygen: {
+            name: 'Oxygen',
+            formula: 'O2',
+        },
+        hydrogen_sulfide: {
+            name: 'Hydrogen sulfide',
+            formula: 'H2S',
+        },
+        hydrogen: {
+            name: 'Hydrogen',
+            formula: 'H2',
+        },
+        methanethiol: {
+            name: 'Methanethiol',
+            formula: 'CH4S',
+        },
+        dimethylsulfide: {
+            name: 'Dimethylsulfide',
+            formula: '(CH3)2S',
+        },
+    };
+    // add chemical notation to formulas
+    for (const value of Object.values(data)) {
+        value.formula_chem = `\\ce{${value.formula}}`;
+    }
+    return data;
+})();
 
 
 export const food = (() => {
+    // todo add per_protein
     const data = {
         "bread": {
             name: "Wheat & Rye (Bread)",
@@ -150,8 +150,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("1.6"),
                             median: dec("1.3"),
@@ -162,8 +160,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("3.9"),
                             median: dec("2.7"),
@@ -172,8 +168,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("648"),
                             median: dec("419"),
@@ -218,8 +212,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("1.7"),
                             median: dec("1.2"),
@@ -230,8 +222,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("2.9"),
                             median: dec("1.8"),
@@ -240,8 +230,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("216"),
                             median: dec("44"),
@@ -286,8 +274,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("2.5"),
                             median: dec("2.6"),
@@ -298,8 +284,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("7.6"),
                             median: dec("7.7"),
@@ -308,8 +292,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("482"),
                             median: dec("670"),
@@ -354,8 +336,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("4.5"),
                             median: dec("3.7"),
@@ -366,8 +346,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("2.8"),
                             median: dec("2.2"),
@@ -376,8 +354,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("2248"),
                             median: dec("1575"),
@@ -422,8 +398,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.5"),
                             median: dec("0.5"),
@@ -434,8 +408,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.9"),
                             median: dec("0.8"),
@@ -444,8 +416,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("59"),
                             median: dec("3"),
@@ -490,8 +460,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("1"),
                             median: dec("0.8"),
@@ -502,8 +470,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("7.5"),
                             median: dec("6.7"),
@@ -512,8 +478,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("397"),
                             median: dec("0"),
@@ -558,8 +522,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.4"),
                             median: dec("-1.3"),
@@ -570,8 +532,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("13"),
                             median: dec("8.7"),
@@ -580,8 +540,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("4134"),
                             median: dec("1823"),
@@ -626,8 +584,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("3.2"),
                             median: dec("3.3"),
@@ -638,8 +594,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("9.1"),
                             median: dec("7.9"),
@@ -648,8 +602,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("1852"),
                             median: dec("900"),
@@ -694,8 +646,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("1"),
                             median: dec("0.9"),
@@ -706,8 +656,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.7"),
                             median: dec("0.6"),
@@ -716,8 +664,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("28"),
                             median: dec("1"),
@@ -762,8 +708,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("3.2"),
                             median: dec("2.6"),
@@ -774,8 +718,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("3.5"),
                             median: dec("3.4"),
@@ -784,8 +726,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("149"),
                             median: dec("7"),
@@ -830,8 +770,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("5.4"),
                             median: dec("5.1"),
@@ -842,8 +780,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("26.3"),
                             median: dec("17.3"),
@@ -852,8 +788,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("2142"),
                             median: dec("318"),
@@ -898,8 +832,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("2.1"),
                             median: dec("0.7"),
@@ -910,8 +842,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.8"),
                             median: dec("0.2"),
@@ -920,8 +850,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("370"),
                             median: dec("77"),
@@ -966,8 +894,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.5"),
                             median: dec("0.4"),
@@ -978,8 +904,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.4"),
                             median: dec("0.3"),
@@ -988,8 +912,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("14"),
                             median: dec("2"),
@@ -1034,8 +956,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.4"),
                             median: dec("0.4"),
@@ -1046,8 +966,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.3"),
                             median: dec("0.3"),
@@ -1056,8 +974,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("28"),
                             median: dec("10"),
@@ -1102,8 +1018,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.5"),
                             median: dec("0.4"),
@@ -1114,8 +1028,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.6"),
                             median: dec("0.3"),
@@ -1124,8 +1036,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("119"),
                             median: dec("55"),
@@ -1170,8 +1080,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.4"),
                             median: dec("0.3"),
@@ -1182,8 +1090,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.9"),
                             median: dec("0.7"),
@@ -1192,8 +1098,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("83"),
                             median: dec("37"),
@@ -1238,8 +1142,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.9"),
                             median: dec("0.8"),
@@ -1250,8 +1152,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("1.9"),
                             median: dec("1.4"),
@@ -1260,8 +1160,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("115"),
                             median: dec("1"),
@@ -1306,8 +1204,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.4"),
                             median: dec("0.4"),
@@ -1318,8 +1214,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("0.6"),
                             median: dec("0.5"),
@@ -1328,8 +1222,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("180"),
                             median: dec("115"),
@@ -1374,8 +1266,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("1.5"),
                             median: dec("1.4"),
@@ -1386,8 +1276,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("2.4"),
                             median: dec("2.6"),
@@ -1396,8 +1284,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("420"),
                             median: dec("404"),
@@ -1442,8 +1328,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("99.5"),
                             median: dec("60.4"),
@@ -1454,8 +1338,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("326.2"),
                             median: dec("170.4"),
@@ -1464,8 +1346,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("1451"),
                             median: dec("740"),
@@ -1510,8 +1390,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("39.7"),
                             median: dec("40.6"),
@@ -1522,8 +1400,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("369.8"),
                             median: dec("127.4"),
@@ -1532,8 +1408,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("1803"),
                             median: dec("461"),
@@ -1578,8 +1452,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("12.3"),
                             median: dec("10.6"),
@@ -1590,8 +1462,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("17.4"),
                             median: dec("13.4"),
@@ -1600,8 +1470,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("1796"),
                             median: dec("1810"),
@@ -1646,8 +1514,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("9.9"),
                             median: dec("7.5"),
@@ -1658,8 +1524,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("12.2"),
                             median: dec("11"),
@@ -1668,8 +1532,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("660"),
                             median: dec("370"),
@@ -1714,8 +1576,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("3.2"),
                             median: dec("2.7"),
@@ -1726,8 +1586,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("9"),
                             median: dec("2.1"),
@@ -1736,8 +1594,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("628"),
                             median: dec("197"),
@@ -1782,8 +1638,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("23.9"),
                             median: dec("18.6"),
@@ -1794,8 +1648,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("87.8"),
                             median: dec("20.2"),
@@ -1804,8 +1656,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("5605"),
                             median: dec("1559"),
@@ -1850,8 +1700,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("4.7"),
                             median: dec("4.2"),
@@ -1862,8 +1710,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("6.3"),
                             median: dec("5.7"),
@@ -1872,8 +1718,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("578"),
                             median: dec("633"),
@@ -1918,8 +1762,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("13.6"),
                             median: dec("7.9"),
@@ -1930,8 +1772,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("8.4"),
                             median: dec("5.6"),
@@ -1940,8 +1780,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("3691"),
                             median: dec("1581"),
@@ -1986,8 +1824,6 @@ export const food = (() => {
                     carbon_dioxide: {
                         unit: "kg",
                         state: "gas",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("26.9"),
                             median: dec("14.7"),
@@ -1998,8 +1834,6 @@ export const food = (() => {
                     land: {
                         unit: "m2",
                         state: null,
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("3"),
                             median: dec("0.8"),
@@ -2008,8 +1842,6 @@ export const food = (() => {
                     water: {
                         unit: "L",
                         state: "liquid",
-                        per_kcal: {},
-                        per_protein: {},
                         per_kg: {
                             mean: dec("3515"),
                             median: dec("1208"),
@@ -3140,6 +2972,7 @@ function travelTimeHoursReadable(hours) {
 
     return str;
 }
+
 
 
 export const travel = (distance, weight, diet) => {

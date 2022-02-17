@@ -5,11 +5,7 @@
   import Toggle from "$lib/Toggle.svelte";
   import ImpactBar from "$lib/ImpactBar.svelte";
   import { diets, dietOptions, food, travel } from "$lib/vars";
-  import Decimal from "decimal.js";
-
-  function dec(s) {
-    return new Decimal(s);
-  }
+  import { dec } from "$lib/utils";
 
   const columns = [
     ["activity", "Activity", "text-left"],
@@ -75,7 +71,6 @@
     distance: 1,
     weight: 70,
     diet: "meat_fish",
-    // sort: "Highest impact",
     sort: "impact",
     sortDescending: true,
   };

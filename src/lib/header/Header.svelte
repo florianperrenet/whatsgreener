@@ -1,5 +1,11 @@
 <script>
 	import { page } from "$app/stores";
+
+	const urls = [
+		["Travel", "/travel"],
+		["Food", "/food"],
+		["View calculations", "/calculations"],
+	];
 </script>
 
 <header
