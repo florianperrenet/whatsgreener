@@ -2643,7 +2643,7 @@ export const diets_footprint_table = (() => {
 
         for (const side of Object.keys(dietvalue.footprint_per_kcal)) {
             for (const [key, value] of Object.entries(dietvalue.footprint_per_kcal[side])) {
-                console.log(key, value)
+                // console.log(key, value)
                 data[diet].push([
                     side,
                     key,
@@ -2671,7 +2671,7 @@ export const airComposition = () => {
             nitrogen: toval("nitrogen", null, dec("78"), 5, "L", 'gas'),
             oxygen: toval("oxygen", null, dec("20.95"), 5, "L", 'gas'),
             argon: toval("argon", null, dec("0.93"), 5, "L", 'gas'),
-            carbon_dioxide: toval("carbon_dioxide", null, dec("0.0004"), 5, "L", 'gas'),
+            carbon_dioxide: toval("carbon_dioxide", null, dec("0.0004").div(dec("500")), 5, "kg", 'gas'),
             water: plusminus(
                 toval("water", null, dec("2.5"), 5, "L", 'gas'),
                 toval("water", null, dec("2.5"), 5, "L", 'gas'),
@@ -2686,8 +2686,8 @@ export const airComposition = () => {
             ),
             argon: toval("argon", null, dec("1"), 5, "L", 'gas'),
             carbon_dioxide: plusminus(
-                toval("carbon_dioxide", null, dec("4.65"), 5, "L", 'gas'),
-                toval("carbon_dioxide", null, dec("0.65"), 5, "L", 'gas'),
+                toval("carbon_dioxide", null, dec("4.65").div(dec("500")), 5, "kg", 'gas'),
+                toval("carbon_dioxide", null, dec("0.65").div(dec("500")), 5, "kg", 'gas'),
             ),
             water: plusminus(
                 toval("water", null, dec("5.65"), 5, "L", 'gas'),
@@ -2711,7 +2711,7 @@ export const airCompositionTable = (() => {
     const aircomposition = airComposition();
     const keys = ["temperature", "nitrogen", "oxygen", 'argon', 'carbon_dioxide', 'water'];
     for (const key of keys) {
-        console.log(key)
+        // console.log(key)
         rows.push([
             key,
             aircomposition.atmospheric[key]._percentage,
@@ -3189,7 +3189,7 @@ export const travel = (distance, weight, diet) => {
                 }
             }
             if (carbon_eq_sum.gt(dec("0"))) {
-                activity[k + "Eq"]["carbon_eq-gas-L"] = toval("carbon_eq", carbon_eq_sum, null, 2, "L", "gas");
+                activity[k + "Eq"]["carbon_eq-gas-kg"] = toval("carbon_eq", carbon_eq_sum, null, 2, "kg", "gas");
             }
         }
 
@@ -3210,8 +3210,11 @@ export const travel = (distance, weight, diet) => {
         let impact = dec("0");
         const cdL = activity.emitsEq;
 
-        if ("carbon_eq-gas-L" in cdL && 'amount' in cdL["carbon_eq-gas-L"])
-            impact = impact.add(cdL["carbon_eq-gas-L"].amount);
+        // carbon_eq-gas-L to carbon_eq-solid-kg            
+
+
+        if ("carbon_eq-gas-kg" in cdL && 'amount' in cdL["carbon_eq-gas-kg"])
+            impact = impact.add(cdL["carbon_eq-gas-kg"].amount);
         activity.impact = impact;
 
         activity.rwgi = {};
