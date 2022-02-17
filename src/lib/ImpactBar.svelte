@@ -1,9 +1,5 @@
 <script>
-  import Decimal from "decimal.js";
-
-  function dec(s) {
-    return new Decimal(s);
-  }
+  import { dec } from "$lib/utils";
 
   export let value;
 
