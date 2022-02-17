@@ -184,8 +184,8 @@
               <td class="text-center pt-3 px-3">
                 {hoursReadable(option.travelTime)}
               </td>
-              <td class="text-right pt-3 px-3">$2</td>
-              <td class="text-right pt-3 px-3">$40</td>
+              <td class="text-right pt-3 px-3">${option.ctt.toFixed(2)}</td>
+              <td class="text-right pt-3 px-3">${option.ctc.toFixed(2)}</td>
             </tr>
             <tr on:click={toggleDetails(option.name)}>
               <td colspan="6" class="px-3 pt-1 pb-4">
@@ -224,7 +224,7 @@
                           <div>{value.name} ({value.activity})</div>
                         {/each}
                       </div>
-                      {#each ["consumesEq", "emitsEq"] as content}
+                      {#each ["consumesConv", "emitsConv"] as content}
                         <div>{content}</div>
                         {#each Object.values(option[content]) as value}
                           <div class="pl-5">

@@ -2671,7 +2671,7 @@ export const airComposition = () => {
             nitrogen: toval("nitrogen", null, dec("78"), 5, "L", 'gas'),
             oxygen: toval("oxygen", null, dec("20.95"), 5, "L", 'gas'),
             argon: toval("argon", null, dec("0.93"), 5, "L", 'gas'),
-            carbon_dioxide: toval("carbon_dioxide", null, dec("0.0004").div(dec("500")), 5, "kg", 'gas'),
+            carbon_dioxide: toval("carbon_dioxide", null, dec("0.0004"), 5, "L", 'gas'),
             water: plusminus(
                 toval("water", null, dec("2.5"), 5, "L", 'gas'),
                 toval("water", null, dec("2.5"), 5, "L", 'gas'),
@@ -2686,8 +2686,8 @@ export const airComposition = () => {
             ),
             argon: toval("argon", null, dec("1"), 5, "L", 'gas'),
             carbon_dioxide: plusminus(
-                toval("carbon_dioxide", null, dec("4.65").div(dec("500")), 5, "kg", 'gas'),
-                toval("carbon_dioxide", null, dec("0.65").div(dec("500")), 5, "kg", 'gas'),
+                toval("carbon_dioxide", null, dec("4.65"), 5, "L", 'gas'),
+                toval("carbon_dioxide", null, dec("0.65"), 5, "L", 'gas'),
             ),
             water: plusminus(
                 toval("water", null, dec("5.65"), 5, "L", 'gas'),
@@ -3077,6 +3077,28 @@ const footprintFoodEating = (diet, kcal) => {
 }
 
 
+function chemGasLtoGasKG(dict) {
+    const newdict = {};
+    for (const [key, value] of Object.entries(dict)) {
+        if (key === 'carbon_dioxide-gas-L') {
+            const val = value.amount.div(dec("500"));
+            if ('carbon_dioxide-gas-kg' in newdict) {
+                newdict['carbon_dioxide-gas-kg'].amount = newdict['carbon_dioxide-gas-kg'].amount.add(val);
+            } else {
+                newdict['carbon_dioxide-gas-kg'] = toval('carbon_dioxide', val, null, 2, 'kg', 'gas', null);
+            }
+        } else {
+            if (key in newdict) {
+                newdict[key].amount = newdict[key].amount.add(value.amount);
+            } else {
+                newdict[key] = value;
+            }
+        }
+    }
+    return newdict;
+}
+
+
 export const travel = (distance, weight, diet) => {
     const impacts = [];
     const traveltimes = [];
@@ -3155,6 +3177,8 @@ export const travel = (distance, weight, diet) => {
             consumesImpact: {},  // calc is below
             emitsImpact: {},  // calc is below
             impact: 0,  // calc is below
+            ctt: kcal.times(dec("0.005")),
+            ctc: 0,
         };
     }
 
@@ -3173,6 +3197,9 @@ export const travel = (distance, weight, diet) => {
             }
         }
 
+        activity.consumesConv = chemGasLtoGasKG(activity.consumes);
+        activity.emitsConv = chemGasLtoGasKG(activity.emits);
+
 
         activity.consumesEq = {};
         activity.emitsEq = {};
@@ -3180,7 +3207,7 @@ export const travel = (distance, weight, diet) => {
         const keys = ["consumes", "emits"];
         for (const k of keys) {
             let carbon_eq_sum = dec("0");
-            for (const [key, value] of Object.entries(activity[k])) {
+            for (const [key, value] of Object.entries(activity[k + "Conv"])) {
                 if (value.name in gwp) {
                     // calc equivalent
                     carbon_eq_sum = carbon_eq_sum.add(value.amount.times(gwp[value.name].gwp100));
@@ -3222,6 +3249,10 @@ export const travel = (distance, weight, diet) => {
 
         impacts.push([activitykey, impact]);
         traveltimes.push([activitykey, activity.travelTime]);
+
+        activity.ctc = impact;
+
+        // activity.ctt = dec("2");
     }
 
     // calculate the RelativeWhatsGreenerImpact
