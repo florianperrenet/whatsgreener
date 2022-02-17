@@ -9,10 +9,17 @@
 
   const selectId = "select_" + counter++;
 
+  let selectedName = null;
+
+  for (const option of options) {
+    if (selected === option[0]) selectedName = option[1];
+  }
+
   let show = false;
 
   function select(option) {
-    selected = option;
+    selected = option[0];
+    selectedName = option[1];
   }
 
   export function clickOutside(node) {
@@ -54,7 +61,7 @@
       aria-labelledby="listbox-label"
     >
       <span class="flex items-center">
-        <span class="ml-3 block truncate">{selected}</span>
+        <span class="ml-3 block truncate">{selectedName}</span>
       </span>
       <span
         class="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
@@ -96,13 +103,13 @@
           >
             <div class="flex items-center">
               <span
-                class="{option === selected
+                class="{option[0] === selected
                   ? 'font-semibold'
-                  : 'font-normal'} ml-3 block truncate">{option}</span
+                  : 'font-normal'} ml-3 block truncate">{option[1]}</span
               >
             </div>
 
-            {#if option === selected}
+            {#if option[0] === selected}
               <span
                 class="text-gray-600 absolute inset-y-0 right-0 flex items-center pr-4"
               >

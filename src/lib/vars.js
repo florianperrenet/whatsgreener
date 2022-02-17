@@ -203,7 +203,7 @@ export const food = (() => {
             },
         },
         "maize": {
-            name: "maize",
+            name: "Maize",
             type: "other",
             unit: "g",
             composition: {
@@ -2552,6 +2552,19 @@ export const diets = (() => {
 })();
 
 
+export const dietOptions = (() => {
+    const options = [];
+    for (const [key, value] of Object.entries(diets)) {
+        options.push([key, value.name]);
+    }
+    options.push("divider");
+    for (const [key, value] of Object.entries(food)) {
+        options.push([key, value.name]);
+    }
+    return options;
+})();
+
+
 // kcal breakfast should be around 800
 // kcal lunch should be around 800
 // kcal dinner should be around 600
@@ -3098,6 +3111,36 @@ function chemGasLtoGasKG(dict) {
     return newdict;
 }
 
+function travelTimeHours(timePerKm, distance) {
+    return timePerKm.times(distance);
+}
+
+function travelTimeHoursReadable(hours) {
+    const fullhours = hours.floor();
+    const minutes = hours.minus(fullhours).times(dec("60")).round();
+
+    function withS(n) {
+        if (n.eq(dec("1"))) return "";
+        return "s";
+    }
+
+    const minuteStr = `${minutes} minute${withS(minutes)}`;
+    const hourStr = `${fullhours} hour${withS(fullhours)}`;
+
+    let str = "";
+    let hoursadded = false;
+    if (fullhours.gte(dec("1"))) {
+        str += hourStr;
+        hoursadded = true;
+    }
+    if (minutes.gte(dec("1"))) {
+        if (hoursadded) str += " ";
+        str += minuteStr;
+    }
+
+    return str;
+}
+
 
 export const travel = (distance, weight, diet) => {
     const impacts = [];
@@ -3107,43 +3150,13 @@ export const travel = (distance, weight, diet) => {
         return dec('60').div(speed_kmh).div(dec('60'));
     }
 
-    // const travel_time = exercises.walkingSlow.timePerKm * distance;
-    const activities = {
-        // walking: {
-        //     name: 'Walking',
-        //     exercise: true,
-        //     distance,
-        //     weight,
-        //     diet,
-
-        //     speed_kmh: exercises.walkingSlow.speed,
-        //     time_km: exercises.walkingSlow.timePerKm.toFixed(5),
-
-        //     // generate
-        //     travel_time: (exercises.walkingSlow.timePerKm * distance).toFixed(2),
-
-        //     footprint: {
-        //         air: {
-        //             name: 'Air',
-        //             activity: 'Breathing',
-        //             ...breathing(exercises.walkingSlow.airInhaledDeltaRest.times(weight).times(travel_time)),
-        //         },
-        //     },
-
-        //     consumes: {/* auto calc */ },
-        //     emits: {/* auto calc */ },
-
-        //     consumes_impact: /* auto calc */ null,
-        //     emits_impact: /* auto calc */ null,
-        //     impact: /* auto calc */ null,
-        // }
-    };
+    const activities = {};
 
     for (const [exercise_type, exercise_value] of Object.entries(exercises)) {
         // skip rest
         if (exercise_type === 'rest') continue;
 
-        const travelTime = exercise_value.timePerKm.times(distance);
+        const travelTime = travelTimeHours(exercise_value.timePerKm, distance);
         const kcal = exercise_value.deltaMETRest.times(weight).times(travelTime);
         const waterConsumption = kcal.div("1000");
 
@@ -3154,6 +3167,7 @@ export const travel = (distance, weight, diet) => {
             met: exercise_value.met,
             timeKm: exercise_value.timePerKm.toFixed(5),
             travelTime: travelTime,
+            travelTimeReadable: travelTimeHoursReadable(travelTime),
             kcal,
             footprint: {
                 air: {

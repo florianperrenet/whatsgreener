@@ -4,42 +4,87 @@
   import Select from "$lib/Select.svelte";
   import Toggle from "$lib/Toggle.svelte";
   import ImpactBar from "$lib/ImpactBar.svelte";
-  import { diets, food, travel } from "$lib/vars";
+  import { diets, dietOptions, food, travel } from "$lib/vars";
   import Decimal from "decimal.js";
 
   function dec(s) {
     return new Decimal(s);
   }
 
+  const columns = [
+    ["activity", "Activity", "text-left"],
+    ["impact", "Impact", "text-center"],
+    ["speed", "Speed", "text-center"],
+    ["travel_time", "Travel time", "text-center"],
+    ["ctt", "CTT", "text-right"],
+    ["ctc", "CTC", "text-right"],
+  ];
+
+  const sortOptions = [];
+  for (const col of columns) {
+    sortOptions.push([col[0], col[1]]);
+  }
+
+  const sortDirections = ["ascending", "descending", "neutral"];
+
+  function setSort(key) {
+    if (key === base.sort) {
+      base.sortDescending = !base.sortDescending;
+    } else {
+      base.sort = key;
+      base.sortDescending = true;
+    }
+  }
+
+  function ascending(a, b, key) {
+    return a[key] - b[key];
+  }
+  function descending(a, b, key) {
+    return b[key] - a[key];
+  }
+
+  function ascendingOnKey(key) {
+    return function (a, b) {
+      return a[key] - b[key];
+    };
+  }
+  function descendingOnKey(key) {
+    return function (a, b) {
+      return b[key] - a[key];
+    };
+  }
+
+  function sortValues(values, basedict) {
+    const keymaps = {
+      impact: "impact",
+      speed: "speedKmh",
+      travel_time: "travelTime",
+      ctt: "ctt",
+      ctc: "ctc",
+    };
+    if (basedict.sort in keymaps) {
+      const key = keymaps[basedict.sort];
+      return values.sort(
+        basedict.sortDescending ? descendingOnKey(key) : ascendingOnKey(key)
+      );
+    }
+    return basedict.sortDescending ? values : values.reverse();
+  }
+
   const base = {
     distance: 1,
     weight: 70,
     diet: "meat_fish",
-    sort: "Highest impact",
+    // sort: "Highest impact",
+    sort: "impact",
+    sortDescending: true,
   };
 
-  const sortOn = {
-    "Lowest impact": (a, b) => {
-      return a.impact - b.impact;
-    },
-    "Highest impact": (a, b) => {
-      return b.impact - a.impact;
-    },
-    "Fastest travel time": (a, b) => {
-      return a.travelTime - b.travelTime;
-    },
-  };
-
-  function travelValues(distance, weight, diet, sort) {
-    const values = Object.values(travel(distance, weight, diet));
-
-    if (sort === "Lowest impact") return values.sort(sortOn["Lowest impact"]);
-    else if (sort === "Highest impact")
-      return values.sort(sortOn["Highest impact"]);
-    else if (sort === "Fastest travel time")
-      return values.sort(sortOn["Fastest travel time"]);
-
-    return values;
+  function travelValues(basedict) {
+    const values = Object.values(
+      travel(basedict.distance, basedict.weight, basedict.diet)
+    );
+    return sortValues(values, basedict);
   }
 
   const showDetails = {};
@@ -92,21 +137,8 @@
       min="1"
     />
     <Input text="Weight (kg)" type="number" bind:value={base.weight} min="1" />
-    <Select
-      text="Diet"
-      bind:selected={base.diet}
-      options={[...Object.keys(diets), "divider", ...Object.keys(food)]}
-    />
-    <Select
-      text="Sort on"
-      bind:selected={base.sort}
-      options={[
-        "Activity",
-        "Fastest travel time",
-        "Lowest impact",
-        "Highest impact",
-      ]}
-    />
+    <Select text="Diet" bind:selected={base.diet} options={dietOptions} />
+    <Select text="Sort on" bind:selected={base.sort} options={sortOptions} />
     <hr class="mt-8 mb-4" />
     <Toggle text="Advanced">todo</Toggle>
   </div>
@@ -148,32 +180,64 @@
     <div class="">
       <table class="not-prose border-collapse">
         <thead class="bg-gray-50">
-          <th
-            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
-            >Activity</th
-          >
-          <th
-            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
-            >Impact</th
-          >
-          <th
-            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
-            >Speed</th
-          >
-          <th
-            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-center border-b border-gray-200"
-            >Travel time</th
-          >
-          <th
-            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-right border-b border-gray-200"
-            >CTT</th
-          >
-          <th
-            class="p-3 tracking-wider text-xs font-medium text-gray-500 uppercase text-right border-b border-gray-200"
-            >CTC</th
-          >
+          {#each columns as [key, name, align]}
+            <th
+              class="{align} {key === base.sort
+                ? 'bg-gray-100'
+                : ''} select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
+              on:click={() => setSort(key)}
+            >
+              <div class="flex items-center">
+                <div class="grow">{name}</div>
+                {#if key === base.sort}
+                  {#if base.sortDescending}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  {:else}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  {/if}
+                {:else}
+                  <svg
+                    class="flex-none h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                {/if}
+              </div>
+            </th>
+          {/each}
         </thead>
-        {#each travelValues(base.distance, base.weight, base.diet, base.sort) as option}
+        <!-- {#each travelValues(base.distance, base.weight, base.diet, base.sort) as option} -->
+        {#each travelValues(base) as option}
           <tbody
             class="hover:bg-gray-50 hover:cursor-pointer border-b border-gray-300"
           >
@@ -182,7 +246,7 @@
               <td class="text-center pt-3 px-3">{option.impact.toFixed(2)}</td>
               <td class="text-center pt-3 px-3">{option.speedKmh} km/h</td>
               <td class="text-center pt-3 px-3">
-                {hoursReadable(option.travelTime)}
+                {option.travelTimeReadable}
               </td>
               <td class="text-right pt-3 px-3">${option.ctt.toFixed(2)}</td>
               <td class="text-right pt-3 px-3">${option.ctc.toFixed(2)}</td>
