@@ -3182,6 +3182,103 @@ export const travel = (distance, weight, diet) => {
         };
     }
 
+    activities['Car petrol'] = {
+        name: 'Car petrol',
+        exercise: false,
+        speedKmh: dec("100"),
+        timeKm: dec("100").toFixed(5),
+        travelTime: dec("100"),
+        footprint: {
+        },
+        consumes: {},  // calc is below
+        emits: {},  // calc is below
+        consumesImpact: {},  // calc is below
+        emitsImpact: {},  // calc is below
+        impact: 0,  // calc is below
+        ctt: dec("1").times(dec("0.005")),
+        ctc: 0,
+    };
+    activities['Car diesel'] = {
+        name: 'Car diesel',
+        exercise: false,
+        speedKmh: dec("100"),
+        timeKm: dec("100").toFixed(5),
+        travelTime: dec("100"),
+        footprint: {
+        },
+        consumes: {},  // calc is below
+        emits: {},  // calc is below
+        consumesImpact: {},  // calc is below
+        emitsImpact: {},  // calc is below
+        impact: 0,  // calc is below
+        ctt: dec("1").times(dec("0.005")),
+        ctc: 0,
+    };
+    activities['Car lpg'] = {
+        name: 'Car lpg',
+        exercise: false,
+        speedKmh: dec("100"),
+        timeKm: dec("100").toFixed(5),
+        travelTime: dec("100"),
+        footprint: {
+        },
+        consumes: {},  // calc is below
+        emits: {},  // calc is below
+        consumesImpact: {},  // calc is below
+        emitsImpact: {},  // calc is below
+        impact: 0,  // calc is below
+        ctt: dec("1").times(dec("0.005")),
+        ctc: 0,
+    };
+    activities['Car electric'] = {
+        name: 'Car electric',
+        exercise: false,
+        speedKmh: dec("100"),
+        timeKm: dec("100").toFixed(5),
+        travelTime: dec("100"),
+        footprint: {
+        },
+        consumes: {},  // calc is below
+        emits: {},  // calc is below
+        consumesImpact: {},  // calc is below
+        emitsImpact: {},  // calc is below
+        impact: 0,  // calc is below
+        ctt: dec("1").times(dec("0.005")),
+        ctc: 0,
+    };
+    activities['Car hydrogen'] = {
+        name: 'Car hydrogen',
+        exercise: false,
+        speedKmh: dec("100"),
+        timeKm: dec("100").toFixed(5),
+        travelTime: dec("100"),
+        footprint: {
+        },
+        consumes: {},  // calc is below
+        emits: {},  // calc is below
+        consumesImpact: {},  // calc is below
+        emitsImpact: {},  // calc is below
+        impact: 0,  // calc is below
+        ctt: dec("1").times(dec("0.005")),
+        ctc: 0,
+    };
+    activities['Airplane'] = {
+        name: 'Airplane',
+        exercise: false,
+        speedKmh: dec("1000"),
+        timeKm: dec("100").toFixed(5),
+        travelTime: dec("100"),
+        footprint: {
+        },
+        consumes: {},  // calc is below
+        emits: {},  // calc is below
+        consumesImpact: {},  // calc is below
+        emitsImpact: {},  // calc is below
+        impact: 0,  // calc is below
+        ctt: dec("1").times(dec("0.005")),
+        ctc: 0,
+    };
+
 
     for (const [activitykey, activity] of Object.entries(activities)) {
         for (const value of Object.values(activity.footprint)) {
