@@ -145,6 +145,7 @@ export const food = (() => {
                     fat: dec("1.2"),
                 },
             },
+            eur_per_kg: dec("1.04"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -207,6 +208,7 @@ export const food = (() => {
                     fat: dec("4.3"),
                 },
             },
+            eur_per_kg: dec("8.93"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -269,6 +271,7 @@ export const food = (() => {
                     fat: dec("7.5"),
                 },
             },
+            eur_per_kg: dec("2.54"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -331,6 +334,7 @@ export const food = (() => {
                     fat: dec("1.4"),
                 },
             },
+            eur_per_kg: dec("1.88"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -393,6 +397,7 @@ export const food = (() => {
                     fat: dec("0.1"),
                 },
             },
+            eur_per_kg: dec("2.15"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -455,6 +460,7 @@ export const food = (() => {
                     fat: dec("1.8"),
                 },
             },
+            eur_per_kg: dec("7.07"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -517,6 +523,7 @@ export const food = (() => {
                     fat: dec("56.2"),
                 },
             },
+            eur_per_kg: dec("11.75"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -579,6 +586,7 @@ export const food = (() => {
                     fat: dec("35.9"),
                 },
             },
+            eur_per_kg: dec("2.80"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -641,6 +649,7 @@ export const food = (() => {
                     fat: dec("1.92"),
                 },
             },
+            eur_per_kg: dec("1.29"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -703,6 +712,7 @@ export const food = (() => {
                     fat: dec("5.2"),
                 },
             },
+            eur_per_kg: dec("4.03"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -765,6 +775,7 @@ export const food = (() => {
                     fat: dec("100"),
                 },
             },
+            eur_per_kg: dec("5.99"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -827,6 +838,7 @@ export const food = (() => {
                     fat: dec("0.2"),
                 },
             },
+            eur_per_kg: dec("2.92"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -889,6 +901,7 @@ export const food = (() => {
                     fat: dec("0.1"),
                 },
             },
+            eur_per_kg: dec("1.72"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -951,6 +964,7 @@ export const food = (() => {
                     fat: dec("0.2"),
                 },
             },
+            eur_per_kg: dec("0.85"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1013,6 +1027,7 @@ export const food = (() => {
                     fat: dec("0.1"),
                 },
             },
+            eur_per_kg: dec("1.69"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1075,6 +1090,7 @@ export const food = (() => {
                     fat: dec("0.2"),
                 },
             },
+            eur_per_kg: dec("2.39"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1137,6 +1153,7 @@ export const food = (() => {
                     fat: dec("0.3"),
                 },
             },
+            eur_per_kg: dec("1.99"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1199,6 +1216,7 @@ export const food = (() => {
                     fat: dec("0.3"),
                 },
             },
+            eur_per_kg: dec("1.79"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1261,6 +1279,7 @@ export const food = (() => {
                     fat: dec("0.7"),
                 },
             },
+            eur_per_kg: dec("12.97"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1323,6 +1342,7 @@ export const food = (() => {
                     fat: dec("15"),
                 },
             },
+            eur_per_kg: dec("7.38"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1385,6 +1405,7 @@ export const food = (() => {
                     fat: dec("22.8"),
                 },
             },
+            eur_per_kg: dec("38.98"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1447,6 +1468,7 @@ export const food = (() => {
                     fat: dec("18.8"),
                 },
             },
+            eur_per_kg: dec("15.16"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1509,6 +1531,7 @@ export const food = (() => {
                     fat: dec("12.4"),
                 },
             },
+            eur_per_kg: dec("9.97"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1571,6 +1594,7 @@ export const food = (() => {
                     fat: dec("3.3"),
                 },
             },
+            eur_per_kg: dec("0.93"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1633,6 +1657,7 @@ export const food = (() => {
                     fat: dec("31"),
                 },
             },
+            eur_per_kg: dec("13.95"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1695,6 +1720,7 @@ export const food = (() => {
                     fat: dec("9.8"),
                 },
             },
+            eur_per_kg: dec("3.32"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1757,6 +1783,7 @@ export const food = (() => {
                     fat: dec("2.5"),
                 },
             },
+            eur_per_kg: dec("11.40"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1819,6 +1846,7 @@ export const food = (() => {
                     fat: dec("0.5"),
                 },
             },
+            eur_per_kg: dec("71.9"),
             footprint: {
                 emits: {
                     carbon_dioxide: {
@@ -1878,6 +1906,10 @@ export const food = (() => {
         for (const [ckey, cvalue] of Object.entries(value.composition.per_100g)) {
             value.composition.per_g[ckey] = cvalue.div(dec("100"));
         }
+
+        value.eur_per_g = value.eur_per_kg.div("1000");
+        value.eur_per_kcal = value.eur_per_g.div(value.composition.per_g.kcal);
+
         // add footprint per_g
         // add footprint per_kcal
         for (const key of Object.keys(value.footprint)) {
@@ -2357,11 +2389,15 @@ export const diets = (() => {
             emits: {},
         };
 
+        let eur_per_kcal = dec("0");
+
         // calc percentage
         for (const [k, v] of Object.entries(value.grouped)) {
-            v.percentage = v.kcal.div(value.kcalsum);
-
             const product = food[k];
+
+            v.percentage = v.kcal.div(value.kcalsum);
+            eur_per_kcal = eur_per_kcal.add(v.kcal.times(product.eur_per_kcal));
+
             for (const key of Object.keys(product.footprint)) {
                 for (const [x, y] of Object.entries(product.footprint[key])) {
                     if (x in value.footprint_per_kcal[key]) {
@@ -2378,6 +2414,8 @@ export const diets = (() => {
                 }
             }
         }
+
+        value.eur_per_kcal = eur_per_kcal.div(kcalsum);
     }
 
     return data;
@@ -2870,6 +2908,16 @@ function fpk_toval(fpk) {
     return newdict;
 }
 
+const dietEurPerKcal = (diet) => {
+    if (diet in food) {
+        return food[diet].eur_per_kcal;
+    } else if (diet in diets) {
+        return diets[diet].eur_per_kcal;
+    } else {
+        throw "diet not found";
+    }
+};
+
 const footprintFoodEating = (diet, kcal) => {
     let foodEmissions;
 
@@ -3024,7 +3072,7 @@ export const travel = (distance, weight, diet) => {
             consumesImpact: {},  // calc is below
             emitsImpact: {},  // calc is below
             impact: 0,  // calc is below
-            ctt: kcal.times(dec("0.005")),
+            ctt: kcal.times(dietEurPerKcal(diet)),
             ctc: 0,
         };
     }

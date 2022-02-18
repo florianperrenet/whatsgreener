@@ -710,7 +710,7 @@ kcal per kg -->
 <p>no statistics used no sources used</p>
 
 {#each Object.entries(diets) as [diet, value]}
-  <h3>{value.name}</h3>
+  <h4>{value.name}</h4>
   <Table
     grid={{
       align: diets_table.align,
