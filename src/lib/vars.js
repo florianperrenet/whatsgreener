@@ -2059,7 +2059,7 @@ export const diets = (() => {
                 }],
             },
         },
-        meat: {
+        meat_no_fish: {
             name: "Meat",
             footprint_per_kcal: {},
             grouped: {},
@@ -2146,7 +2146,7 @@ export const diets = (() => {
 
             },
         },
-        fish: {
+        fish_no_meat: {
             name: "Fish",
             footprint_per_kcal: {},
             grouped: {},
