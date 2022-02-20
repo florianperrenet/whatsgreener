@@ -2899,12 +2899,140 @@ const waterHydration = (waterConsumption) => {
 }
 
 
+
+function sweating(waterConsumption, waterLossSweatPerc) {
+    const amount = waterConsumption.times(waterLossSweatPerc);
+
+    const data = {
+        in: {
+            waterIn: {
+                name: 'Water in: sweat',
+                amount,
+                value: {
+                    water: toval("water", waterConsumption, waterLossSweatPerc, 2, "L", "liquid", null),
+                },
+            },
+        },
+        out: {
+            sweat: {
+                name: 'Sweat',
+                amount,
+                value: multiply_dict_tovals({
+                    water: toval("water", null, dec("89"), 5, "L", "liquid", null),
+                    sodium: toval("sodium", null, dec("0.09"), 5, "kg", "solid", null),
+                    potassium: toval("potassium", null, dec("0.02"), 5, "kg", "solid", null),
+                    calcium: toval("calcium", null, dec("0.0015"), 5, "kg", "solid", null),
+                    magnesium: toval("magnesium", null, dec("0.00013"), 5, "kg", "solid", null),
+                    zinc: toval("zinc", null, dec("0.00004"), 5, "kg", "solid", null),
+                    copper: toval("copper", null, dec("0.000055"), 5, "kg", "solid", null),
+                    iron: toval("iron", null, dec("0.0001"), 5, "kg", "solid", null),
+                    chromium: toval("chromium", null, dec("0.00001"), 5, "kg", "solid", null),
+                    nickel: toval("nickel", null, dec("0.000005"), 5, "kg", "solid", null),
+                    lead: toval("lead", null, dec("0.0000005"), 5, "kg", "solid", null),
+                }, amount),
+            },
+        },
+    };
+
+    addConsumesEmits(data);
+    // sweating doesn't really consume water does it?
+    // and if so water "consume" is already accounted for in hydration..
+    data.consumes = {};
+    return data;
+}
+
+function peeing(waterConsumption, waterLossUrinePerc) {
+    const amount = waterConsumption.times(waterLossUrinePerc);
+
+    const data = {
+        in: {
+            waterIn: {
+                name: 'Water in: urine',
+                amount,
+                value: {
+                    water: toval("water", waterConsumption, waterLossUrinePerc, 2, "L", "liquid", null),
+                },
+            },
+        },
+        out: {
+            urine: {
+                name: 'Urine',
+                amount,
+                value: multiply_dict_tovals(unwrap_plusminus_dict({
+                    water: plusminus(
+                        toval("water", null, dec("93.5"), 5, "L", "liquid", null),
+                        toval("water", null, dec("2.5"), 5, "L", "liquid", null),
+                    ),
+                    nitrogen: toval("nitrogen", null, dec("0.883"), 5, "kg", "solid", null),
+                    chloride: toval("chloride", null, dec("0.497"), 5, "kg", "solid", null),
+                    sodium: toval("sodium", null, dec("0.345"), 5, "kg", "solid", null),
+                    potassium: toval("potassium", null, dec("0.274"), 5, "kg", "solid", null),
+                    sulphate: toval("sulphate", null, dec("0.15"), 5, "kg", "solid", null),
+                    phosphorus: plusminus(
+                        toval("phosphorus", null, dec("0.14"), 5, "kg", "solid", null),
+                        toval("phosphorus", null, dec("0.06"), 5, "kg", "solid", null),
+                    ),
+                    ammonium_ammonia: toval("ammonium_ammonia", null, dec("0.046"), 5, "kg", "solid", null),
+                    calcium: toval("calcium", null, dec("0.023"), 5, "kg", "solid", null),
+                    magnesium: toval("magnesium", null, dec("0.012"), 5, "kg", "solid", null),
+                    nitrate_nitrite: toval("nitrate_nitrite", null, dec("0.000006"), 5, "kg", "solid", null),
+                }), amount),
+            },
+        },
+    };
+
+    addConsumesEmits(data);
+    // peeing doesn't really consume water does it?
+    // and if so water "consume" is already accounted for in hydration..
+    data.consumes = {};
+    return data;
+}
+
+
+function pooping(waterConsumption, waterLossPoopPerc) {
+    const amount = waterConsumption.times(waterLossPoopPerc);
+
+    const data = {
+        in: {
+            waterIn: {
+                name: 'Water in: poop',
+                amount,
+                value: {
+                    water: toval("water", waterConsumption, waterLossPoopPerc, 2, "L", "liquid", null),
+                },
+            },
+        },
+        out: {
+            poop: {
+                name: 'poop',
+                amount,
+                value: multiply_dict_tovals(unwrap_plusminus_dict({
+                    water: toval("water", null, dec("75"), 5, "L", "liquid", null),
+                    carbohydrate: toval("carbohydrate", null, dec("7.03"), 5, "kg", "solid", null),
+                    protein: toval("protein", null, dec("4.92"), 5, "kg", "solid", null),
+                    fiber: toval("fiber", null, dec("4.69"), 5, "kg", "solid", null),
+                    lipids: toval("lipids", null, dec("3.2"), 5, "kg", "solid", null),
+                    nitrogen: toval("nitrogen", null, dec("1.41"), 5, "kg", "solid", null),
+                }), amount),
+            },
+        },
+    };
+
+    addConsumesEmits(data);
+    // pooping doesn't really consume water does it?
+    // and if so water "consume" is already accounted for in hydration..
+    data.consumes = {};
+    return data;
+}
+
+
+
+
 function fpk_toval(fpk) {
     const newdict = {};
     for (const [key, value] of Object.entries(fpk)) {
         newdict[key] = toval(key, value.median, null, 5, value.unit, value.state, null);
     }
-
     return newdict;
 }
 
@@ -3022,31 +3150,66 @@ function travelTimeHoursReadable(hours) {
 }
 
 
+function cars(distance, weight, diet) {
+    const data = {
+        car_petrol: {
+            name: 'Car petrol',
+            speedKmh: dec("100"),
+        },
+        car_diesel: {
+            name: 'Car diesel',
+            speedKmh: dec("100"),
+        },
+        car_lpg: {
+            name: 'Car lpg',
+            speedKmh: dec("100"),
+        },
+        car_electric: {
+            name: 'Car electric',
+            speedKmh: dec("100"),
+        },
+        car_hydrogen: {
+            name: 'Car hydrogen',
+            speedKmh: dec("100"),
+        },
+    };
 
-export const travel = (distance, weight, diet) => {
-    const impacts = [];
-    const traveltimes = [];
+    for (const [key, value] of Object.entries(data)) {
+        value.exercise = false;
+        value.timeKm = timePerKm(value.speedKmh);
+        value.travelTime = travelTimeHours(value.timeKm, distance);
+        value.travelTimeReadable = travelTimeHoursReadable(value.travelTime);
 
-    function time_per_km(speed_kmh) {
-        return dec('60').div(speed_kmh).div(dec('60'));
+        value.footprint = {};
+        value.consumes = {};
+        value.emits = {};
+        value.consumesImpact = {};
+        value.emitsImpact = {};
+        value.impact = dec("0");
+        value.ctt = dec("1");
+        value.ctc = dec("1");
     }
 
-    const activities = {};
+    return data;
+}
 
-    for (const [exercise_type, exercise_value] of Object.entries(exercises)) {
+function exerciseDict(distance, weight, diet) {
+    const data = {};
+
+    for (const [key, value] of Object.entries(exercises)) {
         // skip rest
-        if (exercise_type === 'rest') continue;
+        if (key === 'rest') continue;
 
-        const travelTime = travelTimeHours(exercise_value.timePerKm, distance);
-        const kcal = exercise_value.deltaMETRest.times(weight).times(travelTime);
+        const travelTime = travelTimeHours(value.timePerKm, distance);
+        const kcal = value.deltaMETRest.times(weight).times(travelTime);
         const waterConsumption = kcal.div("1000");
 
-        activities[exercise_type] = {
-            name: exercise_value.name,
+        data[key] = {
+            name: value.name,
             exercise: true,
-            speedKmh: exercise_value.speed,
-            met: exercise_value.met,
-            timeKm: exercise_value.timePerKm.toFixed(5),
+            speedKmh: value.speed,
+            met: value.met,
+            timeKm: value.timePerKm.toFixed(5),
             travelTime: travelTime,
             travelTimeReadable: travelTimeHoursReadable(travelTime),
             kcal,
@@ -3054,7 +3217,7 @@ export const travel = (distance, weight, diet) => {
                 air: {
                     name: 'Air',
                     activity: 'Breathing',
-                    ...breathing(exercise_value.airInhaledDeltaRest.times(weight).times(travelTime)),
+                    ...breathing(value.airInhaledDeltaRest.times(weight).times(travelTime)),
                 },
                 water: {
                     name: 'Water',
@@ -3065,6 +3228,21 @@ export const travel = (distance, weight, diet) => {
                     name: 'Food',
                     activity: 'Eating',
                     ...footprintFoodEating(diet, kcal),
+                },
+                sweat: {
+                    name: 'Sweat',
+                    activity: 'Sweating',
+                    ...sweating(waterConsumption, dec("0.04")),
+                },
+                urine: {
+                    name: 'Urine',
+                    activity: 'Peeing',
+                    ...peeing(waterConsumption, dec("0.6")),
+                },
+                feces: {
+                    name: 'Feces',
+                    activity: 'Pooping',
+                    ...pooping(waterConsumption, dec("0.04")),
                 },
             },
             consumes: {},  // calc is below
@@ -3077,86 +3255,24 @@ export const travel = (distance, weight, diet) => {
         };
     }
 
-    activities['Car petrol'] = {
-        name: 'Car petrol',
-        exercise: false,
-        speedKmh: dec("100"),
-        timeKm: dec("100").toFixed(5),
-        travelTime: dec("100"),
-        footprint: {
-        },
-        consumes: {},  // calc is below
-        emits: {},  // calc is below
-        consumesImpact: {},  // calc is below
-        emitsImpact: {},  // calc is below
-        impact: 0,  // calc is below
-        ctt: dec("1").times(dec("0.005")),
-        ctc: 0,
+    return data;
+}
+
+
+
+export const travel = (distance, weight, diet) => {
+    const impacts = [];
+    const traveltimes = [];
+
+    function time_per_km(speed_kmh) {
+        return dec('60').div(speed_kmh).div(dec('60'));
+    }
+
+    const activities = {
+        ...exerciseDict(distance, weight, diet),
+        ...cars(distance, weight, diet),
     };
-    activities['Car diesel'] = {
-        name: 'Car diesel',
-        exercise: false,
-        speedKmh: dec("100"),
-        timeKm: dec("100").toFixed(5),
-        travelTime: dec("100"),
-        footprint: {
-        },
-        consumes: {},  // calc is below
-        emits: {},  // calc is below
-        consumesImpact: {},  // calc is below
-        emitsImpact: {},  // calc is below
-        impact: 0,  // calc is below
-        ctt: dec("1").times(dec("0.005")),
-        ctc: 0,
-    };
-    activities['Car lpg'] = {
-        name: 'Car lpg',
-        exercise: false,
-        speedKmh: dec("100"),
-        timeKm: dec("100").toFixed(5),
-        travelTime: dec("100"),
-        footprint: {
-        },
-        consumes: {},  // calc is below
-        emits: {},  // calc is below
-        consumesImpact: {},  // calc is below
-        emitsImpact: {},  // calc is below
-        impact: 0,  // calc is below
-        ctt: dec("1").times(dec("0.005")),
-        ctc: 0,
-    };
-    activities['Car electric'] = {
-        name: 'Car electric',
-        exercise: false,
-        speedKmh: dec("100"),
-        timeKm: dec("100").toFixed(5),
-        travelTime: dec("100"),
-        footprint: {
-        },
-        consumes: {},  // calc is below
-        emits: {},  // calc is below
-        consumesImpact: {},  // calc is below
-        emitsImpact: {},  // calc is below
-        impact: 0,  // calc is below
-        ctt: dec("1").times(dec("0.005")),
-        ctc: 0,
-    };
-    activities['Car hydrogen'] = {
-        name: 'Car hydrogen',
-        exercise: false,
-        speedKmh: dec("100"),
-        timeKm: dec("100").toFixed(5),
-        travelTime: dec("100"),
-        footprint: {
-        },
-        consumes: {},  // calc is below
-        emits: {},  // calc is below
-        consumesImpact: {},  // calc is below
-        emitsImpact: {},  // calc is below
-        impact: 0,  // calc is below
-        ctt: dec("1").times(dec("0.005")),
-        ctc: 0,
-    };
+
     activities['Airplane'] = {
         name: 'Airplane',
         exercise: false,

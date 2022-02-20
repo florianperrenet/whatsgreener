@@ -701,6 +701,17 @@ The difference could be 10%.
 3.1 Composition
 kcal per kg -->
 
+<h3>Car</h3>
+Car used for comparisons: or only do weight instead of specific car..?
+
+<h4>Petrol</h4>
+<h4>Diesel</h4>
+<h4>LPG</h4>
+<h4>Electric</h4>
+<h4>Hydrogen</h4>
+
+<h3>Plane</h3>
+
 <hr />
 <h2>Food</h2>
 <h3>Composition and Footprint</h3>
