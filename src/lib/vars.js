@@ -3189,7 +3189,7 @@ export const travel = (distance, weight, diet) => {
 
     const activities = {
         ...exerciseDict(distance, weight, diet),
-        ...car_footprint(distance, "passenger_cars", dec("2021"), "gasoline", dec("0.1"), weight),
+        ...car_footprint(distance, "passenger_cars", dec("2021"), "gasoline", weight),
     };
 
     activities['Airplane'] = {

@@ -8,6 +8,14 @@
 - refining the oil into gasoline
 - transporting the gasoline to service stations
 
+
+https://www.eia.gov/environment/emissions/archive/coefficients.php#tbl5
+
+
+// The fuel consumption of a mid-size car increases by about 1% for every 25 kilograms of weight it carries.
+// https://www.nrcan.gc.ca/energy-efficiency/transportation-alternative-fuels/personal-vehicles/fuel-efficient-driving-techniques/21038
+
+
 */
 
 import { dec, timePerKm, travelTimeHours, travelTimeHoursReadable, toval, addConsumesEmits, multiply_dict_tovals } from "$lib/utils";
@@ -31,36 +39,43 @@ const car_fuel_types = {
     name: "Gasoline",
     fuel_blend: "motor_gasoline",
     price_per_l: dec("2"),
+    fuel_consumption: dec("0.1"),
   },
   diesel: {
     name: "Diesel",
     fuel_blend: "diesel",
     price_per_l: dec("2"),
+    fuel_consumption: dec("0.066666"),
   },
   methanol: {
     name: "Methanol",
     fuel_blend: "M85",
     price_per_l: dec("2"),
+    fuel_consumption: dec("0.1"),
   },
   ethanol: {
     name: "Ethanol",
     fuel_blend: "E10",
     price_per_l: dec("2"),
+    fuel_consumption: dec("0.1"),
   },
   cnc: {
     name: "CNC",
     fuel_blend: "E10",
     price_per_l: dec("2"),
+    fuel_consumption: dec("0.1"),
   },
   lpg: {
     name: "LPG",
     fuel_blend: "E10",
     price_per_l: dec("2"),
+    fuel_consumption: dec("0.1"),
   },
   lng: {
     name: "LNG",
     fuel_blend: "E10",
     price_per_l: dec("2"),
+    fuel_consumption: dec("0.1"),
   },
 };
 
@@ -352,25 +367,7 @@ const car_fuel_other_emissions = {
 };
 
 
-// The fuel consumption of a mid-size car increases by about 1% for every 25 kilograms of weight it carries.
-// https://www.nrcan.gc.ca/energy-efficiency/transportation-alternative-fuels/personal-vehicles/fuel-efficient-driving-techniques/21038
-
-
-
-// construction year
-// vehicle category
-// fuel type
-// verbruik per km
-// hoe beinvloed extra gewicht dit?
-
-// per km weten
-
-
-
-
-
-
-export function car_footprint(distance, vehicle_category, construction_year, fuel_type, fuel_economy, extra_weight) {
+export function car_footprint(distance, vehicle_category, construction_year, fuel_type, extra_weight) {
   const data = {};
 
   for (const [key, value] of Object.entries(car_fuel_types)) {
@@ -378,6 +375,7 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
     data[id] = {
       name: `Car ${key}`,
       fuel_blend: value.fuel_blend,
+      fuel_consumption: value.fuel_consumption,
       price_per_l: value.price_per_l,
     };
   }
@@ -386,6 +384,7 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
   data["motorcycle"] = {
     name: "Motorcycle",
     fuel_blend: "motor_gasoline",
+    fuel_consumption: dec("0.044"),
     price_per_l: dec("2"),
   };
 
@@ -397,7 +396,7 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
     value.travelTime = travelTimeHours(value.timeKm, distance);
     value.travelTimeReadable = travelTimeHoursReadable(value.travelTime);
 
-    const fuel_demand = fuel_economy.times(distance);
+    const fuel_demand = value.fuel_consumption.times(distance);
     const fuel_carbon_emissions = car_fuel_carbon_emissions[value.fuel_blend].times(fuel_demand);
     const cat = car_fuel_other_emissions[fuel_type][vehicle_category];
     const fuel_other_emissions = cat[Object.keys(cat)[0]];

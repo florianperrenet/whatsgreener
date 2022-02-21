@@ -31,7 +31,7 @@
 			</a>
 
 			<div
-				class="w-full flex-none mt-4 sm:mt-0 sm:w-auto sm:ml-auto flex items-center"
+				class="hidden w-full mt-4 sm:mt-0 sm:w-auto sm:ml-auto md:flex items-center"
 			>
 				<nav class="text-sm leading-6 font-semibold text-slate-700">
 					<a
@@ -57,6 +57,28 @@
 							: 'hover:text-blue-500/90'}">View calculations</a
 					>
 				</nav>
+			</div>
+
+			<div class="md:hidden ml-auto">
+				<button
+					type="button"
+					class="flex items-center justify-center text-slate-700"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-6 w-6"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+						/>
+					</svg>
+				</button>
 			</div>
 		</div>
 	</nav>
