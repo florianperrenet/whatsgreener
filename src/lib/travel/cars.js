@@ -30,30 +30,37 @@ const car_fuel_types = {
   gasoline: {
     name: "Gasoline",
     fuel_blend: "motor_gasoline",
+    price_per_l: dec("2"),
   },
   diesel: {
     name: "Diesel",
     fuel_blend: "diesel",
+    price_per_l: dec("2"),
   },
   methanol: {
     name: "Methanol",
     fuel_blend: "M85",
+    price_per_l: dec("2"),
   },
   ethanol: {
     name: "Ethanol",
     fuel_blend: "E10",
+    price_per_l: dec("2"),
   },
   cnc: {
     name: "CNC",
     fuel_blend: "E10",
+    price_per_l: dec("2"),
   },
   lpg: {
     name: "LPG",
     fuel_blend: "E10",
+    price_per_l: dec("2"),
   },
   lng: {
     name: "LNG",
     fuel_blend: "E10",
+    price_per_l: dec("2"),
   },
 };
 
@@ -371,6 +378,7 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
     data[id] = {
       name: `Car ${key}`,
       fuel_blend: value.fuel_blend,
+      price_per_l: value.price_per_l,
     };
   }
 
@@ -378,6 +386,7 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
   data["motorcycle"] = {
     name: "Motorcycle",
     fuel_blend: "motor_gasoline",
+    price_per_l: dec("2"),
   };
 
 
@@ -427,7 +436,7 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
       },
     };
 
-    value.ctt = dec("1");
+    value.ctt = fuel_demand.times(value.price_per_l);
   }
 
   return data;

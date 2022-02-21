@@ -243,8 +243,10 @@
               <td class="text-center pt-3 px-3">
                 {option.travelTimeReadable}
               </td>
-              <td class="text-right pt-3 px-3">${option.ctt.toFixed(2)}</td>
-              <td class="text-right pt-3 px-3">${option.ctc.toFixed(2)}</td>
+              <td class="text-right pt-3 px-3">&euro;{option.ctt.toFixed(2)}</td
+              >
+              <td class="text-right pt-3 px-3">&euro;{option.ctc.toFixed(2)}</td
+              >
             </tr>
             <tr on:click={toggleDetails(option.name)}>
               <td colspan="6" class="px-3 pt-1 pb-4">
