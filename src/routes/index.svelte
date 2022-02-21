@@ -46,12 +46,12 @@
 			</div>
 		</div>
 
-		<div class="xl:absolute xl:top-20 xl:bottom-0 xl:right-0 xl:w-1/2">
+		<!-- <div class="xl:absolute xl:top-20 xl:bottom-0 xl:right-0 xl:w-1/2">
 			<div
 				class="w-full bg-gray-100 rounded-lg shadow-lg"
 				style="height: 700px;"
 			/>
-		</div>
+		</div> -->
 		<!-- style="background: url('/screenshot.png'); background-size: cover; height: 700px;" -->
 
 		<!-- <div class="h-40" />
