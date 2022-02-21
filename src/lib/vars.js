@@ -1,9 +1,11 @@
 import { data } from 'autoprefixer';
-import { dec } from "$lib/utils";
+import {
+    dec, timePerKm, travelTimeHours, travelTimeHoursReadable, toval, addConsumesEmits, multiply_dict_tovals,
+    unwrap_plusminus,
+    unwrap_plusminus_dict
+} from "$lib/utils";
+import { car_footprint } from "$lib/travel/cars";
 
-function timePerKm(speed_kmh) {
-    return dec('60').div(speed_kmh).div(dec('60'));
-}
 
 function plusminus_fmt_perc(l) {
     return `${l[0]}% ± ${l[1]}%`;
@@ -44,26 +46,6 @@ const gwp = {
 
 
 
-function toval(name, amount, percentage, precision, unit, state, reference) {
-    // TODO: potential idea to show increase factor from _amount to amount
-    const _amount = amount;
-    const _percentage = percentage;
-
-    if (amount == null)
-        amount = percentage.div(dec("100"))
-
-    return {
-        _amount,  // original value
-        _percentage,  // original value
-        id: `${name}-${state}-${unit}`,
-        name,
-        amount,
-        finalPrecision: precision,
-        unit,
-        state,
-        reference,
-    }
-}
 
 
 
@@ -2618,27 +2600,7 @@ export const airCompositionTable = (() => {
 //     return newdict;
 // }
 
-function multiply_dict_tovals(dict, factor) {
-    for (const [key, value] of Object.entries(dict)) {
-        dict[key].amount = value.amount.times(factor);
-    }
-    return dict;
-}
 
-
-function unwrap_plusminus(value) {
-    // TODO: if speed slow isArray vs value[0] === 'plusminus'
-    if (Array.isArray(value) && value[0] === 'plusminus')
-        return value[1];
-    return value;
-}
-
-function unwrap_plusminus_dict(dict) {
-    for (const [key, value] of Object.entries(dict)) {
-        dict[key] = unwrap_plusminus(value);
-    }
-    return dict;
-}
 
 
 // function calcdiffs(d) {
@@ -2680,42 +2642,6 @@ function excludeKeys(dict, array) {
     return newdict;
 }
 
-function addConsumesEmits(dict) {
-    const diff = {};
-    const compareKeys = ["in", "out"];
-    for (const compareKey of compareKeys) {
-        for (const content of Object.values(dict[compareKey])) {
-            for (const value of Object.values(content.value)) {
-                if (value.id in diff)
-                    diff[value.id].amount = diff[value.id].amount.minus(value.amount);
-                else {
-                    let val = value;
-                    if (compareKey === "out")
-                        val.amount = val.amount.times(dec("-1"));
-
-                    // original values no longer matter so set to null
-                    val._amount = null;
-                    val._percentage = null;
-                    diff[value.id] = val;
-                }
-            }
-        }
-    }
-
-    const consumes = {};
-    const emits = {};
-    for (const [key, value] of Object.entries(diff)) {
-        if (value.amount.gt(dec("0"))) {
-            consumes[key] = value;
-        } else if (value.amount.lt(dec("0"))) {
-            value.amount = value.amount.times(dec("-1"));
-            emits[key] = value;
-        }
-    }
-
-    dict.consumes = consumes;
-    dict.emits = emits;
-}
 
 export const breathing = (airInhaled) => {
     // amount airInhaled === amount airExhaled
@@ -3119,41 +3045,40 @@ function chemGasLtoGasKG(dict) {
     return newdict;
 }
 
-function travelTimeHours(timePerKm, distance) {
-    return timePerKm.times(distance);
+
+
+
+function cars_footprint() {
+    // per gallon
+    const data = {
+        car_petrol: {
+            E100: {},
+            E85: {
+                carbon_dioxide: 1.34,
+            },
+            E10: {
+                carbon_dioxide: 8.02,
+            },
+        },
+        car_diesel: {
+        },
+        car_lpg: {
+        },
+        car_electric: {
+        },
+        car_hydrogen: {
+        },
+    };
 }
 
-function travelTimeHoursReadable(hours) {
-    const fullhours = hours.floor();
-    const minutes = hours.minus(fullhours).times(dec("60")).round();
 
-    function withS(n) {
-        if (n.eq(dec("1"))) return "";
-        return "s";
-    }
 
-    const minuteStr = `${minutes} minute${withS(minutes)}`;
-    const hourStr = `${fullhours} hour${withS(fullhours)}`;
-
-    let str = "";
-    let hoursadded = false;
-    if (fullhours.gte(dec("1"))) {
-        str += hourStr;
-        hoursadded = true;
-    }
-    if (minutes.gte(dec("1"))) {
-        if (hoursadded) str += " ";
-        str += minuteStr;
-    }
-
-    return str;
-}
 
 
 function cars(distance, weight, diet) {
     const data = {
-        car_petrol: {
-            name: 'Car petrol',
+        car_gasoline: {
+            name: 'Car gasoline',
             speedKmh: dec("100"),
         },
         car_diesel: {
@@ -3245,13 +3170,7 @@ function exerciseDict(distance, weight, diet) {
                     ...pooping(waterConsumption, dec("0.04")),
                 },
             },
-            consumes: {},  // calc is below
-            emits: {},  // calc is below
-            consumesImpact: {},  // calc is below
-            emitsImpact: {},  // calc is below
-            impact: 0,  // calc is below
             ctt: kcal.times(dietEurPerKcal(diet)),
-            ctc: 0,
         };
     }
 
@@ -3270,7 +3189,7 @@ export const travel = (distance, weight, diet) => {
 
     const activities = {
         ...exerciseDict(distance, weight, diet),
-        ...cars(distance, weight, diet),
+        ...car_footprint(distance, "passenger_cars", dec("2021"), "gasoline", dec("0.1"), weight),
     };
 
     activities['Airplane'] = {
@@ -3281,17 +3200,18 @@ export const travel = (distance, weight, diet) => {
         travelTime: dec("100"),
         footprint: {
         },
-        consumes: {},  // calc is below
-        emits: {},  // calc is below
-        consumesImpact: {},  // calc is below
-        emitsImpact: {},  // calc is below
-        impact: 0,  // calc is below
         ctt: dec("1").times(dec("0.005")),
-        ctc: 0,
     };
 
 
     for (const [activitykey, activity] of Object.entries(activities)) {
+        activity.consumes = {};
+        activity.emits = {};
+        activity.consumesImpact = {};
+        activity.emitsImpact = {};
+        activity.impact = dec("0");
+        activity.ctc = dec("0");
+
         for (const value of Object.values(activity.footprint)) {
             const keys = ["consumes", "emits"];
             for (const k of keys) {
