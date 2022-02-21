@@ -3239,6 +3239,8 @@ export const travel = (distance, weight, diet) => {
                 if (value.name in gwp) {
                     // calc equivalent
                     carbon_eq_sum = carbon_eq_sum.add(value.amount.times(gwp[value.name].gwp100));
+                } else if (value.name === "carbon_eq") {
+                    carbon_eq_sum = carbon_eq_sum.add(value.amount);
                 } else {
                     activity[k + "Eq"][key] = value;
                 }

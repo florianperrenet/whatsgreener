@@ -16,6 +16,30 @@ https://www.eia.gov/environment/emissions/archive/coefficients.php#tbl5
 // https://www.nrcan.gc.ca/energy-efficiency/transportation-alternative-fuels/personal-vehicles/fuel-efficient-driving-techniques/21038
 
 
+
+oil to refinery
+10.3g CO2eq/MJ
+
+refinery gasoline
+10.2g CO2eq/MJ
+
+refinery diesel
+5.4g CO2eq/MJ
+
+transport to service station
+1g CO2eq/MJ
+
+Fuel gasoline
+21.5g CO2eq/MJ
+per litre 720g
+
+Fuel diesel
+16.7g CO2eq/MJ
+per litre 640g
+
+gasoline 1 MJ = 0.03 Liter
+diesel 1 MJ = 0.026 Liter
+
 */
 
 import { dec, timePerKm, travelTimeHours, travelTimeHoursReadable, toval, addConsumesEmits, multiply_dict_tovals } from "$lib/utils";
@@ -23,6 +47,31 @@ import { dec, timePerKm, travelTimeHours, travelTimeHoursReadable, toval, addCon
 
 function pergallon_to_perliter(n) {
   return n.div(dec("3.78541178"));
+}
+
+function fuel_wtt_emissions(fuel_type) {
+  const data = {
+    extraction_and_transport_to_refinery: g_mj_to_g_l(dec("10.3"), fuel_type),
+    refining: {
+      gasoline: g_mj_to_g_l(dec("10.2"), fuel_type),
+      diesel: g_mj_to_g_l(dec("5.4"), fuel_type),
+    },
+    transport_to_station: g_mj_to_g_l(dec("1"), fuel_type),
+  };
+
+  return {
+    extraction_and_transport_to_refinery: data.extraction_and_transport_to_refinery.div(dec("1000")),
+    refining: data.refining[fuel_type].div(dec("1000")),
+    transport_to_station: data.transport_to_station.div(dec("1000")),
+  };
+}
+
+function g_mj_to_g_l(g, fuel_type) {
+  if (fuel_type === "gasoline") {
+    return g.times(dec("1").div(dec("0.03")));
+  } else if (fuel_type === "diesel") {
+    return g.times(dec("1").div(dec("0.026")));
+  }
 }
 
 
@@ -47,36 +96,36 @@ const car_fuel_types = {
     price_per_l: dec("2"),
     fuel_consumption: dec("0.066666"),
   },
-  methanol: {
-    name: "Methanol",
-    fuel_blend: "M85",
-    price_per_l: dec("2"),
-    fuel_consumption: dec("0.1"),
-  },
-  ethanol: {
-    name: "Ethanol",
-    fuel_blend: "E10",
-    price_per_l: dec("2"),
-    fuel_consumption: dec("0.1"),
-  },
-  cnc: {
-    name: "CNC",
-    fuel_blend: "E10",
-    price_per_l: dec("2"),
-    fuel_consumption: dec("0.1"),
-  },
-  lpg: {
-    name: "LPG",
-    fuel_blend: "E10",
-    price_per_l: dec("2"),
-    fuel_consumption: dec("0.1"),
-  },
-  lng: {
-    name: "LNG",
-    fuel_blend: "E10",
-    price_per_l: dec("2"),
-    fuel_consumption: dec("0.1"),
-  },
+  // methanol: {
+  //   name: "Methanol",
+  //   fuel_blend: "M85",
+  //   price_per_l: dec("2"),
+  //   fuel_consumption: dec("0.1"),
+  // },
+  // ethanol: {
+  //   name: "Ethanol",
+  //   fuel_blend: "E10",
+  //   price_per_l: dec("2"),
+  //   fuel_consumption: dec("0.1"),
+  // },
+  // cnc: {
+  //   name: "CNC",
+  //   fuel_blend: "E10",
+  //   price_per_l: dec("2"),
+  //   fuel_consumption: dec("0.1"),
+  // },
+  // lpg: {
+  //   name: "LPG",
+  //   fuel_blend: "E10",
+  //   price_per_l: dec("2"),
+  //   fuel_consumption: dec("0.1"),
+  // },
+  // lng: {
+  //   name: "LNG",
+  //   fuel_blend: "E10",
+  //   price_per_l: dec("2"),
+  //   fuel_consumption: dec("0.1"),
+  // },
 };
 
 // carbon emissions
@@ -381,12 +430,12 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
   }
 
   // add motorcycle
-  data["motorcycle"] = {
-    name: "Motorcycle",
-    fuel_blend: "motor_gasoline",
-    fuel_consumption: dec("0.044"),
-    price_per_l: dec("2"),
-  };
+  // data["motorcycle"] = {
+  //   name: "Motorcycle",
+  //   fuel_blend: "motor_gasoline",
+  //   fuel_consumption: dec("0.044"),
+  //   price_per_l: dec("2"),
+  // };
 
 
   for (const [key, value] of Object.entries(data)) {
@@ -400,6 +449,49 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
     const fuel_carbon_emissions = car_fuel_carbon_emissions[value.fuel_blend].times(fuel_demand);
     const cat = car_fuel_other_emissions[fuel_type][vehicle_category];
     const fuel_other_emissions = cat[Object.keys(cat)[0]];
+
+
+    const extraction_and_transport_to_refinery_footprint = {
+      in: {},
+      out: {
+        extraction_and_transport_to_refinery: {
+          name: fuel_type + " extraction and transport to refinery emissions",
+          amount: fuel_demand,
+          value: {
+            carbon_eq: toval("carbon_eq", fuel_wtt_emissions(fuel_type).extraction_and_transport_to_refinery.times(fuel_demand), null, 2, "kg", "gas", null),
+          },
+        },
+      },
+    };
+    addConsumesEmits(extraction_and_transport_to_refinery_footprint);
+
+    const refining_footprint = {
+      in: {},
+      out: {
+        refining: {
+          name: fuel_type + " refining emissions",
+          amount: fuel_demand,
+          value: {
+            carbon_eq: toval("carbon_eq", fuel_wtt_emissions(fuel_type).refining.times(fuel_demand), null, 2, "kg", "gas", null),
+          },
+        },
+      },
+    };
+    addConsumesEmits(refining_footprint);
+
+    const transport_to_station_footprint = {
+      in: {},
+      out: {
+        transport_to_station: {
+          name: fuel_type + " transport to station emissions",
+          amount: fuel_demand,
+          value: {
+            carbon_eq: toval("carbon_eq", fuel_wtt_emissions(fuel_type).transport_to_station.times(fuel_demand), null, 2, "kg", "gas", null),
+          },
+        },
+      },
+    };
+    addConsumesEmits(transport_to_station_footprint);
 
 
     const combust_footprint = {
@@ -427,7 +519,23 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
 
     addConsumesEmits(combust_footprint);
 
+
     value.footprint = {
+      extraction_and_transport_to_refinery: {
+        name: "extraction_and_transport_to_refinery",
+        activity: "extraction_and_transport_to_refinery",
+        ...extraction_and_transport_to_refinery_footprint,
+      },
+      refining_footprint: {
+        name: "refining_footprint",
+        activity: "refining_footprint",
+        ...refining_footprint,
+      },
+      transport_to_station_footprint: {
+        name: "transport_to_station_footprint",
+        activity: "transport_to_station_footprint",
+        ...transport_to_station_footprint,
+      },
       combustion: {
         name: "Combustion",
         activity: "Combusting",

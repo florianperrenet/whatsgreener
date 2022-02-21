@@ -300,6 +300,21 @@
                           </div>
                         {/each}
                       {/each}
+                      {#each ["consumesEq", "emitsEq"] as content}
+                        <div>{content}</div>
+                        {#each Object.values(option[content]) as value}
+                          <div class="pl-5">
+                            {value.name}
+                            {#if value.state != null}
+                              <span class="text-gray-500">{value.state}</span>
+                            {/if}
+                            : {value.amount.toFixed(value.finalPrecision)}
+                            {#if value.unit != null}
+                              <span class="text-sm">{value.unit}</span>
+                            {/if}
+                          </div>
+                        {/each}
+                      {/each}
                     </div>
                   </Toggle>
                 </td>
