@@ -232,7 +232,8 @@
     const items = [];
     for (const item of color.domain()) {
       if (typeof item === "string") {
-        items.push([item, color(item)]);
+        console.log(item);
+        items.push([item, color({ id: item })]);
       }
     }
     legend = items;
