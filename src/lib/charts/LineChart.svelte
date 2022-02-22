@@ -3,38 +3,22 @@
   import * as d3 from "d3";
 
   export let data;
+  export let xlabel;
+  export let ylabel;
 
-  let el;
+  let chart;
+  let legend = [];
 
-  // const margin = { top: 10, right: 30, bottom: 30, left: 60 },
-  //   width = 460 - margin.left - margin.right,
-  //   height = 400 - margin.top - margin.bottom;
+  const margin = { top: 20, right: 20, bottom: 35, left: 40 };
+
+  const height = 560;
+  const width = 1000;
 
   onMount(() => {
-    const width = 1000;
-    const height = 500;
-    const margin = 5;
-    const padding = 5;
-    const adj = 100;
-
     const svg = d3
-      .select(el)
+      .select(chart)
       .append("svg")
-      .attr("preserveAspectRatio", "xMinYMin meet")
-      .attr(
-        "viewBox",
-        "-" +
-          adj +
-          " -" +
-          adj +
-          " " +
-          (width + adj * 3) +
-          " " +
-          (height + adj * 3)
-      )
-      .style("padding", padding)
-      .style("margin", margin)
-      .classed("svg-content", true);
+      .attr("viewBox", [0, 0, width, height]);
 
     var slices = data.columns.map(function (id) {
       return {
@@ -48,118 +32,128 @@
       };
     });
 
-    //----------------------------SCALES----------------------------//
-    const xScale = d3.scaleLinear().range([0, width]);
-
-    const yScale = d3.scaleLinear().rangeRound([height, 0]);
-
-    xScale.domain(
+    //-------------------------2. DRAWING---------------------------//
+    //-----------------------------AXES-----------------------------//
+    const x = d3.scaleLinear(
       d3.extent(data.rows, function (d) {
         return d.distance;
-      })
+      }),
+      [margin.left, width - margin.right]
+    );
+    const y = d3.scaleLinear(
+      [
+        0,
+        d3.max(slices, function (c) {
+          return d3.max(c.values, function (d) {
+            return d.measurement;
+          });
+        }),
+      ],
+      [height - margin.bottom, margin.top]
     );
 
-    yScale.domain([
-      0,
-      d3.max(slices, function (c) {
-        return d3.max(c.values, function (d) {
-          return d.measurement + 4;
-        });
-      }),
-    ]);
+    const xAxis = (g) =>
+      g
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(d3.axisBottom(x).ticks(width / 80))
+        // .call(xaxis)
+        .call((g) => g.select(".domain").remove())
+        .call((g) =>
+          g
+            .append("text")
+            .attr("x", width)
+            .attr("y", margin.bottom - 4)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "end")
+            .text(`${xlabel} →`)
+        );
+    svg.append("g").call(xAxis);
 
-    //-----------------------------AXES-----------------------------//
-    const yaxis = d3.axisLeft().ticks(slices[0].values.length).scale(yScale);
+    const yAxis = (g) =>
+      g
+        .attr("transform", `translate(${margin.left},0)`)
+        .call(d3.axisLeft(y))
+        // .call(yaxis)
+        .call((g) => g.select(".domain").remove())
+        .call((g) =>
+          g
+            .append("text")
+            .attr("x", -margin.left)
+            .attr("y", 10)
+            .attr("fill", "currentColor")
+            .attr("text-anchor", "start")
+            .text(`↑ ${ylabel}`)
+        );
+    svg.append("g").call(yAxis);
 
-    const xaxis = d3.axisBottom().ticks(slices[0].values.length).scale(xScale);
+    const grid = (g) =>
+      g
+        .attr("stroke", "currentColor")
+        .attr("stroke-opacity", 0.1)
+        .call((g) =>
+          g
+            .append("g")
+            .selectAll("line")
+            .data(x.ticks())
+            .join("line")
+            .attr("x1", (d) => 0.5 + x(d))
+            .attr("x2", (d) => 0.5 + x(d))
+            .attr("y1", margin.top)
+            .attr("y2", height - margin.bottom)
+        )
+        .call((g) =>
+          g
+            .append("g")
+            .selectAll("line")
+            .data(y.ticks())
+            .join("line")
+            .attr("y1", (d) => 0.5 + y(d))
+            .attr("y2", (d) => 0.5 + y(d))
+            .attr("x1", margin.left)
+            .attr("x2", width - margin.right)
+        );
+    svg.append("g").call(grid);
 
     //----------------------------LINES-----------------------------//
     const line = d3
       .line()
       .x(function (d) {
-        return xScale(d.distance);
+        return x(d.distance);
       })
       .y(function (d) {
-        return yScale(d.measurement);
+        return y(d.measurement);
       });
 
-    let id = 0;
-    const ids = function () {
-      return "line line-" + id++;
-    };
-
-    //-------------------------2. DRAWING---------------------------//
-    //-----------------------------AXES-----------------------------//
-    svg
-      .append("g")
-      .attr("class", "axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xaxis)
-      .append("text")
-      .attr("x", width / 2 + 100)
-      .attr("y", 50)
-      .style("text-anchor", "end")
-      .text("Distance");
-
-    svg
-      .append("g")
-      .attr("class", "axis")
-      .call(yaxis)
-      .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("dy", ".75em")
-      .attr("y", 6)
-      .style("text-anchor", "end")
-      .text("Impact");
-
-    //----------------------------LINES-----------------------------//
     const lines = svg.selectAll("lines").data(slices).enter().append("g");
-
-    let dasharray = 0;
-    const dasharrayFunc = () => {
-      return dasharray++;
-    };
-
-    var myColor = d3
-      .scaleSequential()
-      .domain([1, 10])
-      .interpolator(d3.interpolateViridis);
+    const color = d3.scaleOrdinal(
+      slices.map((d) => d.id),
+      d3.schemeCategory10
+    );
 
     lines
       .append("path")
       .style("fill", "none")
-      .style("stroke", (d, i) => myColor(i))
-      // .style("stroke", (d, i) => {
-      //   return myColor(i);
-      // })
-      // .style("stroke-dasharray", dasharrayFunc)
+      .style("stroke", (d) => color(d))
       .attr("d", function (d) {
         return line(d.values);
       });
 
-    lines
-      .append("text")
-      .attr("class", "serie_label")
-      .datum(function (d) {
-        return {
-          id: d.id,
-          value: d.values[d.values.length - 1],
-        };
-      })
-      .attr("transform", function (d) {
-        return (
-          "translate(" +
-          (xScale(d.value.distance) + 10) +
-          "," +
-          (yScale(d.value.measurement) + 5) +
-          ")"
-        );
-      })
-      .attr("x", 5)
-      .text(function (d) {
-        return d.id;
-      });
+    const items = [];
+    for (const item of color.domain()) {
+      if (typeof item === "string") {
+        items.push([item, color(item)]);
+      }
+    }
+    legend = items;
   });
 </script>
 
-<div bind:this={el} />
+<div bind:this={chart} />
+<div class="flex flex-wrap gap-x-3 ml-10 mt-5">
+  {#each legend as [item, color]}
+    <div class="flex items-center text-xs">
+      <div class="w-2 h-2 mr-2" style="background: {color};" />
+      {item}
+    </div>
+  {/each}
+</div>

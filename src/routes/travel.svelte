@@ -133,7 +133,6 @@
     const res = travel(dec(distance), dec("70"), "meat_fish");
 
     for (const [key, value] of Object.entries(res)) {
-      console.log(value, value.impact.toFixed(5));
       row[value.name] = value.impact;
     }
 
@@ -352,15 +351,6 @@
       </table>
     </div>
 
-    <!-- <div>
-        <pre>{JSON.stringify(
-          travel(base.distance, base.weight, base.diet),
-          null,
-            2
-        )}</pre>
-    </div> -->
-
-    <!-- Create a div where the graph will take place -->
-    <LineChart {data} />
+    <LineChart {data} xlabel="Distance" ylabel="Impact" />
   </div>
 </SidebarLayout>
