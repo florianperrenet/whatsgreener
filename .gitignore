@@ -9,3 +9,5 @@ node_modules
 .vercel
 .output
 ideas.md
+venv/
+resources/

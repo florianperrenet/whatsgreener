@@ -12,8 +12,10 @@
       <li>Natural gas</li>
       <li>Nuclear</li>
       <li>Hydro</li>
+      <li>Geothermal</li>
       <li>Wind</li>
       <li>Solar</li>
+      <li>Tide/Wave/Ocean</li>
       <li>Biofuels and waste</li>
       <li>Oil</li>
     </ul>
