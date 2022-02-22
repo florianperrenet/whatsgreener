@@ -496,6 +496,7 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
 
     const combust_footprint = {
       in: {
+        // oxygen
         fuel_type: {
           name: fuel_type,
           amount: fuel_demand,
@@ -514,6 +515,7 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
             methane: toval("methane", fuel_other_emissions.methane.times(fuel_demand), null, 5, "kg", "gas", null),
           },
         },
+        // heat
       },
     };
 
@@ -526,12 +528,12 @@ export function car_footprint(distance, vehicle_category, construction_year, fue
         activity: "extraction_and_transport_to_refinery",
         ...extraction_and_transport_to_refinery_footprint,
       },
-      refining_footprint: {
+      refining: {
         name: "refining_footprint",
         activity: "refining_footprint",
         ...refining_footprint,
       },
-      transport_to_station_footprint: {
+      transport_to_station: {
         name: "transport_to_station_footprint",
         activity: "transport_to_station_footprint",
         ...transport_to_station_footprint,

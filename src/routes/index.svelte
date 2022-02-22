@@ -30,17 +30,17 @@
 			</div>
 			<div class="mt-16 text-sm">
 				<a href="/travel" class="font-bold text-lg">
-					Compare Travel &nbsp;->
+					Compare Travel &nbsp;&rightarrow;
 					<div class="border-b-4 border-gray-900 w-12 h-3" />
 				</a>
 				<div class="h-10" />
 				<a href="/food" class="font-bold text-lg">
-					Compare Food &nbsp;->
+					Compare Food &nbsp;&rightarrow;
 					<div class="border-b-4 border-gray-900 w-14 h-3" />
 				</a>
 				<div class="h-10" />
 				<a href="/calculations" class="font-bold text-lg">
-					View Calculations &nbsp;->
+					View Calculations &nbsp;&rightarrow;
 					<div class="border-b-4 border-gray-900 w-16 h-3" />
 				</a>
 			</div>
