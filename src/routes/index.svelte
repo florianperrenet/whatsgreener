@@ -29,6 +29,11 @@
 				</ul>
 			</div>
 			<div class="mt-16 text-sm">
+				<a href="/energy" class="font-bold text-lg">
+					Compare Energy &nbsp;&rightarrow;
+					<div class="border-b-4 border-gray-900 w-10 h-3" />
+				</a>
+				<div class="h-10" />
 				<a href="/travel" class="font-bold text-lg">
 					Compare Travel &nbsp;&rightarrow;
 					<div class="border-b-4 border-gray-900 w-12 h-3" />

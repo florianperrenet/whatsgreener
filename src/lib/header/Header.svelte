@@ -36,10 +36,17 @@
 				<nav class="text-sm leading-6 font-semibold text-slate-700">
 					<a
 						sveltekit:prefetch
-						href="/travel"
-						class={$page.url.pathname === "/travel"
+						href="/energy"
+						class={$page.url.pathname === "/energy"
 							? "text-blue-500"
-							: "hover:text-blue-500/90"}>Travel</a
+							: "hover:text-blue-500/90"}>Energy</a
+					>
+					<a
+						sveltekit:prefetch
+						href="/travel"
+						class="ml-6 {$page.url.pathname === '/travel'
+							? 'text-blue-500'
+							: 'hover:text-blue-500/90'}">Travel</a
 					>
 					<a
 						sveltekit:prefetch
