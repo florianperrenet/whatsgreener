@@ -130,6 +130,35 @@
       d3.schemeCategory10
     );
 
+    // This allows to find the closest X index of the mouse:
+    var bisect = d3.bisector(function (d) {
+      return d.distance;
+    }).left;
+
+    // Create the circle that travels along the curve of chart
+    var focus = svg
+      .append("g")
+      .append("circle")
+      .style("fill", "none")
+      .attr("stroke", "black")
+      .attr("r", 8.5)
+      .style("opacity", 0);
+
+    // Create the text that travels along the curve of chart
+    var focusText = svg
+      .append("g")
+      .append("text")
+      .style("opacity", 0)
+      .attr("text-anchor", "left")
+      .attr("alignment-baseline", "middle");
+
+    var mouseLine = svg
+      .append("g")
+      .append("path") // create vertical line to follow mouse
+      .style("stroke", "#A9A9A9")
+      .style("stroke-width", 1)
+      .style("opacity", 0);
+
     lines
       .append("path")
       .style("fill", "none")
@@ -137,6 +166,68 @@
       .attr("d", function (d) {
         return line(d.values);
       });
+
+    lines
+      .append("circle")
+      // .attr("stroke", (d) => color(d))
+      .style("fill", (d) => color(d))
+      .attr("r", 5)
+      .style("opacity", 0)
+      .attr("class", "focus-circle");
+
+    svg
+      .append("rect")
+      .style("fill", "none")
+      .style("pointer-events", "all")
+      .attr("width", width)
+      .attr("height", height)
+      .on("mouseover", mouseover)
+      .on("mousemove", mousemove)
+      .on("mouseout", mouseout);
+
+    // What happens when the mouse move -> show the annotations at the right positions.
+    function mouseover() {
+      focus.style("opacity", 1);
+      focusText.style("opacity", 1);
+      mouseLine.style("opacity", 1);
+
+      d3.selectAll(".focus-circle").style("opacity", 1);
+    }
+
+    function mousemove(e) {
+      const pointer = d3.pointer(e);
+      const x0 = x.invert(pointer[0]);
+
+      const value_index = bisect(slices[0].values, x0);
+      const selectedData = slices[0].values[value_index];
+
+      const x_val = x(selectedData.distance);
+      const y_val = y(selectedData.measurement);
+
+      // focus.attr("cx", x_val).attr("cy", y_val);
+
+      const circles = d3
+        .selectAll(".focus-circle")
+        .attr("cx", x_val)
+        .attr("cy", (d) => y(d.values[value_index].measurement));
+
+      mouseLine.attr("d", () => {
+        let s = `M${x_val},${height}`;
+        s += ` ${x_val},0`;
+        return s;
+      });
+
+      focusText
+        .html("test")
+        .attr("x", x_val)
+        .attr("y", height / 2);
+    }
+    function mouseout() {
+      focus.style("opacity", 0);
+      focusText.style("opacity", 0);
+      mouseLine.style("opacity", 0);
+      d3.selectAll(".focus-circle").style("opacity", 0);
+    }
 
     const items = [];
     for (const item of color.domain()) {
