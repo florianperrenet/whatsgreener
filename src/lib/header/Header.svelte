@@ -34,34 +34,13 @@
 				class="hidden w-full mt-4 sm:mt-0 sm:w-auto sm:ml-auto md:flex items-center"
 			>
 				<nav class="text-sm leading-6 font-semibold text-slate-700">
-					<a
-						sveltekit:prefetch
-						href="/energy"
-						class={$page.url.pathname === "/energy"
-							? "text-blue-500"
-							: "hover:text-blue-500/90"}>Energy</a
-					>
-					<a
-						sveltekit:prefetch
-						href="/travel"
-						class="ml-6 {$page.url.pathname === '/travel'
-							? 'text-blue-500'
-							: 'hover:text-blue-500/90'}">Travel</a
-					>
-					<a
-						sveltekit:prefetch
-						href="/food"
-						class="mx-6 {$page.url.pathname === '/food'
-							? 'text-blue-500'
-							: 'hover:text-blue-500/90'}">Food</a
-					>
+					<a sveltekit:prefetch href="/energy">Energy</a>
+					<a sveltekit:prefetch href="/travel" class="ml-6">Travel</a>
+					<a sveltekit:prefetch href="/food" class="mx-6">Food</a>
 					<a
 						sveltekit:prefetch
 						href="/calculations"
-						class="border-l border-gray-200 pl-6 {$page.url.pathname ===
-						'/calculations'
-							? 'text-blue-500'
-							: 'hover:text-blue-500/90'}">View calculations</a
+						class="border-l border-gray-200 pl-6">View calculations</a
 					>
 				</nav>
 			</div>

@@ -4,13 +4,16 @@
 
 <ContainerLayout>
   <div class="prose lg:prose-lg prose-slate">
-    <h1>Energy footprint</h1>
+    <div class="text-7xl font-bold text-gray-900 mb-20">Energy footprint</div>
+
+    <h1>Options</h1>
     <ul>
       <li>Coal</li>
       <li>Natural gas</li>
       <li>Nuclear</li>
       <li>Hydro</li>
-      <li>Wind, solar, etc.</li>
+      <li>Wind</li>
+      <li>Solar</li>
       <li>Biofuels and waste</li>
       <li>Oil</li>
     </ul>
