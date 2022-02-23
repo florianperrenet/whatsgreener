@@ -281,7 +281,7 @@
     }
     function mouseout() {
       // focus.style("opacity", 0);
-      // tooltip.style("opacity", 0);
+      tooltip.style("opacity", 0);
       mouseLine.style("opacity", 0);
       d3.selectAll(".focus-circle").style("opacity", 0);
     }
