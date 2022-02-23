@@ -7,9 +7,8 @@
   export let ylabel;
 
   let chart;
-  let legend = [];
 
-  export let margin = { top: 20, right: 110, bottom: 30, left: 30 };
+  export let margin = { top: 20, right: 110, bottom: 35, left: 30 };
   export let height = 560;
   export let width = 700;
 
@@ -60,8 +59,10 @@
         .call((g) =>
           g
             .append("text")
-            .attr("x", width)
-            .attr("y", margin.bottom - 4)
+            .attr("x", width - margin.right)
+            // .attr("x", (width - margin.right) / 2)
+            .attr("y", margin.bottom)
+            .attr("font-weight", "bold")
             .attr("fill", "currentColor")
             .attr("text-anchor", "end")
             .text(`${xlabel} →`)
@@ -79,6 +80,7 @@
             .append("text")
             .attr("x", -margin.left)
             .attr("y", 10)
+            .attr("font-weight", "bold")
             .attr("fill", "currentColor")
             .attr("text-anchor", "start")
             .text(`↑ ${ylabel}`)
@@ -284,14 +286,6 @@
       mouseLine.style("opacity", 0);
       d3.selectAll(".focus-circle").style("opacity", 0);
     }
-
-    const items = [];
-    for (const item of color.domain()) {
-      if (typeof item === "string") {
-        items.push([item, color(item)]);
-      }
-    }
-    legend = items;
   });
 </script>
 
@@ -299,7 +293,7 @@
   style="position: relative;"
   class="shadow ring-1 ring-gray-900 ring-opacity-5 rounded"
 >
-  <div class="flex items-center border-b border-gray-100 mb-3 p-3">
+  <div class="flex items-center border-b border-gray-200 mb-3 p-3">
     <div class="grow">
       <div class="leading-none text-gray-900 mb-1">
         Travel impact over distance
@@ -317,11 +311,3 @@
     <div>Note: Something</div>
   </div>
 </div>
-<!-- <div class="flex flex-wrap gap-x-3 ml-10 mt-5">
-  {#each legend as [item, color]}
-    <div class="flex items-center text-xs">
-      <div class="w-2 h-2 mr-2" style="background: {color};" />
-      {item}
-    </div>
-  {/each}
-</div> -->
