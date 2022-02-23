@@ -61,7 +61,9 @@
       aria-labelledby="listbox-label"
     >
       <span class="flex items-center">
-        <span class="ml-3 block truncate">{selectedName}</span>
+        <span class="ml-3 block truncate"
+          >{selectedName ? selectedName : selected}</span
+        >
       </span>
       <span
         class="ml-3 absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
