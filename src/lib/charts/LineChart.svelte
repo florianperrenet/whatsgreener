@@ -12,6 +12,12 @@
   export let height = 560;
   export let width = 700;
 
+  function descendingOnKey(key) {
+    return function (a, b) {
+      return b[key] - a[key];
+    };
+  }
+
   onMount(() => {
     const svg = d3
       .select(chart)
@@ -193,7 +199,7 @@
 
     lines
       .append("text")
-      .style("font-size", "80%")
+      .style("font-size", "0.7em")
       .style("fill", (d) => color(d.id))
       .datum(function (d) {
         return {
@@ -262,13 +268,27 @@
         .attr("cx", x_val)
         .attr("cy", (d) => y(d.values[value_index].measurement));
 
-      let trs = "";
+      const values_sorted = [];
       for (const slice of slices) {
-        const _color = color(slice.id);
-        trs += `<tr style="color: ${_color}">
-          <td style="background-color: ${_color}; width: 10px; height: 10px; border-radius: 5px; display: inline-block; margin-right: 2px;"></td>
-            <td style="padding-right: 0.8em; font-weight: 700;">${slice.id}</td>
-            <td style="text-align: right; white-space: nowrap; font-weight: 700;">${slice.values[value_index].measurement}</td>
+        const val = slice.values[value_index];
+        values_sorted.push({
+          id: slice.id,
+          color: color(slice.id),
+          ...val,
+        });
+      }
+      values_sorted.sort(descendingOnKey("measurement"));
+
+      let trs = "";
+      for (const item of values_sorted) {
+        trs += `<tr style="color: ${item.color}">
+          <td style="background-color: ${
+            item.color
+          }; width: 10px; height: 10px; border-radius: 5px; display: inline-block; margin-right: 2px;"></td>
+            <td style="padding-right: 0.8em; font-weight: 700;">${item.id}</td>
+            <td style="text-align: right; white-space: nowrap; font-weight: 700;">${item.measurement.toFixed(
+              2
+            )}</td>
           </tr>`;
       }
 
@@ -276,7 +296,7 @@
         .html(
           `<table style="font-size: 0.7em"><thead><tr><td colspan="3"><strong>${selectedData.distance}</strong></td></tr></thead><tbody>${trs}</tbody></table>`
         )
-        .style("left", pointerRel[0] + 30 + "px")
+        .style("left", pointerRel[0] + 40 + "px")
         .style("top", pointerRel[1] + "px");
       // .attr("y", height / 3);
     }
