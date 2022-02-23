@@ -162,7 +162,9 @@
     lines
       .append("path")
       .style("fill", "none")
-      .style("stroke", (d) => color(d))
+      .style("stroke", (d) => {
+        return color(d.id);
+      })
       .attr("d", function (d) {
         return line(d.values);
       });
@@ -170,7 +172,7 @@
     lines
       .append("circle")
       // .attr("stroke", (d) => color(d))
-      .style("fill", (d) => color(d))
+      .style("fill", (d) => color(d.id))
       .attr("r", 5)
       .style("opacity", 0)
       .attr("class", "focus-circle");
@@ -187,7 +189,7 @@
 
     // What happens when the mouse move -> show the annotations at the right positions.
     function mouseover() {
-      focus.style("opacity", 1);
+      // focus.style("opacity", 1);
       focusText.style("opacity", 1);
       mouseLine.style("opacity", 1);
 
@@ -223,7 +225,7 @@
         .attr("y", height / 2);
     }
     function mouseout() {
-      focus.style("opacity", 0);
+      // focus.style("opacity", 0);
       focusText.style("opacity", 0);
       mouseLine.style("opacity", 0);
       d3.selectAll(".focus-circle").style("opacity", 0);
@@ -232,8 +234,7 @@
     const items = [];
     for (const item of color.domain()) {
       if (typeof item === "string") {
-        console.log(item);
-        items.push([item, color({ id: item })]);
+        items.push([item, color(item)]);
       }
     }
     legend = items;
