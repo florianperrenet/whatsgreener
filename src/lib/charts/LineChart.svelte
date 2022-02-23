@@ -9,10 +9,9 @@
   let chart;
   let legend = [];
 
-  const margin = { top: 20, right: 200, bottom: 35, left: 40 };
-
-  const height = 560;
-  const width = 1000;
+  export let margin = { top: 20, right: 110, bottom: 30, left: 30 };
+  export let height = 560;
+  export let width = 700;
 
   onMount(() => {
     const svg = d3
@@ -89,7 +88,7 @@
     const grid = (g) =>
       g
         .attr("stroke", "currentColor")
-        .attr("stroke-opacity", 0.1)
+        .attr("stroke-opacity", 0.2)
         // .call((g) =>
         //   g
         //     .append("g")
@@ -111,7 +110,7 @@
             .attr("y2", (d) => 0.5 + y(d))
             .attr("x1", margin.left)
             .attr("x2", width - margin.right)
-            .style("stroke-dasharray", 2)
+            .style("stroke-dasharray", 3)
         );
     svg.append("g").call(grid);
 
@@ -296,7 +295,28 @@
   });
 </script>
 
-<div bind:this={chart} style="position: relative;" />
+<div
+  style="position: relative;"
+  class="shadow ring-1 ring-gray-900 ring-opacity-5 rounded"
+>
+  <div class="flex items-center border-b border-gray-100 mb-3 p-3">
+    <div class="grow">
+      <div class="leading-none text-gray-900 mb-1">
+        Travel impact over distance
+      </div>
+      <div class="text-sm max-w-lg">Some description</div>
+    </div>
+    <div class="flex-none">
+      <img src="/whatsgreener-logo-site.png" alt="" width="125" />
+    </div>
+  </div>
+
+  <div bind:this={chart} class="relative p-3" />
+  <div class="pl-3 pb-3 text-xs">
+    <div>Source: <a href="/calculations">Calculations</a></div>
+    <div>Note: Something</div>
+  </div>
+</div>
 <!-- <div class="flex flex-wrap gap-x-3 ml-10 mt-5">
   {#each legend as [item, color]}
     <div class="flex items-center text-xs">
