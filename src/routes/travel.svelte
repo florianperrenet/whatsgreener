@@ -352,7 +352,7 @@
     </div>
 
     <div class="not-prose">
-      <LineChart {data} xlabel="Distance" ylabel="Impact" />
+      <LineChart {data} xlabel="Distance (km)" ylabel="Impact (kg CO2eq)" />
     </div>
   </div>
 </SidebarLayout>
