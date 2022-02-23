@@ -9,7 +9,7 @@
   let chart;
   let legend = [];
 
-  const margin = { top: 20, right: 20, bottom: 35, left: 40 };
+  const margin = { top: 20, right: 200, bottom: 35, left: 40 };
 
   const height = 560;
   const width = 1000;
@@ -90,17 +90,17 @@
       g
         .attr("stroke", "currentColor")
         .attr("stroke-opacity", 0.1)
-        .call((g) =>
-          g
-            .append("g")
-            .selectAll("line")
-            .data(x.ticks())
-            .join("line")
-            .attr("x1", (d) => 0.5 + x(d))
-            .attr("x2", (d) => 0.5 + x(d))
-            .attr("y1", margin.top)
-            .attr("y2", height - margin.bottom)
-        )
+        // .call((g) =>
+        //   g
+        //     .append("g")
+        //     .selectAll("line")
+        //     .data(x.ticks())
+        //     .join("line")
+        //     .attr("x1", (d) => 0.5 + x(d))
+        //     .attr("x2", (d) => 0.5 + x(d))
+        //     .attr("y1", margin.top)
+        //     .attr("y2", height - margin.bottom)
+        // )
         .call((g) =>
           g
             .append("g")
@@ -111,6 +111,7 @@
             .attr("y2", (d) => 0.5 + y(d))
             .attr("x1", margin.left)
             .attr("x2", width - margin.right)
+            .style("stroke-dasharray", 2)
         );
     svg.append("g").call(grid);
 
@@ -145,16 +146,27 @@
       .style("opacity", 0);
 
     // Create the text that travels along the curve of chart
-    var focusText = svg
-      .append("g")
-      .append("text")
+    var tooltip = d3
+      .select(chart)
+      .append("div")
+      .style("position", "absolute")
+      .style("pointer-events", "none")
       .style("opacity", 0)
-      .attr("text-anchor", "left")
-      .attr("alignment-baseline", "middle");
+      .style("background-color", "rgba(255, 255, 255, 0.95)")
+      .style(
+        "box-shadow",
+        "rgb(0 0 0 / 12%) 0px 2px 2px, rgb(0 0 0 / 35%) 0px 0px 1px"
+      )
+      .style("border-radius", 2)
+      .style("text-align", "left")
+      .style("font-size", "0.9em")
+      .style("white-space", "nowrap")
+      .style("padding", "0.3em");
 
     var mouseLine = svg
       .append("g")
       .append("path") // create vertical line to follow mouse
+      .attr("id", "mouse-line")
       .style("stroke", "#A9A9A9")
       .style("stroke-width", 1)
       .style("opacity", 0);
@@ -162,6 +174,7 @@
     lines
       .append("path")
       .style("fill", "none")
+      .style("stroke-width", 1.5)
       .style("stroke", (d) => {
         return color(d.id);
       })
@@ -177,6 +190,28 @@
       .style("opacity", 0)
       .attr("class", "focus-circle");
 
+    lines
+      .append("text")
+      .style("font-size", "80%")
+      .style("fill", (d) => color(d.id))
+      .datum(function (d) {
+        return {
+          id: d.id,
+          value: d.values[d.values.length - 1],
+        };
+      })
+      .attr("transform", function (d) {
+        return (
+          "translate(" +
+          (x(d.value.distance) + 10) +
+          "," +
+          (y(d.value.measurement) + 5) +
+          ")"
+        );
+      })
+      .attr("x", 5)
+      .text((d) => d.id);
+
     svg
       .append("rect")
       .style("fill", "none")
@@ -190,7 +225,7 @@
     // What happens when the mouse move -> show the annotations at the right positions.
     function mouseover() {
       // focus.style("opacity", 1);
-      focusText.style("opacity", 1);
+      tooltip.style("opacity", 1);
       mouseLine.style("opacity", 1);
 
       d3.selectAll(".focus-circle").style("opacity", 1);
@@ -201,10 +236,23 @@
       const x0 = x.invert(pointer[0]);
 
       const value_index = bisect(slices[0].values, x0);
+      const len = slices[0].values.length;
+
+      if (value_index >= len) return;
+
       const selectedData = slices[0].values[value_index];
 
       const x_val = x(selectedData.distance);
       const y_val = y(selectedData.measurement);
+
+      mouseLine.attr("d", () => {
+        let s = `M${x_val},${height}`;
+        s += ` ${x_val},0`;
+        return s;
+      });
+
+      const pointerRel = d3.pointer(e, d3.select(chart).node());
+      const pointermouseline = d3.pointer(e, d3.select("#mouse-line").node());
 
       // focus.attr("cx", x_val).attr("cy", y_val);
 
@@ -213,20 +261,27 @@
         .attr("cx", x_val)
         .attr("cy", (d) => y(d.values[value_index].measurement));
 
-      mouseLine.attr("d", () => {
-        let s = `M${x_val},${height}`;
-        s += ` ${x_val},0`;
-        return s;
-      });
+      let trs = "";
+      for (const slice of slices) {
+        const _color = color(slice.id);
+        trs += `<tr style="color: ${_color}">
+          <td style="background-color: ${_color}; width: 10px; height: 10px; border-radius: 5px; display: inline-block; margin-right: 2px;"></td>
+            <td style="padding-right: 0.8em; font-weight: 700;">${slice.id}</td>
+            <td style="text-align: right; white-space: nowrap; font-weight: 700;">${slice.values[value_index].measurement}</td>
+          </tr>`;
+      }
 
-      focusText
-        .html("test")
-        .attr("x", x_val)
-        .attr("y", height / 2);
+      tooltip
+        .html(
+          `<table style="font-size: 0.7em"><thead><tr><td colspan="3"><strong>${selectedData.distance}</strong></td></tr></thead><tbody>${trs}</tbody></table>`
+        )
+        .style("left", pointerRel[0] + 30 + "px")
+        .style("top", pointerRel[1] + "px");
+      // .attr("y", height / 3);
     }
     function mouseout() {
       // focus.style("opacity", 0);
-      focusText.style("opacity", 0);
+      // tooltip.style("opacity", 0);
       mouseLine.style("opacity", 0);
       d3.selectAll(".focus-circle").style("opacity", 0);
     }
@@ -241,12 +296,12 @@
   });
 </script>
 
-<div bind:this={chart} />
-<div class="flex flex-wrap gap-x-3 ml-10 mt-5">
+<div bind:this={chart} style="position: relative;" />
+<!-- <div class="flex flex-wrap gap-x-3 ml-10 mt-5">
   {#each legend as [item, color]}
     <div class="flex items-center text-xs">
       <div class="w-2 h-2 mr-2" style="background: {color};" />
       {item}
     </div>
   {/each}
-</div>
+</div> -->

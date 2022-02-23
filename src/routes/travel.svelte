@@ -351,6 +351,8 @@
       </table>
     </div>
 
-    <LineChart {data} xlabel="Distance" ylabel="Impact" />
+    <div class="not-prose">
+      <LineChart {data} xlabel="Distance" ylabel="Impact" />
+    </div>
   </div>
 </SidebarLayout>
