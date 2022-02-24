@@ -53,6 +53,8 @@
 
     chartData = {
       title: `Energy mixture of ${selected}`,
+      description: "Some description",
+      source: "Calculations",
       series: series,
       x: energyMix.years,
       xlabel: "year",

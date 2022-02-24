@@ -13,23 +13,38 @@ export function chart(conf) {
   // append the svg object to the body of the page
   const svg = el
     .append("svg")
-    .attr("width", conf.width)
-    .attr("height", conf.height)
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", `0 0 ${conf.width} ${conf.height}`)
+    // .attr("width", conf.width)
+    // .attr("height", conf.height)
     .append("g")
     .attr("transform",
-      "translate(" + conf.margin.left + "," + conf.margin.top + ")");
+      "translate(" + conf.margin.left + "," + conf.margin.top + ")")
 
   // chart columns / keys
   const keys = Object.keys(conf.series);
 
   // remap data
   const data = [];
-  for (const [x_index, x_value] of conf.x.entries()) {
-    const row = { x: x_value };
-    for (const [serie_key, serie_value] of Object.entries(conf.series)) {
-      row[serie_key] = serie_value[x_index];
+  if (conf.relative) {
+    for (const [x_index, x_value] of conf.x.entries()) {
+      const row = { x: x_value, total: 0 };
+      for (const [serie_key, serie_value] of Object.entries(conf.series)) {
+        row.total += serie_value[x_index];
+      }
+      for (const [serie_key, serie_value] of Object.entries(conf.series)) {
+        row[serie_key] = serie_value[x_index] / row.total;
+      }
+      data.push(row);
     }
-    data.push(row);
+  } else {
+    for (const [x_index, x_value] of conf.x.entries()) {
+      const row = { x: x_value };
+      for (const [serie_key, serie_value] of Object.entries(conf.series)) {
+        row[serie_key] = serie_value[x_index];
+      }
+      data.push(row);
+    }
   }
 
   // color palette
@@ -83,8 +98,13 @@ export function chart(conf) {
   var y = d3.scaleLinear()
     .domain([0, maxY])
     .range([height, 0]);
+
+  const yTicks = d3.axisLeft(y).ticks(5);
+  if (conf.relative)
+    yTicks.tickFormat(d3.format(".0%"));
+
   svg.append("g")
-    .call(d3.axisLeft(y).ticks(5))
+    .call(yTicks)
 
 
 
@@ -167,13 +187,17 @@ export function chart(conf) {
   var highlight = function (e, d) {
     // reduce opacity of all groups
     svg.selectAll(".myArea").style("opacity", .1)
-    // expect the one that is hovered
+    // except the one that is hovered
     svg.select("." + d).style("opacity", 1)
+
+    svg.selectAll(".label").style("opacity", .3);
+    svg.select(".label." + d).style("opacity", 1)
   }
 
   // And when it is not hovered anymore
   var noHighlight = function (e) {
     svg.selectAll(".myArea").style("opacity", 1)
+    svg.selectAll(".label").style("opacity", 1);
   }
 
 
@@ -183,7 +207,7 @@ export function chart(conf) {
   //////////
 
   // Add one dot in the legend for each name.
-  var size = 20
+  var size = 10
   svg.selectAll("myrect")
     .data(keys)
     .enter()
@@ -201,12 +225,15 @@ export function chart(conf) {
     .data(keys)
     .enter()
     .append("text")
+    .attr("class", d => "label " + d)
     .attr("x", 400 + size * 1.2)
     .attr("y", function (d, i) { return 10 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function (d) { return color(d) })
     .text(function (d) { return d })
     .attr("text-anchor", "left")
     .style("alignment-baseline", "middle")
+    .style("cursor", "default")
+    .attr("font-size", "70%")
     .on("mouseover", highlight)
     .on("mouseleave", noHighlight)
 
