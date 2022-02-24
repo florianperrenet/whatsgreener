@@ -84,15 +84,16 @@ export function chart(conf) {
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height + 40)
-    .text(conf.xlabel);
+    .text(conf.xlabel + " →")
+    .attr("font-size", "70%");
 
   // Add Y axis label:
   svg.append("text")
     .attr("text-anchor", "end")
     .attr("x", 0)
     .attr("y", -20)
-    .attr("text-anchor", "start")
-    .text(conf.ylabel)
+    .text("↑ " + conf.ylabel)
+    .attr("font-size", "70%")
 
   // Add Y axis
   var y = d3.scaleLinear()
