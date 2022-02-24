@@ -30,16 +30,18 @@
     </div>
 
     {#if energyMix.data}
-      {#each Object.entries(energyMix.data[selected][year]) as [key, value]}
-        {#if key === "total"}
-          <li>Total: {value}</li>
-        {:else}
-          <li>{key}: {value.a} kWh = {value.pr}%</li>
-        {/if}
-      {/each}
+      <ul>
+        {#each Object.entries(energyMix.data[selected][year]) as [key, value]}
+          {#if key === "total"}
+            <li>Total: {value}</li>
+          {:else}
+            <li>{key}: {value.a} TWh = {value.pr}%</li>
+          {/if}
+        {/each}
+      </ul>
     {/if}
 
-    <h1>Options</h1>
+    <h2>All sources</h2>
     <ul>
       <li>Coal</li>
       <li>Natural gas</li>
