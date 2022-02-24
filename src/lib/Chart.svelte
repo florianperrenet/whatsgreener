@@ -41,6 +41,10 @@
       </div>
     </div>
 
+    <div class="p-3">
+      <input type="checkbox" /> Relative
+    </div>
+
     <div id={chartId} bind:this={chartEl} class="relative p-3" />
 
     <div class="pl-3 pb-3 text-xs">

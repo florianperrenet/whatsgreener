@@ -35,7 +35,8 @@ export function chart(conf) {
   // color palette
   var color = d3.scaleOrdinal()
     .domain(keys)
-    .range(d3.schemeSet2);
+    // .range(d3.schemeSet2);
+    .range(d3.schemeTableau10);
 
   // stack the data?
   var stackedData = d3.stack()
@@ -61,7 +62,7 @@ export function chart(conf) {
 
   var xAxis = svg.append("g")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x).ticks(5))
+    .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format("d")))
 
   // Add X axis label:
   svg.append("text")
