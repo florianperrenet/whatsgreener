@@ -143,6 +143,7 @@ export function chart(conf) {
     .enter()
     .append("path")
     .attr("class", function (d) { return "myArea " + d.key })
+    .style("stroke", "rgba(0, 0, 0, 0.2)")
     .style("fill", function (d) { return color(d.key); })
     .attr("d", area)
 
@@ -226,7 +227,7 @@ export function chart(conf) {
     .enter()
     .append("text")
     .attr("class", d => "label " + d)
-    .attr("x", 400 + size * 1.2)
+    .attr("x", 400 + 5 + size * 1.2)
     .attr("y", function (d, i) { return 10 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function (d) { return color(d) })
     .text(function (d) { return d })

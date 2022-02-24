@@ -50,7 +50,7 @@
     </div>
 
     <div class="p-3 text-sm">
-      <label class="inline-flex items-center cursor-pointer">
+      <label class="inline-flex items-center cursor-pointer select-none">
         <input
           type="checkbox"
           on:click={toggleRelative}
