@@ -4,6 +4,7 @@
   import Select from "$lib/Select.svelte";
 
   import { chart } from "$lib/chart";
+  import Chart from "$lib/Chart.svelte";
 
   let energyMix = {};
   let entities = [];
@@ -12,6 +13,10 @@
   let year = "2019";
 
   let chartEl;
+
+  let series = {};
+
+  let chartData = null;
 
   onMount(async () => {
     const response = await fetch(
@@ -22,16 +27,32 @@
     entities = energyMix.entities.map((entity) => [entity, entity]);
     selected = entities[0][0];
 
-    const series = {};
+    // chart({
+    //   el: chartEl,
+    //   series: series,
+    //   x: energyMix.years,
+    //   xlabel: "year",
+    //   ylabel: "TWh",
+    //   margin: { top: 60, right: 230, bottom: 50, left: 50 },
+    //   width: 660,
+    //   height: 400,
+    // });
+  });
+
+  $: if (selected) {
+    const d = {};
     for (const [year, year_value] of Object.entries(energyMix.data[selected])) {
       for (const [key, value] of Object.entries(year_value)) {
         if (key === "total") continue;
-        if (!(key in series)) series[key] = [];
-        series[key].push(value);
+        if (!(key in d)) d[key] = [];
+        d[key].push(value.a);
       }
     }
-    chart({
-      el: chartEl,
+
+    series = d;
+
+    chartData = {
+      title: `Energy mixture of ${selected}`,
       series: series,
       x: energyMix.years,
       xlabel: "year",
@@ -39,8 +60,8 @@
       margin: { top: 60, right: 230, bottom: 50, left: 50 },
       width: 660,
       height: 400,
-    });
-  });
+    };
+  }
 </script>
 
 <ContainerLayout>
@@ -64,7 +85,11 @@
       </ul>
     {/if}
 
-    <div class="not-prose">
+    {#if selected}
+      <Chart data={chartData} />
+    {/if}
+
+    <!-- <div class="not-prose">
       <div
         style="position: relative;"
         class="bg-white shadow ring-1 ring-gray-900 ring-opacity-5 rounded"
@@ -87,7 +112,7 @@
           <div>Note: Something</div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <h2>All sources</h2>
     <ul>

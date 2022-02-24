@@ -1,13 +1,17 @@
 import * as d3 from "d3";
 
 export function chart(conf) {
-
   // chart size
   const width = conf.width - conf.margin.left - conf.margin.right;
   const height = conf.height - conf.margin.top - conf.margin.bottom;
 
+  const el = d3.select(conf.el);
+
+  // first clear the div, in case of redraw
+  el.selectAll("svg").remove();
+
   // append the svg object to the body of the page
-  const svg = d3.select(conf.el)
+  const svg = el
     .append("svg")
     .attr("width", conf.width)
     .attr("height", conf.height)
@@ -23,12 +27,10 @@ export function chart(conf) {
   for (const [x_index, x_value] of conf.x.entries()) {
     const row = { x: x_value };
     for (const [serie_key, serie_value] of Object.entries(conf.series)) {
-      row[serie_key] = serie_value[x_index].a;
+      row[serie_key] = serie_value[x_index];
     }
     data.push(row);
   }
-
-  const max_y = 0;
 
   // color palette
   var color = d3.scaleOrdinal()
@@ -163,14 +165,14 @@ export function chart(conf) {
   // What to do when one group is hovered
   var highlight = function (e, d) {
     // reduce opacity of all groups
-    d3.selectAll(".myArea").style("opacity", .1)
+    svg.selectAll(".myArea").style("opacity", .1)
     // expect the one that is hovered
-    d3.select("." + d).style("opacity", 1)
+    svg.select("." + d).style("opacity", 1)
   }
 
   // And when it is not hovered anymore
   var noHighlight = function (e) {
-    d3.selectAll(".myArea").style("opacity", 1)
+    svg.selectAll(".myArea").style("opacity", 1)
   }
 
 
