@@ -7,8 +7,7 @@
   import { onMount } from "svelte";
 
   export let data;
-
-  if (!("relative" in data)) data.relative = false;
+  export let relative = false;
 
   let chartEl;
 
@@ -21,10 +20,13 @@
 
   function toggleRelative() {
     data.relative = !data.relative;
+    relative = data.relative;
   }
 
-  $: if (data) {
-    // data.el = chartId;
+  $: if (data && mounted) {
+    if (!("relative" in data)) {
+      data.relative = relative;
+    }
     data.el = chartEl;
     chart(data);
   }

@@ -1,28 +1,13 @@
 import * as d3 from "d3";
 
+const LABELS_SPACE = 10;
+
 export function chart(conf) {
-  const margin = { top: 30, right: 230, bottom: 50, left: 50 };
-
-
-  // chart size
-  const width = conf.width - margin.left - margin.right;
-  const height = conf.height - margin.top - margin.bottom;
+  console.log(conf.relative)
 
   const el = d3.select(conf.el);
-
   // first clear the div, in case of redraw
   el.selectAll("svg").remove();
-
-  // append the svg object to the body of the page
-  const svg = el
-    .append("svg")
-    .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", `0 0 ${conf.width} ${conf.height}`)
-    // .attr("width", conf.width)
-    // .attr("height", conf.height)
-    .append("g")
-    .attr("transform",
-      "translate(" + margin.left + "," + margin.top + ")")
 
   // chart columns / keys
   const keys = Object.keys(conf.series);
@@ -50,12 +35,6 @@ export function chart(conf) {
     }
   }
 
-  // color palette
-  var color = d3.scaleOrdinal()
-    .domain(keys)
-    // .range(d3.schemeSet2);
-    .range(d3.schemeTableau10);
-
   // stack the data?
   var stackedData = d3.stack()
     .keys(keys)
@@ -67,6 +46,136 @@ export function chart(conf) {
       return v[1];
     })
   });
+
+  // color palette
+  var color = d3.scaleOrdinal()
+    .domain(keys)
+    // .range(d3.schemeSet2);
+    .range(d3.schemeTableau10);
+
+
+
+
+
+
+
+
+
+  // append the svg object to the body of the page
+  const svg = el
+    .append("svg")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", `0 0 ${conf.width} ${conf.height}`)
+    .append("g")
+  // .attr("width", conf.width)
+  // .attr("height", conf.height)
+
+
+
+  //////////
+  // HIGHLIGHT GROUP //
+  //////////
+
+  // What to do when one group is hovered
+  var highlight = function (e, d) {
+    // reduce opacity of all groups
+    svg.selectAll(".area").style("opacity", .1)
+    // except the one that is hovered
+    svg.select(".area." + d).style("opacity", 1)
+
+    svg.selectAll(".label").style("opacity", .3);
+    svg.select(".label." + d).style("opacity", 1)
+  }
+
+  // And when it is not hovered anymore
+  var noHighlight = function (e) {
+    svg.selectAll(".area").style("opacity", 1)
+    svg.selectAll(".label").style("opacity", 1);
+  }
+
+
+
+
+
+  //////////
+  // LEGEND //
+  //////////
+
+  // Add one dot in the legend for each name.
+  var size = 10
+  // svg.append("g").selectAll("myrect")
+  //   .data(keys)
+  //   .enter()
+  //   .append("rect")
+  //   .attr("x", conf.width)
+  //   .attr("y", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
+  //   .attr("width", size)
+  //   .attr("height", size)
+  //   .style("fill", function (d) { return color(d) })
+  //   .on("mouseover", highlight)
+  //   .on("mouseleave", noHighlight)
+
+  // Add one dot in the legend for each name.
+  const labels = svg.append("g").attr("class", "legend").selectAll("mylabels")
+    .data(keys)
+    .enter()
+    .append("text")
+    .attr("class", d => "label " + d)
+    // .attr("x", 400 + 5 + size * 1.2)
+    .attr("y", function (d, i) { return 10 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
+    .style("fill", function (d) { return color(d) })
+    .text(function (d) { return d })
+    .attr("text-anchor", "start")
+    .style("alignment-baseline", "middle")
+    .style("cursor", "default")
+    .attr("font-size", "70%")
+    .on("mouseover", highlight)
+    .on("mouseleave", noHighlight)
+
+
+  const legend = svg.select(".legend");
+  let labelWidthMax = legend.node().getBBox().width;
+
+  const margin = {
+    top: 30,
+    bottom: 50,
+    right: labelWidthMax + LABELS_SPACE,
+  };
+
+
+  // chart size
+  const height = conf.height - margin.top - margin.bottom;
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, maxY])
+    .range([height, 0]);
+
+  const yTicks = d3.axisLeft(y).ticks(5);
+  if (conf.relative)
+    yTicks.tickFormat(d3.format(".0%"));
+
+  const yAxis = svg.append("g")
+    .attr("class", "yAxis")
+    .call(yTicks)
+
+  const yAxisWidth = yAxis.node().getBBox().width;
+  // update left margin
+  margin.left = yAxisWidth;
+
+
+  svg.attr("transform",
+    "translate(" + margin.left + "," + margin.top + ")")
+
+
+  const width = conf.width - margin.left - margin.right;
+
+
+
+
+
+
+
 
 
   //////////
@@ -92,23 +201,12 @@ export function chart(conf) {
 
   // Add Y axis label:
   svg.append("text")
-    .attr("text-anchor", "end")
-    .attr("x", 0)
+    .attr("text-anchor", "start")
+    .attr("x", -margin.left)
     .attr("y", -20)
     .text("↑ " + conf.ylabel)
     .attr("font-size", "70%")
 
-  // Add Y axis
-  var y = d3.scaleLinear()
-    .domain([0, maxY])
-    .range([height, 0]);
-
-  const yTicks = d3.axisLeft(y).ticks(5);
-  if (conf.relative)
-    yTicks.tickFormat(d3.format(".0%"));
-
-  svg.append("g")
-    .call(yTicks)
 
 
 
@@ -146,7 +244,7 @@ export function chart(conf) {
     .data(stackedData)
     .enter()
     .append("path")
-    .attr("class", function (d) { return "myArea " + d.key })
+    .attr("class", function (d) { return "area " + d.key })
     .style("stroke", "rgba(0, 0, 0, 0.2)")
     .style("fill", function (d) { return color(d.key); })
     .attr("d", area)
@@ -184,62 +282,15 @@ export function chart(conf) {
 
 
 
-  //////////
-  // HIGHLIGHT GROUP //
-  //////////
-
-  // What to do when one group is hovered
-  var highlight = function (e, d) {
-    // reduce opacity of all groups
-    svg.selectAll(".myArea").style("opacity", .1)
-    // except the one that is hovered
-    svg.select("." + d).style("opacity", 1)
-
-    svg.selectAll(".label").style("opacity", .3);
-    svg.select(".label." + d).style("opacity", 1)
-  }
-
-  // And when it is not hovered anymore
-  var noHighlight = function (e) {
-    svg.selectAll(".myArea").style("opacity", 1)
-    svg.selectAll(".label").style("opacity", 1);
-  }
+  labels.attr("x", width + LABELS_SPACE).attr("y", (d, i) => {
+    // place the label in the middle
+    const items = stackedData[i];
+    const [y_lower, y_upper] = items[items.length - 1];
+    const between = y_lower + (y_upper - y_lower) / 2;
+    return y(between);
+  });
 
 
 
-  //////////
-  // LEGEND //
-  //////////
-
-  // Add one dot in the legend for each name.
-  var size = 10
-  svg.selectAll("myrect")
-    .data(keys)
-    .enter()
-    .append("rect")
-    .attr("x", 400)
-    .attr("y", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
-    .attr("width", size)
-    .attr("height", size)
-    .style("fill", function (d) { return color(d) })
-    .on("mouseover", highlight)
-    .on("mouseleave", noHighlight)
-
-  // Add one dot in the legend for each name.
-  svg.selectAll("mylabels")
-    .data(keys)
-    .enter()
-    .append("text")
-    .attr("class", d => "label " + d)
-    .attr("x", 400 + 5 + size * 1.2)
-    .attr("y", function (d, i) { return 10 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
-    .style("fill", function (d) { return color(d) })
-    .text(function (d) { return d })
-    .attr("text-anchor", "left")
-    .style("alignment-baseline", "middle")
-    .style("cursor", "default")
-    .attr("font-size", "70%")
-    .on("mouseover", highlight)
-    .on("mouseleave", noHighlight)
 
 }
