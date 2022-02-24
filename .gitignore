@@ -10,4 +10,4 @@ node_modules
 .output
 ideas.md
 venv/
-resources/
+./resources/
