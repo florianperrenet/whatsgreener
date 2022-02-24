@@ -1,9 +1,12 @@
 import * as d3 from "d3";
 
 export function chart(conf) {
+  const margin = { top: 30, right: 230, bottom: 50, left: 50 };
+
+
   // chart size
-  const width = conf.width - conf.margin.left - conf.margin.right;
-  const height = conf.height - conf.margin.top - conf.margin.bottom;
+  const width = conf.width - margin.left - margin.right;
+  const height = conf.height - margin.top - margin.bottom;
 
   const el = d3.select(conf.el);
 
@@ -19,7 +22,7 @@ export function chart(conf) {
     // .attr("height", conf.height)
     .append("g")
     .attr("transform",
-      "translate(" + conf.margin.left + "," + conf.margin.top + ")")
+      "translate(" + margin.left + "," + margin.top + ")")
 
   // chart columns / keys
   const keys = Object.keys(conf.series);

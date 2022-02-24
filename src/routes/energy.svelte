@@ -59,7 +59,6 @@
       x: energyMix.years,
       xlabel: "Year",
       ylabel: "TWh",
-      margin: { top: 60, right: 230, bottom: 50, left: 50 },
       width: 660,
       height: 400,
     };

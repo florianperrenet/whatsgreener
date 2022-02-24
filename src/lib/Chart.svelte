@@ -71,8 +71,13 @@
     <div id={chartId} bind:this={chartEl} class="relative p-3" />
 
     <div class="pl-3 pb-3 text-xs">
-      <div>Source: {data.source}</div>
-      <div>Note: {data.note}</div>
+      {#if data.source}
+        <div>Source: {data.source}</div>
+      {/if}
+
+      {#if data.note}
+        <div>Note: {data.note}</div>
+      {/if}
     </div>
   </div>
 </div>
