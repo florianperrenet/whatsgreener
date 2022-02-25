@@ -47,6 +47,20 @@
     if (show) show = false;
   }
 
+  function onTab() {
+    console.log("tab");
+  }
+  function onEnter() {
+    if (!filter || !filtered.length) return;
+    select(filtered[0]);
+  }
+  function onArrowDown() {
+    console.log("arrow down");
+  }
+  function onArrowUp() {
+    console.log("arrow up");
+  }
+
   $: {
     if (filter) {
       const _filtered = [];
@@ -119,7 +133,15 @@
       class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-4"
       role="option"
     >
-      <Input placeholder="Search {text.toLowerCase()}" bind:value={filter} />
+      <Input
+        placeholder="Search {text.toLowerCase()}"
+        bind:value={filter}
+        {onEnter}
+        {onTab}
+        {onArrowDown}
+        {onArrowUp}
+        focus={show}
+      />
     </li>
     {#each filtered as option}
       {#if option === "divider"}
