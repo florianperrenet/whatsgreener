@@ -344,7 +344,7 @@ export function chart(conf) {
     .attr("class", "tooltip")
     .style("position", "absolute")
     .style("pointer-events", "none")
-    .style("opacity", 1)
+    .style("opacity", 0)
     .style("background-color", "rgba(255, 255, 255, 0.95)")
     .style(
       "box-shadow",
