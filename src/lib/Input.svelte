@@ -16,6 +16,8 @@
 
   export let focus = false;
 
+  export let autocomplete = false;
+
   let Input;
 
   const initialValue = value;
@@ -58,6 +60,7 @@
       class="text-sm block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
       {placeholder}
       {focus}
+      {autocomplete}
     />
   {:else}
     <input
@@ -68,6 +71,7 @@
       bind:this={Input}
       class="text-sm block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
       {placeholder}
+      {autocomplete}
     />
   {/if}
 </label>

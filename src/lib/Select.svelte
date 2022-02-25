@@ -8,6 +8,9 @@
   export let options = [];
   export let selected = null;
 
+  let preselected = null;
+  let preselected_idx = 0;
+
   let filter = null;
   let filtered = options;
 
@@ -51,14 +54,18 @@
     console.log("tab");
   }
   function onEnter() {
-    if (!filter || !filtered.length) return;
+    if (!show || !filter || !filtered.length) return;
     select(filtered[0]);
   }
   function onArrowDown() {
-    console.log("arrow down");
+    // if (!show || filtered.length < 1) return;
+    // preselected = filtered[preselected_idx++][0];
+    // console.log("arrow down");
   }
   function onArrowUp() {
-    console.log("arrow up");
+    // if (!show || filtered.length < 2) return;
+    // preselected = filtered[--preselected_idx][0];
+    // console.log("arrow up");
   }
 
   $: {
@@ -148,7 +155,9 @@
         <div class="border-b border-gray-200" />
       {:else}
         <li
-          class="hover:bg-gray-200 text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9"
+          class="{option[0] === preselected
+            ? 'bg-gray-100'
+            : ''} hover:bg-gray-200 text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9"
           role="option"
           on:click={() => select(option)}
         >
