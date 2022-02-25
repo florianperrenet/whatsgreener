@@ -188,11 +188,13 @@ export function chart(conf) {
     .range([0, width]);
 
   var xAxis = svg.append("g")
+    .attr("class", "xAxis")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format("d")))
 
   // Add X axis label:
   svg.append("text")
+    .attr("class", "xLabel")
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height + 40)
@@ -201,6 +203,7 @@ export function chart(conf) {
 
   // Add Y axis label:
   svg.append("text")
+    .attr("class", "yLabel")
     .attr("text-anchor", "start")
     .attr("x", -margin.left)
     .attr("y", -20)
@@ -210,6 +213,7 @@ export function chart(conf) {
 
   const grid = (g) =>
     g
+      .attr("class", "grid")
       .attr("stroke", "currentColor")
       .attr("stroke-opacity", 0.2)
       // .call((g) =>
@@ -278,6 +282,7 @@ export function chart(conf) {
     .attr("class", function (d) { return "area " + d.key })
     .style("stroke", "rgba(0, 0, 0, 0.2)")
     .style("fill", function (d) { return color(d.key); })
+    .style("fill-opacity", 0.7)
     .attr("d", area)
 
   // Add the brushing
