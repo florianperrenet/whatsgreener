@@ -227,7 +227,7 @@ export function chart(conf) {
         g
           .append("g")
           .selectAll("line")
-          .data(y.ticks().slice(1))
+          .data(y.ticks(5).slice(1))
           .join("line")
           .attr("y1", (d) => 0.5 + y(d))
           .attr("y2", (d) => 0.5 + y(d))
