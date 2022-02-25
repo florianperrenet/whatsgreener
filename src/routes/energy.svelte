@@ -74,7 +74,7 @@
       <Select text="Capita" bind:selected options={entities} />
     </div>
 
-    {#if energyMix.data}
+    <!-- {#if energyMix.data}
       <ul>
         {#each Object.entries(energyMix.data[selected][year]) as [key, value]}
           {#if key === "total"}
@@ -84,7 +84,7 @@
           {/if}
         {/each}
       </ul>
-    {/if}
+    {/if} -->
 
     {#if selected}
       <Chart data={chartData} />
@@ -115,7 +115,7 @@
       </div>
     </div> -->
 
-    <h2>All sources</h2>
+    <h2>All possible sources</h2>
     <ul>
       <li>Coal</li>
       <li>Natural gas</li>
