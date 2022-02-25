@@ -2,12 +2,20 @@ import * as d3 from "d3";
 
 const LABELS_SPACE = 10;
 
+
+function descendingOnKey(key) {
+  return function (a, b) {
+    return b[key] - a[key];
+  };
+}
+
 export function chart(conf) {
   console.log(conf.relative)
 
   const el = d3.select(conf.el);
   // first clear the div, in case of redraw
   el.selectAll("svg").remove();
+  el.selectAll(".tooltip").remove();
 
   // chart columns / keys
   const keys = Object.keys(conf.series);
@@ -325,6 +333,182 @@ export function chart(conf) {
     const between = y_lower + (y_upper - y_lower) / 2;
     return y(between);
   });
+
+
+
+
+
+
+  const tooltip = el
+    .append("div")
+    .attr("class", "tooltip")
+    .style("position", "absolute")
+    .style("pointer-events", "none")
+    .style("opacity", 1)
+    .style("background-color", "rgba(255, 255, 255, 0.95)")
+    .style(
+      "box-shadow",
+      "rgb(0 0 0 / 12%) 0px 2px 2px, rgb(0 0 0 / 35%) 0px 0px 1px"
+    )
+    .style("border-radius", 2)
+    .style("text-align", "left")
+    .style("font-size", "0.9em")
+    .style("white-space", "nowrap")
+    .style("padding", "0.3em");
+
+  var mouseLine = svg
+    .append("g")
+    .append("path") // create vertical line to follow mouse
+    .attr("id", "mouse-line")
+    // .style("stroke", "#A9A9A9")
+    .style("stroke", "rgba(180,180,180,.4)")
+    .style("stroke-width", 1)
+    .style("opacity", 0);
+
+
+  function mouseover() {
+    // focus.style("opacity", 1);
+    tooltip.style("opacity", 1);
+    mouseLine.style("opacity", 1);
+    // d3.selectAll(".focus-circle").style("opacity", 1);
+  }
+
+  var bisect = d3.bisector(function (d) {
+    return d.distance;
+  }).left;
+
+  function mousemove(e) {
+    const pointer = d3.pointer(e);
+    const x0 = x.invert(pointer[0]);
+    const xindex = d3.bisectLeft(conf.x, x0);
+    const xval = conf.x[xindex];
+    const xpos = x(xval);
+
+    mouseLine.attr("d", () => {
+      let s = `M${xpos},${height}`;
+      s += ` ${xpos},0`;
+      return s;
+    });
+
+    const pointerRel = d3.pointer(e, svg.node());
+    const pointermouseline = d3.pointer(e, svg.select("#mouse-line").node());
+
+
+    const values_sorted = [];
+    for (const [serie_key, serie_value] of Object.entries(conf.series)) {
+      const value = serie_value[xindex];
+      values_sorted.push({
+        id: serie_key,
+        color: color(serie_key),
+        value: value,
+      });
+    }
+    // values_sorted.sort(descendingOnKey("measurement"));
+    values_sorted.reverse();
+
+    let trs = "";
+    for (const item of values_sorted) {
+      trs += `<tr style="color: ${item.color}">
+        <td style="background-color: ${item.color
+        }; width: 10px; height: 10px; border-radius: 5px; display: inline-block; margin-right: 2px;"></td>
+          <td style="padding-right: 0.8em; font-weight: 700;">${item.id}</td>
+          <td style="text-align: right; white-space: nowrap; font-weight: 700;">${item.value.toFixed(
+          2
+        )}</td>
+        </tr>`;
+    }
+
+
+    tooltip
+      .html(
+        `<table style="font-size: 0.7em"><thead><tr><td colspan="3"><strong>${xval}</strong></td></tr></thead><tbody>${trs}</tbody></table>`
+      )
+      .style("left", pointerRel[0] + margin.left + 30 + "px")
+      .style("top", pointerRel[1] + margin.top + 10 + "px");
+    // .attr("y", height / 3);
+
+
+
+
+
+    // const value_index = bisect(slices[0].values, x0);
+    // const len = slices[0].values.length;
+
+    // if (value_index >= len) return;
+
+    // const selectedData = slices[0].values[value_index];
+
+    // const x_val = x(selectedData.distance);
+    // const y_val = y(selectedData.measurement);
+
+    // mouseLine.attr("d", () => {
+    //   let s = `M${x_val},${height}`;
+    //   s += ` ${x_val},0`;
+    //   return s;
+    // });
+
+    // const pointerRel = d3.pointer(e, d3.select(chart).node());
+    // const pointermouseline = d3.pointer(e, d3.select("#mouse-line").node());
+
+    // // focus.attr("cx", x_val).attr("cy", y_val);
+
+    // const circles = d3
+    //   .selectAll(".focus-circle")
+    //   .attr("cx", x_val)
+    //   .attr("cy", (d) => y(d.values[value_index].measurement));
+
+    // const values_sorted = [];
+    // for (const slice of slices) {
+    //   const val = slice.values[value_index];
+    //   values_sorted.push({
+    //     id: slice.id,
+    //     color: color(slice.id),
+    //     ...val,
+    //   });
+    // }
+    // values_sorted.sort(descendingOnKey("measurement"));
+
+    // let trs = "";
+    // for (const item of values_sorted) {
+    //   trs += `<tr style="color: ${item.color}">
+    //     <td style="background-color: ${item.color
+    //     }; width: 10px; height: 10px; border-radius: 5px; display: inline-block; margin-right: 2px;"></td>
+    //       <td style="padding-right: 0.8em; font-weight: 700;">${item.id}</td>
+    //       <td style="text-align: right; white-space: nowrap; font-weight: 700;">${item.measurement.toFixed(
+    //       2
+    //     )}</td>
+    //     </tr>`;
+  }
+
+  // tooltip
+  //   .html(
+  //     `<table style="font-size: 0.7em"><thead><tr><td colspan="3"><strong>${selectedData.distance}</strong></td></tr></thead><tbody>${trs}</tbody></table>`
+  //   )
+  //   .style("left", pointerRel[0] + 40 + "px")
+  //   .style("top", pointerRel[1] + "px");
+  // .attr("y", height / 3);
+
+  function mouseout() {
+    // focus.style("opacity", 0);
+    tooltip.style("opacity", 0);
+    mouseLine.style("opacity", 0);
+    // d3.selectAll(".focus-circle").style("opacity", 0);
+  }
+
+
+
+  svg
+    .append("rect")
+    .attr("class", "pointer-events")
+    .style("fill", "none")
+    .style("pointer-events", "all")
+    .attr("width", width)
+    .attr("height", height)
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseout", mouseout);
+
+
 
 
 
