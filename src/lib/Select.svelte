@@ -109,7 +109,7 @@
   <ul
     class="{show
       ? ''
-      : 'hidden'} absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+      : 'hidden'} absolute z-10 mt-1 w-full bg-white shadow-lg max-h-72 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
     tabindex="-1"
     role="listbox"
     aria-labelledby="listbox-label"
@@ -119,7 +119,7 @@
       class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-4"
       role="option"
     >
-      <Input placeholder="Search capita" bind:value={filter} />
+      <Input placeholder="Search {text.toLowerCase()}" bind:value={filter} />
     </li>
     {#each filtered as option}
       {#if option === "divider"}
