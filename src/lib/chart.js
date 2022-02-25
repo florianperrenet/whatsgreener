@@ -235,7 +235,8 @@ export function chart(conf) {
           .attr("x2", width)
           .style("stroke-dasharray", 3)
       );
-  svg.append("g").call(grid);
+  if (!conf.relative)
+    svg.append("g").call(grid);
 
 
 
