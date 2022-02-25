@@ -3,7 +3,7 @@
 </script>
 
 <script>
-  export let text;
+  export let label = null;
   export let placeholder = null;
   export let value = null;
   export let type = "text";
@@ -23,7 +23,9 @@
 </script>
 
 <label for={inputId} class="block">
-  <span class="block text-sm font-medium text-gray-700">{text}</span>
+  {#if label}
+    <span class="block text-sm font-medium text-gray-700">{label}</span>
+  {/if}
   {#if type === "number"}
     <!-- {:else if type === "number"} -->
     <input
@@ -32,7 +34,7 @@
       {min}
       value={initialValue}
       on:input={handleNumberChange}
-      class="text-sm mt-1 mb-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      class="text-sm block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
       {placeholder}
     />
   {:else}
@@ -40,7 +42,7 @@
       id={inputId}
       type="text"
       bind:value
-      class="text-sm mt-1 mb-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      class="text-sm block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
       {placeholder}
     />
   {/if}
