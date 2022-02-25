@@ -208,6 +208,36 @@ export function chart(conf) {
     .attr("font-size", "70%")
 
 
+  const grid = (g) =>
+    g
+      .attr("stroke", "currentColor")
+      .attr("stroke-opacity", 0.2)
+      // .call((g) =>
+      //   g
+      //     .append("g")
+      //     .selectAll("line")
+      //     .data(x.ticks())
+      //     .join("line")
+      //     .attr("x1", (d) => 0.5 + x(d))
+      //     .attr("x2", (d) => 0.5 + x(d))
+      //     .attr("y1", margin.top)
+      //     .attr("y2", height - margin.bottom)
+      // )
+      .call((g) =>
+        g
+          .append("g")
+          .selectAll("line")
+          .data(y.ticks().slice(1))
+          .join("line")
+          .attr("y1", (d) => 0.5 + y(d))
+          .attr("y2", (d) => 0.5 + y(d))
+          .attr("x1", 0)
+          .attr("x2", width)
+          .style("stroke-dasharray", 3)
+      );
+  svg.append("g").call(grid);
+
+
 
 
   //////////
