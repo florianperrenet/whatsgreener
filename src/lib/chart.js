@@ -365,6 +365,20 @@ export function chart(conf) {
     .style("stroke-width", 1)
     .style("opacity", 0);
 
+  const rect = svg
+    .append("rect")
+    .attr("class", "pointer-events")
+    .style("fill", "none")
+    .style("pointer-events", "all")
+    .attr("width", width)
+    .attr("height", height)
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseout", mouseout);
+
+
+
+
 
   function mouseover() {
     // focus.style("opacity", 1);
@@ -390,19 +404,34 @@ export function chart(conf) {
       return s;
     });
 
-    const pointerRel = d3.pointer(e, svg.node());
-    const pointermouseline = d3.pointer(e, svg.select("#mouse-line").node());
-
-
     const values_sorted = [];
-    for (const [serie_key, serie_value] of Object.entries(conf.series)) {
-      const value = serie_value[xindex];
+    // for (const [serie_key, serie_value] of Object.entries(conf.series)) {
+    //   const value = serie_value[xindex];
+    //   values_sorted.push({
+    //     id: serie_key,
+    //     color: color(serie_key),
+    //     value: value,
+    //   });
+    // }
+
+    // for (const [serie_id, serie_value] of Object.entries(stackedData)) {
+    //   const value = serie_value.data[xindex];
+    //   values_sorted.push({
+    //     id: serie_value.key,
+    //     color: color(serie_value.key),
+    //     value: value,
+    //   })
+    // }
+
+    for (const key of keys) {
+      let value = data[xindex][key];
       values_sorted.push({
-        id: serie_key,
-        color: color(serie_key),
+        id: key,
+        color: color(key),
         value: value,
       });
     }
+
     // values_sorted.sort(descendingOnKey("measurement"));
     values_sorted.reverse();
 
@@ -412,7 +441,7 @@ export function chart(conf) {
         <td style="background-color: ${item.color
         }; width: 10px; height: 10px; border-radius: 5px; display: inline-block; margin-right: 2px;"></td>
           <td style="padding-right: 0.8em; font-weight: 700;">${item.id}</td>
-          <td style="text-align: right; white-space: nowrap; font-weight: 700;">${item.value.toFixed(
+          <td style="text-align: right; white-space: nowrap; font-weight: 700;">${conf.relative ? `${(item.value * 100).toFixed(2)}%` : item.value.toFixed(
           2
         )}</td>
         </tr>`;
@@ -423,9 +452,8 @@ export function chart(conf) {
       .html(
         `<table style="font-size: 0.7em"><thead><tr><td colspan="3"><strong>${xval}</strong></td></tr></thead><tbody>${trs}</tbody></table>`
       )
-      .style("left", pointerRel[0] + margin.left + 30 + "px")
-      .style("top", pointerRel[1] + margin.top + 10 + "px");
-    // .attr("y", height / 3);
+      .style("left", xpos + margin.left + 12 + 10 + "px")
+      .style("top", pointer[1] + margin.top + 12 + "px");
 
 
 
@@ -495,18 +523,6 @@ export function chart(conf) {
     // d3.selectAll(".focus-circle").style("opacity", 0);
   }
 
-
-
-  svg
-    .append("rect")
-    .attr("class", "pointer-events")
-    .style("fill", "none")
-    .style("pointer-events", "all")
-    .attr("width", width)
-    .attr("height", height)
-    .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
-    .on("mouseout", mouseout);
 
 
 
