@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 
 const LABELS_SPACE = 25;
+const INDICATOR_SPACE = 2;
 
 
 function descendingOnKey(key) {
@@ -182,7 +183,7 @@ export function chart(conf) {
 
   legendItems.append("rect")
     .attr("class", d => "item-rect " + d)
-    .attr("width", labelWidthMax)
+    .attr("width", labelWidthMax + LABELS_SPACE + INDICATOR_SPACE)
     .attr("height", labelHeight)
     .attr("opacity", 0)
     .on("mouseover", highlight)
@@ -383,8 +384,8 @@ export function chart(conf) {
     const item_ind = legendItems.select(`.item-indicator.${key} path`);
 
     // indicator path vals
-    const indic_start = width + 2;
-    const indic_end = width + LABELS_SPACE - 2;
+    const indic_start = width + INDICATOR_SPACE;
+    const indic_end = width + LABELS_SPACE - INDICATOR_SPACE;
     const indic_diff = indic_end - indic_start;
     const indic_mid = indic_start + (indic_diff / keys_len) * index;
 
@@ -423,7 +424,7 @@ export function chart(conf) {
       .attr("x", labelX)
       .attr("y", placeY)
     item_rect
-      .attr("x", labelX)
+      .attr("x", width + INDICATOR_SPACE)
       .attr("y", placeY - labelHeight / 2)
     item_ind
       .attr("d", `M${indic_start},${mid_place} H${indic_mid} V${placeY} H${indic_end}`)
