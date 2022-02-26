@@ -93,14 +93,17 @@ export function chart(conf) {
     // except the one that is hovered
     svg.select(".area." + d).style("opacity", 1)
 
-    svg.selectAll(".label").style("opacity", .3);
-    svg.select(".label." + d).style("opacity", 1)
+    svg.selectAll(".item-label").style("opacity", .3);
+    svg.select(".item-label." + d).style("opacity", 1)
+    svg.selectAll(".item-indicator").style("opacity", .3);
+    svg.select(".item-indicator." + d).style("opacity", 1)
   }
 
   // And when it is not hovered anymore
   var noHighlight = function (e) {
     svg.selectAll(".area").style("opacity", 1)
-    svg.selectAll(".label").style("opacity", 1);
+    svg.selectAll(".item-label").style("opacity", 1);
+    svg.selectAll(".item-indicator").style("opacity", 1);
   }
 
 
