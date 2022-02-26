@@ -19,6 +19,8 @@ export function chart(conf) {
 
   // chart columns / keys
   const keys = Object.keys(conf.series);
+  const keys_len = keys.length;
+  const keys_rev = keys.slice().reverse();
 
   // remap data
   const data = [];
@@ -133,9 +135,6 @@ export function chart(conf) {
   legendItems.append("g")
     .attr("class", d => "item-indicator " + d)
 
-  legendItems.append("rect")
-    .attr("class", d => "item-rect " + d)
-
   legendItems.append("text")
     .attr("class", d => "item-label " + d)
     // .attr("x", 400 + 5 + size * 1.2)
@@ -146,8 +145,8 @@ export function chart(conf) {
     .style("alignment-baseline", "middle")
     .style("cursor", "default")
     .attr("font-size", "70%")
-    .on("mouseover", highlight)
-    .on("mouseleave", noHighlight)
+  // .on("mouseover", highlight)
+  // .on("mouseleave", noHighlight)
 
   // const labels = svg.append("g").attr("class", "legend").selectAll("mylabels")
   //   .data(keys)
@@ -171,6 +170,17 @@ export function chart(conf) {
   const legend = svg.select(".legend");
   let labelWidthMax = legend.node().getBBox().width;
   const labelHeight = legendItems.select('.item-label')._groups[0][0].getBBox().height;
+
+  legendItems.append("rect")
+    .attr("class", d => "item-rect " + d)
+    .attr("width", labelWidthMax)
+    .attr("height", labelHeight)
+    .attr("opacity", 0)
+    .on("mouseover", highlight)
+    .on("mouseleave", noHighlight)
+
+
+
 
   const margin = {
     top: 30,
@@ -354,51 +364,109 @@ export function chart(conf) {
 
 
 
-  const labels = legendItems.selectAll('.item-label');
+  // for (const key of keys) {
+  //   const index = keys.indexOf(key);
+  //   const index_inv = keys_len - index - 1;
+  // }
+
+  // set default label positions
+  for (const [index, key] of keys_rev.entries()) {
+    const label = legendItems.select(`.item-label.${key}`);
+    const item_rect = legendItems.select(`.item-rect.${key}`);
+    label
+      .attr("x", width + LABELS_SPACE)
+      .attr("y", labelHeight * index)
+    item_rect
+      .attr("x", width + LABELS_SPACE)
+      .attr("y", labelHeight * index - labelHeight / 2)
+  }
+  // now check if the label can be positioned better
   let minplacement = 0;
-  labels.attr("x", width + LABELS_SPACE).attr("y", (d, i) => {
-    const index = keys.indexOf(d);
+  for (const [index, key] of keys.entries()) {
+    const curplacement = labelHeight * (keys_len - index - 1);
+    const label = legendItems.select(`.item-label.${key}`);
+    const item_rect = legendItems.select(`.item-rect.${key}`);
 
-
-    // place the label in the middle
+    // find the middle
     const items = stackedData[index];
     const [y_lower, y_upper] = items[items.length - 1];
     let between = y_lower + (y_upper - y_lower) / 2;
+    let placement = y(between);
 
-    let yplacement = y(between);
+    if (placement <= curplacement) return;
 
-    console.log(d, yplacement, minplacement)
-
-    if (index !== 0 && yplacement > minplacement) {
-      console.log(true)
-
-      yplacement = minplacement;
+    if (index !== 0 && placement > minplacement) {
+      placement = minplacement;
     }
 
-    minplacement = yplacement - labelHeight;
-    return yplacement;
+    label.attr("y", placement);
+    item_rect.attr("y", placement - labelHeight / 2);
+    minplacement = placement - labelHeight;
+  }
+
+
+  // const labels = legendItems.selectAll('.item-label');
+
+
+  // let minplacement = 0;
+  // let starty = maxY;
+  // labels.attr("x", width + LABELS_SPACE).attr("y", (d, i) => {
+  //   const index = keys.indexOf(d);
+  //   const index_inv = keys_len - index - 1;
+
+  //   return labelHeight * index_inv;
+
+
+
+
+
+  //   const ypos = y(starty);
+  //   starty -= labelHeight;
+  //   return ypos;
+
+
+  //   // const index = keys.indexOf(d);
+
+
+  //   // // place the label in the middle
+  //   // const items = stackedData[index];
+  //   // const [y_lower, y_upper] = items[items.length - 1];
+  //   // let between = y_lower + (y_upper - y_lower) / 2;
+
+  //   // let yplacement = y(between);
+
+  //   // console.log(d, yplacement, minplacement)
+
+  //   // if (index !== 0 && yplacement > minplacement) {
+  //   //   console.log(true)
+
+  //   //   yplacement = minplacement;
+  //   // }
+
+  //   // minplacement = yplacement - labelHeight;
+  //   // return yplacement;
 
 
 
 
 
 
-    // let yinverted = y.invert(yplacement)
+  //   // let yinverted = y.invert(yplacement)
 
-    // let placementdiff = Math.abs(minplacement - yplacement)
+  //   // let placementdiff = Math.abs(minplacement - yplacement)
 
-    // console.log(d, yinverted, minplacement)
-    // if (yinverted <= minplacement) {
-    //   yplacement = minplacement;
-    //   console.log(true, yplacement, y.invert(100))
-    //   // yinverted = y.invert(yplacement);
-    //   // yplacement = spacetaken - labelHeight
-    // }
-    // minplacement = yinverted + 100;
+  //   // console.log(d, yinverted, minplacement)
+  //   // if (yinverted <= minplacement) {
+  //   //   yplacement = minplacement;
+  //   //   console.log(true, yplacement, y.invert(100))
+  //   //   // yinverted = y.invert(yplacement);
+  //   //   // yplacement = spacetaken - labelHeight
+  //   // }
+  //   // minplacement = yinverted + 100;
 
 
-    // return yplacement;
-  });
+  //   // return yplacement;
+  // });
 
 
 
