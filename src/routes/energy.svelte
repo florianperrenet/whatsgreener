@@ -115,7 +115,30 @@
       </div>
     </div> -->
 
+    <h3>Source score</h3>
+
+    <h3>Country score against worst possible impact score</h3>
+
     <h2>All possible sources</h2>
+    <ul>
+      <li>In</li>
+      <li>Outs</li>
+      <li>Product lifetime</li>
+      <li>Reusability (recycling)</li>
+      <li>Scalability</li>
+      <li>Scarcity of resources used</li>
+      <li>Pollution</li>
+      <ul>
+        <li>Waste Problem</li>
+        <ul>
+          <li>Amount of waste</li>
+          <li>Waste Pollution</li>
+        </ul>
+      </ul>
+      <li>Pros</li>
+      <li>Cons</li>
+    </ul>
+    <h3>div</h3>
     <ul>
       <li>Coal</li>
       <li>Natural gas</li>

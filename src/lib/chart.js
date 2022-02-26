@@ -124,13 +124,22 @@ export function chart(conf) {
   //   .on("mouseleave", noHighlight)
 
   // Add one dot in the legend for each name.
-  const labels = svg.append("g").attr("class", "legend").selectAll("mylabels")
+  const legendItems = svg.append("g").attr("class", "legend").selectAll("mylabels")
     .data(keys)
     .enter()
-    .append("text")
-    .attr("class", d => "label " + d)
+    .append("g")
+    .attr("class", "legend-item")
+
+  legendItems.append("g")
+    .attr("class", d => "item-indicator " + d)
+
+  legendItems.append("rect")
+    .attr("class", d => "item-rect " + d)
+
+  legendItems.append("text")
+    .attr("class", d => "item-label " + d)
     // .attr("x", 400 + 5 + size * 1.2)
-    .attr("y", function (d, i) { return 10 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
+    // .attr("y", function (d, i) { return 10 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function (d) { return color(d) })
     .text(function (d) { return d })
     .attr("text-anchor", "start")
@@ -140,9 +149,28 @@ export function chart(conf) {
     .on("mouseover", highlight)
     .on("mouseleave", noHighlight)
 
+  // const labels = svg.append("g").attr("class", "legend").selectAll("mylabels")
+  //   .data(keys)
+  //   .enter()
+  //   .append("g")
+  //   .attr("class", "legend-item")
+  //   .append("text")
+  //   .attr("class", d => "label " + d)
+  //   // .attr("x", 400 + 5 + size * 1.2)
+  //   .attr("y", function (d, i) { return 10 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
+  //   .style("fill", function (d) { return color(d) })
+  //   .text(function (d) { return d })
+  //   .attr("text-anchor", "start")
+  //   .style("alignment-baseline", "middle")
+  //   .style("cursor", "default")
+  //   .attr("font-size", "70%")
+  //   .on("mouseover", highlight)
+  //   .on("mouseleave", noHighlight)
+
 
   const legend = svg.select(".legend");
   let labelWidthMax = legend.node().getBBox().width;
+  const labelHeight = legendItems.select('.item-label')._groups[0][0].getBBox().height;
 
   const margin = {
     top: 30,
@@ -326,12 +354,50 @@ export function chart(conf) {
 
 
 
+  const labels = legendItems.selectAll('.item-label');
+  let minplacement = 0;
   labels.attr("x", width + LABELS_SPACE).attr("y", (d, i) => {
+    const index = keys.indexOf(d);
+
+
     // place the label in the middle
-    const items = stackedData[i];
+    const items = stackedData[index];
     const [y_lower, y_upper] = items[items.length - 1];
-    const between = y_lower + (y_upper - y_lower) / 2;
-    return y(between);
+    let between = y_lower + (y_upper - y_lower) / 2;
+
+    let yplacement = y(between);
+
+    console.log(d, yplacement, minplacement)
+
+    if (index !== 0 && yplacement > minplacement) {
+      console.log(true)
+
+      yplacement = minplacement;
+    }
+
+    minplacement = yplacement - labelHeight;
+    return yplacement;
+
+
+
+
+
+
+    // let yinverted = y.invert(yplacement)
+
+    // let placementdiff = Math.abs(minplacement - yplacement)
+
+    // console.log(d, yinverted, minplacement)
+    // if (yinverted <= minplacement) {
+    //   yplacement = minplacement;
+    //   console.log(true, yplacement, y.invert(100))
+    //   // yinverted = y.invert(yplacement);
+    //   // yplacement = spacetaken - labelHeight
+    // }
+    // minplacement = yinverted + 100;
+
+
+    // return yplacement;
   });
 
 
