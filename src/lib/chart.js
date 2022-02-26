@@ -383,12 +383,6 @@ export function chart(conf) {
     const item_rect = legendItems.select(`.item-rect.${key}`);
     const item_ind = legendItems.select(`.item-indicator.${key} path`);
 
-    // indicator path vals
-    const indic_start = width + INDICATOR_SPACE;
-    const indic_end = width + LABELS_SPACE - INDICATOR_SPACE;
-    const indic_diff = indic_end - indic_start;
-    const indic_mid = indic_start + (indic_diff / keys_len) * index;
-
     // default place (top)
     const def_place = index_inv * labelHeight;
 
@@ -416,8 +410,6 @@ export function chart(conf) {
       placeY = mid_place;
     }
 
-    console.log(key, def_place, mid_place, min_place)
-
 
     const labelX = width + LABELS_SPACE;
     label
@@ -426,6 +418,16 @@ export function chart(conf) {
     item_rect
       .attr("x", width + INDICATOR_SPACE)
       .attr("y", placeY - labelHeight / 2)
+
+
+    // indicator path vals
+    const indic_start = width + INDICATOR_SPACE;
+    const indic_end = width + LABELS_SPACE - INDICATOR_SPACE;
+    const indic_diff = indic_end - indic_start;
+
+    const indic_mult = mid_place > placeY ? index_inv + 1 : index;
+    const indic_mid = indic_start + (indic_diff / (keys_len + 1)) * indic_mult;
+
     item_ind
       .attr("d", `M${indic_start},${mid_place} H${indic_mid} V${placeY} H${indic_end}`)
 
