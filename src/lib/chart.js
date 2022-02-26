@@ -425,7 +425,9 @@ export function chart(conf) {
     const indic_end = width + LABELS_SPACE - INDICATOR_SPACE;
     const indic_diff = indic_end - indic_start;
 
-    const indic_mult = mid_place > placeY ? index_inv + 1 : index;
+    console.log(key, index_inv)
+
+    const indic_mult = mid_place > placeY ? index_inv + 1 : index + 1;
     const indic_mid = indic_start + (indic_diff / (keys_len + 1)) * indic_mult;
 
     item_ind
