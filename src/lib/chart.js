@@ -134,6 +134,10 @@ export function chart(conf) {
 
   legendItems.append("g")
     .attr("class", d => "item-indicator " + d)
+    .append("path")
+    .attr("stroke", "#999")
+    .attr("stroke-width", "0.5")
+    .attr("fill", "none")
 
   legendItems.append("text")
     .attr("class", d => "item-label " + d)
@@ -373,12 +377,26 @@ export function chart(conf) {
   for (const [index, key] of keys_rev.entries()) {
     const label = legendItems.select(`.item-label.${key}`);
     const item_rect = legendItems.select(`.item-rect.${key}`);
+    const item_ind = legendItems.select(`.item-indicator.${key} path`);
     label
       .attr("x", width + LABELS_SPACE)
       .attr("y", labelHeight * index)
     item_rect
       .attr("x", width + LABELS_SPACE)
       .attr("y", labelHeight * index - labelHeight / 2)
+
+    // find the middle
+    const items = stackedData[index];
+    const [y_lower, y_upper] = items[items.length - 1];
+    let between = y_lower + (y_upper - y_lower) / 2;
+    let placement = y(between);
+
+
+    const ind_start = width;
+    const ind_end = width + LABELS_SPACE;
+    const ind_mid = ind_start + (ind_end - ind_start) / 2
+    item_ind
+      .attr("d", `M${ind_start},${placement} H${ind_mid} V${labelHeight * index} H${ind_end}`)
   }
   // now check if the label can be positioned better
   let minplacement = 0;
@@ -386,12 +404,14 @@ export function chart(conf) {
     const curplacement = labelHeight * (keys_len - index - 1);
     const label = legendItems.select(`.item-label.${key}`);
     const item_rect = legendItems.select(`.item-rect.${key}`);
+    const item_ind = legendItems.select(`.item-indicator.${key} path`);
 
     // find the middle
     const items = stackedData[index];
     const [y_lower, y_upper] = items[items.length - 1];
     let between = y_lower + (y_upper - y_lower) / 2;
     let placement = y(between);
+    const placement_c = placement;
 
     if (placement <= curplacement) return;
 
@@ -401,6 +421,13 @@ export function chart(conf) {
 
     label.attr("y", placement);
     item_rect.attr("y", placement - labelHeight / 2);
+    const ind_start = width;
+    const ind_end = width + LABELS_SPACE;
+    const ind_mid = ind_start + (ind_end - ind_start) / 2
+    item_ind
+      .attr("d", `M${ind_start},${placement_c} H${ind_mid} V${placement} H${ind_end}`)
+    // .attr("d", `M${ind_start},${placement_c} H${ind_mid} V${placement} H${ind_end}`)
+
     minplacement = placement - labelHeight;
   }
 
