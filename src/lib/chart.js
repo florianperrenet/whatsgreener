@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-const LABELS_SPACE = 10;
+const LABELS_SPACE = 25;
 
 
 function descendingOnKey(key) {
@@ -134,6 +134,8 @@ export function chart(conf) {
 
   legendItems.append("g")
     .attr("class", d => "item-indicator " + d)
+    // .on("mouseover", highlight)
+    // .on("mouseleave", noHighlight)
     .append("path")
     .attr("stroke", "#999")
     .attr("stroke-width", "0.5")
@@ -368,68 +370,123 @@ export function chart(conf) {
 
 
 
-  // for (const key of keys) {
-  //   const index = keys.indexOf(key);
-  //   const index_inv = keys_len - index - 1;
-  // }
+  let min_place = null;
+  for (const key of keys) {
+    const index = keys.indexOf(key);
+    const index_inv = keys_len - index - 1;
 
-  // set default label positions
-  for (const [index, key] of keys_rev.entries()) {
-    const label = legendItems.select(`.item-label.${key}`);
-    const item_rect = legendItems.select(`.item-rect.${key}`);
-    const item_ind = legendItems.select(`.item-indicator.${key} path`);
-    label
-      .attr("x", width + LABELS_SPACE)
-      .attr("y", labelHeight * index)
-    item_rect
-      .attr("x", width + LABELS_SPACE)
-      .attr("y", labelHeight * index - labelHeight / 2)
-
-    // find the middle
-    const items = stackedData[index];
-    const [y_lower, y_upper] = items[items.length - 1];
-    let between = y_lower + (y_upper - y_lower) / 2;
-    let placement = y(between);
-
-
-    const ind_start = width;
-    const ind_end = width + LABELS_SPACE;
-    const ind_mid = ind_start + (ind_end - ind_start) / 2
-    item_ind
-      .attr("d", `M${ind_start},${placement} H${ind_mid} V${labelHeight * index} H${ind_end}`)
-  }
-  // now check if the label can be positioned better
-  let minplacement = 0;
-  for (const [index, key] of keys.entries()) {
-    const curplacement = labelHeight * (keys_len - index - 1);
     const label = legendItems.select(`.item-label.${key}`);
     const item_rect = legendItems.select(`.item-rect.${key}`);
     const item_ind = legendItems.select(`.item-indicator.${key} path`);
 
-    // find the middle
+    // indicator path vals
+    const indic_start = width + 2;
+    const indic_end = width + LABELS_SPACE - 2;
+    const indic_diff = indic_end - indic_start;
+    const indic_mid = indic_start + (indic_diff / keys_len) * index;
+
+    // default place (top)
+    const def_place = index_inv * labelHeight;
+
+    // find the middle of area
     const items = stackedData[index];
     const [y_lower, y_upper] = items[items.length - 1];
     let between = y_lower + (y_upper - y_lower) / 2;
-    let placement = y(between);
-    const placement_c = placement;
+    const mid_place = y(between);
 
-    if (placement <= curplacement) return;
-
-    if (index !== 0 && placement > minplacement) {
-      placement = minplacement;
+    // set min place to bottom label
+    if (min_place === null) {
+      min_place = mid_place;
     }
 
-    label.attr("y", placement);
-    item_rect.attr("y", placement - labelHeight / 2);
-    const ind_start = width;
-    const ind_end = width + LABELS_SPACE;
-    const ind_mid = ind_start + (ind_end - ind_start) / 2
-    item_ind
-      .attr("d", `M${ind_start},${placement_c} H${ind_mid} V${placement} H${ind_end}`)
-    // .attr("d", `M${ind_start},${placement_c} H${ind_mid} V${placement} H${ind_end}`)
+    let placeY;
 
-    minplacement = placement - labelHeight;
+    if (mid_place <= def_place) {
+      // place it on def_place
+      placeY = def_place;
+    } else if (mid_place > min_place) {
+      // place it on min_place
+      placeY = min_place;
+    } else {
+      // place it on mid_place
+      placeY = mid_place;
+    }
+
+    console.log(key, def_place, mid_place, min_place)
+
+
+    const labelX = width + LABELS_SPACE;
+    label
+      .attr("x", labelX)
+      .attr("y", placeY)
+    item_rect
+      .attr("x", labelX)
+      .attr("y", placeY - labelHeight / 2)
+    item_ind
+      .attr("d", `M${indic_start},${mid_place} H${indic_mid} V${placeY} H${indic_end}`)
+
+
+
+    min_place = placeY - labelHeight;
   }
+
+  // set default label positions
+  // for (const [index, key] of keys_rev.entries()) {
+  //   const label = legendItems.select(`.item-label.${key}`);
+  //   const item_rect = legendItems.select(`.item-rect.${key}`);
+  //   const item_ind = legendItems.select(`.item-indicator.${key} path`);
+  //   label
+  //     .attr("x", width + LABELS_SPACE)
+  //     .attr("y", labelHeight * index)
+  //   item_rect
+  //     .attr("x", width + LABELS_SPACE)
+  //     .attr("y", labelHeight * index - labelHeight / 2)
+
+  //   // find the middle
+  //   const items = stackedData[index];
+  //   const [y_lower, y_upper] = items[items.length - 1];
+  //   let between = y_lower + (y_upper - y_lower) / 2;
+  //   let placement = y(between);
+
+
+  //   const ind_start = width;
+  //   const ind_end = width + LABELS_SPACE;
+  //   const ind_mid = ind_start + (ind_end - ind_start) / 2
+  //   item_ind
+  //     .attr("d", `M${ind_start},${placement} H${ind_mid} V${labelHeight * index} H${ind_end}`)
+  // }
+  // // now check if the label can be positioned better
+  // let minplacement = 0;
+  // for (const [index, key] of keys.entries()) {
+  //   const curplacement = labelHeight * (keys_len - index - 1);
+  //   const label = legendItems.select(`.item-label.${key}`);
+  //   const item_rect = legendItems.select(`.item-rect.${key}`);
+  //   const item_ind = legendItems.select(`.item-indicator.${key} path`);
+
+  //   // find the middle
+  //   const items = stackedData[index];
+  //   const [y_lower, y_upper] = items[items.length - 1];
+  //   let between = y_lower + (y_upper - y_lower) / 2;
+  //   let placement = y(between);
+  //   const placement_c = placement;
+
+  //   if (placement <= curplacement) return;
+
+  //   if (index !== 0 && placement > minplacement) {
+  //     placement = minplacement;
+  //   }
+
+  //   label.attr("y", placement);
+  //   item_rect.attr("y", placement - labelHeight / 2);
+  //   const ind_start = width;
+  //   const ind_end = width + LABELS_SPACE;
+  //   const ind_mid = ind_start + (ind_end - ind_start) / 2
+  //   item_ind
+  //     .attr("d", `M${ind_start},${placement_c} H${ind_mid} V${placement} H${ind_end}`)
+  //   // .attr("d", `M${ind_start},${placement_c} H${ind_mid} V${placement} H${ind_end}`)
+
+  //   minplacement = placement - labelHeight;
+  // }
 
 
   // const labels = legendItems.selectAll('.item-label');
