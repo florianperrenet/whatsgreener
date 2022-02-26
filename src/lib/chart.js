@@ -11,8 +11,6 @@ function descendingOnKey(key) {
 }
 
 export function chart(conf) {
-  console.log(conf.relative)
-
   const el = d3.select(conf.el);
   // first clear the div, in case of redraw
   el.selectAll("svg").remove();
@@ -424,8 +422,6 @@ export function chart(conf) {
     const indic_start = width + INDICATOR_SPACE;
     const indic_end = width + LABELS_SPACE - INDICATOR_SPACE;
     const indic_diff = indic_end - indic_start;
-
-    console.log(key, index_inv)
 
     const indic_mult = mid_place > placeY ? index_inv + 1 : index + 1;
     const indic_mid = indic_start + (indic_diff / (keys_len + 1)) * indic_mult;
