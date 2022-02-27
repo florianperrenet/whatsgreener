@@ -26,6 +26,7 @@
   $: if (data && mounted) {
     if (!("width" in data)) {
       data.width = chartEl.offsetWidth;
+      data.height = data.width / 2;
     }
 
     if (!("relative" in data)) {

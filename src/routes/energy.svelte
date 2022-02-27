@@ -52,14 +52,13 @@
     series = d;
 
     chartData = {
-      title: `Energy mixture of ${selected}`,
+      title: `Energy usage mixture of, ${selected}`,
       description: "Some description",
       source: "Calculations",
       series: series,
       x: energyMix.years,
       xlabel: "Year",
       ylabel: "TWh",
-      height: 400,
     };
   }
 </script>
@@ -68,7 +67,7 @@
   <div class="prose lg:prose-lg prose-slate">
     <div class="text-7xl font-bold text-gray-900 mb-20">Energy footprint</div>
 
-    <h1>Energy mixture per capita</h1>
+    <h1>Energy usage mixture per capita</h1>
     <div class="not-prose">
       <Select text="Capita" bind:selected options={entities} />
     </div>
@@ -126,6 +125,10 @@
       <li>Reusability (recycling)</li>
       <li>Scalability</li>
       <li>Scarcity of resources used</li>
+      <ul>
+        <li>What has already been used</li>
+        <li>What is left</li>
+      </ul>
       <li>Pollution</li>
       <ul>
         <li>Waste Problem</li>
@@ -139,16 +142,16 @@
     </ul>
     <h3>div</h3>
     <ul>
+      <li>Oil</li>
       <li>Coal</li>
       <li>Natural gas</li>
       <li>Nuclear</li>
       <li>Hydro</li>
-      <li>Geothermal</li>
       <li>Wind</li>
       <li>Solar</li>
+      <li>Geothermal</li>
       <li>Tide/Wave/Ocean</li>
       <li>Biofuels and waste</li>
-      <li>Oil</li>
     </ul>
   </div>
 </ContainerLayout>
