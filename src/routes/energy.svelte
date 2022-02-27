@@ -59,7 +59,6 @@
       x: energyMix.years,
       xlabel: "Year",
       ylabel: "TWh",
-      width: 706,
       height: 400,
     };
   }

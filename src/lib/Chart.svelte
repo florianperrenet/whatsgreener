@@ -24,6 +24,10 @@
   }
 
   $: if (data && mounted) {
+    if (!("width" in data)) {
+      data.width = chartEl.offsetWidth;
+    }
+
     if (!("relative" in data)) {
       data.relative = relative;
     }
@@ -70,7 +74,9 @@
       </label>
     </div>
 
-    <div id={chartId} bind:this={chartEl} class="relative p-3" />
+    <div class="p-3">
+      <div id={chartId} bind:this={chartEl} class="relative" />
+    </div>
 
     <div class="pl-3 pb-3 text-xs">
       {#if data.source}

@@ -2,6 +2,7 @@ import * as d3 from "d3";
 
 const LABELS_SPACE = 25;
 const INDICATOR_SPACE = 2;
+const TOOLTIP_SPACE = 10;
 
 
 function descendingOnKey(key) {
@@ -674,8 +675,8 @@ export function chart(conf) {
       .html(
         `<table style="font-size: 0.7em"><thead><tr><td colspan="3"><strong>${xval}</strong></td></tr></thead><tbody>${trs}</tbody></table>`
       )
-      .style("left", xpos + margin.left + 12 + 10 + "px")
-      .style("top", pointer[1] + margin.top + 12 + "px");
+      .style("left", xpos + margin.left + TOOLTIP_SPACE + "px")
+      .style("top", pointer[1] + margin.top + "px");
 
 
 
