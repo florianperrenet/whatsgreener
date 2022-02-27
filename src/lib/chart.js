@@ -107,27 +107,6 @@ export function chart(conf) {
   }
 
 
-
-
-
-  //////////
-  // LEGEND //
-  //////////
-
-  // Add one dot in the legend for each name.
-  var size = 10
-  // svg.append("g").selectAll("myrect")
-  //   .data(keys)
-  //   .enter()
-  //   .append("rect")
-  //   .attr("x", conf.width)
-  //   .attr("y", function (d, i) { return 10 + i * (size + 5) }) // 100 is where the first dot appears. 25 is the distance between dots
-  //   .attr("width", size)
-  //   .attr("height", size)
-  //   .style("fill", function (d) { return color(d) })
-  //   .on("mouseover", highlight)
-  //   .on("mouseleave", noHighlight)
-
   // Add one dot in the legend for each name.
   const legendItems = svg.append("g").attr("class", "legend").selectAll("mylabels")
     .data(keys)
@@ -137,8 +116,6 @@ export function chart(conf) {
 
   legendItems.append("g")
     .attr("class", d => "item-indicator " + d)
-    // .on("mouseover", highlight)
-    // .on("mouseleave", noHighlight)
     .append("path")
     .attr("stroke", "#999")
     .attr("stroke-width", "0.5")
@@ -146,35 +123,12 @@ export function chart(conf) {
 
   legendItems.append("text")
     .attr("class", d => "item-label " + d)
-    // .attr("x", 400 + 5 + size * 1.2)
-    // .attr("y", function (d, i) { return 10 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
     .style("fill", function (d) { return color(d) })
     .text(function (d) { return d })
     .attr("text-anchor", "start")
     .style("alignment-baseline", "middle")
     .style("cursor", "default")
     .attr("font-size", "70%")
-  // .on("mouseover", highlight)
-  // .on("mouseleave", noHighlight)
-
-  // const labels = svg.append("g").attr("class", "legend").selectAll("mylabels")
-  //   .data(keys)
-  //   .enter()
-  //   .append("g")
-  //   .attr("class", "legend-item")
-  //   .append("text")
-  //   .attr("class", d => "label " + d)
-  //   // .attr("x", 400 + 5 + size * 1.2)
-  //   .attr("y", function (d, i) { return 10 + i * (size + 5) + (size / 2) }) // 100 is where the first dot appears. 25 is the distance between dots
-  //   .style("fill", function (d) { return color(d) })
-  //   .text(function (d) { return d })
-  //   .attr("text-anchor", "start")
-  //   .style("alignment-baseline", "middle")
-  //   .style("cursor", "default")
-  //   .attr("font-size", "70%")
-  //   .on("mouseover", highlight)
-  //   .on("mouseleave", noHighlight)
-
 
   const legend = svg.select(".legend");
   let labelWidthMax = legend.node().getBBox().width;
@@ -372,7 +326,7 @@ export function chart(conf) {
   }
 
 
-
+  // label and indicator placement
   let min_place = null;
   for (const key of keys) {
     const index = keys.indexOf(key);
@@ -430,133 +384,8 @@ export function chart(conf) {
     item_ind
       .attr("d", `M${indic_start},${mid_place} H${indic_mid} V${placeY} H${indic_end}`)
 
-
-
     min_place = placeY - labelHeight;
   }
-
-  // set default label positions
-  // for (const [index, key] of keys_rev.entries()) {
-  //   const label = legendItems.select(`.item-label.${key}`);
-  //   const item_rect = legendItems.select(`.item-rect.${key}`);
-  //   const item_ind = legendItems.select(`.item-indicator.${key} path`);
-  //   label
-  //     .attr("x", width + LABELS_SPACE)
-  //     .attr("y", labelHeight * index)
-  //   item_rect
-  //     .attr("x", width + LABELS_SPACE)
-  //     .attr("y", labelHeight * index - labelHeight / 2)
-
-  //   // find the middle
-  //   const items = stackedData[index];
-  //   const [y_lower, y_upper] = items[items.length - 1];
-  //   let between = y_lower + (y_upper - y_lower) / 2;
-  //   let placement = y(between);
-
-
-  //   const ind_start = width;
-  //   const ind_end = width + LABELS_SPACE;
-  //   const ind_mid = ind_start + (ind_end - ind_start) / 2
-  //   item_ind
-  //     .attr("d", `M${ind_start},${placement} H${ind_mid} V${labelHeight * index} H${ind_end}`)
-  // }
-  // // now check if the label can be positioned better
-  // let minplacement = 0;
-  // for (const [index, key] of keys.entries()) {
-  //   const curplacement = labelHeight * (keys_len - index - 1);
-  //   const label = legendItems.select(`.item-label.${key}`);
-  //   const item_rect = legendItems.select(`.item-rect.${key}`);
-  //   const item_ind = legendItems.select(`.item-indicator.${key} path`);
-
-  //   // find the middle
-  //   const items = stackedData[index];
-  //   const [y_lower, y_upper] = items[items.length - 1];
-  //   let between = y_lower + (y_upper - y_lower) / 2;
-  //   let placement = y(between);
-  //   const placement_c = placement;
-
-  //   if (placement <= curplacement) return;
-
-  //   if (index !== 0 && placement > minplacement) {
-  //     placement = minplacement;
-  //   }
-
-  //   label.attr("y", placement);
-  //   item_rect.attr("y", placement - labelHeight / 2);
-  //   const ind_start = width;
-  //   const ind_end = width + LABELS_SPACE;
-  //   const ind_mid = ind_start + (ind_end - ind_start) / 2
-  //   item_ind
-  //     .attr("d", `M${ind_start},${placement_c} H${ind_mid} V${placement} H${ind_end}`)
-  //   // .attr("d", `M${ind_start},${placement_c} H${ind_mid} V${placement} H${ind_end}`)
-
-  //   minplacement = placement - labelHeight;
-  // }
-
-
-  // const labels = legendItems.selectAll('.item-label');
-
-
-  // let minplacement = 0;
-  // let starty = maxY;
-  // labels.attr("x", width + LABELS_SPACE).attr("y", (d, i) => {
-  //   const index = keys.indexOf(d);
-  //   const index_inv = keys_len - index - 1;
-
-  //   return labelHeight * index_inv;
-
-
-
-
-
-  //   const ypos = y(starty);
-  //   starty -= labelHeight;
-  //   return ypos;
-
-
-  //   // const index = keys.indexOf(d);
-
-
-  //   // // place the label in the middle
-  //   // const items = stackedData[index];
-  //   // const [y_lower, y_upper] = items[items.length - 1];
-  //   // let between = y_lower + (y_upper - y_lower) / 2;
-
-  //   // let yplacement = y(between);
-
-  //   // console.log(d, yplacement, minplacement)
-
-  //   // if (index !== 0 && yplacement > minplacement) {
-  //   //   console.log(true)
-
-  //   //   yplacement = minplacement;
-  //   // }
-
-  //   // minplacement = yplacement - labelHeight;
-  //   // return yplacement;
-
-
-
-
-
-
-  //   // let yinverted = y.invert(yplacement)
-
-  //   // let placementdiff = Math.abs(minplacement - yplacement)
-
-  //   // console.log(d, yinverted, minplacement)
-  //   // if (yinverted <= minplacement) {
-  //   //   yplacement = minplacement;
-  //   //   console.log(true, yplacement, y.invert(100))
-  //   //   // yinverted = y.invert(yplacement);
-  //   //   // yplacement = spacetaken - labelHeight
-  //   // }
-  //   // minplacement = yinverted + 100;
-
-
-  //   // return yplacement;
-  // });
-
 
 
 
@@ -601,18 +430,11 @@ export function chart(conf) {
 
 
 
-
-
   function mouseover() {
-    // focus.style("opacity", 1);
     tooltip.style("opacity", 1);
     mouseLine.style("opacity", 1);
-    // d3.selectAll(".focus-circle").style("opacity", 1);
   }
 
-  var bisect = d3.bisector(function (d) {
-    return d.distance;
-  }).left;
 
   function mousemove(e) {
     const pointer = d3.pointer(e);
@@ -628,24 +450,6 @@ export function chart(conf) {
     });
 
     const values_sorted = [];
-    // for (const [serie_key, serie_value] of Object.entries(conf.series)) {
-    //   const value = serie_value[xindex];
-    //   values_sorted.push({
-    //     id: serie_key,
-    //     color: color(serie_key),
-    //     value: value,
-    //   });
-    // }
-
-    // for (const [serie_id, serie_value] of Object.entries(stackedData)) {
-    //   const value = serie_value.data[xindex];
-    //   values_sorted.push({
-    //     id: serie_value.key,
-    //     color: color(serie_value.key),
-    //     value: value,
-    //   })
-    // }
-
     for (const key of keys) {
       let value = data[xindex][key];
       values_sorted.push({
@@ -655,7 +459,6 @@ export function chart(conf) {
       });
     }
 
-    // values_sorted.sort(descendingOnKey("measurement"));
     values_sorted.reverse();
 
     let trs = "";
@@ -670,80 +473,17 @@ export function chart(conf) {
         </tr>`;
     }
 
-
     tooltip
       .html(
         `<table style="font-size: 0.7em"><thead><tr><td colspan="3"><strong>${xval}</strong></td></tr></thead><tbody>${trs}</tbody></table>`
       )
       .style("left", xpos + margin.left + TOOLTIP_SPACE + "px")
       .style("top", pointer[1] + margin.top + "px");
-
-
-
-
-
-    // const value_index = bisect(slices[0].values, x0);
-    // const len = slices[0].values.length;
-
-    // if (value_index >= len) return;
-
-    // const selectedData = slices[0].values[value_index];
-
-    // const x_val = x(selectedData.distance);
-    // const y_val = y(selectedData.measurement);
-
-    // mouseLine.attr("d", () => {
-    //   let s = `M${x_val},${height}`;
-    //   s += ` ${x_val},0`;
-    //   return s;
-    // });
-
-    // const pointerRel = d3.pointer(e, d3.select(chart).node());
-    // const pointermouseline = d3.pointer(e, d3.select("#mouse-line").node());
-
-    // // focus.attr("cx", x_val).attr("cy", y_val);
-
-    // const circles = d3
-    //   .selectAll(".focus-circle")
-    //   .attr("cx", x_val)
-    //   .attr("cy", (d) => y(d.values[value_index].measurement));
-
-    // const values_sorted = [];
-    // for (const slice of slices) {
-    //   const val = slice.values[value_index];
-    //   values_sorted.push({
-    //     id: slice.id,
-    //     color: color(slice.id),
-    //     ...val,
-    //   });
-    // }
-    // values_sorted.sort(descendingOnKey("measurement"));
-
-    // let trs = "";
-    // for (const item of values_sorted) {
-    //   trs += `<tr style="color: ${item.color}">
-    //     <td style="background-color: ${item.color
-    //     }; width: 10px; height: 10px; border-radius: 5px; display: inline-block; margin-right: 2px;"></td>
-    //       <td style="padding-right: 0.8em; font-weight: 700;">${item.id}</td>
-    //       <td style="text-align: right; white-space: nowrap; font-weight: 700;">${item.measurement.toFixed(
-    //       2
-    //     )}</td>
-    //     </tr>`;
   }
 
-  // tooltip
-  //   .html(
-  //     `<table style="font-size: 0.7em"><thead><tr><td colspan="3"><strong>${selectedData.distance}</strong></td></tr></thead><tbody>${trs}</tbody></table>`
-  //   )
-  //   .style("left", pointerRel[0] + 40 + "px")
-  //   .style("top", pointerRel[1] + "px");
-  // .attr("y", height / 3);
-
   function mouseout() {
-    // focus.style("opacity", 0);
     tooltip.style("opacity", 0);
     mouseLine.style("opacity", 0);
-    // d3.selectAll(".focus-circle").style("opacity", 0);
   }
 
 

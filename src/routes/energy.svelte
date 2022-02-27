@@ -52,6 +52,7 @@
     series = d;
 
     chartData = {
+      type: "area",
       title: `Energy usage mixture of, ${selected}`,
       description: "Some description",
       source: "Calculations",
