@@ -114,12 +114,12 @@
       </div>
     </div> -->
 
-    <h3>Source score</h3>
+    <!-- <h3>Source score</h3>
 
     <h3>Country score against worst possible impact score</h3>
-
-    <h2>All possible sources</h2>
-    <ul>
+ -->
+    <h2>Sources</h2>
+    <!-- <ul>
       <li>In</li>
       <li>Outs</li>
       <li>Product lifetime</li>
@@ -141,7 +141,7 @@
       <li>Pros</li>
       <li>Cons</li>
     </ul>
-    <h3>div</h3>
+    <h3>div</h3> -->
     <ul>
       <li>Oil</li>
       <li>Coal</li>
@@ -150,6 +150,8 @@
       <li>Hydro</li>
       <li>Wind</li>
       <li>Solar</li>
+
+      <li />
       <li>Geothermal</li>
       <li>Tide/Wave/Ocean</li>
       <li>Biofuels and waste</li>

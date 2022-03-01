@@ -151,13 +151,22 @@
 
 <SidebarLayout>
   <div slot="sidebar">
-    <Input
-      text="Distance (km)"
-      type="number"
-      bind:value={base.distance}
-      min="1"
-    />
-    <Input text="Weight (kg)" type="number" bind:value={base.weight} min="1" />
+    <div class="mb-4">
+      <Input
+        label="Distance (km)"
+        type="number"
+        bind:value={base.distance}
+        min="1"
+      />
+    </div>
+    <div class="mb-4">
+      <Input
+        label="Weight (kg)"
+        type="number"
+        bind:value={base.weight}
+        min="1"
+      />
+    </div>
     <Select text="Diet" bind:selected={base.diet} options={dietOptions} />
     <Select text="Sort on" bind:selected={base.sort} options={sortOptions} />
     <hr class="mt-8 mb-4" />
@@ -351,8 +360,8 @@
       </table>
     </div>
 
-    <div class="not-prose">
+    <!-- <div class="not-prose">
       <LineChart {data} xlabel="Distance (km)" ylabel="Impact (kg CO2eq)" />
-    </div>
+    </div> -->
   </div>
 </SidebarLayout>

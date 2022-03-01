@@ -46,7 +46,7 @@
 
 <label for={inputId} class="block">
   {#if label}
-    <span class="block text-sm font-medium text-gray-700">{label}</span>
+    <span class="block text-sm font-medium text-gray-700 mb-1">{label}</span>
   {/if}
   {#if type === "number"}
     <!-- {:else if type === "number"} -->
