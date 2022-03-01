@@ -63,6 +63,8 @@
 <p>
   If you find a mistake or see an improvement, please let me know by <a
     href="mailto:florian@whatsgreener.xyz">email</a
+  >, via
+  <a href="https://community.whatsgreener.xyz" target="_blank">community chat</a
   >
   or edit directly on
   <a href="https://github.com/florianperrenet/whatsgreener" target="_blank"
