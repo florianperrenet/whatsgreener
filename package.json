@@ -30,6 +30,7 @@
     "decimal.js": "^10.3.1",
     "katex": "^0.15.2",
     "normalize.css": "^8.0.1",
-    "sass": "^1.49.7"
+    "sass": "^1.49.7",
+    "topojson-client": "^3.1.0"
   }
 }
