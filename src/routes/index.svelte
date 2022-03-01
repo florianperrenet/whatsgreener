@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>whatsgreener, a proper footprint comparison tool.</title>
+	<title>whatsgreener</title>
 </svelte:head>
 
 <div class="relative w-full bg-white">
