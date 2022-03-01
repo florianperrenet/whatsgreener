@@ -175,9 +175,10 @@
   <div slot="content">
     <div class="mb-10 text-4xl font-extrabold text-slate-900">Travel</div>
     <div class="lead">Usage impact</div>
-    <!-- <div class="font-bold">Terminology</div>
+
+    <!-- <div class="font-bold">Terminology</div> -->
     <div class="text-base b-5 mb-10">
-      <div>
+      <!-- <div>
         <span class="font-medium">MET:</span>
         <a href="/calculations#ref-met">
           Metabolic Equivalent of Task (exercise intensity)
@@ -192,20 +193,20 @@
         <a href="/calculations#relativewhatsgreenerimpact"
           >RelativeWhatsGreenerImpact</a
         >
-      </div>
-      <div>
-        <span class="font-medium">CTC:</span>
-        <a href="/calculations#costtocompensate">CostToCompensate</a>
-      </div>
+      </div> -->
       <div>
         <span class="font-medium">CTT:</span>
         <a href="/calculations#costtocompensate">CostToTravel</a>
       </div>
       <div>
+        <span class="font-medium">CTC:</span>
+        <a href="/calculations#costtocompensate">CostToCompensate</a>
+      </div>
+      <!-- <div>
         <span class="font-medium">carbon_eq:</span>
         <a href="/calculations#ref-co2-eq100">CO2-eq100</a>
-      </div>
-    </div> -->
+      </div> -->
+    </div>
 
     <div class="">
       <table class="not-prose border-collapse">
