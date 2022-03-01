@@ -108,4 +108,8 @@ export const bibliography = {
         title: "wikipedia human feces average chemical characteristics",
         url: "https://en.wikipedia.org/wiki/Human_feces#Average_chemical_characteristics",
     },
+    "eia-coal_emissions": {
+        title: "coal emissions",
+        url: "https://www.eia.gov/energyexplained/coal/coal-and-the-environment.php#:~:text=Several%20principal%20emissions%20result%20from,respiratory%20illnesses%20and%20lung%20disease",
+    },
 };

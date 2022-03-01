@@ -11,89 +11,182 @@
 	const size = 600;
 
 	onMount(async () => {
-		var canvas = document.getElementById("my_dataviz");
+		// 	.stroke {
+		//   fill: none;
+		//   stroke: #000;
+		//   stroke-width: 1px;
+		// }
 
-		const projection = d3
-			// .geoEqualEarth()
-			.geoOrthographic();
-		// .geoNaturalEarth1()
-		// .scale(width / 1.3 / Math.PI)
-		// .translate([width / 2, height / 2]);
+		// .fill {
+		//   fill: #f2f2f2;
+		// }
 
-		const context = canvas.getContext("2d");
-		const path = d3.geoPath(projection, context);
+		// .graticule {
+		//   fill: none;
+		//   stroke: #777;
+		//   stroke-width: .5px;
+		//   stroke-opacity: .5;
+		// }
 
-		const response = await fetch("/land-50m.json");
-		const world = await response.json();
+		// .land {
+		//   fill: darkgrey;
+		// }
+		// .boundary {
+		//   fill: none;
+		//   stroke: #fff;
+		//   stroke-width: .5px;
+		// }
 
-		const outline = { type: "Sphere" };
-		const graticule = d3.geoGraticule10();
-		const land = topojson.feature(world, world.objects.land);
+		const el = document.getElementById("my_dataviz");
 
 		const width = size;
-		const height = (() => {
-			const [[x0, y0], [x1, y1]] = d3
-				.geoPath(projection.fitWidth(width, outline))
-				.bounds(outline);
-			const dy = Math.ceil(y1 - y0),
-				l = Math.min(Math.ceil(x1 - x0), dy);
-			projection.scale((projection.scale() * (l - 1)) / l).precision(0.2);
-			return dy;
-		})();
+		const height = size;
 
-		// const context = canvas.context2d(width, height);
+		const projection = d3
+			.geoOrthographic()
+			.scale(300)
+			.translate([width / 2, height / 2]);
+		const path = d3.geoPath(projection);
+		const graticule = d3.geoGraticule10();
 
-		function render() {
-			context.clearRect(0, 0, width, height);
+		const svg = d3
+			.select(el)
+			.append("svg")
+			.attr("class", "map")
+			.attr("width", size)
+			.attr("height", size);
 
-			context.save();
-			context.beginPath(),
-				path(outline),
-				context.clip(),
-				(context.fillStyle = "#fff"),
-				context.fillRect(0, 0, width, height);
+		svg
+			.append("defs")
+			.append("path")
+			.datum({ type: "Sphere" })
+			.attr("id", "sphere")
+			.attr("d", path);
 
-			context.beginPath(),
-				path(graticule),
-				(context.strokeStyle = "#ccc"),
-				context.stroke();
+		svg
+			.append("use")
+			.attr("class", "fill")
+			.attr("fill", "#fff")
+			.attr("xlink:href", "#sphere");
 
-			context.beginPath(),
-				path(land),
-				(context.fillStyle = "#000"),
-				context.fill();
+		svg
+			.append("path")
+			.datum(graticule)
+			.attr("class", "graticule")
+			.attr("fill", "none")
+			.attr("stroke", "#ccc")
+			.attr("stroke-width", ".5px")
+			// .attr("stroke-opacity", ".5")
+			.attr("d", path);
 
-			context.restore();
-			context.beginPath(),
-				path(outline),
-				(context.strokeStyle = "#000"),
-				context.stroke();
-		}
+		const response = await fetch("/world-110m.json");
+		const world = await response.json();
 
+		const land = topojson.feature(world, world.objects.land),
+			// countries = topojson.feature(world, world.objects.countries).features;
+			borders = topojson.mesh(world, world.objects.countries, function (a, b) {
+				return a !== b;
+			});
+
+		// add land
+		svg
+			.append("path", ".graticule")
+			.datum(land)
+			.attr("class", "land")
+			.attr("fill", "black")
+			.attr("d", path);
+
+		// add borders
+		svg
+			.append("path", ".graticule")
+			.datum(borders)
+			.attr("class", "boundary")
+			.attr("d", path)
+			.attr("fill", "none")
+			.attr("stroke", "#fff")
+			.attr("stroke-width", "0.5")
+			.attr("stroke-opacity", "0.3")
+			.attr("d", path);
+
+		svg
+			.append("use")
+			.attr("class", "stroke")
+			.attr("fill", "none")
+			.attr("stroke", "#000")
+			.attr("stroke-width", "1")
+			.attr("xlink:href", "#sphere");
+
+		d3.timer((elapsed) => {
+			projection.rotate([0.002 * elapsed, 0, 0]);
+			svg.selectAll("path").attr("d", path);
+		});
+
+		// var canvas = document.getElementById("my_dataviz");
+		// const projection = d3
+		// 	// .geoEqualEarth()
+		// 	.geoOrthographic();
+		// // .geoNaturalEarth1()
+		// // .scale(width / 1.3 / Math.PI)
+		// // .translate([width / 2, height / 2]);
+		// const context = canvas.getContext("2d");
+		// const path = d3.geoPath(projection, context);
+		// const response = await fetch("/land-50m.json");
+		// const world = await response.json();
+		// const outline = { type: "Sphere" };
+		// const graticule = d3.geoGraticule10();
+		// const land = topojson.feature(world, world.objects.land);
+		// const width = size;
+		// const height = (() => {
+		// 	const [[x0, y0], [x1, y1]] = d3
+		// 		.geoPath(projection.fitWidth(width, outline))
+		// 		.bounds(outline);
+		// 	const dy = Math.ceil(y1 - y0),
+		// 		l = Math.min(Math.ceil(x1 - x0), dy);
+		// 	projection.scale((projection.scale() * (l - 1)) / l).precision(0.2);
+		// 	return dy;
+		// })();
+		// // const context = canvas.context2d(width, height);
+		// function render() {
+		// 	context.clearRect(0, 0, width, height);
+		// 	context.save();
+		// 	context.beginPath(),
+		// 		path(outline),
+		// 		context.clip(),
+		// 		(context.fillStyle = "#fff"),
+		// 		context.fillRect(0, 0, width, height);
+		// 	context.beginPath(),
+		// 		path(graticule),
+		// 		(context.strokeStyle = "#ccc"),
+		// 		context.stroke();
+		// 	context.beginPath(),
+		// 		path(land),
+		// 		(context.fillStyle = "#333"),
+		// 		context.fill();
+		// 	context.restore();
+		// 	context.beginPath(),
+		// 		path(outline),
+		// 		(context.strokeStyle = "#000"),
+		// 		context.stroke();
+		// }
+		// render();
 		// for (let x = 0; true; ++x) {
 		// 	projection.rotate([x / 10, 0, 0]);
-
 		// 	render();
-
 		// 	// context.beginPath(), path(land), context.fill();
 		// 	// context.beginPath(), path(sphere), context.stroke();
 		// 	// await visibility();
 		// 	await new Promise((r) => setTimeout(r, 100));
 		// }
-		render();
-
 		// d3.timer((elapsed) => {
 		// 	projection.rotate([0.001 * elapsed, 0, 0]);
 		// 	render();
 		// });
-
 		// 			const projection = d3.geoOrthographic().fitExtent([[1, 1], [width - 1, height - 1]], sphere);
 		//   const path = d3.geoPath(projection, context);
 		//   const figure = html`<figure>
 		//   ${context.canvas}
 		//   <figcaption>Rotating lambda (+λ).</figcaption>
 		// </figure>`;
-
 		// 			for (let x = 0; true; ++x) {
 		//     projection.rotate([x / 10, 0, 0]);
 		//     context.clearRect(0, 0, width, height);
@@ -102,7 +195,6 @@
 		//     yield figure;
 		//     await visibility();
 		//   }
-
 		// // select the canvas element created in the html.
 		// var canvas = document.getElementById("my_dataviz");
 		// // Actual width and height. No idea if clienWidth would be a better option..?
@@ -195,7 +287,7 @@
 
 		<div class="xl:absolute xl:top-60 xl:bottom-0 xl:right-0 xl:w-1/2">
 			<div class="w-full">
-				<canvas id="my_dataviz" width={size} height={size} />
+				<div id="my_dataviz" width={size} height={size} />
 			</div>
 		</div>
 		<!-- <div class="h-40" />

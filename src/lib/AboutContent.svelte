@@ -63,7 +63,7 @@
 <p>
   If you find a mistake or see an improvement, please let me know by <a
     href="mailto:florian@whatsgreener.xyz">email</a
-  >, via
+  >, via the
   <a href="https://community.whatsgreener.xyz" target="_blank">community chat</a
   >
   or edit directly on
@@ -264,7 +264,19 @@
 <p>Text</p>
 <h3>Coal</h3>
 <h4>Combustion</h4>
-<p>Text</p>
+<p>
+  Emissions from burning coal Several principal emissions result from coal
+  combustion: Sulfur dioxide (SO2), which contributes to acid rain and
+  respiratory illnesses Nitrogen oxides (NOx), which contribute to smog and
+  respiratory illnesses Particulates, which contribute to smog, haze, and
+  respiratory illnesses and lung disease Carbon dioxide (CO2), which is the
+  primary greenhouse gas produced from burning fossil fuels (coal, oil, and
+  natural gas) Mercury and other heavy metals, which have been linked to both
+  neurological and developmental damage in humans and other animals Fly ash and
+  bottom ash, which are residues created when power plants burn coal. <Cite
+    to="eia-coal_emissions"
+  />
+</p>
 <h3>Natural gas</h3>
 <h4>Combustion</h4>
 <p>Text</p>

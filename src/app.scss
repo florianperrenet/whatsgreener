@@ -14,25 +14,25 @@
 
   /* AXES */
   /* ticks */
-  .axis line {
-    stroke: #706f6f;
-    stroke-width: 0.5;
-    shape-rendering: crispEdges;
-  }
+  // .axis line {
+  //   stroke: #706f6f;
+  //   stroke-width: 0.5;
+  //   shape-rendering: crispEdges;
+  // }
 
-  /* axis contour */
-  .axis path {
-    stroke: #706f6f;
-    stroke-width: 0.7;
-    shape-rendering: crispEdges;
-  }
+  // /* axis contour */
+  // .axis path {
+  //   stroke: #706f6f;
+  //   stroke-width: 0.7;
+  //   shape-rendering: crispEdges;
+  // }
 
-  /* axis text */
-  .axis text {
-    fill: #2b2929;
-    font-family: Georgia;
-    font-size: 120%;
-  }
+  // /* axis text */
+  // .axis text {
+  //   fill: #2b2929;
+  //   font-family: Georgia;
+  //   font-size: 120%;
+  // }
 
   // path.line {
   //   fill: none;
@@ -62,8 +62,36 @@
   //   stroke-dasharray: 6;
   // }
 
-  .serie_label {
-    fill: #2b2929;
-    font-family: Georgia;
-    font-size: 80%;
-  }
+  // .serie_label {
+  //   fill: #2b2929;
+  //   font-family: Georgia;
+  //   font-size: 80%;
+  // }
+
+
+
+  // .stroke {
+  //   fill: none;
+  //   stroke: #000;
+  //   stroke-width: 1px;
+  // }
+  
+  // .fill {
+  //   fill: #f2f2f2;
+  // }
+
+  // .graticule {
+  //   fill: none;
+  //   stroke: #777;
+  //   stroke-width: .5px;
+  //   stroke-opacity: .5;
+  // }
+  
+  // .land {
+  //   fill: darkgrey;
+  // }
+  // .boundary {
+  //   fill: none;
+  //   stroke: #fff;
+  //   stroke-width: .5px;
+  // }
