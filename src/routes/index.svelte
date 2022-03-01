@@ -43,28 +43,65 @@
 
 		// const context = canvas.context2d(width, height);
 
-		context.save();
-		context.beginPath(),
-			path(outline),
-			context.clip(),
-			(context.fillStyle = "#fff"),
-			context.fillRect(0, 0, width, height);
+		function render() {
+			context.clearRect(0, 0, width, height);
 
-		context.beginPath(),
-			path(graticule),
-			(context.strokeStyle = "#ccc"),
-			context.stroke();
+			context.save();
+			context.beginPath(),
+				path(outline),
+				context.clip(),
+				(context.fillStyle = "#fff"),
+				context.fillRect(0, 0, width, height);
 
-		context.beginPath(),
-			path(land),
-			(context.fillStyle = "#000"),
-			context.fill();
+			context.beginPath(),
+				path(graticule),
+				(context.strokeStyle = "#ccc"),
+				context.stroke();
 
-		context.restore();
-		context.beginPath(),
-			path(outline),
-			(context.strokeStyle = "#000"),
-			context.stroke();
+			context.beginPath(),
+				path(land),
+				(context.fillStyle = "#000"),
+				context.fill();
+
+			context.restore();
+			context.beginPath(),
+				path(outline),
+				(context.strokeStyle = "#000"),
+				context.stroke();
+		}
+
+		// for (let x = 0; true; ++x) {
+		// 	projection.rotate([x / 10, 0, 0]);
+
+		// 	render();
+
+		// 	// context.beginPath(), path(land), context.fill();
+		// 	// context.beginPath(), path(sphere), context.stroke();
+		// 	// await visibility();
+		// 	await new Promise((r) => setTimeout(r, 100));
+		// }
+		render();
+
+		// d3.timer((elapsed) => {
+		// 	projection.rotate([0.001 * elapsed, 0, 0]);
+		// 	render();
+		// });
+
+		// 			const projection = d3.geoOrthographic().fitExtent([[1, 1], [width - 1, height - 1]], sphere);
+		//   const path = d3.geoPath(projection, context);
+		//   const figure = html`<figure>
+		//   ${context.canvas}
+		//   <figcaption>Rotating lambda (+λ).</figcaption>
+		// </figure>`;
+
+		// 			for (let x = 0; true; ++x) {
+		//     projection.rotate([x / 10, 0, 0]);
+		//     context.clearRect(0, 0, width, height);
+		//     context.beginPath(), path(land), context.fill();
+		//     context.beginPath(), path(sphere), context.stroke();
+		//     yield figure;
+		//     await visibility();
+		//   }
 
 		// // select the canvas element created in the html.
 		// var canvas = document.getElementById("my_dataviz");
