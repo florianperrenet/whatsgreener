@@ -89,6 +89,8 @@
       <Chart data={chartData} />
     {/if}
 
+    <h2>Impact to produce 1kwh per source</h2>
+
     <!-- <div class="not-prose">
       <div
         style="position: relative;"
