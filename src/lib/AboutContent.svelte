@@ -84,6 +84,9 @@
   <li>Product lifetime</li>
   <li>Reusability (recycling)</li>
   <li>Scalability</li>
+  <li>Dependence of other countries</li>
+  <li>Work environment</li>
+  <li>Sustainability how long can we sustain this model</li>
   <li>Scarcity of resources used</li>
   <ul>
     <li>What has already been used</li>
@@ -97,8 +100,8 @@
       <li>Waste Pollution</li>
     </ul>
   </ul>
-  <li>Pros</li>
-  <li>Cons</li>
+  <li>Other Pros</li>
+  <li>Other Cons</li>
 </ul>
 
 <h3>Non-greenhouse gases</h3>
