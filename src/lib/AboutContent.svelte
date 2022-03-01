@@ -77,6 +77,30 @@
 <hr />
 <h2>Quick deepdive</h2>
 
+<h3>Factors to take into account</h3>
+<ul>
+  <li>In</li>
+  <li>Outs</li>
+  <li>Product lifetime</li>
+  <li>Reusability (recycling)</li>
+  <li>Scalability</li>
+  <li>Scarcity of resources used</li>
+  <ul>
+    <li>What has already been used</li>
+    <li>What is left</li>
+  </ul>
+  <li>Pollution</li>
+  <ul>
+    <li>Waste Problem</li>
+    <ul>
+      <li>Amount of waste</li>
+      <li>Waste Pollution</li>
+    </ul>
+  </ul>
+  <li>Pros</li>
+  <li>Cons</li>
+</ul>
+
 <h3>Non-greenhouse gases</h3>
 <p>
   Nitrogen {@html chem("N2")}, Oxygen {@html chem("O2")} and Argon {@html chem(
@@ -227,6 +251,41 @@
 <p>
   It's not in GWP but what to do with it instead? Needs at least some scoring.
 </p>
+
+<hr />
+
+<h2>Energy</h2>
+
+<h3>Oil</h3>
+<h4>Combustion</h4>
+<p>Text</p>
+<h3>Coal</h3>
+<h4>Combustion</h4>
+<p>Text</p>
+<h3>Natural gas</h3>
+<h4>Combustion</h4>
+<p>Text</p>
+<h3>Nuclear</h3>
+<h4>Combustion</h4>
+<p>Text</p>
+<h3>Hydro</h3>
+<h4>Combustion</h4>
+<p>Text</p>
+<h3>Wind</h3>
+<h4>Combustion</h4>
+<p>Text</p>
+<h3>Solar</h3>
+<h4>Combustion</h4>
+<p>Text</p>
+<h3>Geothermal</h3>
+<h4>Combustion</h4>
+<p>Text</p>
+<h3>Tide/Wave/Ocean</h3>
+<h4>Combustion</h4>
+<p>Text</p>
+<h3>Biofuels and waste</h3>
+<h4>Combustion</h4>
+<p>Text</p>
 
 <hr />
 
