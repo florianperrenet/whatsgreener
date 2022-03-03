@@ -7,7 +7,7 @@
       <img src="/whatsgreener-logo-site.png" alt="" width="175" />
     </div>
     <div class="flex">
-      <div class="flex-none w-1/2 lg:flex sm:space-y-8 lg:space-y-0">
+      <div class="flex-none w-1/2 lg:flex space-y-8 lg:space-y-0">
         <div class="lg:flex-none lg:w-1/2">
           <div class="font-semibold">Getting started</div>
           <ul class="mt-3 space-y-2">
@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div class="flex-none w-1/2 lg:flex sm:space-y-8 lg:space-y-0">
+      <div class="flex-none w-1/2 lg:flex space-y-8 lg:space-y-0">
         <div class="lg:flex-none lg:w-1/2">
           <div class="font-semibold">Calculations</div>
           <ul class="mt-3 space-y-2">
