@@ -8,15 +8,15 @@
         <div class="w-1/2">
           <div class="font-semibold">Getting started</div>
           <ul class="mt-3 space-y-2">
-            <li><a href="#">Start 1</a></li>
-            <li><a href="#">Start 2</a></li>
+            <li><a href="/calculations#energy">Energy</a></li>
+            <li><a href="/calculations#travel">Travel</a></li>
+            <li><a href="/calculations#food">Food</a></li>
           </ul>
         </div>
         <div class="w-1/2">
           <div class="font-semibold">Core concepts</div>
           <ul class="mt-3 space-y-2">
-            <li><a href="#">Concept 1</a></li>
-            <li><a href="#">Concept 2</a></li>
+            <li><a href="#">Open source</a></li>
           </ul>
         </div>
       </div>
