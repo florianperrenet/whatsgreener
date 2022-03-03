@@ -8,33 +8,10 @@
 	];
 
 	let menu_open = false;
-
-	export function clickOutside(node) {
-		const handleClick = (event) => {
-			if (node && !node.contains(event.target) && !event.defaultPrevented) {
-				node.dispatchEvent(new CustomEvent("click_outside", node));
-			}
-		};
-
-		document.addEventListener("click", handleClick, true);
-
-		return {
-			destroy() {
-				document.removeEventListener("click", handleClick, true);
-			},
-		};
-	}
-
-	function handleClickOutside(e) {
-		menu_open = false;
-		console.log("clicked outside");
-	}
 </script>
 
 <header
 	class="sticky top-0 flex-none relative z-10 text-lg font-semibold ring-1 ring-gray-900 ring-opacity-5 shadow-sm py-3 bg-white"
-	use:clickOutside
-	on:click_outside={handleClickOutside}
 >
 	<nav aria-label="Global" class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex items-center flex-wrap sm:flex-nowrap">
@@ -285,5 +262,10 @@
 				</div>
 			</div>
 		</div>
+
+		<div
+			style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.15);"
+			on:click={() => (menu_open = false)}
+		/>
 	{/if}
 </header>
