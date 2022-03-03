@@ -10,9 +10,10 @@
       <div
         class="{item.children.length ? 'mb-3' : ''} {root
           ? 'font-semibold'
-          : ''} truncate level{item.level} {item.item === activeHeading
-          ? 'bg-slate-300'
-          : 'hover:bg-slate-100'}"
+          : 'text-gray-700'} truncate level{item.level} {item.item ===
+        activeHeading
+          ? 'text-gray-900 bg-slate-300'
+          : 'hover:text-gray-900'}"
       >
         <a
           href="#{item.id}"
