@@ -8,9 +8,9 @@
         <div class="lg:flex-none lg:w-1/2">
           <div class="font-semibold">Getting started</div>
           <ul class="mt-3 space-y-2">
-            <li><a href="/calculations#energy">Energy</a></li>
-            <li><a href="/calculations#travel">Travel</a></li>
-            <li><a href="/calculations#food">Food</a></li>
+            <li><a href="/energy">Energy</a></li>
+            <li><a href="/travel">Travel</a></li>
+            <li><a href="/food">Food</a></li>
           </ul>
         </div>
         <div class="lg:flex-none lg:w-1/2">
