@@ -34,7 +34,7 @@
       class="hidden lg:block absolute top-0 bottom-0 right-0 left-1/2 bg-white"
     />
     <div
-      class="relative flex w-full max-w-container mx-auto px-4 sm:px-6 lg:px-8"
+      class="relative bg-white lg:bg-gray-50 flex w-full max-w-container mx-auto px-4 sm:px-6 lg:px-8"
     >
       <div class="w-full flex-none lg:grid lg:grid-cols-3 lg:gap-8">
         <div
