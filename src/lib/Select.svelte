@@ -72,7 +72,7 @@
     if (filter) {
       const _filtered = [];
       for (const [key, name] of options) {
-        if (key.startsWith(filter)) {
+        if (key.startsWith(filter.toLowerCase())) {
           _filtered.push([key, name]);
         }
       }
