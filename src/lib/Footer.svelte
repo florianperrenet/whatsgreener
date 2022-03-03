@@ -1,4 +1,7 @@
-<footer class="pt-10 pb-20 border-t border-gray-200 bg-white">
+<footer
+  class="pt-10 pb-20 border-t border-gray-200 bg-white"
+  style="z-index: 5;"
+>
   <div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mb-10">
       <img src="/whatsgreener-logo-site.png" alt="" width="175" />
