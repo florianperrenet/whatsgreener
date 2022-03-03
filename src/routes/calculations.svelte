@@ -20,6 +20,7 @@
 	import Toc from "$lib/Toc.svelte";
 	import AboutContent from "$lib/AboutContent.svelte";
 	import SidebarLayout from "$lib/SidebarLayout.svelte";
+	import Input from "$lib/Input.svelte";
 
 	function titleToId(title) {
 		return title.toLowerCase().replace(/\W/g, "_");
@@ -134,9 +135,18 @@
 	on:scroll={setActiveHeading}
 />
 
-<SidebarLayout>
+<SidebarLayout fixed={true}>
 	<div slot="sidebar">
-		<Toc {toc} {activeHeading} root />
+		<div class="sticky top-0">
+			<div class="h-16 bg-gray-50" />
+			<div class="bg-gray-50">
+				<Input placeholder="Quick search..." />
+			</div>
+			<div class="h-8 bg-gradient-to-b from-gray-50" />
+		</div>
+		<div class="-mt-8">
+			<Toc {toc} {activeHeading} root />
+		</div>
 	</div>
 
 	<div slot="content">
