@@ -103,7 +103,7 @@
 
 <div class="relative w-full bg-white">
 	<div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8 lg:pt-40 pt-20">
-		<div class="mb-20">
+		<div class="mb-20 lg:mb-80">
 			<h1
 				class="font-extrabold md:text-6xl sm:text-5xl text-4xl text-slate-900 mb-10 leading-tight"
 			>
@@ -146,17 +146,11 @@
 		</div>
 
 		<div
-			class="lg:absolute lg:top-60 lg:bottom-0 lg:right-0 lg:w-1/2 overflow-hidden"
+			class="hidden lg:flex lg:absolute lg:top-60 lg:bottom-0 lg:right-0 lg:w-1/2 overflow-hidden"
 		>
 			<div class="w-full">
 				<div id="my_dataviz" width={size} height={size} />
 			</div>
 		</div>
 	</div>
-
-	<!-- <div
-		style="background: url(''); background-size: cover; height: 100%; width: 100%; position: absolute; top: 0; left: 0; opacity: 1; z-index: 0;"
-	/> -->
-
-	<div class="py-20" />
 </div>
