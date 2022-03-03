@@ -4,8 +4,8 @@
       <img src="/whatsgreener-logo-site.png" alt="" width="175" />
     </div>
     <div class="flex">
-      <div class="flex w-1/2">
-        <div class="w-1/2">
+      <div class="flex-none w-1/2 lg:flex sm:space-y-8 lg:space-y-0">
+        <div class="lg:flex-none lg:w-1/2">
           <div class="font-semibold">Getting started</div>
           <ul class="mt-3 space-y-2">
             <li><a href="/calculations#energy">Energy</a></li>
@@ -13,7 +13,7 @@
             <li><a href="/calculations#food">Food</a></li>
           </ul>
         </div>
-        <div class="w-1/2">
+        <div class="lg:flex-none lg:w-1/2">
           <div class="font-semibold">Core concepts</div>
           <ul class="mt-3 space-y-2">
             <li><a href="#">Open source</a></li>
@@ -21,8 +21,8 @@
         </div>
       </div>
 
-      <div class="flex w-1/2">
-        <div class="w-1/2">
+      <div class="flex-none w-1/2 lg:flex sm:space-y-8 lg:space-y-0">
+        <div class="lg:flex-none lg:w-1/2">
           <div class="font-semibold">Calculations</div>
           <ul class="mt-3 space-y-2">
             <li><a href="/calculations#energy">Energy</a></li>
@@ -30,7 +30,7 @@
             <li><a href="/calculations#food">Food</a></li>
           </ul>
         </div>
-        <div class="w-1/2">
+        <div class="lg:flex-none lg:w-1/2">
           <div class="font-semibold">Community</div>
           <ul class="mt-3 space-y-2">
             <li>
