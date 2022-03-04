@@ -21,7 +21,7 @@
           <div
             class="hidden lg:block absolute top-0 bottom-0 -right-4 w-8 bg-white"
           />
-          <div class="prose lg:prose-lg prose-slate mx-auto">
+          <div class="prose lg:prose-lg prose-slate mx-auto overflow-x-hidden">
             <slot name="content" />
           </div>
         </div>
@@ -51,7 +51,9 @@
             class="hidden lg:block absolute top-0 bottom-0 -right-8 w-8 bg-white"
           />
           <div class="relative py-16 lg:px-16">
-            <div class="prose lg:prose-lg prose-slate mx-auto">
+            <div
+              class="prose lg:prose-lg prose-slate mx-auto overflow-x-hidden"
+            >
               <slot name="content" />
             </div>
           </div>
