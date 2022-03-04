@@ -48,7 +48,7 @@
         </div>
         <div class="relative col-span-2 lg:-ml-8 bg-white lg:shadow-md">
           <div
-            class="hidden lg:block absolute top-0 bottom-0 -right-4 w-8 bg-white"
+            class="hidden lg:block absolute top-0 bottom-0 -right-8 w-8 bg-white"
           />
           <div class="relative py-16 lg:px-16">
             <div class="prose lg:prose-lg prose-slate mx-auto">
