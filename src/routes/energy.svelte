@@ -67,9 +67,10 @@
 
 <ContainerLayout>
   <div class="prose lg:prose-lg prose-slate">
-    <div class="text-7xl font-bold text-gray-900 mb-20">Energy footprint</div>
+    <!-- <div class="text-7xl font-bold text-gray-900 mb-20">Energy footprint</div> -->
+    <h1>Energy footprint</h1>
 
-    <h1>Energy usage mixture per capita</h1>
+    <h2>Energy usage mixture per capita</h2>
     <div class="not-prose">
       <Select text="Capita" bind:selected options={entities} />
     </div>
@@ -90,8 +91,16 @@
       <Chart data={chartData} />
     {/if}
 
-    <h2>Impact to produce 1kwh per source</h2>
-    <pre>{JSON.stringify(energy_footprint_per_kwh(), null, 2)}</pre>
+    <h2>Footprint to produce 1kwh per source</h2>
+    <!-- source emissions per kwh -->
+
+    {#each Object.values(energy_footprint_per_kwh()) as source}
+      <div>
+        <div>name: {source.name}</div>
+        <div>impact: {source.impact}</div>
+        <hr />
+      </div>
+    {/each}
 
     <h2>Energy source efficiency</h2>
 
@@ -127,7 +136,7 @@
 
     <h3>Country score against worst possible impact score</h3>
  -->
-    <h2>Sources</h2>
+    <h2>Energy sources</h2>
     <!-- <ul>
       <li>In</li>
       <li>Outs</li>

@@ -272,7 +272,7 @@
 </header>
 
 <div class="bg-gray-900 z-10">
-	<div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8 py-2">
+	<div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8 py-1">
 		<div class="flex items-center justify-between flex-wrap">
 			<div class="w-0 flex-1 flex items-center">
 				<span class="flex p-2 rounded-lg bg-gray-800">
@@ -292,7 +292,7 @@
 					</svg>
 				</span>
 				<p class="ml-3 font-medium text-white truncate">
-					<span> Data is incomplete, no conclusions can be made yet.</span>
+					<span> Data is not complete, conclusions can not be made yet.</span>
 				</p>
 			</div>
 			<div class="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
