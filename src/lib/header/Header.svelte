@@ -271,7 +271,7 @@
 	{/if}
 </header>
 
-<div class="bg-gray-900">
+<div class="bg-gray-900 z-10">
 	<div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8 py-2">
 		<div class="flex items-center justify-between flex-wrap">
 			<div class="w-0 flex-1 flex items-center">
