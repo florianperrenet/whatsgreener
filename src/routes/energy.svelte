@@ -2,10 +2,14 @@
   import { onMount } from "svelte";
   import ContainerLayout from "$lib/ContainerLayout.svelte";
   import Select from "$lib/Select.svelte";
-  import { energy_footprint_per_kwh } from "$lib/energy/energy.js";
+  import {
+    energy_footprint_per_kwh,
+    energy_source_efficiency,
+  } from "$lib/energy/energy.js";
 
   import { chart } from "$lib/chart";
   import Chart from "$lib/Chart.svelte";
+  import Toggle from "$lib/Toggle.svelte";
 
   let energyMix = {};
   let entities = [];
@@ -67,7 +71,6 @@
 
 <ContainerLayout>
   <div class="prose lg:prose-lg prose-slate">
-    <!-- <div class="text-7xl font-bold text-gray-900 mb-20">Energy footprint</div> -->
     <h1>Energy footprint</h1>
 
     <h2>Energy usage mixture per capita</h2>
@@ -75,24 +78,12 @@
       <Select text="Capita" bind:selected options={entities} />
     </div>
 
-    <!-- {#if energyMix.data}
-      <ul>
-        {#each Object.entries(energyMix.data[selected][year]) as [key, value]}
-          {#if key === "total"}
-            <li>Total: {value}</li>
-          {:else}
-            <li>{key}: {value.a} TWh = {value.pr}%</li>
-          {/if}
-        {/each}
-      </ul>
-    {/if} -->
-
     {#if selected}
       <Chart data={chartData} />
     {/if}
 
     <h2>Footprint to produce 1kwh per source</h2>
-    <!-- source emissions per kwh -->
+    <!-- source footprint per kwh -->
 
     {#each Object.values(energy_footprint_per_kwh()) as source}
       <div>
@@ -103,63 +94,28 @@
     {/each}
 
     <h2>Energy source efficiency</h2>
+    <Toggle text="toggle">
+      {#each Object.entries(energy_source_efficiency) as [key, value]}
+        <div>
+          <div>name: {key}</div>
+          <div>efficiency: {value}%</div>
+          <hr />
+        </div>
+      {/each}
+    </Toggle>
 
     <!-- cost -->
     <h2>Country impact scoring</h2>
-
-    <!-- <div class="not-prose">
-      <div
-        style="position: relative;"
-        class="bg-white shadow ring-1 ring-gray-900 ring-opacity-5 rounded"
-      >
-        <div class="flex items-center border-b border-gray-200 mb-3 p-3">
-          <div class="grow">
-            <div class="leading-none text-gray-900 mb-1">
-              Travel impact over distance
-            </div>
-            <div class="text-sm max-w-lg">Some description</div>
-          </div>
-          <div class="flex-none">
-            <img src="/whatsgreener-logo-site.png" alt="" width="125" />
-          </div>
+    <div>Worst score possible is: xx</div>
+    {#if energyMix.entities}
+      {#each energyMix.entities as entity}
+        <div>
+          <div>name: {entity} &nbsp; score: 5</div>
         </div>
+      {/each}
+    {/if}
 
-        <div bind:this={chartEl} class="relative p-3" />
-        <div class="pl-3 pb-3 text-xs">
-          <div>Source: <a href="/calculations">Calculations</a></div>
-          <div>Note: Something</div>
-        </div>
-      </div>
-    </div> -->
-
-    <!-- <h3>Source score</h3>
-
-    <h3>Country score against worst possible impact score</h3>
- -->
     <h2>Energy sources</h2>
-    <!-- <ul>
-      <li>In</li>
-      <li>Outs</li>
-      <li>Product lifetime</li>
-      <li>Reusability (recycling)</li>
-      <li>Scalability</li>
-      <li>Scarcity of resources used</li>
-      <ul>
-        <li>What has already been used</li>
-        <li>What is left</li>
-      </ul>
-      <li>Pollution</li>
-      <ul>
-        <li>Waste Problem</li>
-        <ul>
-          <li>Amount of waste</li>
-          <li>Waste Pollution</li>
-        </ul>
-      </ul>
-      <li>Pros</li>
-      <li>Cons</li>
-    </ul>
-    <h3>div</h3> -->
     <ul>
       <li>Oil</li>
       <li>Coal</li>

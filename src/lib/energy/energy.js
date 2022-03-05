@@ -8,6 +8,14 @@ https://www.researchgate.net/publication/272130888_Final_report_on_technical_dat
 import { dec, timePerKm, convert_and_add_emit_score, travelTimeHours, travelTimeHoursReadable, toval, addConsumesEmits, multiply_dict_tovals } from "$lib/utils";
 
 
+// TODO random values..
+export const energy_source_efficiency = {
+  oil: dec("30"),
+  coal: dec("30"),
+  natural_gas: dec("40"),
+};
+
+
 const hard_coal = (() => {
   const data = {
     in: {
@@ -123,22 +131,6 @@ const natural_gas = (() => {
 })();
 
 export function energy_footprint_per_kwh() {
-
-  // const extraction_and_transport_to_refinery_footprint = {
-  //   in: {},
-  //   out: {
-  //     extraction_and_transport_to_refinery: {
-  //       name: fuel_type + " extraction and transport to refinery emissions",
-  //       amount: fuel_demand,
-  //       value: {
-  //         carbon_eq: toval("carbon_eq", fuel_wtt_emissions(fuel_type).extraction_and_transport_to_refinery.times(fuel_demand), null, 2, "kg", "gas", null),
-  //       },
-  //     },
-  //   },
-  // };
-  // addConsumesEmits(extraction_and_transport_to_refinery_footprint);
-
-
   const data = {
     natural_gas: {
       name: "natural_gas",
