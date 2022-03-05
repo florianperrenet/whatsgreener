@@ -29,6 +29,7 @@ export function chart(conf) {
     .range(d3.schemeTableau10);
 
 
+  // console.log(d3.scaleSequential)
 
 
 
@@ -115,11 +116,13 @@ function barVert(el, conf, keys, keys_len, svg, color) {
     .keys(subgroups)
     (data)
 
-  console.log(stackedData)
+  // console.log(stackedData)
 
   color = d3.scaleOrdinal()
     .domain(subgroups)
     .range(d3.schemeTableau10)
+
+  // console.log(d3.schemeTableau10)
 
 
   svg.attr("transform",
@@ -153,7 +156,7 @@ function barVert(el, conf, keys, keys_len, svg, color) {
   //   .attr("height", y.bandwidth())
   //   .attr("fill", d3.schemeTableau10[3])
 
-  console.log(stackedData)
+  // console.log(stackedData)
   svg.append("g")
     .selectAll("g")
     // Enter in the stack data = loop key per key = group per group

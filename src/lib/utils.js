@@ -1,5 +1,37 @@
 import Decimal from "decimal.js";
 
+export const chartColors = [
+  "#4e79a7",
+  "#f28e2c",
+  "#e15759",
+  "#76b7b2",
+  "#59a14f",
+  "#edc949",
+  "#af7aa1",
+  "#ff9da7",
+  "#9c755f",
+  "#bab0ab",
+];
+export const redColors = ["#fff5f0", "#fee0d3", "#fdc3ac", "#fca082", "#fb7c5c", "#f5553d", "#e23028", "#c2181c", "#9b0d14", "#67000d"];
+export const grayColors = ["#ffffff", "#f1f1f1", "#dedede", "#c6c6c6", "#a7a7a7", "#878787", "#686868", "#474747", "#222222", "#000000"];
+
+export const energySourceColors = {
+  oil: "#4e79a7",
+  coal: "#f28e2c",
+  gas: "#e15759",
+  nuclear: "#76b7b2",
+  hydro: "#59a14f",
+  wind: "#edc949",
+  solar: "#af7aa1",
+};
+
+export function descendingOnKey(key) {
+  return function (a, b) {
+    return b[key] - a[key];
+  };
+}
+
+
 export function dec(s) {
   return new Decimal(s);
 }
