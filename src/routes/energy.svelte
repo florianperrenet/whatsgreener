@@ -36,7 +36,15 @@
 
     const barSeries = {};
     for (const entity of energyMix.entities) {
-      barSeries[entity] = Math.floor(Math.random() * 100);
+      barSeries[entity] = {
+        oil: Math.floor(Math.random() * 10),
+        coal: Math.floor(Math.random() * 10),
+        gas: Math.floor(Math.random() * 10),
+        nuclear: Math.floor(Math.random() * 10),
+        hydro: Math.floor(Math.random() * 10),
+        wind: Math.floor(Math.random() * 10),
+        solar: Math.floor(Math.random() * 10),
+      };
     }
 
     barData = {
@@ -102,9 +110,9 @@
     {/if}
 
     <h2>Per capita energy usage by source, 2019</h2>
-    {#if energyMix.entities}
+    <!-- {#if energyMix.entities}
       <Chart data={barData} />
-    {/if}
+    {/if} -->
 
     <h2>Energy source efficiency</h2>
     <ul>

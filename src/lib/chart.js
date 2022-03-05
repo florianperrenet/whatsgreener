@@ -60,20 +60,71 @@ export function chart(conf) {
 
 
 function barVert(el, conf, keys, keys_len, svg, color) {
+  // // remap data
+  // const data = [];
+  // if (conf.relative) {
+  //   for (const [x_index, x_value] of conf.x.entries()) {
+  //     const row = { x: x_value, total: 0 };
+  //     for (const [serie_key, serie_value] of Object.entries(conf.series)) {
+  //       row.total += serie_value[x_index];
+  //     }
+  //     for (const [serie_key, serie_value] of Object.entries(conf.series)) {
+  //       row[serie_key] = serie_value[x_index] / row.total;
+  //     }
+  //     data.push(row);
+  //   }
+  // } else {
+  //   for (const [x_index, x_value] of conf.x.entries()) {
+  //     const row = { x: x_value };
+  //     for (const [serie_key, serie_value] of Object.entries(conf.series)) {
+  //       row[serie_key] = serie_value[x_index];
+  //     }
+  //     data.push(row);
+  //   }
+  // }
+
+
   const data = [];
   for (const [serie_key, serie_value] of Object.entries(conf.series)) {
+    let total = 0;
+    for (const value of Object.values(serie_value)) {
+      total += value;
+    }
+
     data.push({
       id: serie_key,
-      x: serie_value,
+      ...serie_value,
+      total,
     });
   }
 
-  data.sort(descendingOnKey('x'));
+
+  const subgroups = ["coal",
+    "gas",
+    "hydro",
+    "nuclear",
+    "oil",
+    "solar",
+    "wind",]
+
+
+  data.sort(descendingOnKey('total'));
+
+  // stack the data?
+  const stackedData = d3.stack()
+    .keys(subgroups)
+    (data)
+
+  console.log(stackedData)
+
+  color = d3.scaleOrdinal()
+    .domain(subgroups)
+    .range(d3.schemeTableau10)
+
 
   svg.attr("transform",
     "translate(" + 100 + "," + -30 + ")")
 
-  console.log(d3.schemeTableau10)
 
   // Add X axis
   var x = d3.scaleLinear()
@@ -87,20 +138,39 @@ function barVert(el, conf, keys, keys_len, svg, color) {
   var y = d3.scaleBand()
     .range([0, conf.height])
     .domain(data.map(function (d) { return d.id; }))
-    .padding(.1);
+    .padding(.2);
   svg.append("g")
     .call(d3.axisLeft(y))
 
   //Bars
-  svg.selectAll("myRect")
-    .data(data)
-    .enter()
-    .append("rect")
-    .attr("x", x(0))
-    .attr("y", function (d) { return y(d.id); })
-    .attr("width", function (d) { return x(d.x); })
+  // svg.selectAll("myRect")
+  //   .data(data)
+  //   .enter()
+  //   .append("rect")
+  //   .attr("x", x(0))
+  //   .attr("y", function (d) { return y(d.id); })
+  //   .attr("width", function (d) { return x(d.x); })
+  //   .attr("height", y.bandwidth())
+  //   .attr("fill", d3.schemeTableau10[3])
+
+  console.log(stackedData)
+  svg.append("g")
+    .selectAll("g")
+    // Enter in the stack data = loop key per key = group per group
+    .data(stackedData)
+    .enter().append("g")
+    .attr("fill", (d) => color(d.key))
+    .selectAll("rect")
+    // enter a second time = loop subgroup per subgroup to add all rectangles
+    .data((d) => d)
+    .enter().append("rect")
+    // .attr("x", function (d) { console.log(d.data.id); return x(d.data.id); })
+    // .attr("y", function (d) { return y(d[1]); })
+    .attr("x", (d) => x(d[0]))
+    .attr("y", (d) => y(d.data.id))
     .attr("height", y.bandwidth())
-    .attr("fill", d3.schemeTableau10[3])
+    .attr("width", (d) => x(d[1]) - x(d[0]))
+    .attr("stroke", "grey")
 
 }
 
