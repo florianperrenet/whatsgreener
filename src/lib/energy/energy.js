@@ -73,3 +73,10 @@ const natural_gas = {
     "PM2.5-10": toval("PM2.5-10", dec("7.04E-06"), null, 2, 'kg', 'gas', null),
   }
 }
+
+function energy_footprint_per_kwh() {
+  return {
+    natural_gas: natural_gas,
+    coal: hard_coal,
+  };
+}
