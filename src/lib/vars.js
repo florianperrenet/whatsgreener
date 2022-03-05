@@ -2,7 +2,9 @@ import { data } from 'autoprefixer';
 import {
     dec, timePerKm, travelTimeHours, travelTimeHoursReadable, toval, addConsumesEmits, multiply_dict_tovals,
     unwrap_plusminus,
-    unwrap_plusminus_dict
+    unwrap_plusminus_dict,
+    gwp,
+    chemGasLtoGasKG
 } from "$lib/utils";
 import { car_footprint } from "$lib/travel/cars";
 
@@ -13,36 +15,6 @@ function plusminus_fmt_perc(l) {
 function plusminus_fmt(l) {
     return `${l[0]} ± ${l[1]}`;
 }
-
-
-const gwp = {
-    // Major Greenhouse Gases AR6 (2021)
-    // gwp100 is default
-    carbon_dioxide: {
-        name: "Carbon dioxide",
-        formula: "CO2",
-        lifetime: dec("0"),
-        gwp20: dec("1"),
-        gwp100: dec("1"),
-        gwp500: dec("1"),
-    },
-    methane: {
-        name: "Methane",
-        formula: "CH4",
-        lifetime: dec("11.8"),
-        gwp20: dec("81.2"),
-        gwp100: dec("27.9"),
-        gwp500: dec("7.95"),
-    },
-    nitrous_oxide: {
-        name: "Nitrous oxide",
-        formula: "N2O",
-        lifetime: dec("109"),
-        gwp20: dec("273"),
-        gwp100: dec("273"),
-        gwp500: dec("130"),
-    },
-};
 
 
 
@@ -3024,26 +2996,7 @@ const footprintFoodEating = (diet, kcal) => {
 }
 
 
-function chemGasLtoGasKG(dict) {
-    const newdict = {};
-    for (const [key, value] of Object.entries(dict)) {
-        if (key === 'carbon_dioxide-gas-L') {
-            const val = value.amount.div(dec("500"));
-            if ('carbon_dioxide-gas-kg' in newdict) {
-                newdict['carbon_dioxide-gas-kg'].amount = newdict['carbon_dioxide-gas-kg'].amount.add(val);
-            } else {
-                newdict['carbon_dioxide-gas-kg'] = toval('carbon_dioxide', val, null, 2, 'kg', 'gas', null);
-            }
-        } else {
-            if (key in newdict) {
-                newdict[key].amount = newdict[key].amount.add(value.amount);
-            } else {
-                newdict[key] = value;
-            }
-        }
-    }
-    return newdict;
-}
+
 
 
 

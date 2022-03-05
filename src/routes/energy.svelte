@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import ContainerLayout from "$lib/ContainerLayout.svelte";
   import Select from "$lib/Select.svelte";
+  import { energy_footprint_per_kwh } from "$lib/energy/energy.js";
 
   import { chart } from "$lib/chart";
   import Chart from "$lib/Chart.svelte";
@@ -90,6 +91,10 @@
     {/if}
 
     <h2>Impact to produce 1kwh per source</h2>
+    <pre>{JSON.stringify(energy_footprint_per_kwh(), null, 2)}</pre>
+
+    <h2>Energy source efficiency</h2>
+
     <!-- cost -->
     <h2>Country impact scoring</h2>
 
