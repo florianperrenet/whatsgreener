@@ -101,6 +101,11 @@
       <Chart data={chartData} />
     {/if}
 
+    <h2>Per capita energy usage by source, 2019</h2>
+    {#if energyMix.entities}
+      <Chart data={barData} />
+    {/if}
+
     <h2>Footprint to produce 1kwh per source</h2>
     <!-- source footprint per kwh -->
 
