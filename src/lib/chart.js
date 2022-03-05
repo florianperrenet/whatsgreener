@@ -22,6 +22,92 @@ export function chart(conf) {
   const keys_len = keys.length;
   const keys_rev = keys.slice().reverse();
 
+  // color palette
+  const color = d3.scaleOrdinal()
+    .domain(keys)
+    // .range(d3.schemeSet2);
+    .range(d3.schemeTableau10);
+
+
+
+
+
+
+
+
+
+  // append the svg object to the body of the page
+  const svg = el
+    .append("svg")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", `0 0 ${conf.width} ${conf.height}`)
+    .append("g")
+  // .attr("width", conf.width)
+  // .attr("height", conf.height)
+
+
+
+
+  if (conf.type === 'area') {
+    areaChart(el, conf, keys, keys_len, svg, color);
+  } else if (conf.type === 'bar_vertical') {
+    barVert(el, conf, keys, keys_len, svg, color);
+  }
+
+
+
+}
+
+
+function barVert(el, conf, keys, keys_len, svg, color) {
+  const data = [];
+  for (const [serie_key, serie_value] of Object.entries(conf.series)) {
+    data.push({
+      id: serie_key,
+      x: serie_value,
+    });
+  }
+
+  data.sort(descendingOnKey('x'));
+
+  svg.attr("transform",
+    "translate(" + 100 + "," + -30 + ")")
+
+  console.log(d3.schemeTableau10)
+
+  // Add X axis
+  var x = d3.scaleLinear()
+    .domain([0, conf.x])
+    .range([0, conf.width]);
+  svg.append("g")
+    .attr("transform", `translate(0, ${conf.height})`)
+    .call(d3.axisBottom(x))
+
+  // Y axis
+  var y = d3.scaleBand()
+    .range([0, conf.height])
+    .domain(data.map(function (d) { return d.id; }))
+    .padding(.1);
+  svg.append("g")
+    .call(d3.axisLeft(y))
+
+  //Bars
+  svg.selectAll("myRect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", x(0))
+    .attr("y", function (d) { return y(d.id); })
+    .attr("width", function (d) { return x(d.x); })
+    .attr("height", y.bandwidth())
+    .attr("fill", d3.schemeTableau10[3])
+
+}
+
+
+
+function areaChart(el, conf, keys, keys_len, svg, color) {
+
   // remap data
   const data = [];
   if (conf.relative) {
@@ -46,7 +132,7 @@ export function chart(conf) {
   }
 
   // stack the data?
-  var stackedData = d3.stack()
+  const stackedData = d3.stack()
     .keys(keys)
     (data)
 
@@ -57,37 +143,12 @@ export function chart(conf) {
     })
   });
 
-  // color palette
-  var color = d3.scaleOrdinal()
-    .domain(keys)
-    // .range(d3.schemeSet2);
-    .range(d3.schemeTableau10);
-
-
-
-
-
-
-
-
-
-  // append the svg object to the body of the page
-  const svg = el
-    .append("svg")
-    .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", `0 0 ${conf.width} ${conf.height}`)
-    .append("g")
-  // .attr("width", conf.width)
-  // .attr("height", conf.height)
-
-
-
   //////////
   // HIGHLIGHT GROUP //
   //////////
 
   // What to do when one group is hovered
-  var highlight = function (e, d) {
+  const highlight = function (e, d) {
     // reduce opacity of all groups
     svg.selectAll(".area").style("opacity", .1)
     // except the one that is hovered
@@ -100,7 +161,7 @@ export function chart(conf) {
   }
 
   // And when it is not hovered anymore
-  var noHighlight = function (e) {
+  const noHighlight = function (e) {
     svg.selectAll(".area").style("opacity", 1)
     svg.selectAll(".item-label").style("opacity", 1);
     svg.selectAll(".item-indicator").style("opacity", 1);
@@ -464,13 +525,13 @@ export function chart(conf) {
     let trs = "";
     for (const item of values_sorted) {
       trs += `<tr style="color: ${item.color}">
-        <td style="background-color: ${item.color
+          <td style="background-color: ${item.color
         }; width: 10px; height: 10px; border-radius: 5px; display: inline-block; margin-right: 2px;"></td>
-          <td style="padding-right: 0.8em; font-weight: 700;">${item.id}</td>
-          <td style="text-align: right; white-space: nowrap; font-weight: 700;">${conf.relative ? `${(item.value * 100).toFixed(2)}%` : item.value.toFixed(
+            <td style="padding-right: 0.8em; font-weight: 700;">${item.id}</td>
+            <td style="text-align: right; white-space: nowrap; font-weight: 700;">${conf.relative ? `${(item.value * 100).toFixed(2)}%` : item.value.toFixed(
           2
         )}</td>
-        </tr>`;
+          </tr>`;
     }
 
     tooltip
@@ -485,11 +546,4 @@ export function chart(conf) {
     tooltip.style("opacity", 0);
     mouseLine.style("opacity", 0);
   }
-
-
-
-
-
-
-
 }

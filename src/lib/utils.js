@@ -174,8 +174,6 @@ export function chemGasLtoGasKG(dict) {
 export function convert_and_add_emit_score(data) {
   const impacts = [];
 
-  console.log(data)
-
   for (const [key, value] of Object.entries(data)) {
     value.consumes = {};
     value.emits = {};
@@ -206,7 +204,6 @@ export function convert_and_add_emit_score(data) {
     for (const k of keys) {
       let carbon_eq_sum = dec("0");
       for (const [akey, avalue] of Object.entries(value[k + "Conv"])) {
-        console.log(akey, avalue, gwp)
         if (avalue.name in gwp) {
           // calc equivalent
           carbon_eq_sum = carbon_eq_sum.add(avalue.amount.times(gwp[avalue.name].gwp100));

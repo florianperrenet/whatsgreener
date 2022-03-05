@@ -23,6 +23,8 @@
 
   let chartData = null;
 
+  let barData = null;
+
   onMount(async () => {
     const response = await fetch(
       "/resources/ourworldindata-energy-mix-per-capita.json"
@@ -31,6 +33,23 @@
     energyMix = data;
     entities = energyMix.entities.map((entity) => [entity, entity]);
     selected = entities[0][0];
+
+    const barSeries = {};
+    for (const entity of energyMix.entities) {
+      barSeries[entity] = Math.floor(Math.random() * 100);
+    }
+
+    barData = {
+      type: "bar_vertical",
+      title: `Country impact scoring`,
+      description: "Some description",
+      source: "Calculations",
+      series: barSeries,
+      x: 100,
+      height: 1200,
+      xlabel: "Year",
+      ylabel: "TWh",
+    };
 
     // chart({
     //   el: chartEl,
@@ -89,6 +108,7 @@
       <div>
         <div>name: {source.name}</div>
         <div>impact: {source.impact}</div>
+        <div>cost: &euro;xx</div>
         <hr />
       </div>
     {/each}
@@ -106,13 +126,10 @@
 
     <!-- cost -->
     <h2>Country impact scoring</h2>
+
     <div>Worst score possible is: xx</div>
     {#if energyMix.entities}
-      {#each energyMix.entities as entity}
-        <div>
-          <div>name: {entity} &nbsp; score: 5</div>
-        </div>
-      {/each}
+      <Chart data={barData} />
     {/if}
 
     <h2>Energy sources</h2>
