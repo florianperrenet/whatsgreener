@@ -90,6 +90,8 @@
     {/if}
 
     <h2>Impact to produce 1kwh per source</h2>
+    <!-- cost -->
+    <h2>Country impact scoring</h2>
 
     <!-- <div class="not-prose">
       <div
