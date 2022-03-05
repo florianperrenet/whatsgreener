@@ -106,6 +106,16 @@
       <Chart data={barData} />
     {/if}
 
+    <h2>Energy source efficiency</h2>
+    <ul>
+      {#each Object.entries(energy_source_efficiency) as [key, value]}
+        <li>
+          <div>name: {key}</div>
+          <div>efficiency: {value}%</div>
+        </li>
+      {/each}
+    </ul>
+
     <h2>Footprint to produce 1kwh per source</h2>
     <!-- source footprint per kwh -->
 
@@ -117,17 +127,6 @@
         <hr />
       </div>
     {/each}
-
-    <h2>Energy source efficiency</h2>
-    <Toggle text="toggle">
-      {#each Object.entries(energy_source_efficiency) as [key, value]}
-        <div>
-          <div>name: {key}</div>
-          <div>efficiency: {value}%</div>
-          <hr />
-        </div>
-      {/each}
-    </Toggle>
 
     <!-- cost -->
     <h2>Country impact scoring</h2>
