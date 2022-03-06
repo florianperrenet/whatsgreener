@@ -219,6 +219,8 @@
     highlightSource = null;
   }
 
+  let stackedBarKey = "armr";
+
   // let sortOnSource = null;
   // function sortOnSource(source) {
   //   items = items.sort(descendingOnKey2("values", source));
@@ -232,6 +234,11 @@
     }
 
     return arr;
+  }
+
+  let relative = false;
+  function toggleRelative() {
+    relative = !relative;
   }
 
   $: getOpacity = (source) => {
@@ -251,6 +258,8 @@
       items = items.sort(descendingOnKey3("values", source, "a"));
     }
   };
+
+  $: stackedBarKey = relative ? "pr" : "armr";
 </script>
 
 <ContainerLayout>
@@ -308,6 +317,23 @@
 
     <div>Filter on country</div>
     <div class="mb-4">Order on amount or impact</div>
+
+    <label class="inline-flex items-center cursor-pointer select-none mb-4">
+      <input
+        type="checkbox"
+        on:click={toggleRelative}
+        class="
+        w-3
+        h-3
+      rounded
+      border-gray-300
+      text-blue-600
+      shadow-sm
+      focus:ring-transparent
+      "
+      />
+      <span class="ml-1">Relative</span>
+    </label>
 
     <!-- legenda -->
     <!-- add on hover -->
@@ -372,7 +398,7 @@
               <td class="py-1">
                 <div class="mb-1">
                   <StackedBar
-                    values={unpack(item.values, "armr")}
+                    values={unpack(item.values, stackedBarKey)}
                     colors={chartColors}
                     highlightKey={highlightSource}
                     activeKey={activeSource}
@@ -381,7 +407,7 @@
                 <div class="opacity-50">
                   <StackedBar
                     height="h-1"
-                    values={unpack(item.values, "armr")}
+                    values={unpack(item.values, stackedBarKey)}
                     colors={grayColors.slice(1).slice(-5)}
                   />
                 </div>
@@ -397,13 +423,13 @@
                   <div class="p-5">
                     <div class="mb-5">
                       <StackedBar
-                        values={unpack(item.values, "armr")}
+                        values={unpack(item.values, stackedBarKey)}
                         colors={chartColors}
                       />
                     </div>
                     <div class="mb-5">
                       <StackedBar
-                        values={unpack(item.values, "armr")}
+                        values={unpack(item.values, stackedBarKey)}
                         colors={grayColors.slice(1).slice(-5)}
                       />
                     </div>
