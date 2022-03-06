@@ -35,20 +35,41 @@
 
   //   return bars;
   // }
+
+  $: show = (key) => {
+    const isActive = key === activeKey;
+    const isHighlighted = key === highlightKey;
+    if (activeKey) {
+      if (highlightKey && !isHighlighted) return false;
+      if (isActive) return true;
+      if (isHighlighted) return true;
+      return false;
+    }
+    return true;
+  };
+
+  $: opacity = (key) => {
+    const isHighlighted = key === highlightKey;
+    const isActive = key === activeKey;
+    if (isActive) return 1;
+    if (isHighlighted && activeKey) return 0.8;
+    if (isHighlighted) return 1;
+    if (!highlightKey && !activeKey) return 1;
+    return 0.5;
+  };
 </script>
 
 <div class="overflow-hidden">
   <div class="flex w-full bg-gray-100 {height}">
     {#each Object.entries(values) as [key, value], index}
-      {#if activeKey !== null && key !== activeKey}{:else}
+      {#if show(key)}
         <div
-          class="{height} {highlightKey === key
-            ? ''
-            : highlightKey === null
-            ? ''
-            : 'opacity-20'}"
-          style="background-color: {colors[index]}; width: {value}%"
+          class={height}
+          style="background-color: {colors[index]}; opacity: {opacity(
+            key
+          )}; width: {value}%"
         />
+        <!-- {:else} -->
       {/if}
     {/each}
   </div>
