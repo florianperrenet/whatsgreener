@@ -55,7 +55,7 @@
     if (isHighlighted && activeKey) return 0.8;
     if (isHighlighted) return 1;
     if (!highlightKey && !activeKey) return 1;
-    return 0.5;
+    return 0.1;
   };
 </script>
 
