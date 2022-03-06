@@ -318,23 +318,6 @@
     <div>Filter on country</div>
     <div class="mb-4">Order on amount or impact</div>
 
-    <label class="inline-flex items-center cursor-pointer select-none mb-4">
-      <input
-        type="checkbox"
-        on:click={toggleRelative}
-        class="
-        w-3
-        h-3
-      rounded
-      border-gray-300
-      text-blue-600
-      shadow-sm
-      focus:ring-transparent
-      "
-      />
-      <span class="ml-1">Relative</span>
-    </label>
-
     <!-- legenda -->
     <!-- add on hover -->
     <!-- add on click -->
@@ -358,18 +341,37 @@
       {/if}
     </div>
 
-    <button
-      class="text-sm px-4 py-2 border font-medium rounded-md bg-white"
-      on:click={sortOnSource(activeSource)}
-    >
-      Sort energy mixture descending {#if activeSource}on {activeSource}{/if}
-    </button>
-    <button
-      class="text-sm px-4 py-2 border font-medium rounded-md bg-white"
-      on:click={sortOnSource(activeSource)}
-    >
-      Sort actual impact descending {#if activeSource}on {activeSource}{/if}
-    </button>
+    <div class="flex items-center gap-4">
+      <button
+        class="text-sm px-4 py-2 border font-medium rounded-md bg-white"
+        on:click={sortOnSource(activeSource)}
+      >
+        Sort energy mixture descending {#if activeSource}on {activeSource}{/if}
+      </button>
+      <button
+        class="text-sm px-4 py-2 border font-medium rounded-md bg-white"
+        on:click={sortOnSource(activeSource)}
+      >
+        Sort actual impact descending {#if activeSource}on {activeSource}{/if}
+      </button>
+
+      <label class="inline-flex items-center cursor-pointer select-none">
+        <input
+          type="checkbox"
+          on:click={toggleRelative}
+          class="
+            w-3
+            h-3
+            rounded
+            border-gray-300
+            text-blue-600
+            shadow-sm
+            focus:ring-transparent
+            "
+        />
+        <span class="ml-1">Relative</span>
+      </label>
+    </div>
 
     <table
       class="not-prose border-collapse table-auto divide-y divide-gray-200"
@@ -385,7 +387,8 @@
         >
         <th
           class="select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
-        />
+          >Amount</th
+        >
       </thead>
       <tbody class="divide-y divide-gray-200">
         {#if energyMix.entities}
