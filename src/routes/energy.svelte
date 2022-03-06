@@ -27,7 +27,9 @@
   let entities = [];
   let selected = null;
 
-  let year = "2019";
+  let _years = [];
+
+  let tableYear = "2019";
 
   let chartEl;
 
@@ -48,6 +50,8 @@
     const data = await response.json();
     energyMix = data;
     entities = energyMix.entities.map((entity) => [entity, entity]);
+    _years = energyMix.years.map((year) => [year, year]);
+
     selected = entities[0][0];
 
     // for (const [year, year_value] of Object.entries(energyMix.data[country])) {
@@ -62,7 +66,7 @@
     latestYear = energyMix.years[energyMix.years.length - 1];
 
     for (const [country, country_value] of Object.entries(energyMix.data)) {
-      const lastItem = country_value[latestYear];
+      const lastItem = country_value[tableYear];
       const values = {};
       for (const source of energyMix.sources) {
         values[source] = lastItem[source];
@@ -315,7 +319,7 @@
     <hr />
 
     <div class="not-prose">
-      <Select text="Year" bind:selected options={entities} />
+      <Select text="Year" bind:selected={tableYear} options={_years} />
     </div>
 
     <div class="mb-4">Filter on country</div>
