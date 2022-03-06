@@ -318,8 +318,7 @@
       <Select text="Year" bind:selected options={entities} />
     </div>
 
-    <div>Filter on country</div>
-    <div class="mb-4">Order on amount or impact</div>
+    <div class="mb-4">Filter on country</div>
 
     <!-- legenda -->
     <!-- add on hover -->
@@ -330,8 +329,8 @@
           <div
             class="flex items-center cursor-pointer"
             style="opacity: {getOpacity(source)}"
-            on:mouseover={() => handleMouseOver(source)}
-            on:mouseout={handleMouseOut}
+            on:mouseenter={() => handleMouseOver(source)}
+            on:mouseleave={handleMouseOut}
             on:click={() => handleClick(source)}
           >
             <div
