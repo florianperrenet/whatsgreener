@@ -17,6 +17,7 @@
     redColors,
     grayColors,
     dec,
+    descending,
     descendingOnKey,
     descendingOnKey2,
     descendingOnKey3,
@@ -50,7 +51,8 @@
     const data = await response.json();
     energyMix = data;
     entities = energyMix.entities.map((entity) => [entity, entity]);
-    _years = energyMix.years.map((year) => [year, year]);
+    const __years = energyMix.years.slice(1).reverse();
+    _years = __years.map((year) => [year, year]);
 
     selected = entities[0][0];
 

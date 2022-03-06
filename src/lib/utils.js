@@ -31,6 +31,12 @@ export function descendingOnKey(key) {
   };
 }
 
+export function descending() {
+  return function (a, b) {
+    return b - a;
+  };
+}
+
 export function descendingOnKey2(base, key) {
   return function (a, b) {
     return b[base][key] - a[base][key];
