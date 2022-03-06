@@ -235,13 +235,13 @@
   }
 
   $: getOpacity = (source) => {
-    if (source !== activeSource && activeSource !== null) {
-      return 0.5;
-    }
-    if (source !== highlightSource && highlightSource !== null) {
-      return 0.5;
-    }
-    return 1;
+    const isHighlighted = source === highlightSource;
+    const isActive = source === activeSource;
+    if (isActive) return 1;
+    if (isHighlighted && activeSource) return 0.8;
+    if (isHighlighted) return 1;
+    if (!highlightSource && !activeSource) return 1;
+    return 0.5;
   };
 
   $: sortOnSource = (source) => {
