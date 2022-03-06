@@ -258,6 +258,46 @@
     <h1>Energy footprint</h1>
     <!-- sources, efficiency, footprint, table -->
 
+    <h2>Energy sources</h2>
+    <ul>
+      <li>Oil</li>
+      <li>Coal</li>
+      <li>Natural gas</li>
+      <li>Nuclear</li>
+      <li>Hydro</li>
+      <li>Wind</li>
+      <li>Solar</li>
+
+      <li />
+      <li>Geothermal</li>
+      <li>Tide/Wave/Ocean</li>
+      <li>Biofuels and waste</li>
+    </ul>
+
+    <h2>Energy source efficiency</h2>
+    <ul>
+      {#each Object.entries(energy_source_efficiency) as [key, value]}
+        <li>
+          <div>name: {key}</div>
+          <div>efficiency: {value}%</div>
+        </li>
+      {/each}
+    </ul>
+
+    <h2>Footprint to produce 1kwh per source</h2>
+    <!-- source footprint per kwh -->
+
+    {#each Object.values(energy_footprint_per_kwh()) as source}
+      <div>
+        <div>name: {source.name}</div>
+        <div>impact: {source.impact}</div>
+        <div>cost: &euro;xx</div>
+        <hr />
+      </div>
+    {/each}
+
+    <h2>Per capita energy usage by source, 2019</h2>
+
     <div>per capita = per person</div>
     <div>per country</div>
     <hr />
@@ -293,13 +333,13 @@
     </div>
 
     <button
-      class="text-base px-4 py-2 border font-medium rounded-md bg-white"
+      class="text-sm px-4 py-2 border font-medium rounded-md bg-white"
       on:click={sortOnSource(activeSource)}
     >
       Sort energy mixture descending {#if activeSource}on {activeSource}{/if}
     </button>
     <button
-      class="text-base px-4 py-2 border font-medium rounded-md bg-white"
+      class="text-sm px-4 py-2 border font-medium rounded-md bg-white"
       on:click={sortOnSource(activeSource)}
     >
       Sort actual impact descending {#if activeSource}on {activeSource}{/if}
@@ -379,21 +419,21 @@
       </tbody>
     </table>
 
-    <h2>Energy usage mixture per capita</h2>
+    <!-- <h2>Energy usage mixture per capita</h2>
     <div class="not-prose">
       <Select text="Capita" bind:selected options={entities} />
-    </div>
+    </div> -->
 
-    {#if selected}
+    <!-- {#if selected}
       <Chart data={chartData} />
-    {/if}
+    {/if} -->
 
-    <h2>Per capita energy usage by source, 2019</h2>
+    <!-- <h2>Per capita energy usage by source, 2019</h2> -->
     <!-- {#if energyMix.entities}
       <Chart data={barData} />
     {/if} -->
 
-    <h2>Energy source efficiency</h2>
+    <!-- <h2>Energy source efficiency</h2>
     <ul>
       {#each Object.entries(energy_source_efficiency) as [key, value]}
         <li>
@@ -406,17 +446,17 @@
     <h2>Footprint to produce 1kwh per source</h2>
     <!-- source footprint per kwh -->
 
-    {#each Object.values(energy_footprint_per_kwh()) as source}
+    <!-- {#each Object.values(energy_footprint_per_kwh()) as source}
       <div>
         <div>name: {source.name}</div>
         <div>impact: {source.impact}</div>
         <div>cost: &euro;xx</div>
         <hr />
       </div>
-    {/each}
+    {/each} -->
 
     <!-- cost -->
-    <h2>Country impact scoring</h2>
+    <!-- <h2>Country impact scoring</h2>
 
     <div>Worst score possible is: xx</div>
     {#if energyMix.entities}
@@ -438,5 +478,7 @@
       <li>Tide/Wave/Ocean</li>
       <li>Biofuels and waste</li>
     </ul>
+  </div>
+-->
   </div>
 </ContainerLayout>
