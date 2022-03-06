@@ -372,16 +372,16 @@
     </button>
 
     <table
-      class="not-prose border-collapse table-fixed divide-y divide-gray-200"
+      class="not-prose border-collapse table-auto divide-y divide-gray-200"
     >
       <thead class="bg-gray-100">
         <th
-          class="select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
+          class="text-right select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
           >Country</th
         >
         <th
           class="select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
-          >Energy mixture / <br /> actual impact</th
+          >Energy mixture / actual impact</th
         >
         <th
           class="select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
@@ -394,8 +394,11 @@
               class="cursor-pointer hover:bg-gray-100"
               on:click={() => toggleDetails(item.country)}
             >
-              <td class="py-1">{item.country}</td>
-              <td class="py-1">
+              <td
+                class="py-1 px-2 text-right whitespace-nowrap"
+                style="width: 1%;">{item.country}</td
+              >
+              <td class="py-1 px-2">
                 <div class="mb-1">
                   <StackedBar
                     values={unpack(item.values, stackedBarKey)}
@@ -412,7 +415,10 @@
                   />
                 </div>
               </td>
-              <td class="text-xs">
+              <td
+                class="py-1 px-2 text-xs whitespace-nowrap"
+                style="width: 1%;"
+              >
                 <div>{item.total.toFixed(2)} kwh</div>
                 <div class="opacity-50">80 points</div>
               </td>
