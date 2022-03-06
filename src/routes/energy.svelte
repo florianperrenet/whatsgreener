@@ -18,6 +18,8 @@
     grayColors,
     dec,
     descendingOnKey,
+    descendingOnKey2,
+    descendingOnKey3,
   } from "$lib/utils";
   import { stringify } from "postcss";
 
@@ -73,6 +75,7 @@
     }
 
     _items.sort(descendingOnKey("total"));
+
     items = _items;
 
     const barSeries = [];
@@ -194,6 +197,50 @@
     }
     return d;
   }
+
+  let highlightSource = null;
+  let activeSource = null;
+
+  function handleClick(source) {
+    if (source === activeSource) {
+      activeSource = null;
+      // items = items.sort(descendingOnKey("total"));
+      return;
+    }
+
+    activeSource = source;
+  }
+
+  function handleMouseOver(source) {
+    highlightSource = source;
+  }
+
+  function handleMouseOut(e) {
+    highlightSource = null;
+  }
+
+  // let sortOnSource = null;
+  // function sortOnSource(source) {
+  //   items = items.sort(descendingOnKey2("values", source));
+  // }
+
+  function sortedItems(arr) {
+    if (sortOnSource) {
+      arr.sort(descendingOnKey2("values", sortOnSource));
+    } else {
+      arr.sort(descendingOnKey("total"));
+    }
+
+    return arr;
+  }
+
+  $: sortOnSource = (source) => {
+    if (source === null) {
+      items = items.sort(descendingOnKey("total"));
+    } else {
+      items = items.sort(descendingOnKey3("values", source, "a"));
+    }
+  };
 </script>
 
 <ContainerLayout>
@@ -218,7 +265,16 @@
     <div class="flex flex-wrap gap-4">
       {#if energyMix.entities}
         {#each energyMix.sources as source, index}
-          <div class="flex items-center">
+          <div
+            class="flex items-center cursor-pointer {highlightSource === source
+              ? ''
+              : highlightSource === null
+              ? ''
+              : 'opacity-50'}"
+            on:mouseover={() => handleMouseOver(source)}
+            on:mouseout={handleMouseOut}
+            on:click={() => handleClick(source)}
+          >
             <div
               class="w-2 h-2 mr-2"
               style="background-color: {chartColors[index]};"
@@ -227,6 +283,10 @@
           </div>
         {/each}
       {/if}
+    </div>
+
+    <div on:click={sortOnSource(activeSource)}>
+      Sort descending {#if activeSource}on {activeSource}{/if}
     </div>
 
     <table
@@ -250,6 +310,8 @@
                   <StackedBar
                     values={unpack(item.values, "armr")}
                     colors={chartColors}
+                    highlightKey={highlightSource}
+                    activeKey={activeSource}
                   />
                 </div>
                 <div class="opacity-50">

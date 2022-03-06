@@ -5,6 +5,9 @@
   export let colors;
   export let height = "h-3";
 
+  export let highlightKey = null;
+  export let activeKey = null;
+
   // console.log(values);
 
   // function getColor(value) {
@@ -37,10 +40,16 @@
 <div class="overflow-hidden">
   <div class="flex w-full bg-gray-100 {height}">
     {#each Object.entries(values) as [key, value], index}
-      <div
-        class={height}
-        style="background-color: {colors[index]}; width: {value}%"
-      />
+      {#if activeKey !== null && key !== activeKey}{:else}
+        <div
+          class="{height} {highlightKey === key
+            ? ''
+            : highlightKey === null
+            ? ''
+            : 'opacity-20'}"
+          style="background-color: {colors[index]}; width: {value}%"
+        />
+      {/if}
     {/each}
   </div>
 </div>

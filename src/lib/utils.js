@@ -31,6 +31,18 @@ export function descendingOnKey(key) {
   };
 }
 
+export function descendingOnKey2(base, key) {
+  return function (a, b) {
+    return b[base][key] - a[base][key];
+  };
+}
+
+export function descendingOnKey3(base, key, item) {
+  return function (a, b) {
+    return b[base][key][item] - a[base][key][item];
+  };
+}
+
 
 export function dec(s) {
   return new Decimal(s);
