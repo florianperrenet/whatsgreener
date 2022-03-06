@@ -236,6 +236,9 @@
     return arr;
   }
 
+  let tooltip;
+  let arrow;
+
   let relative = false;
   function toggleRelative() {
     relative = !relative;
@@ -408,6 +411,9 @@
                     colors={chartColors}
                     highlightKey={highlightSource}
                     activeKey={activeSource}
+                    title={item.country}
+                    {tooltip}
+                    {arrow}
                   />
                 </div>
                 <div class="opacity-50">
@@ -517,3 +523,15 @@
 -->
   </div>
 </ContainerLayout>
+
+<div
+  class="hidden absolute bg-white pointer-events-none shadow-md rounded-sm"
+  bind:this={tooltip}
+>
+  <div id="tooltip-html" class="text-xs p-3" />
+  <div
+    class="absolute bg-white"
+    style="width: 8px; height: 8px; transform: rotate(45deg);"
+    bind:this={arrow}
+  />
+</div>
