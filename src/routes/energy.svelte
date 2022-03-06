@@ -309,15 +309,23 @@
       class="not-prose border-collapse table-fixed divide-y divide-gray-200"
     >
       <thead class="bg-gray-100">
-        <th>Country</th>
-        <th>Energy mixture / actual impact</th>
-        <th />
+        <th
+          class="select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
+          >Country</th
+        >
+        <th
+          class="select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
+          >Energy mixture / <br /> actual impact</th
+        >
+        <th
+          class="select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
+        />
       </thead>
       <tbody class="divide-y divide-gray-200">
         {#if energyMix.entities}
           {#each items as item}
             <tr
-              class="cursor-pointer"
+              class="cursor-pointer hover:bg-gray-100"
               on:click={() => toggleDetails(item.country)}
             >
               <td class="py-1">{item.country}</td>
