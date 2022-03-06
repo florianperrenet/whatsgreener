@@ -255,7 +255,7 @@
     if (source === null) {
       items = items.sort(descendingOnKey("total"));
     } else {
-      items = items.sort(descendingOnKey3("values", source, "a"));
+      items = items.sort(descendingOnKey3("values", source, stackedBarKey));
     }
   };
 
@@ -338,7 +338,7 @@
     <!-- legenda -->
     <!-- add on hover -->
     <!-- add on click -->
-    <div class="flex flex-wrap gap-4 mb-4">
+    <div class="flex flex-wrap gap-4 mb-4 select-none">
       {#if energyMix.entities}
         {#each energyMix.sources as source, index}
           <div
