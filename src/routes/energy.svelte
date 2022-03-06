@@ -234,6 +234,16 @@
     return arr;
   }
 
+  $: getOpacity = (source) => {
+    if (source !== activeSource && activeSource !== null) {
+      return 0.5;
+    }
+    if (source !== highlightSource && highlightSource !== null) {
+      return 0.5;
+    }
+    return 1;
+  };
+
   $: sortOnSource = (source) => {
     if (source === null) {
       items = items.sort(descendingOnKey("total"));
@@ -257,20 +267,17 @@
     </div>
 
     <div>Filter on country</div>
-    <div>Order on amount or impact</div>
+    <div class="mb-4">Order on amount or impact</div>
 
     <!-- legenda -->
     <!-- add on hover -->
     <!-- add on click -->
-    <div class="flex flex-wrap gap-4">
+    <div class="flex flex-wrap gap-4 mb-4">
       {#if energyMix.entities}
         {#each energyMix.sources as source, index}
           <div
-            class="flex items-center cursor-pointer {highlightSource === source
-              ? ''
-              : highlightSource === null
-              ? ''
-              : 'opacity-50'}"
+            class="flex items-center cursor-pointer"
+            style="opacity: {getOpacity(source)}"
             on:mouseover={() => handleMouseOver(source)}
             on:mouseout={handleMouseOut}
             on:click={() => handleClick(source)}
@@ -285,16 +292,25 @@
       {/if}
     </div>
 
-    <div on:click={sortOnSource(activeSource)}>
-      Sort descending {#if activeSource}on {activeSource}{/if}
-    </div>
+    <button
+      class="text-base px-4 py-2 border font-medium rounded-md bg-white"
+      on:click={sortOnSource(activeSource)}
+    >
+      Sort energy mixture descending {#if activeSource}on {activeSource}{/if}
+    </button>
+    <button
+      class="text-base px-4 py-2 border font-medium rounded-md bg-white"
+      on:click={sortOnSource(activeSource)}
+    >
+      Sort actual impact descending {#if activeSource}on {activeSource}{/if}
+    </button>
 
     <table
       class="not-prose border-collapse table-fixed divide-y divide-gray-200"
     >
       <thead class="bg-gray-100">
         <th>Country</th>
-        <th>Energy mixture / impact</th>
+        <th>Energy mixture / actual impact</th>
         <th />
       </thead>
       <tbody class="divide-y divide-gray-200">
