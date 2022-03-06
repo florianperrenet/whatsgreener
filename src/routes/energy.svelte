@@ -199,15 +199,43 @@
 <ContainerLayout>
   <div class="prose lg:prose-lg prose-slate">
     <h1>Energy footprint</h1>
+    <!-- sources, efficiency, footprint, table -->
 
     <div>per capita = per person</div>
     <div>per country</div>
+    <hr />
+
+    <div class="not-prose">
+      <Select text="Year" bind:selected options={entities} />
+    </div>
+
+    <div>Filter on country</div>
+    <div>Order on amount or impact</div>
+
+    <!-- legenda -->
+    <!-- add on hover -->
+    <!-- add on click -->
+    <div class="flex flex-wrap gap-4">
+      {#if energyMix.entities}
+        {#each energyMix.sources as source, index}
+          <div class="flex items-center">
+            <div
+              class="w-2 h-2 mr-2"
+              style="background-color: {chartColors[index]};"
+            />
+            <span>{source}</span>
+          </div>
+        {/each}
+      {/if}
+    </div>
+
     <table
       class="not-prose border-collapse table-fixed divide-y divide-gray-200"
     >
       <thead class="bg-gray-100">
         <th>Country</th>
-        <th>Energy mixture</th>
+        <th>Energy mixture / impact</th>
+        <th />
       </thead>
       <tbody class="divide-y divide-gray-200">
         {#if energyMix.entities}
@@ -232,10 +260,14 @@
                   />
                 </div>
               </td>
+              <td class="text-xs">
+                <div>{item.total.toFixed(2)} kwh</div>
+                <div class="opacity-50">80 points</div>
+              </td>
             </tr>
             {#if showDetails[item.country]}
               <tr class="">
-                <td colspan="2">
+                <td colspan="3">
                   <div class="p-5">
                     <div class="mb-5">
                       <StackedBar
