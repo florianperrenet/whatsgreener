@@ -36,43 +36,53 @@
   const energySources = [
     {
       name: "Oil",
+      url: "/calculations#oil",
       img: "https://iea.imgix.net/32746c27-a6f7-44a4-bebc-3e8b15c07c7e/oil2012.png?auto=compress%2Cformat&fit=min&q=80&rect=1163%2C443%2C3087%2C2058&w=600&fit=crop&fm=jpg&q=70&auto=format&h=400",
     },
     {
       name: "Coal",
+      url: "/calculations#coal",
       img: "https://iea.imgix.net/0f8115b4-76a4-4882-a441-5e46778d694f/shutterstock_1185961420.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C21%2C4048%2C2701&w=600&fit=crop&fm=jpg&q=70&auto=format&h=400",
     },
     {
       name: "Natural gas",
+      url: "/calculations#natural gas",
       img: "https://iea.imgix.net/cf6d619d-e3e5-4fac-944b-7d9d7f4dded2/CoverGasMarketReport2022.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C0%2C4996%2C3326&w=600&fit=crop&fm=jpg&q=70&auto=format&h=399",
     },
     {
       name: "Nuclear",
+      url: "/calculations#nuclear",
       img: "https://iea.imgix.net/1d5c97e0-168b-4631-93db-697540c71b7f/nuclear.jpg.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C0%2C3000%2C2000&w=1460&fit=crop&fm=jpg&q=70&auto=format&h=973",
     },
     {
       name: "Hydro",
+      url: "/calculations#hydro",
       img: "https://iea.imgix.net/acded788-87f6-4092-bb2a-9ec1ed864d9f/shutterstock_475746370.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C0%2C3800%2C2533&w=600&fit=crop&fm=jpg&q=70&auto=format&h=400",
       // img: "https://iea.imgix.net/584bbbbc-879b-4854-aa75-1df457e9ea54/GettyImages-619758910.jpg?auto=compress%2Cformat&fit=min&q=80&rect=653%2C0%2C4681%2C3119&w=600&fit=crop&fm=jpg&q=70&auto=format&h=400",
     },
     {
       name: "Wind",
+      url: "/calculations#wind",
       img: "https://iea.imgix.net/60dc2ee0-6d77-4812-8078-31210ed0b670/wind_tall.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C3062%2C4500%2C3006&w=1460&fit=crop&fm=jpg&q=70&auto=format&h=975",
     },
     {
       name: "Solar",
+      url: "/calculations#solar",
       img: "https://iea.imgix.net/1d5c97e0-168b-4631-93db-697540c71b7f/solar.jpg.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C0%2C3000%2C2000&w=1460&fit=crop&fm=jpg&q=70&auto=format&h=973",
     },
     {
       name: "Geothermal",
+      url: "/calculations#geothermal",
       img: "https://iea.imgix.net/1d5c97e0-168b-4631-93db-697540c71b7f/other_renewables.jpg.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C0%2C3000%2C2000&w=1460&fit=crop&fm=jpg&q=70&auto=format&h=973",
     },
     {
       name: "Tide/Wave/Ocean",
+      url: "/calculations#tide/wave/ocean",
       img: "https://images.unsplash.com/photo-1508624217470-5ef0f947d8be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
     },
     {
       name: "Biofuels and waste",
+      url: "/calculations#biofuels and waste",
       img: "https://images.unsplash.com/photo-1567547921486-f280c2f53b5d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
     },
   ];
@@ -333,31 +343,32 @@
 </script>
 
 <ContainerLayout>
-  <div class="prose lg:prose-lg prose-slate max-w-container">
+  <div class="max-w-container prose prose-slate lg:prose-lg">
     <h1>Energy footprint</h1>
     <!-- sources, efficiency, footprint, table -->
 
     <h2>Energy sources</h2>
 
-    <div class="snap-x w-full flex gap-6 overflow-x-auto pb-5">
+    <div class="flex w-full snap-x gap-6 overflow-x-auto pb-5">
       {#each energySources as source, index}
-        <div class="snap-center shrink-0">
+        <div class="shrink-0 snap-center">
           <div
-            class="overflow-hidden relative shrink-0 w-96 h-60 rounded-lg shadow-lg bg-white bg-cover bg-no-repeat"
+            class="relative h-60 w-96 shrink-0 overflow-hidden rounded-lg bg-white bg-cover bg-no-repeat shadow-lg"
             style="background-image: url('{source.img}');"
           >
             <div
-              class="absolute inset-0 w-full h-full bg-gradient-to-b from-[rgba(0,0,0,.3)] to-[rgba(0,0,0,.1)]"
+              class="absolute inset-0 h-full w-full bg-gradient-to-b from-[rgba(0,0,0,.3)] to-[rgba(0,0,0,.1)]"
             >
               <!-- style="background-color: rgba(0,0,0,0.2);" -->
               <div class="p-5">
-                <div class="text-gray-300 text-xs font-semibold mb-1">
+                <div class="mb-1 text-xs font-semibold text-gray-300">
                   {index + 1} / {energySources.length}
                 </div>
-                <div class="text-white font-bold text-2xl">{source.name}</div>
-                <button
-                  class="absolute left-0 bottom-0 bg-white m-5 py-2 px-3 rounded-md text-xs font-medium"
-                  >Everything about {source.name} -></button
+                <div class="text-2xl font-bold text-white">{source.name}</div>
+                <a
+                  href={source.url}
+                  class="absolute left-0 bottom-0 m-5 rounded-md bg-white py-2 px-3 text-xs font-medium no-underline"
+                  >Everything about {source.name} -></a
                 >
               </div>
             </div>
@@ -397,18 +408,18 @@
     <!-- legenda -->
     <!-- add on hover -->
     <!-- add on click -->
-    <div class="flex flex-wrap gap-4 mb-4 select-none">
+    <div class="mb-4 flex select-none flex-wrap gap-4">
       {#if energyMix.entities}
         {#each energyMix.sources as source, index}
           <div
-            class="flex items-center cursor-pointer"
+            class="flex cursor-pointer items-center"
             style="opacity: {getOpacity(source)}"
             on:mouseenter={() => handleMouseOver(source)}
             on:mouseleave={handleMouseOut}
             on:click={() => handleClick(source)}
           >
             <div
-              class="w-2 h-2 mr-2"
+              class="mr-2 h-2 w-2"
               style="background-color: {chartColors[index]};"
             />
             <span>{source}</span>
@@ -433,25 +444,25 @@
 
     <div class="flex items-center gap-4">
       <button
-        class="text-sm px-4 py-2 border font-medium rounded-md bg-white"
+        class="rounded-md border bg-white px-4 py-2 text-sm font-medium"
         on:click={sortOnSource(activeSource)}
       >
         Sort energy mixture descending {#if activeSource}on {activeSource}{/if}
       </button>
       <button
-        class="text-sm px-4 py-2 border font-medium rounded-md bg-white"
+        class="rounded-md border bg-white px-4 py-2 text-sm font-medium"
         on:click={sortOnSource(activeSource)}
       >
         Sort actual impact descending {#if activeSource}on {activeSource}{/if}
       </button>
 
-      <label class="inline-flex items-center cursor-pointer select-none">
+      <label class="inline-flex cursor-pointer select-none items-center">
         <input
           type="checkbox"
           on:click={toggleRelative}
           class="
-            w-3
             h-3
+            w-3
             rounded
             border-gray-300
             text-blue-600
@@ -462,13 +473,13 @@
         <span class="ml-1">Relative</span>
       </label>
 
-      <label class="inline-flex items-center cursor-pointer select-none">
+      <label class="inline-flex cursor-pointer select-none items-center">
         <!-- on:click={toggleRelative} -->
         <input
           type="checkbox"
           class="
-            w-3
             h-3
+            w-3
             rounded
             border-gray-300
             text-blue-600
@@ -481,19 +492,19 @@
     </div>
 
     <table
-      class="not-prose border-collapse table-auto divide-y divide-gray-200"
+      class="not-prose table-auto border-collapse divide-y divide-gray-200"
     >
       <thead class="bg-gray-100">
         <th
-          class="text-right select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
+          class="cursor-pointer select-none border-b border-gray-200 p-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500 hover:bg-gray-100"
           >Country</th
         >
         <th
-          class="select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
+          class="cursor-pointer select-none border-b border-gray-200 p-3 text-xs font-medium uppercase tracking-wider text-gray-500 hover:bg-gray-100"
           >Energy mixture / actual impact</th
         >
         <th
-          class="select-none hover:bg-gray-100 cursor-pointer p-3 tracking-wider text-xs font-medium text-gray-500 uppercase border-b border-gray-200"
+          class="cursor-pointer select-none border-b border-gray-200 p-3 text-xs font-medium uppercase tracking-wider text-gray-500 hover:bg-gray-100"
           >Amount</th
         >
       </thead>
@@ -506,7 +517,7 @@
                 on:click={() => toggleDetails(item.country)}
               >
                 <td
-                  class="py-1 px-2 text-right whitespace-nowrap"
+                  class="whitespace-nowrap py-1 px-2 text-right"
                   style="width: 1%;">{item.country}</td
                 >
                 <td class="py-1 px-2">
@@ -530,7 +541,7 @@
                   </div>
                 </td>
                 <td
-                  class="py-1 px-2 text-xs whitespace-nowrap"
+                  class="whitespace-nowrap py-1 px-2 text-xs"
                   style="width: 1%;"
                 >
                   <div>{item.total.toFixed(2)} kwh</div>
@@ -631,10 +642,10 @@
 </ContainerLayout>
 
 <div
-  class="hidden absolute bg-white pointer-events-none shadow-md rounded-sm"
+  class="pointer-events-none absolute hidden rounded-sm bg-white shadow-md"
   bind:this={tooltip}
 >
-  <div id="tooltip-html" class="text-xs p-3" />
+  <div id="tooltip-html" class="p-3 text-xs" />
   <div
     class="absolute bg-white"
     style="width: 8px; height: 8px; transform: rotate(45deg);"
