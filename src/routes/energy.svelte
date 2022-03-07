@@ -350,7 +350,7 @@
       {/each}
     </div>
 
-    <h2>Energy source efficiency</h2>
+    <h2>Energy sources efficiency</h2>
     <!-- <ul>
         {#each Object.entries(energy_source_efficiency) as [key, value]}
           <li>
@@ -360,10 +360,10 @@
         {/each}
       </ul> -->
 
-    <h2>Energy source scarcity</h2>
+    <h2>Energy sources scarcity</h2>
 
     <!-- <h2>Footprint to produce 1kwh per source</h2> -->
-    <h2>Energy source footprint to produce 1kwh</h2>
+    <h2>Energy sources footprint to produce 1kwh</h2>
     <!-- source footprint per kwh -->
 
     {#each Object.values(energy_footprint_per_kwh()) as source}

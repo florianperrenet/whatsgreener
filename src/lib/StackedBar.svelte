@@ -166,11 +166,11 @@
 </script>
 
 <div class="overflow-hidden">
-  <div class="flex flex-row w-full bg-gray-100 {height}">
+  <div class="w-full bg-gray-100">
     {#each Object.entries(values) as [key, value], index}
       {#if show(key)}
         <div
-          class={height}
+          class="inline-block {height}"
           style="background-color: {colors[index]}; opacity: {opacity(
             key,
             highlightKey,
