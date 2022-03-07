@@ -522,11 +522,11 @@
                     />
                   </div>
                   <div class="opacity-50">
-                    <!-- <StackedBar
+                    <StackedBar
                       height="h-1"
                       values={unpack(item.values, stackedBarKey)}
                       colors={grayColors.slice(1).slice(-5)}
-                    /> -->
+                    />
                   </div>
                 </td>
                 <td
@@ -548,10 +548,10 @@
                         />
                       </div>
                       <div class="mb-5">
-                        <!-- <StackedBar
+                        <StackedBar
                           values={unpack(item.values, stackedBarKey)}
                           colors={grayColors.slice(1).slice(-5)}
-                        /> -->
+                        />
                       </div>
                       <div>
                         <Chart data={chData(item.country)} />
