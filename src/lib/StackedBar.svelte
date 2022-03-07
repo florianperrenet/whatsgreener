@@ -1,5 +1,6 @@
 <script>
   import { dec, chartColors } from "$lib/utils";
+  import * as d3 from "d3";
 
   // import { tooltip } from "$lib/tooltip";
 
@@ -26,6 +27,8 @@
   export let activeKey = null;
 
   import { onMount } from "svelte";
+
+  let stackedBar;
 
   // console.log(values);
 
@@ -164,7 +167,36 @@
     if (!_highlightKey && !_activeKey) return 1;
     return lowestOpacity;
   };
+
+  onMount(() => {
+    const el = d3.select(stackedBar);
+    const svg = el
+      .append("svg")
+      .attr("width", "100%")
+      .attr("height", "10")
+      .append("g");
+
+    let index = 0;
+    let x = 0;
+    for (const [key, value] of Object.entries(values)) {
+      const color = colors[index++];
+      const _opacity = opacity(key, highlightKey, activeKey, 0.1);
+      svg
+        .append("rect")
+        .attr("width", `${value}%`)
+        .attr("height", "10")
+        .attr("fill", color)
+        .attr("opacity", _opacity)
+        .attr("x", `${x}%`)
+        .on("mouseenter", (e) => onMouseEnter(e, key, values))
+        .on("mouseleave", onMouseLeave);
+
+      x += value;
+    }
+  });
 </script>
+
+<div bind:this={stackedBar} />
 
 <!-- <div class="overflow-hidden">
   <div class="flex flex-row w-full bg-gray-100 {height}">
@@ -186,6 +218,10 @@
   </div>
 </div> -->
 
-<svg class="w-full h-3">
-  <rect width="10%" height="10" />
-</svg>
+<!-- <svg class="w-full h-3">
+  {#each Object.entries(values) as [key, value], index}
+    {#if show(key)}
+      <rect width="{value}%" height="10" x="calc({value}%)" />
+    {/if}
+  {/each}
+</svg> -->
