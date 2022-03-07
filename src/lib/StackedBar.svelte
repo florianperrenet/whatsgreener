@@ -204,7 +204,12 @@
       {#if show(key)}
         <div
           class={height}
-          style="background-color: #000; opacity: 1; width: {value}%;"
+          style="background-color: {colors[index]}; opacity: {opacity(
+            key,
+            highlightKey,
+            activeKey,
+            0.1
+          )}; width: {value}%;"
           on:mouseenter={(e) => onMouseEnter(e, key, values)}
           on:mouseleave={onMouseLeave}
         />
