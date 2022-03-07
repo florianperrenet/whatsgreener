@@ -334,13 +334,13 @@
             >
               <!-- style="background-color: rgba(0,0,0,0.2);" -->
               <div class="p-5">
-                <div class="text-white text-sm">
-                  {index + 1}/{energySources.length}
+                <div class="text-gray-300 text-xs font-semibold mb-1">
+                  {index + 1} / {energySources.length}
                 </div>
-                <div class="text-white font-bold text-xl">{source.name}</div>
+                <div class="text-white font-bold text-2xl">{source.name}</div>
                 <button
-                  class="absolute left-0 bottom-0 bg-white m-5 py-1 px-3 rounded-md text-base"
-                  >View {source.name} -></button
+                  class="absolute left-0 bottom-0 bg-white m-5 py-2 px-3 rounded-md text-xs font-medium"
+                  >Everything about {source.name} -></button
                 >
               </div>
             </div>
