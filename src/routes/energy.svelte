@@ -295,6 +295,8 @@
     relative = !relative;
   }
 
+  let filterCountry = null;
+
   $: getOpacity = (source) => {
     const isHighlighted = source === highlightSource;
     const isActive = source === activeSource;
@@ -312,6 +314,20 @@
       items = items.sort(descendingOnKey3("values", source, stackedBarKey));
     }
   };
+
+  // let filteredItems = null;
+
+  // $: if (filterCountry === null) {
+  //   filteredItems = items;
+  //   const _items = [];
+  //   for (const item of items) {
+  //     if (item.country.startsWith(filterCountry)) {
+  //       _items.push(item);
+  //     }
+  //   }
+
+  //   items = _items;
+  // }
 
   $: stackedBarKey = relative ? "pr" : "armr";
 </script>
@@ -383,7 +399,12 @@
     </div>
 
     <div class="not-prose mb-4">
-      <Input label="Filter on country" type="text" placeholder="country" />
+      <Input
+        label="Filter on country"
+        type="text"
+        placeholder="country"
+        bind:value={filterCountry}
+      />
     </div>
 
     <!-- legenda -->
@@ -478,64 +499,66 @@
       <tbody class="divide-y divide-gray-200">
         {#if energyMix.entities}
           {#each items as item}
-            <tr
-              class="cursor-pointer hover:bg-gray-100"
-              on:click={() => toggleDetails(item.country)}
-            >
-              <td
-                class="py-1 px-2 text-right whitespace-nowrap"
-                style="width: 1%;">{item.country}</td
+            {#if filterCountry === null || item.country.startsWith(filterCountry)}
+              <tr
+                class="cursor-pointer hover:bg-gray-100"
+                on:click={() => toggleDetails(item.country)}
               >
-              <td class="py-1 px-2">
-                <div class="mb-1">
-                  <StackedBar
-                    values={unpack(item.values, stackedBarKey)}
-                    colors={chartColors}
-                    highlightKey={highlightSource}
-                    activeKey={activeSource}
-                    title={item.country}
-                    {tooltip}
-                    {arrow}
-                  />
-                </div>
-                <div class="opacity-50">
-                  <StackedBar
-                    height="h-1"
-                    values={unpack(item.values, stackedBarKey)}
-                    colors={grayColors.slice(1).slice(-5)}
-                  />
-                </div>
-              </td>
-              <td
-                class="py-1 px-2 text-xs whitespace-nowrap"
-                style="width: 1%;"
-              >
-                <div>{item.total.toFixed(2)} kwh</div>
-                <div class="opacity-50">80 points</div>
-              </td>
-            </tr>
-            {#if showDetails[item.country]}
-              <tr class="">
-                <td colspan="3">
-                  <div class="p-5">
-                    <div class="mb-5">
-                      <StackedBar
-                        values={unpack(item.values, stackedBarKey)}
-                        colors={chartColors}
-                      />
-                    </div>
-                    <div class="mb-5">
-                      <StackedBar
-                        values={unpack(item.values, stackedBarKey)}
-                        colors={grayColors.slice(1).slice(-5)}
-                      />
-                    </div>
-                    <div>
-                      <Chart data={chData(item.country)} />
-                    </div>
+                <td
+                  class="py-1 px-2 text-right whitespace-nowrap"
+                  style="width: 1%;">{item.country}</td
+                >
+                <td class="py-1 px-2">
+                  <div class="mb-1">
+                    <StackedBar
+                      values={unpack(item.values, stackedBarKey)}
+                      colors={chartColors}
+                      highlightKey={highlightSource}
+                      activeKey={activeSource}
+                      title={item.country}
+                      {tooltip}
+                      {arrow}
+                    />
+                  </div>
+                  <div class="opacity-50">
+                    <StackedBar
+                      height="h-1"
+                      values={unpack(item.values, stackedBarKey)}
+                      colors={grayColors.slice(1).slice(-5)}
+                    />
                   </div>
                 </td>
+                <td
+                  class="py-1 px-2 text-xs whitespace-nowrap"
+                  style="width: 1%;"
+                >
+                  <div>{item.total.toFixed(2)} kwh</div>
+                  <div class="opacity-50">80 points</div>
+                </td>
               </tr>
+              {#if showDetails[item.country]}
+                <tr class="">
+                  <td colspan="3">
+                    <div class="p-5">
+                      <div class="mb-5">
+                        <StackedBar
+                          values={unpack(item.values, stackedBarKey)}
+                          colors={chartColors}
+                        />
+                      </div>
+                      <div class="mb-5">
+                        <StackedBar
+                          values={unpack(item.values, stackedBarKey)}
+                          colors={grayColors.slice(1).slice(-5)}
+                        />
+                      </div>
+                      <div>
+                        <Chart data={chData(item.country)} />
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              {/if}
             {/if}
           {/each}
         {/if}
