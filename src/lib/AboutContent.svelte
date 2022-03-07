@@ -259,6 +259,8 @@
 
 <h2>Energy</h2>
 
+<h3>Sources</h3>
+
 <h3>Oil</h3>
 <h4>Combustion</h4>
 <p>Text</p>
@@ -616,10 +618,10 @@ The difference could be 10%.
   water usage.
 </p>
 
-<table class="table table-bordered">
+<table class="table-bordered table">
   <tbody>
     <tr>
-      <td rowspan="7" class="text-center text-middle">Emits</td>
+      <td rowspan="7" class="text-middle text-center">Emits</td>
       <td colspan="2" class="text-center">Heat</td>
       <td class="text-right">formula</td>
       <td class="text-right">food</td>
@@ -630,7 +632,7 @@ The difference could be 10%.
       <td class="text-right">water</td>
     </tr>
     <tr>
-      <td rowspan="5" class="text-center text-middle">Organic solids</td>
+      <td rowspan="5" class="text-middle text-center">Organic solids</td>
       <td>Carbohydrate</td>
       <td class="text-right">7.03%</td>
       <td class="text-right">food</td>
@@ -859,7 +861,7 @@ Car used for comparisons: or only do weight instead of specific car..?
 <hr />
 <h2>References</h2>
 {#each Object.entries(bibliography) as [key, item]}
-  <div id="bib-{key}" class="mb-4 text-base truncate">
+  <div id="bib-{key}" class="mb-4 truncate text-base">
     <span>[{item.index}]</span>
     <span>"{item.title}"</span>
     <br />
