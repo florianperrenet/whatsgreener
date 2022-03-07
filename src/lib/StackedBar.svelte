@@ -166,7 +166,7 @@
 </script>
 
 <div class="overflow-hidden">
-  <div class="flex w-full bg-gray-100 {height}">
+  <div class="flex flex-row w-full bg-gray-100 {height}">
     {#each Object.entries(values) as [key, value], index}
       {#if show(key)}
         <div
