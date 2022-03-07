@@ -196,27 +196,22 @@
   });
 </script>
 
-<div bind:this={stackedBar} />
+<!-- <div bind:this={stackedBar} /> -->
 
-<!-- <div class="overflow-hidden">
+<div class="overflow-hidden">
   <div class="flex flex-row w-full bg-gray-100 {height}">
     {#each Object.entries(values) as [key, value], index}
       {#if show(key)}
         <div
           class={height}
-          style="background-color: {colors[index]}; opacity: {opacity(
-            key,
-            highlightKey,
-            activeKey,
-            0.1
-          )}; width: {value}%"
+          style="background-color: #000; opacity: 1; width: {value}%"
           on:mouseenter={(e) => onMouseEnter(e, key, values)}
           on:mouseleave={onMouseLeave}
         />
       {/if}
     {/each}
   </div>
-</div> -->
+</div>
 
 <!-- <svg class="w-full h-3">
   {#each Object.entries(values) as [key, value], index}
