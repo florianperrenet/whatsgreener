@@ -32,6 +32,50 @@
 
   let tableYear = "2019";
 
+  const energySources = [
+    {
+      name: "Oil",
+      img: "https://iea.imgix.net/32746c27-a6f7-44a4-bebc-3e8b15c07c7e/oil2012.png?auto=compress%2Cformat&fit=min&q=80&rect=1163%2C443%2C3087%2C2058&w=600&fit=crop&fm=jpg&q=70&auto=format&h=400",
+    },
+    {
+      name: "Coal",
+      img: "https://iea.imgix.net/0f8115b4-76a4-4882-a441-5e46778d694f/shutterstock_1185961420.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C21%2C4048%2C2701&w=600&fit=crop&fm=jpg&q=70&auto=format&h=400",
+    },
+    {
+      name: "Natural gas",
+      img: "https://iea.imgix.net/cf6d619d-e3e5-4fac-944b-7d9d7f4dded2/CoverGasMarketReport2022.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C0%2C4996%2C3326&w=600&fit=crop&fm=jpg&q=70&auto=format&h=399",
+    },
+    {
+      name: "Nuclear",
+      img: "https://iea.imgix.net/1d5c97e0-168b-4631-93db-697540c71b7f/nuclear.jpg.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C0%2C3000%2C2000&w=1460&fit=crop&fm=jpg&q=70&auto=format&h=973",
+    },
+    {
+      name: "Hydro",
+      img: "https://iea.imgix.net/acded788-87f6-4092-bb2a-9ec1ed864d9f/shutterstock_475746370.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C0%2C3800%2C2533&w=600&fit=crop&fm=jpg&q=70&auto=format&h=400",
+      // img: "https://iea.imgix.net/584bbbbc-879b-4854-aa75-1df457e9ea54/GettyImages-619758910.jpg?auto=compress%2Cformat&fit=min&q=80&rect=653%2C0%2C4681%2C3119&w=600&fit=crop&fm=jpg&q=70&auto=format&h=400",
+    },
+    {
+      name: "Wind",
+      img: "https://iea.imgix.net/60dc2ee0-6d77-4812-8078-31210ed0b670/wind_tall.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C3062%2C4500%2C3006&w=1460&fit=crop&fm=jpg&q=70&auto=format&h=975",
+    },
+    {
+      name: "Solar",
+      img: "https://iea.imgix.net/1d5c97e0-168b-4631-93db-697540c71b7f/solar.jpg.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C0%2C3000%2C2000&w=1460&fit=crop&fm=jpg&q=70&auto=format&h=973",
+    },
+    {
+      name: "Geothermal",
+      img: "https://iea.imgix.net/1d5c97e0-168b-4631-93db-697540c71b7f/other_renewables.jpg.jpg?auto=compress%2Cformat&fit=min&q=80&rect=0%2C0%2C3000%2C2000&w=1460&fit=crop&fm=jpg&q=70&auto=format&h=973",
+    },
+    {
+      name: "Tide/Wave/Ocean",
+      img: "https://images.unsplash.com/photo-1560260240-c6ef90a163a4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80",
+    },
+    {
+      name: "Biofuels and waste",
+      img: "https://images.unsplash.com/photo-1567547921486-f280c2f53b5d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+    },
+  ];
+
   let chartEl;
 
   let series = {};
@@ -277,30 +321,45 @@
     <!-- sources, efficiency, footprint, table -->
 
     <h2>Energy sources</h2>
-    <ul>
-      <li>Oil</li>
-      <li>Coal</li>
-      <li>Natural gas</li>
-      <li>Nuclear</li>
-      <li>Hydro</li>
-      <li>Wind</li>
-      <li>Solar</li>
 
-      <li />
-      <li>Geothermal</li>
-      <li>Tide/Wave/Ocean</li>
-      <li>Biofuels and waste</li>
-    </ul>
+    <div class="snap-x w-full flex gap-6 overflow-x-auto pb-10">
+      {#each energySources as source, index}
+        <div class="snap-center shrink-0">
+          <div
+            class="overflow-hidden relative shrink-0 w-96 h-60 rounded-lg shadow-lg bg-white bg-cover bg-no-repeat"
+            style="background-image: url('{source.img}');"
+          >
+            <div
+              class="absolute inset-0 w-full h-full bg-gradient-to-b from-[rgba(0,0,0,.3)] to-[rgba(0,0,0,.1)]"
+            >
+              <!-- style="background-color: rgba(0,0,0,0.2);" -->
+              <div class="p-5">
+                <div class="text-white text-sm">
+                  {index + 1}/{energySources.length}
+                </div>
+                <div class="text-white font-bold text-xl">{source.name}</div>
+                <button
+                  class="absolute left-0 bottom-0 bg-white m-5 py-1 px-3 rounded-md text-base"
+                  >View {source.name} -></button
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      {/each}
+    </div>
 
     <h2>Energy source efficiency</h2>
-    <ul>
-      {#each Object.entries(energy_source_efficiency) as [key, value]}
-        <li>
-          <div>name: {key}</div>
-          <div>efficiency: {value}%</div>
-        </li>
-      {/each}
-    </ul>
+    <Toggle>
+      <ul>
+        {#each Object.entries(energy_source_efficiency) as [key, value]}
+          <li>
+            <div>name: {key}</div>
+            <div>efficiency: {value}%</div>
+          </li>
+        {/each}
+      </ul>
+    </Toggle>
 
     <h2>Footprint to produce 1kwh per source</h2>
     <!-- source footprint per kwh -->
