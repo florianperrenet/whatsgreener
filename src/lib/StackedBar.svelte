@@ -204,7 +204,7 @@
       {#if show(key)}
         <div
           class={height}
-          style="background-color: #000; opacity: 1; width: {value}%"
+          style="background-color: #000; opacity: 1; width: {value}%;"
           on:mouseenter={(e) => onMouseEnter(e, key, values)}
           on:mouseleave={onMouseLeave}
         />
