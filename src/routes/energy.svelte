@@ -3,6 +3,7 @@
   import ContainerLayout from "$lib/ContainerLayout.svelte";
   import Select from "$lib/Select.svelte";
   import StackedBar from "$lib/StackedBar.svelte";
+  import Input from "$lib/Input.svelte";
   import {
     energy_footprint_per_kwh,
     energy_source_efficiency,
@@ -68,7 +69,7 @@
     },
     {
       name: "Tide/Wave/Ocean",
-      img: "https://images.unsplash.com/photo-1560260240-c6ef90a163a4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80",
+      img: "https://images.unsplash.com/photo-1508624217470-5ef0f947d8be?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
     },
     {
       name: "Biofuels and waste",
@@ -316,13 +317,13 @@
 </script>
 
 <ContainerLayout>
-  <div class="prose lg:prose-lg prose-slate">
+  <div class="prose lg:prose-lg prose-slate max-w-container">
     <h1>Energy footprint</h1>
     <!-- sources, efficiency, footprint, table -->
 
     <h2>Energy sources</h2>
 
-    <div class="snap-x w-full flex gap-6 overflow-x-auto pb-10">
+    <div class="snap-x w-full flex gap-6 overflow-x-auto pb-5">
       {#each energySources as source, index}
         <div class="snap-center shrink-0">
           <div
@@ -350,18 +351,19 @@
     </div>
 
     <h2>Energy source efficiency</h2>
-    <Toggle>
-      <ul>
+    <!-- <ul>
         {#each Object.entries(energy_source_efficiency) as [key, value]}
           <li>
             <div>name: {key}</div>
             <div>efficiency: {value}%</div>
           </li>
         {/each}
-      </ul>
-    </Toggle>
+      </ul> -->
 
-    <h2>Footprint to produce 1kwh per source</h2>
+    <h2>Energy source scarcity</h2>
+
+    <!-- <h2>Footprint to produce 1kwh per source</h2> -->
+    <h2>Energy source footprint to produce 1kwh</h2>
     <!-- source footprint per kwh -->
 
     {#each Object.values(energy_footprint_per_kwh()) as source}
@@ -373,17 +375,16 @@
       </div>
     {/each}
 
-    <h2>Per capita energy usage by source, 2019</h2>
-
-    <div>per capita = per person</div>
-    <div>per country</div>
-    <hr />
+    <!-- <h2>Per capita energy usage by source, 2019</h2> -->
+    <h2>Energy usage per country "per capita", {tableYear}</h2>
 
     <div class="not-prose">
       <Select text="Year" bind:selected={tableYear} options={_years} />
     </div>
 
-    <div class="mb-4">Filter on country</div>
+    <div class="not-prose mb-4">
+      <Input label="Filter on country" type="text" placeholder="country" />
+    </div>
 
     <!-- legenda -->
     <!-- add on hover -->
@@ -437,6 +438,23 @@
             "
         />
         <span class="ml-1">Relative</span>
+      </label>
+
+      <label class="inline-flex items-center cursor-pointer select-none">
+        <!-- on:click={toggleRelative} -->
+        <input
+          type="checkbox"
+          class="
+            w-3
+            h-3
+            rounded
+            border-gray-300
+            text-blue-600
+            shadow-sm
+            focus:ring-transparent
+            "
+        />
+        <span class="ml-1">Per capita</span>
       </label>
     </div>
 
