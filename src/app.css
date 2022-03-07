@@ -1,0 +1,12 @@
+@import url('https://rsms.me/inter/inter.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer utilities {
+  .max-w-container {
+    max-width: 85rem;
+  }
+}
