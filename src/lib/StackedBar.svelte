@@ -11,6 +11,7 @@
     offset,
     arrow as flarrow,
   } from "@floating-ui/dom";
+  import { svg } from "d3";
 
   export let values;
   export let colors;
@@ -165,7 +166,7 @@
   };
 </script>
 
-<div class="overflow-hidden">
+<!-- <div class="overflow-hidden">
   <div class="flex flex-row w-full bg-gray-100 {height}">
     {#each Object.entries(values) as [key, value], index}
       {#if show(key)}
@@ -183,4 +184,8 @@
       {/if}
     {/each}
   </div>
-</div>
+</div> -->
+
+<svg class="w-full h-3">
+  <rect width="10%" height="10" />
+</svg>

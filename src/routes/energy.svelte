@@ -394,19 +394,6 @@
     <!-- <h2>Per capita energy usage by source, 2019</h2> -->
     <h2>Energy usage per country "per capita", {tableYear}</h2>
 
-    <div class="not-prose">
-      <Select text="Year" bind:selected={tableYear} options={_years} />
-    </div>
-
-    <div class="not-prose mb-4">
-      <Input
-        label="Filter on country"
-        type="text"
-        placeholder="country"
-        bind:value={filterCountry}
-      />
-    </div>
-
     <!-- legenda -->
     <!-- add on hover -->
     <!-- add on click -->
@@ -428,6 +415,20 @@
           </div>
         {/each}
       {/if}
+    </div>
+
+    <div class="not-prose">
+      <Select text="Year" bind:selected={tableYear} options={_years} />
+    </div>
+
+    <div class="not-prose mb-4">
+      <Input
+        label="Filter on country"
+        type="text"
+        placeholder="country"
+        bind:value={filterCountry}
+        autocomplete={false}
+      />
     </div>
 
     <div class="flex items-center gap-4">
