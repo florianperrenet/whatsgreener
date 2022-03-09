@@ -10,9 +10,17 @@ import { dec, timePerKm, convert_and_add_emit_score, travelTimeHours, travelTime
 
 // TODO random values..
 export const energy_source_efficiency = {
-  oil: dec("30"),
-  coal: dec("30"),
-  natural_gas: dec("40"),
+  // https://geospatial.blogs.com/geospatial/2010/01/energy-efficiency-of-fossil-fuel-power-generation.html#:~:text=The%20average%20efficiencies%20of%20power,up%20the%20stack%22%20as%20heat.
+  oil: dec("38"),
+
+  // Life_Cycle_Assessment_of_Fossil_and_Biomass_Power_
+  // 19/74
+  coal: dec("43"), // 46<->40
+  lignite: dec("40"),
+  natural_gas: dec("59"),
+
+  // https://en.wikipedia.org/wiki/Solar_cell_efficiency
+  solar: dec("25"), // 47.1<->12.6
 };
 
 

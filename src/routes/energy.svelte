@@ -378,16 +378,45 @@
     </div>
 
     <h2>Energy sources efficiency</h2>
-    <!-- <ul>
+    <!-- with btu example? -->
+    <table class="not-prose">
+      <thead>
+        <th>Source</th>
+        <th>Efficiency</th>
+      </thead>
+      <tbody>
         {#each Object.entries(energy_source_efficiency) as [key, value]}
-          <li>
-            <div>name: {key}</div>
-            <div>efficiency: {value}%</div>
-          </li>
+          <tr>
+            <td>{key}</td>
+            <td>{value}%</td>
+          </tr>
         {/each}
-      </ul> -->
+      </tbody>
+    </table>
 
     <h2>Energy sources scarcity</h2>
+    <table class="not-prose">
+      <thead>
+        <th>Source</th>
+        <!-- <th>Available</th> -->
+        <th>Proven reserves</th>
+        <th>Used</th>
+        <th>Use rate</th>
+        <th>Regain rate</th>
+        <th>Left</th>
+        <th>Time till depletion</th>
+      </thead>
+      <tbody>
+        {#each Object.entries(energy_source_efficiency) as [key, value]}
+          <tr>
+            <td>{key}</td>
+            <td>{value} xx</td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+
+    <h2>Energy sources total energy supply</h2>
 
     <!-- <h2>Footprint to produce 1kwh per source</h2> -->
     <h2>Energy sources footprint to produce 1kwh</h2>

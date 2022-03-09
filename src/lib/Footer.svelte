@@ -1,5 +1,5 @@
 <footer
-  class="pt-10 pb-20 border-t border-gray-200 bg-white"
+  class="border-t border-gray-200 bg-white pt-10 pb-20"
   style="z-index: 5;"
 >
   <div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
@@ -7,8 +7,8 @@
       <img src="/whatsgreener-logo-site.png" alt="" width="175" />
     </div>
     <div class="flex">
-      <div class="flex-none w-1/2 lg:flex space-y-8 lg:space-y-0">
-        <div class="lg:flex-none lg:w-1/2">
+      <div class="w-1/2 flex-none space-y-8 lg:flex lg:space-y-0">
+        <div class="lg:w-1/2 lg:flex-none">
           <div class="font-semibold">Getting started</div>
           <ul class="mt-3 space-y-2">
             <li><a href="/energy">Energy</a></li>
@@ -16,16 +16,17 @@
             <li><a href="/food">Food</a></li>
           </ul>
         </div>
-        <div class="lg:flex-none lg:w-1/2">
+        <div class="lg:w-1/2 lg:flex-none">
           <div class="font-semibold">Core concepts</div>
           <ul class="mt-3 space-y-2">
             <li><a href="#">Open source</a></li>
+            <li><a href="#">Full footprint</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="flex-none w-1/2 lg:flex space-y-8 lg:space-y-0">
-        <div class="lg:flex-none lg:w-1/2">
+      <div class="w-1/2 flex-none space-y-8 lg:flex lg:space-y-0">
+        <div class="lg:w-1/2 lg:flex-none">
           <div class="font-semibold">Calculations</div>
           <ul class="mt-3 space-y-2">
             <li><a href="/calculations#energy">Energy</a></li>
@@ -33,7 +34,7 @@
             <li><a href="/calculations#food">Food</a></li>
           </ul>
         </div>
-        <div class="lg:flex-none lg:w-1/2">
+        <div class="lg:w-1/2 lg:flex-none">
           <div class="font-semibold">Community</div>
           <ul class="mt-3 space-y-2">
             <li>
