@@ -24,6 +24,16 @@ export const energy_source_efficiency = {
 };
 
 
+export const energy_source_proven_reserves = {
+  oil: 244.4,  // thousand million tonnes
+  gas: 188.1,  // trillion cubic meters
+  coal: 1074108,  // million tonnes
+  cobalt: 6902,  // thousand tonnes
+  lithium: 18955,  // thousand tonnes
+  uranium: 16,  // million metric tonnes https://www.scientificamerican.com/article/how-long-will-global-uranium-deposits-last/
+};
+
+
 const hard_coal = (() => {
   const data = {
     in: {

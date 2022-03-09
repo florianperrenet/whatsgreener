@@ -342,6 +342,10 @@
   $: stackedBarKey = relative ? "pr" : "armr";
 </script>
 
+<svelte:head>
+  <title>Energy</title>
+</svelte:head>
+
 <ContainerLayout>
   <div class="max-w-container prose prose-slate lg:prose-lg">
     <h1>Energy footprint</h1>
@@ -395,6 +399,7 @@
     </table>
 
     <h2>Energy sources scarcity</h2>
+    <!-- chloropleth with where the main reserves are located -->
     <table class="not-prose">
       <thead>
         <th>Source</th>
@@ -417,6 +422,9 @@
     </table>
 
     <h2>Energy sources total energy supply</h2>
+    <p>
+      If we would use all proven reserves, how much energy would that produce?
+    </p>
 
     <!-- <h2>Footprint to produce 1kwh per source</h2> -->
     <h2>Energy sources footprint to produce 1kwh</h2>
