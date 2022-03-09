@@ -381,7 +381,7 @@
       {/each}
     </div>
 
-    <h2>Energy sources efficiency</h2>
+    <h2>Energy sources electric <!-- generation --> efficiency</h2>
     <!-- with btu example? -->
     <table class="not-prose">
       <thead>
@@ -398,7 +398,7 @@
       </tbody>
     </table>
 
-    <h2>Energy sources scarcity</h2>
+    <h2>Energy sources resource scarcity</h2>
     <!-- chloropleth with where the main reserves are located -->
     <table class="not-prose">
       <thead>
