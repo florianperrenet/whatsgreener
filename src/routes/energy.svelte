@@ -404,6 +404,12 @@
       </tbody>
     </table>
 
+    <p>
+      It isn't so important for wind and solar since the resource is free and
+      largely infinite. It only matters for the amount of solar/wind turbines
+      needed to produce the energy. so it is quite important actually..
+    </p>
+
     <h2>Energy sources resource scarcity</h2>
     <!-- chloropleth with where the main reserves are located -->
     <!-- dont forget the lifetime (and recyclability) of solar, wind -->
@@ -477,6 +483,12 @@
     <p>
       * uranium can also be extracted from seawater which would add xx amount to
       the reserves. But yy.
+    </p>
+
+    <p>
+      Given just this data one could say that it would be best to use x% coal y%
+      .. etc. But ofcourse we also need to take the footprint into consideration
+      to make an actual fair comparison.
     </p>
 
     <!-- <h2>World energy usage per year</h2> -->
