@@ -37,7 +37,7 @@ export const energy_source_efficiency = {
   // https://en.wikipedia.org/wiki/Solar_cell_efficiency
   solar: {
     a: dec("25"), // 47.1<->12.6
-    maximum: '-',
+    maximum: dec('68.7'), // https://en.wikipedia.org/wiki/Shockley%E2%80%93Queisser_limit
   },
   wind: {
     a: dec("30"), // 30<->40 https://www.epa.gov/sites/default/files/2019-08/documents/wind_turbines_fact_sheet_p100il8k.pdf

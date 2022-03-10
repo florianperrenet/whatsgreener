@@ -393,7 +393,8 @@
     <table class="">
       <thead>
         <th>Source</th>
-        <th>Efficiency</th>
+        <th>Average efficiency</th>
+        <th>Max achieved efficiency</th>
         <th>Theoretical maximum</th>
       </thead>
       <tbody>
@@ -401,6 +402,7 @@
           <tr>
             <td>{key}</td>
             <td>{value.a}%</td>
+            <td>-</td>
             <td>{value.maximum}%</td>
           </tr>
         {/each}
