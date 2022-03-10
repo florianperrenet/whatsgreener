@@ -9,6 +9,7 @@
     energy_source_scarcity,
     energy_source_efficiency,
     energy_source_tes,
+    resource_world_consumption,
   } from "$lib/energy/energy.js";
 
   import { chart } from "$lib/chart";
@@ -393,12 +394,14 @@
       <thead>
         <th>Source</th>
         <th>Efficiency</th>
+        <th>Theoretical maximum</th>
       </thead>
       <tbody>
         {#each Object.entries(energy_source_efficiency) as [key, value]}
           <tr>
             <td>{key}</td>
             <td>{value.a}%</td>
+            <td>-</td>
           </tr>
         {/each}
       </tbody>
@@ -494,11 +497,44 @@
 
     <h2>Years to power our consumption</h2>
     <p>How many years could we power our consumption with above supply.</p>
+    <table class="table-fixed">
+      <thead>
+        <th>Source</th>
+        <th>years</th>
+        <th />
+      </thead>
+      <tbody>
+        {#each Object.entries(resource_world_consumption.values) as [key, value]}
+          <tr>
+            <td>{key}</td>
+            <td>{value.toFixed(0)}</td>
+            <td>
+              <StackedBar
+                values={{ key: value }}
+                colors={chartColors}
+                highlightKey={highlightSource}
+                activeKey={activeSource}
+                title="test"
+                {tooltip}
+                {arrow}
+                bind:tooltip_data
+              />
+            </td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+
+    <p>
+      All sources combined: <span class="font-semibold"
+        >{resource_world_consumption.combined.toFixed(2)}</span
+      > years till full resource depletion.
+    </p>
 
     <!-- <h2>World energy usage per year</h2> -->
 
     <!-- <h2>Footprint to produce 1kwh per source</h2> -->
-    <h2>Energy sources footprint to produce 1kwh</h2>
+    <h2>Energy sources full footprint to produce 1kwh</h2>
     <!-- source footprint per kwh -->
 
     {#each Object.values(energy_footprint_per_kwh()) as source}

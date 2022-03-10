@@ -7,6 +7,9 @@ https://www.researchgate.net/publication/272130888_Final_report_on_technical_dat
 
 import { dec, timePerKm, convert_and_add_emit_score, travelTimeHours, travelTimeHoursReadable, toval, addConsumesEmits, multiply_dict_tovals } from "$lib/utils";
 
+// https://ourworldindata.org/energy-production-consumption
+export const world_energy_consumption_twh_year = dec('160_000');
+
 
 // TODO random values..
 export const energy_source_efficiency = {
@@ -198,6 +201,25 @@ export const energy_source_tes = (() => {
   for (const [key, value] of Object.entries(data)) {
     value.twh_rel = value.twh.div(max).times(100);
   }
+
+  return data;
+})();
+
+
+export const resource_world_consumption = (() => {
+  const data = {
+    combined: dec("0"),
+    values: {},
+  };
+
+  for (const [key, value] of Object.entries(energy_source_tes)) {
+    data.values[key] = value.twh.div(world_energy_consumption_twh_year);
+    data.combined = data.combined.add(value.twh);
+  }
+
+  data.combined = data.combined.div(world_energy_consumption_twh_year);
+
+  console.log(data)
 
   return data;
 })();
