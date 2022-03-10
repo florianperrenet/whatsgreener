@@ -6,7 +6,9 @@
   import Input from "$lib/Input.svelte";
   import {
     energy_footprint_per_kwh,
+    energy_source_scarcity,
     energy_source_efficiency,
+    energy_source_tes,
   } from "$lib/energy/energy.js";
 
   import { chart } from "$lib/chart";
@@ -383,7 +385,7 @@
 
     <h2>Energy sources electric <!-- generation --> efficiency</h2>
     <!-- with btu example? -->
-    <table class="not-prose">
+    <table class="">
       <thead>
         <th>Source</th>
         <th>Efficiency</th>
@@ -400,7 +402,8 @@
 
     <h2>Energy sources resource scarcity</h2>
     <!-- chloropleth with where the main reserves are located -->
-    <table class="not-prose">
+    <!-- dont forget the lifetime (and recyclability) of solar, wind -->
+    <table class="">
       <thead>
         <th>Source</th>
         <!-- <th>Available</th> -->
@@ -409,22 +412,55 @@
         <th>Use rate</th>
         <th>Regain rate</th>
         <th>Left</th>
-        <th>Time till depletion</th>
+        <th class="text-right">Time till depletion</th>
       </thead>
       <tbody>
-        {#each Object.entries(energy_source_efficiency) as [key, value]}
+        {#each Object.entries(energy_source_scarcity) as [key, value]}
+          <tr>
+            <td>{key}</td>
+            <td>{value.proven_reserves}</td>
+            <td>{value.used}</td>
+            <td>{value.use_rate}</td>
+            <td>{value.regain_rate}</td>
+            <td>{value.left}</td>
+            <td class="text-right"
+              >{value.time_till_depletion_readable} years</td
+            >
+          </tr>
+        {/each}
+        <!-- {#each Object.entries(energy_source_efficiency) as [key, value]}
           <tr>
             <td>{key}</td>
             <td>{value} xx</td>
           </tr>
-        {/each}
+        {/each} -->
       </tbody>
     </table>
 
     <h2>Energy sources total energy supply</h2>
     <p>
-      If we would use all proven reserves, how much energy would that produce?
+      If we were to use all proven reserves, how much energy would that produce?
     </p>
+    <table class="">
+      <thead>
+        <th>Source</th>
+        <th>Proven reserves</th>
+        <th class="text-right">TWh</th>
+      </thead>
+      <tbody>
+        {#each Object.entries(energy_source_tes) as [key, value]}
+          <tr>
+            <td>{key}</td>
+            <td>{value.proven_reserves}</td>
+            <td class="text-right">{value.twh}</td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
+
+    {#if energyMix.entities}
+      <Chart data={barData} />
+    {/if}
 
     <!-- <h2>Footprint to produce 1kwh per source</h2> -->
     <h2>Energy sources footprint to produce 1kwh</h2>

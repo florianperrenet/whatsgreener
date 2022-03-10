@@ -19,7 +19,9 @@
         <div class="lg:w-1/2 lg:flex-none">
           <div class="font-semibold">Core concepts</div>
           <ul class="mt-3 space-y-2">
+            <!-- Fact checkable -->
             <li><a href="#">Open source</a></li>
+            <!-- Full picture -->
             <li><a href="#">Full footprint</a></li>
           </ul>
         </div>

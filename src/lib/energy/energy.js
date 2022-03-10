@@ -21,17 +21,122 @@ export const energy_source_efficiency = {
 
   // https://en.wikipedia.org/wiki/Solar_cell_efficiency
   solar: dec("25"), // 47.1<->12.6
+  wind: dec("30"), // 30<->40 https://www.epa.gov/sites/default/files/2019-08/documents/wind_turbines_fact_sheet_p100il8k.pdf
 };
 
 
 export const energy_source_proven_reserves = {
-  oil: 244.4,  // thousand million tonnes
-  gas: 188.1,  // trillion cubic meters
-  coal: 1074108,  // million tonnes
-  cobalt: 6902,  // thousand tonnes
-  lithium: 18955,  // thousand tonnes
-  uranium: 16,  // million metric tonnes https://www.scientificamerican.com/article/how-long-will-global-uranium-deposits-last/
+  oil: dec("244.4"),  // thousand million tonnes
+  gas: dec("188.1"),  // trillion cubic meters
+  coal: dec("1074108"),  // million tonnes
+  cobalt: dec("6902"),  // thousand tonnes
+  lithium: dec("18955"),  // thousand tonnes
+  uranium: dec("16"),  // million metric tonnes https://www.scientificamerican.com/article/how-long-will-global-uranium-deposits-last/
+  graphite: dec("349503"),  // thousand tonnes
 };
+
+export const energy_source_scarcity = (() => {
+  const data = {
+    oil: {
+      proven_reserves: energy_source_proven_reserves.oil,
+      used: '-',
+      use_rate: dec('4017.5').div('1000'),  // million tonnes
+      regain_rate: '-',
+      left: '-',
+    },
+    gas: {
+      proven_reserves: energy_source_proven_reserves.gas,
+      used: '-',
+      use_rate: dec('3822.8').div('1000'),  // billion cubic meters
+      regain_rate: '-',
+      left: '-',
+    },
+    coal: {
+      proven_reserves: energy_source_proven_reserves.coal,
+      used: '-',
+      use_rate: dec('151.42'),  // exajoules
+      regain_rate: '-',
+      left: '-',
+    },
+    cobalt: {
+      proven_reserves: energy_source_proven_reserves.cobalt,
+      used: '-',
+      use_rate: dec('127.7'),
+      regain_rate: '-',
+      left: '-',
+    },
+    lithium: {
+      proven_reserves: energy_source_proven_reserves.lithium,
+      used: '-',
+      use_rate: dec('86.3'),
+      regain_rate: '-',
+      left: '-',
+    },
+    uranium: {
+      proven_reserves: energy_source_proven_reserves.uranium,
+      used: '-',
+      use_rate: dec('66500').div('1000000'),  // tonnes https://en.wikipedia.org/wiki/Peak_uranium
+      regain_rate: '-',
+      left: '-',
+    },
+    graphite: {
+      proven_reserves: energy_source_proven_reserves.graphite,
+      used: '-',
+      use_rate: dec('906.7'),
+      regain_rate: '-',
+      left: '-',
+    },
+  };
+
+  for (const [key, value] of Object.entries(data)) {
+    value.time_till_depletion = value.proven_reserves.div(value.use_rate);
+    value.time_till_depletion_readable = value.time_till_depletion.toFixed(0);
+  }
+
+  return data;
+})();
+
+// total energy supply
+export const energy_source_tes = (() => {
+
+  const data = {
+    oil: {
+      proven_reserves: energy_source_proven_reserves.oil,
+    },
+    gas: {
+      proven_reserves: energy_source_proven_reserves.gas,
+    },
+    coal: {
+      proven_reserves: energy_source_proven_reserves.coal,
+    },
+    uranium: {
+      proven_reserves: energy_source_proven_reserves.uranium,
+    },
+  };
+
+  const oil_giga_joules = data.oil.proven_reserves.times('1000000000').times('0.38');
+  const oil_gwh = oil_giga_joules.times('0.000277777778');
+  data.oil.twh = oil_gwh.div(1000).toFixed(1);
+
+  const gas_kwh = data.gas.proven_reserves.times(1e12).times('10.55');
+  const gas_twh = gas_kwh.times('0.000_000_001')
+  data.gas.twh = gas_twh.toFixed(1);
+
+  const coal_kwh = data.coal.proven_reserves.times(1e6).times(8);
+  const coal_twh = coal_kwh.times('0.000_000_001')
+  data.coal.twh = coal_twh.toFixed(1);
+
+  const uranium_kwh = data.uranium.proven_reserves.times(1e6).times(24_000_000);
+  const uranium_twh = uranium_kwh.times('0.000_000_001')
+  data.uranium.twh = uranium_twh.toFixed(1);
+
+  for (const [key, value] of Object.entries(data)) {
+    // value.time_till_depletion = value.proven_reserves.div(value.use_rate);
+    // value.time_till_depletion_readable = value.time_till_depletion.toFixed(0);
+  }
+
+  return data;
+})();
 
 
 const hard_coal = (() => {
