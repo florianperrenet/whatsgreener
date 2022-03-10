@@ -386,6 +386,7 @@
 
     <h2>Energy sources electric <!-- generation --> efficiency</h2>
     <!-- with btu example? -->
+    <p>"Combustion" only not full cycle energy efficiency</p>
     <table class="">
       <thead>
         <th>Source</th>

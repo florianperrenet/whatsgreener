@@ -130,7 +130,7 @@ export const energy_source_tes = (() => {
   const coal_twh = coal_kwh.times('0.000_000_001')
   data.coal.twh = coal_twh;
 
-  const uranium_kwh = data.uranium.proven_reserves.times(1000_000).times(1000).times(24_000_000);
+  const uranium_kwh = data.uranium.proven_reserves.times(1000_000).times(1000).times(24_000_000).times(0.0077);
   const uranium_twh = uranium_kwh.times('0.000_000_001')
   data.uranium.twh = uranium_twh;
 
