@@ -457,7 +457,7 @@
             <td class="text-right">{value.twh.toFixed(1)}</td>
             <td>
               <StackedBar
-                values={{ value: value.twh_rel }}
+                values={{ key: value.twh_rel }}
                 colors={chartColors}
                 highlightKey={highlightSource}
                 activeKey={activeSource}
