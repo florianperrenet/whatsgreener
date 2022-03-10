@@ -116,23 +116,28 @@ export const energy_source_tes = (() => {
 
   const oil_giga_joules = data.oil.proven_reserves.times('1000000000').times('0.38');
   const oil_gwh = oil_giga_joules.times('0.000277777778');
-  data.oil.twh = oil_gwh.div(1000).toFixed(1);
+  data.oil.twh = oil_gwh.div(1000);
 
   const gas_kwh = data.gas.proven_reserves.times(1e12).times('10.55');
   const gas_twh = gas_kwh.times('0.000_000_001')
-  data.gas.twh = gas_twh.toFixed(1);
+  data.gas.twh = gas_twh;
 
   const coal_kwh = data.coal.proven_reserves.times(1e6).times(8);
   const coal_twh = coal_kwh.times('0.000_000_001')
-  data.coal.twh = coal_twh.toFixed(1);
+  data.coal.twh = coal_twh;
 
   const uranium_kwh = data.uranium.proven_reserves.times(1e6).times(24_000_000);
   const uranium_twh = uranium_kwh.times('0.000_000_001')
-  data.uranium.twh = uranium_twh.toFixed(1);
+  data.uranium.twh = uranium_twh;
 
+  let max = dec(0);
   for (const [key, value] of Object.entries(data)) {
-    // value.time_till_depletion = value.proven_reserves.div(value.use_rate);
-    // value.time_till_depletion_readable = value.time_till_depletion.toFixed(0);
+    if (value.twh.gt(max)) {
+      max = value.twh;
+    }
+  }
+  for (const [key, value] of Object.entries(data)) {
+    value.twh_rel = value.twh.div(max).times(100);
   }
 
   return data;

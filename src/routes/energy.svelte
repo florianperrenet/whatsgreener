@@ -26,6 +26,7 @@
     descendingOnKey3,
   } from "$lib/utils";
   import { stringify } from "postcss";
+  import ImpactBar from "$lib/ImpactBar.svelte";
 
   let energyMix = {};
   let entities = [];
@@ -441,26 +442,34 @@
     <p>
       If we were to use all proven reserves, how much energy would that produce?
     </p>
-    <table class="">
+    <table class="table-fixed">
       <thead>
         <th>Source</th>
         <th>Proven reserves</th>
         <th class="text-right">TWh</th>
+        <th />
       </thead>
       <tbody>
         {#each Object.entries(energy_source_tes) as [key, value]}
           <tr>
             <td>{key}</td>
             <td>{value.proven_reserves}</td>
-            <td class="text-right">{value.twh}</td>
+            <td class="text-right">{value.twh.toFixed(1)}</td>
+            <td>
+              <StackedBar
+                values={{ value: value.twh_rel }}
+                colors={chartColors}
+                highlightKey={highlightSource}
+                activeKey={activeSource}
+                title="test"
+                {tooltip}
+                {arrow}
+              />
+            </td>
           </tr>
         {/each}
       </tbody>
     </table>
-
-    {#if energyMix.entities}
-      <Chart data={barData} />
-    {/if}
 
     <!-- <h2>Footprint to produce 1kwh per source</h2> -->
     <h2>Energy sources footprint to produce 1kwh</h2>
@@ -476,6 +485,7 @@
     {/each}
 
     <!-- <h2>Per capita energy usage by source, 2019</h2> -->
+    <!-- is it energy usage or resource usage -->
     <h2>Energy usage per country "per capita", {tableYear}</h2>
 
     <!-- legenda -->
