@@ -391,14 +391,12 @@
       <thead>
         <th>Source</th>
         <th>Efficiency</th>
-        <th>Important</th>
       </thead>
       <tbody>
         {#each Object.entries(energy_source_efficiency) as [key, value]}
           <tr>
             <td>{key}</td>
             <td>{value.a}%</td>
-            <td>{value.important ? "yes" : "no"}</td>
           </tr>
         {/each}
       </tbody>
