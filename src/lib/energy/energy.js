@@ -16,32 +16,32 @@ export const energy_source_efficiency = {
   // https://geospatial.blogs.com/geospatial/2010/01/energy-efficiency-of-fossil-fuel-power-generation.html#:~:text=The%20average%20efficiencies%20of%20power,up%20the%20stack%22%20as%20heat.
   oil: {
     a: dec("38"),
-    important: true,
+    maximum: '-',
   },
 
   // Life_Cycle_Assessment_of_Fossil_and_Biomass_Power_
   // 19/74
   coal: {
     a: dec("43"), // 46<->40
-    important: true,
+    maximum: '-',
   },
   lignite: {
     a: dec("40"),
-    important: true,
+    maximum: '-',
   },
   natural_gas: {
     a: dec("59"),
-    important: true,
+    maximum: '-',
   },
 
   // https://en.wikipedia.org/wiki/Solar_cell_efficiency
   solar: {
     a: dec("25"), // 47.1<->12.6
-    important: false,
+    maximum: '-',
   },
   wind: {
     a: dec("30"), // 30<->40 https://www.epa.gov/sites/default/files/2019-08/documents/wind_turbines_fact_sheet_p100il8k.pdf
-    important: false,
+    maximum: dec('59'),
   },
 };
 
@@ -61,7 +61,7 @@ export const energy_source_scarcity = (() => {
     oil: {
       proven_reserves: energy_source_proven_reserves.oil,
       unit: 'thousand million tonnes',
-      used: '-',
+      used: dec('182241').div('1000'),
       use_rate: dec('4017.5').div('1000'),  // million tonnes
       regain_rate: '-',
       left: '-',
@@ -69,7 +69,7 @@ export const energy_source_scarcity = (() => {
     gas: {
       proven_reserves: energy_source_proven_reserves.gas,
       unit: 'trillion cubic meters',
-      used: '-',
+      used: dec('118471').div(1000),
       use_rate: dec('3822.8').div('1000'),  // billion cubic meters
       regain_rate: '-',
       left: '-',
@@ -77,8 +77,8 @@ export const energy_source_scarcity = (() => {
     coal: {
       proven_reserves: energy_source_proven_reserves.coal,
       unit: 'million tonnes',
-      used: '-',
-      use_rate: dec('151.42'),  // exajoules
+      used: dec('5705').times('1_000_000_000_000').div('29.3').div(1000_000_000),
+      use_rate: dec('151.42').times('1_000_000_000_000').div('29.3').div(1000_000_000),  // exajoules
       regain_rate: '-',
       left: '-',
     },

@@ -401,7 +401,7 @@
           <tr>
             <td>{key}</td>
             <td>{value.a}%</td>
-            <td>-</td>
+            <td>{value.maximum}%</td>
           </tr>
         {/each}
       </tbody>
@@ -416,10 +416,12 @@
     <h2>Energy sources resource scarcity</h2>
     <!-- chloropleth with where the main reserves are located -->
     <!-- dont forget the lifetime (and recyclability) of solar, wind -->
+    <!-- proven reserves over time (and adjusted (minus the use with increase rate)) -->
     <table class="">
       <thead>
         <th>Source</th>
         <!-- <th>Available</th> -->
+        <th>Unit</th>
         <th>Already used</th>
         <th>Proven reserves (left)</th>
         <th>Use rate (per year)</th>
@@ -430,8 +432,9 @@
         {#each Object.entries(energy_source_scarcity) as [key, value]}
           <tr>
             <td>{key}</td>
-            <td>-</td>
-            <td>{value.proven_reserves} {value.unit}</td>
+            <td>{value.unit}</td>
+            <td>{value.used}</td>
+            <td>{value.proven_reserves}</td>
             <td>{value.use_rate}</td>
             <td>{value.regain_rate}</td>
             <td
@@ -495,7 +498,7 @@
       to make an actual fair comparison.
     </p>
 
-    <h2>Years to power our consumption</h2>
+    <h2>For how long could the resources power our consumption</h2>
     <p>How many years could we power our consumption with above supply.</p>
     <table class="table-fixed">
       <thead>
@@ -526,10 +529,17 @@
     </table>
 
     <p>
-      All sources combined: <span class="font-semibold"
+      All resources combined: <span class="font-semibold"
         >{resource_world_consumption.combined.toFixed(2)}</span
       > years till full resource depletion.
     </p>
+
+    <p>
+      This clearly shows that we cannot rely on just one energy source. Instead
+      we need to rely on all of them. (and make a optimal distribution)
+    </p>
+
+    <p>Guess we are in the last liveable century.</p>
 
     <!-- <h2>World energy usage per year</h2> -->
 
