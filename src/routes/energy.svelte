@@ -391,12 +391,14 @@
       <thead>
         <th>Source</th>
         <th>Efficiency</th>
+        <th>Important</th>
       </thead>
       <tbody>
         {#each Object.entries(energy_source_efficiency) as [key, value]}
           <tr>
             <td>{key}</td>
-            <td>{value}%</td>
+            <td>{value.a}%</td>
+            <td>{value.important ? "yes" : "no"}</td>
           </tr>
         {/each}
       </tbody>
@@ -409,24 +411,24 @@
       <thead>
         <th>Source</th>
         <!-- <th>Available</th> -->
-        <th>Proven reserves</th>
-        <th>Used</th>
-        <th>Use rate</th>
-        <th>Regain rate</th>
-        <th>Left</th>
+        <th>Already used</th>
+        <th>Proven reserves (left)</th>
+        <th>Use rate (per year)</th>
+        <th>Regain rate (per year)</th>
         <th class="text-right">Time till depletion</th>
       </thead>
       <tbody>
         {#each Object.entries(energy_source_scarcity) as [key, value]}
           <tr>
             <td>{key}</td>
-            <td>{value.proven_reserves}</td>
-            <td>{value.used}</td>
+            <td>-</td>
+            <td>{value.proven_reserves} {value.unit}</td>
             <td>{value.use_rate}</td>
             <td>{value.regain_rate}</td>
-            <td>{value.left}</td>
-            <td class="text-right"
-              >{value.time_till_depletion_readable} years</td
+            <td
+              class="{value.time_till_depletion.lt(100)
+                ? 'font-medium text-red-500'
+                : ''} text-right">{value.time_till_depletion_readable} years</td
             >
           </tr>
         {/each}
@@ -454,7 +456,7 @@
         {#each Object.entries(energy_source_tes) as [key, value]}
           <tr>
             <td>{key}</td>
-            <td>{value.proven_reserves}</td>
+            <td>{value.proven_reserves} {value.unit}</td>
             <td class="text-right">{value.twh.toFixed(1)}</td>
             <td>
               <StackedBar
@@ -471,6 +473,13 @@
         {/each}
       </tbody>
     </table>
+
+    <p>
+      * uranium can also be extracted from seawater which would add xx amount to
+      the reserves. But yy.
+    </p>
+
+    <!-- <h2>World energy usage per year</h2> -->
 
     <!-- <h2>Footprint to produce 1kwh per source</h2> -->
     <h2>Energy sources footprint to produce 1kwh</h2>

@@ -11,17 +11,35 @@ import { dec, timePerKm, convert_and_add_emit_score, travelTimeHours, travelTime
 // TODO random values..
 export const energy_source_efficiency = {
   // https://geospatial.blogs.com/geospatial/2010/01/energy-efficiency-of-fossil-fuel-power-generation.html#:~:text=The%20average%20efficiencies%20of%20power,up%20the%20stack%22%20as%20heat.
-  oil: dec("38"),
+  oil: {
+    a: dec("38"),
+    important: true,
+  },
 
   // Life_Cycle_Assessment_of_Fossil_and_Biomass_Power_
   // 19/74
-  coal: dec("43"), // 46<->40
-  lignite: dec("40"),
-  natural_gas: dec("59"),
+  coal: {
+    a: dec("43"), // 46<->40
+    important: true,
+  },
+  lignite: {
+    a: dec("40"),
+    important: true,
+  },
+  natural_gas: {
+    a: dec("59"),
+    important: true,
+  },
 
   // https://en.wikipedia.org/wiki/Solar_cell_efficiency
-  solar: dec("25"), // 47.1<->12.6
-  wind: dec("30"), // 30<->40 https://www.epa.gov/sites/default/files/2019-08/documents/wind_turbines_fact_sheet_p100il8k.pdf
+  solar: {
+    a: dec("25"), // 47.1<->12.6
+    important: false,
+  },
+  wind: {
+    a: dec("30"), // 30<->40 https://www.epa.gov/sites/default/files/2019-08/documents/wind_turbines_fact_sheet_p100il8k.pdf
+    important: false,
+  },
 };
 
 
@@ -39,6 +57,7 @@ export const energy_source_scarcity = (() => {
   const data = {
     oil: {
       proven_reserves: energy_source_proven_reserves.oil,
+      unit: 'thousand million tonnes',
       used: '-',
       use_rate: dec('4017.5').div('1000'),  // million tonnes
       regain_rate: '-',
@@ -46,6 +65,7 @@ export const energy_source_scarcity = (() => {
     },
     gas: {
       proven_reserves: energy_source_proven_reserves.gas,
+      unit: 'trillion cubic meters',
       used: '-',
       use_rate: dec('3822.8').div('1000'),  // billion cubic meters
       regain_rate: '-',
@@ -53,6 +73,7 @@ export const energy_source_scarcity = (() => {
     },
     coal: {
       proven_reserves: energy_source_proven_reserves.coal,
+      unit: 'million tonnes',
       used: '-',
       use_rate: dec('151.42'),  // exajoules
       regain_rate: '-',
@@ -60,6 +81,7 @@ export const energy_source_scarcity = (() => {
     },
     cobalt: {
       proven_reserves: energy_source_proven_reserves.cobalt,
+      unit: 'thousand tonnes',
       used: '-',
       use_rate: dec('127.7'),
       regain_rate: '-',
@@ -67,6 +89,7 @@ export const energy_source_scarcity = (() => {
     },
     lithium: {
       proven_reserves: energy_source_proven_reserves.lithium,
+      unit: 'thousand tonnes',
       used: '-',
       use_rate: dec('86.3'),
       regain_rate: '-',
@@ -74,6 +97,7 @@ export const energy_source_scarcity = (() => {
     },
     uranium: {
       proven_reserves: energy_source_proven_reserves.uranium,
+      unit: 'million tonnes',
       used: '-',
       use_rate: dec('66500').div('1000000'),  // tonnes https://en.wikipedia.org/wiki/Peak_uranium
       regain_rate: '-',
@@ -81,8 +105,25 @@ export const energy_source_scarcity = (() => {
     },
     graphite: {
       proven_reserves: energy_source_proven_reserves.graphite,
+      unit: 'thousand tonnes',
       used: '-',
       use_rate: dec('906.7'),
+      regain_rate: '-',
+      left: '-',
+    },
+    solar: {
+      proven_reserves: dec('0'),
+      unit: '- year',
+      used: '-',
+      use_rate: dec('0'),
+      regain_rate: '-',
+      left: '-',
+    },
+    wind: {
+      proven_reserves: dec('0'),
+      unit: '- year',
+      used: '-',
+      use_rate: dec('0'),
       regain_rate: '-',
       left: '-',
     },
@@ -102,15 +143,29 @@ export const energy_source_tes = (() => {
   const data = {
     oil: {
       proven_reserves: energy_source_proven_reserves.oil,
+      unit: energy_source_scarcity.oil.unit,
     },
     gas: {
       proven_reserves: energy_source_proven_reserves.gas,
+      unit: energy_source_scarcity.gas.unit,
     },
     coal: {
       proven_reserves: energy_source_proven_reserves.coal,
+      unit: energy_source_scarcity.coal.unit,
     },
-    uranium: {
+    "uranium*": {
       proven_reserves: energy_source_proven_reserves.uranium,
+      unit: energy_source_scarcity.uranium.unit,
+    },
+    solar: {
+      proven_reserves: 'xx',
+      unit: '- year',
+      twh: dec('0'),
+    },
+    wind: {
+      proven_reserves: 'xx',
+      unit: '- year',
+      twh: dec('0'),
     },
   };
 
@@ -130,9 +185,9 @@ export const energy_source_tes = (() => {
   const coal_twh = coal_kwh.times('0.000_000_001')
   data.coal.twh = coal_twh;
 
-  const uranium_kwh = data.uranium.proven_reserves.times(1000_000).times(1000).times(24_000_000).times(0.0077);
+  const uranium_kwh = data["uranium*"].proven_reserves.times(1000_000).times(1000).times(24_000_000).times(0.0077);
   const uranium_twh = uranium_kwh.times('0.000_000_001')
-  data.uranium.twh = uranium_twh;
+  data["uranium*"].twh = uranium_twh;
 
   let max = dec(0);
   for (const [key, value] of Object.entries(data)) {
