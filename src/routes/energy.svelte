@@ -34,6 +34,8 @@
 
   let _years = [];
 
+  let tooltip_data = {};
+
   let tableYear = "2019";
 
   const energySources = [
@@ -471,6 +473,7 @@
                 title="test"
                 {tooltip}
                 {arrow}
+                bind:tooltip_data
               />
             </td>
           </tr>
@@ -488,6 +491,9 @@
       .. etc. But ofcourse we also need to take the footprint into consideration
       to make an actual fair comparison.
     </p>
+
+    <h2>Years to power our consumption</h2>
+    <p>How many years could we power our consumption with above supply.</p>
 
     <!-- <h2>World energy usage per year</h2> -->
 
@@ -633,6 +639,7 @@
                       title={item.country}
                       {tooltip}
                       {arrow}
+                      bind:tooltip_data
                     />
                   </div>
                   <div class="opacity-50">
@@ -745,10 +752,35 @@
 </ContainerLayout>
 
 <div
-  class="pointer-events-none absolute hidden rounded-sm bg-white shadow-md"
+  class="pointer-events-none absolute hidden rounded bg-white shadow-md ring-1 ring-gray-900 ring-opacity-5"
   bind:this={tooltip}
 >
-  <div id="tooltip-html" class="p-3 text-xs" />
+  <div id="tooltip-html" class="py-2 px-3">
+    {#if "title" in tooltip_data}
+      <div class="mb-1 text-sm font-bold">{tooltip_data.title}</div>
+    {/if}
+    {#if "table" in tooltip_data}
+      <table class="text-xs">
+        <tbody>
+          {#each tooltip_data.table.rows as row}
+            <tr
+              class={row.opacity === 1 ? "font-semibold" : ""}
+              style="opacity: {row.opacity};"
+            >
+              <td class="flex items-center pr-2">
+                <div
+                  class="mr-1 h-2 w-2"
+                  style="background-color: {row.color};"
+                />
+                <span>{row.key}</span>
+              </td>
+              <td class="text-right">{row.value.toFixed(2)}</td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
+    {/if}
+  </div>
   <div
     class="absolute bg-white"
     style="width: 8px; height: 8px; transform: rotate(45deg);"

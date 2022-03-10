@@ -26,6 +26,8 @@
   export let highlightKey = null;
   export let activeKey = null;
 
+  export let tooltip_data = null;
+
   import { onMount } from "svelte";
 
   let stackedBar;
@@ -89,23 +91,42 @@
 
     tooltip.style.display = "block";
 
-    let trs = "";
+    const _tooltip_data = {
+      title,
+      table: {
+        columns: [],
+        rows: [],
+      },
+    };
     let index = 0;
     for (const [valkey, valval] of Object.entries(values)) {
       const color = colors[index++];
       const _opacity = opacity(valkey, key, null, 0.4);
-      trs += `<tr style="opacity: ${_opacity};">
-          <td style="background-color: ${color}; width: 10px; height: 10px; display: inline-block; margin-right: 2px;"></td>
-            <td style="padding-right: 0.8em;">${valkey}</td>
-            <td style="text-align: right; white-space: nowrap;">${valval.toFixed(
-              2
-            )}</td>
-          </tr>`;
+      _tooltip_data.table.rows.push({
+        color,
+        opacity: _opacity,
+        key: valkey,
+        value: valval,
+      });
     }
 
-    const tooltip_html_el = tooltip.querySelector("#tooltip-html");
+    tooltip_data = _tooltip_data;
 
-    tooltip_html_el.innerHTML = `<table><thead><tr><td colspan="3" style="padding-bottom: 5px;"><strong>${title}</strong></td></tr></thead><tbody>${trs}</tbody></table>`;
+    // let trs = "";
+    // let index = 0;
+    // for (const [valkey, valval] of Object.entries(values)) {
+    //   const color = colors[index++];
+    //   const _opacity = opacity(valkey, key, null, 0.4);
+    //   trs += `<tr style="opacity: ${_opacity};">
+    //       <td style="background-color: ${color}; width: 10px; height: 10px; display: inline-block; margin-right: 2px;"></td>
+    //         <td style="padding-right: 0.8em;">${valkey}</td>
+    //         <td style="text-align: right; white-space: nowrap;">${valval.toFixed(
+    //           2
+    //         )}</td>
+    //       </tr>`;
+    // }
+    // const tooltip_html_el = tooltip.querySelector("#tooltip-html");
+    // tooltip_html_el.innerHTML = `<table><thead><tr><td colspan="3" style="padding-bottom: 5px;"><strong>${title}</strong></td></tr></thead><tbody>${trs}</tbody></table>`;
 
     computePosition(e.target, tooltip, {
       placement: "top",
@@ -199,7 +220,7 @@
 <!-- <div bind:this={stackedBar} /> -->
 
 <div class="overflow-hidden">
-  <div class="flex flex-row w-full bg-gray-100 {height}">
+  <div class="flex w-full flex-row bg-gray-100 {height}">
     {#each Object.entries(values) as [key, value], index}
       {#if show(key)}
         <div
