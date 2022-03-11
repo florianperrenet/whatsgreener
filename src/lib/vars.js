@@ -17,6 +17,34 @@ function plusminus_fmt(l) {
 }
 
 
+export const WIND_TURBINE_EFFICIENCY = dec('0.3');  // perc
+export const WIND_TURBINE_MAX_EFFICIENCY = dec('0.59');  // perc
+export const WIND_TURBINE_MAX_ACHIEVED_EFFICIENCY = '..'; // unknown
+export const WIND_TURBINE_LIFESPAN = dec('20');  // years
+
+function metaval(amount, unit) {
+    // const is_percentage = unit === '%';
+    return {
+        amount,
+        unit,
+        // is_percentage,
+    };
+}
+
+export const wind_turbine = {
+    efficiency: metaval(dec("0.3"), '%'),
+    max_efficiency: metaval(dec("0.59"), '%'),
+    max_achieved_efficiency: metaval('unkown', '%'),
+    lifespan: metaval(dec('20'), 'years'),
+}
+
+export const solar_panel = {
+    efficiency: metaval(dec("0.25"), '%'),
+    max_efficiency: metaval(dec("0.687"), '%'),
+    max_achieved_efficiency: metaval('unknown', '%'),
+    lifespan: metaval(dec('25'), 'years'),
+}
+
 
 
 

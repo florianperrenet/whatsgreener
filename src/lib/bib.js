@@ -120,4 +120,12 @@ export const bibliography = {
         title: "epa-wind_turbines_fact_sheet",
         url: "https://www.epa.gov/sites/default/files/2019-08/documents/wind_turbines_fact_sheet_p100il8k.pdf",
     },
+    "wikipedia-solar_cell_efficiency": {
+        title: "wikipedia-solar_cell_efficiency",
+        url: "https://en.wikipedia.org/wiki/Solar_cell_efficiency",
+    },
+    "wikipedia-shockley-queisser_limit": {
+        title: "wikipedia-shockley-queisser_limit",
+        url: "https://en.wikipedia.org/wiki/Shockley%E2%80%93Queisser_limit",
+    },
 };
