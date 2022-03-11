@@ -18,6 +18,8 @@
     waterGainLossesTypical,
   } from "$lib/vars";
 
+  import { energy_source_efficiency } from "$lib/energy/energy.js";
+
   import katex from "katex";
   import "katex/dist/contrib/mhchem.js";
 
@@ -289,6 +291,20 @@
 <h4>Combustion</h4>
 <p>Text</p>
 <h3>Wind</h3>
+<p>
+  The theoretical maximum efficiency of a turbine is ~{energy_source_efficiency
+    .wind.maximum}% <Cite
+    to="umich-theoretical_maximum_efficiency_wind_turbine"
+  />
+
+  Wind turbines are 20% to 40% efficient at converting wind into energy. The
+  typical life span of a wind turbine is 20 years, with routine maintenance
+  required every six months. Wind turbine power output is variable due to the
+  fluctuation in wind speed; however, when coupled with an energy storage
+  device, wind power can provide a steady power output.
+
+  <Cite to="epa-wind_turbines_fact_sheet" />
+</p>
 <h4>Combustion</h4>
 <p>Text</p>
 <h3>Solar</h3>

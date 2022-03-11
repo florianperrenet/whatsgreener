@@ -112,4 +112,12 @@ export const bibliography = {
         title: "coal emissions",
         url: "https://www.eia.gov/energyexplained/coal/coal-and-the-environment.php#:~:text=Several%20principal%20emissions%20result%20from,respiratory%20illnesses%20and%20lung%20disease",
     },
+    "umich-theoretical_maximum_efficiency_wind_turbine": {
+        title: "theoretical maximum efficiency of a turbine",
+        url: "https://css.umich.edu/factsheets/wind-energy-factsheet",
+    },
+    "epa-wind_turbines_fact_sheet": {
+        title: "epa-wind_turbines_fact_sheet",
+        url: "https://www.epa.gov/sites/default/files/2019-08/documents/wind_turbines_fact_sheet_p100il8k.pdf",
+    },
 };

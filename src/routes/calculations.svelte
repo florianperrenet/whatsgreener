@@ -18,7 +18,7 @@
   import { afterNavigate } from "$app/navigation";
 
   import Toc from "$lib/Toc.svelte";
-  import AboutContent from "$lib/AboutContent.svelte";
+  import CalculationContent from "$lib/CalculationContent.svelte";
   import SidebarLayout from "$lib/SidebarLayout.svelte";
   import Input from "$lib/Input.svelte";
   import ComboBox from "$lib/components/ComboBox.svelte";
@@ -170,7 +170,7 @@
   </div>
 
   <div slot="content">
-    <AboutContent />
+    <CalculationContent />
   </div>
 </SidebarLayout>
 

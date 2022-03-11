@@ -33,7 +33,7 @@
         <input
           bind:this={input}
           type="text"
-          placeholder="Search documentation"
+          placeholder="Search calculations"
           class="h-14 grow border-0 text-sm placeholder:text-gray-400 focus:ring-0"
         />
 
