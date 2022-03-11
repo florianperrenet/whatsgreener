@@ -409,7 +409,7 @@
               </Ref></td
             >
             <td>?</td>
-            <td>{value.maximum}%</td>
+            <td><Ref to="test">{value.maximum}%</Ref></td>
           </tr>
         {/each}
       </tbody>
