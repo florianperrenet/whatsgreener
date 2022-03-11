@@ -11,14 +11,9 @@
   let popover;
   let popover_arrow;
 
-  function onMouseEnter() {
-    show();
-  }
+  let show_popover = false;
 
-  function show() {
-    if (!popover) return;
-    popover.style.display = "block";
-
+  $: if (popover && popover_arrow) {
     computePosition(element, popover, {
       placement: "top",
       middleware: [
@@ -51,35 +46,28 @@
       });
     });
   }
-
-  function hide() {
-    if (!popover) return;
-    popover.style.display = "";
-  }
-
-  function onMouseLeave(e) {
-    hide();
-  }
 </script>
 
 <span
   bind:this={element}
-  on:mouseenter={onMouseEnter}
-  on:mouseleave={onMouseLeave}
+  on:mouseenter={() => (show_popover = true)}
+  on:mouseleave={() => (show_popover = false)}
 >
   <slot name="element" />
 
-  <div
-    bind:this={popover}
-    class="absolute hidden rounded bg-white shadow-md ring-1 ring-gray-900 ring-opacity-5"
-  >
+  {#if show_popover}
     <div
-      class="absolute h-[12px] w-[12px] bg-gray-300 after:absolute after:bottom-[1px] after:left-[1px] after:h-[12px] after:w-[12px] after:bg-white"
-      style="transform: rotate(-45deg);"
-      bind:this={popover_arrow}
-    />
-    <div class="bg-red -mb-2 px-3 pt-2 pb-4">
-      <slot name="content" />
+      bind:this={popover}
+      class="absolute rounded bg-white shadow-md ring-1 ring-gray-900 ring-opacity-5"
+    >
+      <div
+        class="absolute h-[12px] w-[12px] bg-gray-300 after:absolute after:bottom-[1px] after:left-[1px] after:h-[12px] after:w-[12px] after:bg-white"
+        style="transform: rotate(-45deg);"
+        bind:this={popover_arrow}
+      />
+      <div class="bg-red -mb-2 px-3 pt-2 pb-4">
+        <slot name="content" />
+      </div>
     </div>
-  </div>
+  {/if}
 </span>
