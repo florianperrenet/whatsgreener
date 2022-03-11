@@ -32,20 +32,27 @@ function metaval(amount, unit) {
 }
 
 export const wind_turbine = {
+    name: "Wind turbine",
     efficiency: metaval(dec("0.3"), '%'),
     max_efficiency: metaval(dec("0.59"), '%'),
     max_achieved_efficiency: metaval('unkown', '%'),
-    lifespan: metaval(dec('20'), 'years'),
+    lifespan: metaval(dec('20'), 'year'),
+    // ? materials
 }
 
 export const solar_panel = {
+    name: "Solar panel",
     efficiency: metaval(dec("0.25"), '%'),
     max_efficiency: metaval(dec("0.687"), '%'),
     max_achieved_efficiency: metaval('unknown', '%'),
-    lifespan: metaval(dec('25'), 'years'),
+    lifespan: metaval(dec('25'), 'year'),
+    // ? materials
 }
 
-
+export const energy_sources = {
+    wind_turbine: wind_turbine,
+    solar_panel: solar_panel,
+}
 
 
 
