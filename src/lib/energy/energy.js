@@ -16,22 +16,22 @@ export const energy_source_efficiency = {
   // https://geospatial.blogs.com/geospatial/2010/01/energy-efficiency-of-fossil-fuel-power-generation.html#:~:text=The%20average%20efficiencies%20of%20power,up%20the%20stack%22%20as%20heat.
   oil: {
     a: dec("38"),
-    maximum: '-',
+    maximum: '..',
   },
 
   // Life_Cycle_Assessment_of_Fossil_and_Biomass_Power_
   // 19/74
   coal: {
     a: dec("43"), // 46<->40
-    maximum: '-',
+    maximum: '..',
   },
   lignite: {
     a: dec("40"),
-    maximum: '-',
+    maximum: '..',
   },
   natural_gas: {
     a: dec("59"),
-    maximum: '-',
+    maximum: '..',
   },
 
   // https://en.wikipedia.org/wiki/Solar_cell_efficiency
@@ -63,72 +63,72 @@ export const energy_source_scarcity = (() => {
       unit: 'thousand million tonnes',
       used: dec('182241').div('1000'),
       use_rate: dec('4017.5').div('1000'),  // million tonnes
-      regain_rate: '-',
-      left: '-',
+      regain_rate: '..',
+      left: '..',
     },
     gas: {
       proven_reserves: energy_source_proven_reserves.gas,
       unit: 'trillion cubic meters',
       used: dec('118471').div(1000),
       use_rate: dec('3822.8').div('1000'),  // billion cubic meters
-      regain_rate: '-',
-      left: '-',
+      regain_rate: '..',
+      left: '..',
     },
     coal: {
       proven_reserves: energy_source_proven_reserves.coal,
       unit: 'million tonnes',
       used: dec('5705').times('1_000_000_000_000').div('29.3').div(1000_000_000),
       use_rate: dec('151.42').times('1_000_000_000_000').div('29.3').div(1000_000_000),  // exajoules
-      regain_rate: '-',
-      left: '-',
+      regain_rate: '..',
+      left: '..',
     },
     cobalt: {
       proven_reserves: energy_source_proven_reserves.cobalt,
       unit: 'thousand tonnes',
-      used: '-',
+      used: '..',
       use_rate: dec('127.7'),
-      regain_rate: '-',
-      left: '-',
+      regain_rate: '..',
+      left: '..',
     },
     lithium: {
       proven_reserves: energy_source_proven_reserves.lithium,
       unit: 'thousand tonnes',
-      used: '-',
+      used: '..',
       use_rate: dec('86.3'),
-      regain_rate: '-',
-      left: '-',
+      regain_rate: '..',
+      left: '..',
     },
     uranium: {
       proven_reserves: energy_source_proven_reserves.uranium,
       unit: 'million tonnes',
-      used: '-',
+      used: '..',
       use_rate: dec('66500').div('1000000'),  // tonnes https://en.wikipedia.org/wiki/Peak_uranium
-      regain_rate: '-',
-      left: '-',
+      regain_rate: '..',
+      left: '..',
     },
     graphite: {
       proven_reserves: energy_source_proven_reserves.graphite,
       unit: 'thousand tonnes',
-      used: '-',
+      used: '..',
       use_rate: dec('906.7'),
-      regain_rate: '-',
-      left: '-',
+      regain_rate: '..',
+      left: '..',
     },
     solar: {
       proven_reserves: dec('0'),
-      unit: '- year',
-      used: '-',
+      unit: '.. year',
+      used: '..',
       use_rate: dec('0'),
-      regain_rate: '-',
-      left: '-',
+      regain_rate: '..',
+      left: '..',
     },
     wind: {
       proven_reserves: dec('0'),
-      unit: '- year',
-      used: '-',
+      unit: '.. year',
+      used: '..',
       use_rate: dec('0'),
-      regain_rate: '-',
-      left: '-',
+      regain_rate: '..',
+      left: '..',
     },
   };
 
@@ -162,12 +162,12 @@ export const energy_source_tes = (() => {
     },
     solar: {
       proven_reserves: 'xx',
-      unit: '- year',
+      unit: '.. year',
       twh: dec('0'),
     },
     wind: {
       proven_reserves: 'xx',
-      unit: '- year',
+      unit: '.. year',
       twh: dec('0'),
     },
   };

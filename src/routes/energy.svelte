@@ -387,14 +387,15 @@
       {/each}
     </div>
 
-    <h2>Energy sources electric <!-- generation --> efficiency</h2>
+    <h2>Energy sources electric generation efficiency</h2>
     <!-- with btu example? -->
-    <p>"Combustion" only not full cycle energy efficiency</p>
+    <!-- <p>"Combustion" only not full cycle energy efficiency</p> -->
+    <!-- efficiency over time? -->
     <table class="">
       <thead>
         <th>Source</th>
-        <th>Average efficiency</th>
-        <th>Max achieved efficiency</th>
+        <th>Current efficiency</th>
+        <th>Highest achieved efficiency</th>
         <th>Theoretical maximum</th>
       </thead>
       <tbody>
@@ -402,7 +403,7 @@
           <tr>
             <td>{key}</td>
             <td>{value.a}%</td>
-            <td>-</td>
+            <td>..</td>
             <td>{value.maximum}%</td>
           </tr>
         {/each}
@@ -410,12 +411,13 @@
     </table>
 
     <p>
-      It isn't so important for wind and solar since the resource is free and
-      largely infinite. It only matters for the amount of solar/wind turbines
-      needed to produce the energy. so it is quite important actually..
+      Efficiency is very important, because the more efficient the less
+      resources are required to produce energy.
     </p>
 
-    <h2>Energy sources resource scarcity</h2>
+    <!-- calculation to prove? -->
+
+    <h2>Resource scarcity</h2>
     <!-- chloropleth with where the main reserves are located -->
     <!-- dont forget the lifetime (and recyclability) of solar, wind -->
     <!-- proven reserves over time (and adjusted (minus the use with increase rate)) -->
@@ -426,6 +428,7 @@
         <th>Unit</th>
         <th>Already used</th>
         <th>Proven reserves (left)</th>
+        <th>Estimated reserves</th>
         <th>Use rate (per year)</th>
         <th>Regain rate (per year)</th>
         <th class="text-right">Time till depletion</th>
@@ -437,6 +440,7 @@
             <td>{value.unit}</td>
             <td>{value.used}</td>
             <td>{value.proven_reserves}</td>
+            <td>..</td>
             <td>{value.use_rate}</td>
             <td>{value.regain_rate}</td>
             <td
@@ -454,6 +458,12 @@
         {/each} -->
       </tbody>
     </table>
+
+    <p>
+      This is excluding unproven reserves. It is likely to find some more
+      reserves and so the time till depletion could increase slighty chart with
+      prove.
+    </p>
 
     <h2>Energy sources total energy supply</h2>
     <p>
