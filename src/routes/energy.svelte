@@ -15,6 +15,7 @@
   import { chart } from "$lib/chart";
   import Chart from "$lib/Chart.svelte";
   import Toggle from "$lib/Toggle.svelte";
+  import Ref from "$lib/components/Ref.svelte";
 
   import {
     chartColors,
@@ -402,9 +403,13 @@
         {#each Object.entries(energy_source_efficiency) as [key, value]}
           <tr>
             <td>{key}</td>
-            <td><a href="#">{value.a}%</a></td>
-            <td>..</td>
-            <td><a href="#">{value.maximum}%</a></td>
+            <td
+              ><Ref to="test">
+                {value.a}%
+              </Ref></td
+            >
+            <td>?</td>
+            <td>{value.maximum}%</td>
           </tr>
         {/each}
       </tbody>

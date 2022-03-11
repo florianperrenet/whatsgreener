@@ -29,7 +29,7 @@
       el.scrollIntoView({
         behavior: "smooth",
       });
-    }}>[<a href="#bib-{to}" class="no-underline">{getBibIndex(to)}</a>]</span
+    }}><a href="#bib-{to}" class="no-underline">[{getBibIndex(to)}]</a></span
   >
 
   <div slot="content">
