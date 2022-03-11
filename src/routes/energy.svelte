@@ -402,9 +402,9 @@
         {#each Object.entries(energy_source_efficiency) as [key, value]}
           <tr>
             <td>{key}</td>
-            <td>{value.a}%</td>
+            <td><a href="#">{value.a}%</a></td>
             <td>..</td>
-            <td>{value.maximum}%</td>
+            <td><a href="#">{value.maximum}%</a></td>
           </tr>
         {/each}
       </tbody>
@@ -460,9 +460,8 @@
     </table>
 
     <p>
-      This is excluding unproven reserves. It is likely to find some more
-      reserves and so the time till depletion could increase slighty chart with
-      prove.
+      This excludes unproven reserves. It is likely to find some more reserves
+      and so the time till depletion could increase slighty chart with prove.
     </p>
 
     <h2>Energy sources total energy supply</h2>
@@ -551,7 +550,7 @@
       we need to rely on all of them. (and make a optimal distribution)
     </p>
 
-    <p>Guess we are in the last liveable century.</p>
+    <!-- <p>Guess we are in the last liveable century.</p> -->
 
     <!-- <h2>World energy usage per year</h2> -->
 
