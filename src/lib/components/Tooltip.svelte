@@ -7,6 +7,8 @@
     arrow as flarrow,
   } from "@floating-ui/dom";
 
+  export let pointer_events = true;
+
   let element;
   let popover;
   let popover_arrow;
@@ -58,7 +60,9 @@
   {#if show_popover}
     <div
       bind:this={popover}
-      class="absolute rounded bg-white shadow-md ring-1 ring-gray-900 ring-opacity-5"
+      class="{pointer_events
+        ? ''
+        : 'pointer-events-none'} absolute rounded bg-white shadow-md ring-1 ring-gray-900 ring-opacity-5"
     >
       <div
         class="absolute h-[12px] w-[12px] bg-gray-300 after:absolute after:bottom-[1px] after:left-[1px] after:h-[12px] after:w-[12px] after:bg-white"

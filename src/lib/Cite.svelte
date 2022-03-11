@@ -1,6 +1,6 @@
 <script>
   import { bibliography } from "$lib/bib.js";
-  import PopOver from "$lib/components/PopOver.svelte";
+  import Tooltip from "$lib/components/Tooltip.svelte";
 
   export let to;
 
@@ -19,7 +19,7 @@
   const bibItem = bibliography[to];
 </script>
 
-<PopOver>
+<Tooltip>
   <span
     slot="element"
     class="cite"
@@ -54,4 +54,4 @@
       </svg></a
     >
   </div>
-</PopOver>
+</Tooltip>
