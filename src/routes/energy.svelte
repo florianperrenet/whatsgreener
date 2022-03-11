@@ -411,8 +411,8 @@
     </table>
 
     <p>
-      Efficiency is very important, because the more efficient the less
-      resources are required to produce energy.
+      Efficiency is very important, because the more efficient the conversion
+      the less resources are required to produce energy.
     </p>
 
     <!-- calculation to prove? -->
