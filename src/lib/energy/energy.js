@@ -114,6 +114,62 @@ export const energy_source_scarcity = (() => {
       regain_rate: '?',
       left: '?',
     },
+
+    // https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-silver.pdf
+    // https://www.silverinstitute.org/silver-supply-demand/
+    // https://www.usmoneyreserve.com/blog/how-much-silver-is-in-the-world/#:~:text=How%20Much%20Silver%20Is%20Left,Russia's%20(45%2C000%20metric%20tons).
+    silver: {
+      proven_reserves: dec('560_000'),  // tonnes
+      unit: 'tonnes',
+      used: dec('1_740_000'),
+      use_rate: dec('27000'),
+      regain_rate: '?',
+      left: '?',
+    },
+    // https://lisbdnet.com/when-will-we-run-out-of-metal/
+    gold: {
+      proven_reserves: dec('54_000'),  // tonnes
+      unit: 'tonnes',
+      used: dec('190_000'),
+      use_rate: dec('1800'),
+      regain_rate: '?',
+      left: '?',
+    },
+
+    // https://www.freeingenergy.com/do-we-have-enough-materials-to-make-the-solar-panels-needed-for-a-clean-energy-future/
+    // https://en.wikipedia.org/wiki/Peak_copper
+    copper: {
+      proven_reserves: dec('2_000_000_000'),  // tonnes
+      unit: 'tonnes',
+      used: '?',
+      use_rate: dec('20_000_000'),
+      regain_rate: '?',
+      left: '?',
+    },
+
+    // https://en.wikipedia.org/wiki/List_of_countries_by_silicon_production
+    // https://www.usgs.gov/centers/national-minerals-information-center/silicon-statistics-and-information
+    // https://pubs.usgs.gov/periodicals/mcs2021/mcs2021-silicon.pdf
+    silicon: {
+      proven_reserves: dec('0'),  // tonnes
+      unit: 'tonnes',
+      used: '?',
+      use_rate: dec('0'),
+      regain_rate: '?',
+      left: '?',
+    },
+
+    // https://pubs.usgs.gov/periodicals/mcs2022/mcs2022.pdf
+    // aluminum
+    bauxite: {
+      proven_reserves: dec('55_000_000_000'),  // tonnes
+      unit: 'tonnes',
+      used: '?',
+      use_rate: dec('0'),
+      regain_rate: '?',
+      left: '?',
+    },
+
     solar: {
       proven_reserves: dec('0'),
       unit: '? year',
