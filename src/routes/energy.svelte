@@ -574,6 +574,9 @@
       </div>
     {/each}
 
+    <h2>Optimal energy source mix</h2>
+    <hr />
+
     <!-- <h2>Per capita energy usage by source, 2019</h2> -->
     <!-- is it energy usage or resource usage -->
     <h2>Energy usage per country "per capita", {tableYear}</h2>
