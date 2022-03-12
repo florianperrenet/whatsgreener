@@ -402,7 +402,7 @@
       <tbody>
         {#each Object.entries(energy_source_efficiency) as [key, value]}
           <tr>
-            <td>{key}</td>
+            <td class="font-medium">{key}</td>
             <td
               ><Ref to="test">
                 {value.a}%
@@ -422,52 +422,11 @@
 
     <!-- calculation to prove? -->
 
-    <h2>Resource scarcity</h2>
-    <!-- chloropleth with where the main reserves are located -->
-    <!-- dont forget the lifetime (and recyclability) of solar, wind -->
-    <!-- proven reserves over time (and adjusted (minus the use with increase rate)) -->
-    <table class="">
-      <thead>
-        <th>Source</th>
-        <!-- <th>Available</th> -->
-        <th>Unit</th>
-        <th>Already used</th>
-        <th>Proven reserves (left)</th>
-        <th>Estimated reserves</th>
-        <th>Use rate (per year)</th>
-        <th>Regain rate (per year)</th>
-        <th class="text-right">Time till depletion</th>
-      </thead>
-      <tbody>
-        {#each Object.entries(energy_source_scarcity) as [key, value]}
-          <tr>
-            <td>{key}</td>
-            <td>{value.unit}</td>
-            <td>{value.used}</td>
-            <td>{value.proven_reserves}</td>
-            <td>..</td>
-            <td>{value.use_rate}</td>
-            <td>{value.regain_rate}</td>
-            <td
-              class="{value.time_till_depletion.lt(100)
-                ? 'font-medium text-red-500'
-                : ''} text-right">{value.time_till_depletion_readable} years</td
-            >
-          </tr>
-        {/each}
-        <!-- {#each Object.entries(energy_source_efficiency) as [key, value]}
-          <tr>
-            <td>{key}</td>
-            <td>{value} xx</td>
-          </tr>
-        {/each} -->
-      </tbody>
-    </table>
+    <h2>Energy sources lifespan</h2>
+    <p>Lifespan</p>
 
-    <p>
-      This excludes unproven reserves. It is likely to find some more reserves
-      and so the time till depletion could increase slighty chart with prove.
-    </p>
+    <h2>Energy source usability</h2>
+    <p>For how long can we still use the source</p>
 
     <h2>Energy sources total energy supply</h2>
     <p>
