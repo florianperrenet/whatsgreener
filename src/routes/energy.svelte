@@ -516,7 +516,7 @@
     </p>
 
     <h2>For how long could the proven reserves power our consumption</h2>
-    <p>How many years could we power our consumption with supply.</p>
+    <p>How many years could we power our consumption with current supply.</p>
     <table class="table-fixed">
       <thead>
         <th>Source</th>
