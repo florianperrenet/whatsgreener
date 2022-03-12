@@ -46,6 +46,25 @@ export const energy_source_efficiency = {
 };
 
 
+export const energy_sources_lifespan = {
+  oil: 0,
+  coal: 0,
+  lignite: 0,
+  natural_gas: 0,
+  solar: 20,
+  wind: 20,
+};
+
+export const energy_sources_possible_lifespan = {
+  oil: 50,
+  coal: 100,
+  lignite: 100,
+  natural_gas: 50,
+  solar: 80,
+  wind: 80,
+};
+
+
 export const energy_source_proven_reserves = {
   oil: dec("244.4"),  // thousand million tonnes
   gas: dec("188.1"),  // trillion cubic meters

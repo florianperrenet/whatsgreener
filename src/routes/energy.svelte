@@ -10,12 +10,15 @@
     energy_source_efficiency,
     energy_source_tes,
     resource_world_consumption,
+    energy_sources_lifespan,
+    energy_sources_possible_lifespan,
   } from "$lib/energy/energy.js";
 
   import { chart } from "$lib/chart";
   import Chart from "$lib/Chart.svelte";
   import Toggle from "$lib/Toggle.svelte";
   import Ref from "$lib/components/Ref.svelte";
+  import TableData from "$lib/components/TableData.svelte";
 
   import {
     chartColors,
@@ -392,7 +395,13 @@
     <!-- with btu example? -->
     <!-- <p>"Combustion" only not full cycle energy efficiency</p> -->
     <!-- efficiency over time? -->
+
+    <p>
+      Efficiency is important, because the more efficient the conversion the
+      less resources are required to produce energy.
+    </p>
     <table class="">
+      <TableData />
       <thead>
         <th>Source</th>
         <th>Current efficiency</th>
@@ -415,22 +424,54 @@
       </tbody>
     </table>
 
-    <p>
-      Efficiency is very important, because the more efficient the conversion
-      the less resources are required to produce energy.
-    </p>
-
     <!-- calculation to prove? -->
 
-    <h2>Energy sources lifespan</h2>
-    <p>Lifespan</p>
+    <h2>Energy sources lifespan per unit</h2>
+    <p>When used to generate electricity.</p>
+    <table>
+      <TableData />
+      <thead>
+        <th>Source</th>
+        <th>Lifespan years per unit</th>
+      </thead>
+      <tbody>
+        {#each Object.entries(energy_sources_lifespan) as [key, value]}
+          <tr>
+            <td class="font-medium">{key}</td>
+            <td><Ref to="test">{value}</Ref></td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
 
-    <h2>Energy source usability</h2>
-    <p>For how long can we still use the source</p>
+    <h2>Energy sources possible usage timespan</h2>
+    <p>
+      For how long can we still use an energy source due to resource scarcity.
+      Although, this would only work if all resources are used for that
+      particular source.
+    </p>
+    <table>
+      <TableData />
+      <thead>
+        <th>Source</th>
+        <th>Possible timespan years</th>
+        <th>With recycling</th>
+      </thead>
+      <tbody>
+        {#each Object.entries(energy_sources_possible_lifespan) as [key, value]}
+          <tr>
+            <td class="font-medium">{key}</td>
+            <td><Ref to="test">{value}</Ref></td>
+            <td>?</td>
+          </tr>
+        {/each}
+      </tbody>
+    </table>
 
     <h2>Energy sources total energy supply</h2>
     <p>
-      If we were to use all proven reserves, how much energy would that produce?
+      If we were to use all proven reserves to generate electricity, how much
+      would that produce?
     </p>
     <table class="table-fixed">
       <thead>
@@ -473,8 +514,8 @@
       to make an actual fair comparison.
     </p>
 
-    <h2>For how long could the resources power our consumption</h2>
-    <p>How many years could we power our consumption with above supply.</p>
+    <h2>For how long could the proven reserves power our consumption</h2>
+    <p>How many years could we power our consumption with supply.</p>
     <table class="table-fixed">
       <thead>
         <th>Source</th>
@@ -511,7 +552,7 @@
 
     <p>
       This clearly shows that we cannot rely on just one energy source. Instead
-      we need to rely on all of them. (and make a optimal distribution)
+      we need to rely on all of them. (and make an optimal distribution)
     </p>
 
     <!-- <p>Guess we are in the last liveable century.</p> -->
