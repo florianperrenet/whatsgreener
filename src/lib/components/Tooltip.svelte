@@ -9,14 +9,14 @@
 
   export let pointer_events = true;
 
-  let element;
+  let trigger;
   let popover;
   let popover_arrow;
 
   let show_popover = false;
 
   $: if (popover && popover_arrow) {
-    computePosition(element, popover, {
+    computePosition(trigger, popover, {
       placement: "top",
       middleware: [
         offset(6),
@@ -51,11 +51,11 @@
 </script>
 
 <span
-  bind:this={element}
+  bind:this={trigger}
   on:mouseenter={() => (show_popover = true)}
   on:mouseleave={() => (show_popover = false)}
 >
-  <slot name="element" />
+  <slot name="trigger" />
 
   {#if show_popover}
     <div

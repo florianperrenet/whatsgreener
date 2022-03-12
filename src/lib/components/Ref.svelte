@@ -8,7 +8,7 @@
 
 <Tooltip>
   <span
-    slot="element"
+    slot="trigger"
     class="cursor-default border-b-2 border-dotted border-gray-400 no-underline"
     ><slot /></span
   >
