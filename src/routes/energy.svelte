@@ -475,6 +475,7 @@
       would that produce?
     </p>
     <table class="table-fixed">
+      <TableData />
       <thead>
         <th>Source</th>
         <th>Proven reserves</th>
@@ -515,9 +516,12 @@
       to make an actual fair comparison.
     </p>
 
+    <h2>What releases more energy, oil through solar panels or directly oil</h2>
+
     <h2>For how long could the proven reserves power our consumption</h2>
     <p>How many years could we power our consumption with current supply.</p>
     <table class="table-fixed">
+      <TableData />
       <thead>
         <th>Source</th>
         <th>years</th>
