@@ -448,7 +448,8 @@
     <p>
       For how long can we still use an energy source due to resource scarcity.
       Although, this would only work if all resources are used for that
-      particular source.
+      particular source. Combined will be a weird and unfair calculation, who
+      can use what.
     </p>
     <table>
       <TableData />
@@ -552,7 +553,8 @@
 
     <p>
       This clearly shows that we cannot rely on just one energy source. Instead
-      we need to rely on all of them. (and make an optimal distribution)
+      we need to rely on all of them. (and make an optimal distribution). Or
+      lower our consumption so the resources last longer.
     </p>
 
     <!-- <p>Guess we are in the last liveable century.</p> -->
