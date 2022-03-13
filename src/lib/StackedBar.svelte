@@ -2,7 +2,7 @@
   import { dec, chartColors } from "$lib/utils";
   import * as d3 from "d3";
 
-  // import { tooltip } from "$lib/tooltip";
+  import { tooltip } from "$lib/tooltip";
 
   // import { createPopper } from "@popperjs/core";
   import {
@@ -20,7 +20,7 @@
 
   export let title = null;
 
-  export let tooltip = null;
+  export let tooltipje = null;
   export let arrow = null;
 
   export let highlightKey = null;
@@ -87,9 +87,9 @@
   // });
 
   function onMouseEnter(e, key, values) {
-    if (!tooltip) return;
+    if (!tooltipje) return;
 
-    tooltip.style.display = "block";
+    tooltipje.style.display = "block";
 
     const _tooltip_data = {
       title,
@@ -128,7 +128,7 @@
     // const tooltip_html_el = tooltip.querySelector("#tooltip-html");
     // tooltip_html_el.innerHTML = `<table><thead><tr><td colspan="3" style="padding-bottom: 5px;"><strong>${title}</strong></td></tr></thead><tbody>${trs}</tbody></table>`;
 
-    computePosition(e.target, tooltip, {
+    computePosition(e.target, tooltipje, {
       placement: "top",
       middleware: [
         offset(6),
@@ -137,7 +137,7 @@
         flarrow({ element: arrow }),
       ],
     }).then(({ x, y, placement, middlewareData }) => {
-      Object.assign(tooltip.style, {
+      Object.assign(tooltipje.style, {
         left: `${x}px`,
         top: `${y}px`,
       });
@@ -162,9 +162,9 @@
   }
 
   function onMouseLeave(e) {
-    if (!tooltip) return;
+    if (!tooltipje) return;
 
-    tooltip.style.display = "";
+    tooltipje.style.display = "";
   }
 
   $: show = (key) => {
@@ -215,6 +215,10 @@
       x += value;
     }
   });
+
+  function getContent(key, values) {
+    return "something";
+  }
 </script>
 
 <!-- <div bind:this={stackedBar} /> -->
@@ -231,9 +235,20 @@
             activeKey,
             0.1
           )}; width: {value}%;"
+          use:tooltip={{ content: getContent(key, value, index) }}
+        />
+
+        <!-- <div
+          class={height}
+          style="background-color: {colors[index]}; opacity: {opacity(
+            key,
+            highlightKey,
+            activeKey,
+            0.1
+          )}; width: {value}%;"
           on:mouseenter={(e) => onMouseEnter(e, key, values)}
           on:mouseleave={onMouseLeave}
-        />
+        /> -->
       {/if}
     {/each}
   </div>

@@ -294,7 +294,7 @@ export const resource_world_consumption = (() => {
 
   data.combined = data.combined.div(world_energy_consumption_twh_year);
 
-  console.log(data)
+  // console.log(data)
 
   return data;
 })();

@@ -1,45 +1,182 @@
-export function tooltip(element) {
-  let div;
-  let title;
-  function mouseOver(event) {
-    // NOTE: remove the `title` attribute, to prevent showing the default browser tooltip
-    // remember to set it back on `mouseleave`
-    title = element.getAttribute('title');
-    element.removeAttribute('title');
+import {
+  computePosition,
+  flip,
+  shift,
+  offset,
+  arrow as flarrow,
+} from "@floating-ui/dom";
 
-    div = document.createElement('div');
-    div.textContent = title;
-    div.style = `
-			border: 1px solid #ddd;
-			box-shadow: 1px 1px 1px #ddd;
-			background: white;
-			border-radius: 4px;
-			padding: 4px;
-			position: absolute;
-			top: ${event.pageX + 10}px;
-			left: ${event.pageY + 10}px;
-		`;
-    document.body.appendChild(div);
-  }
-  function mouseMove(event) {
-    div.style.left = `${event.pageX + 10}px`;
-    div.style.top = `${event.pageY + 10}px`;
-  }
-  function mouseLeave() {
-    document.body.removeChild(div);
-    // NOTE: restore the `title` attribute
-    element.setAttribute('title', title);
+import { tooltip as toolstore } from "$lib/store"
+
+import Test from "$lib/Test.svelte"
+
+
+export function tooltip(trigger, param) {
+  let popper;
+  let popper_content;
+  let popper_arrow;
+
+  let content = param.content;
+
+  let interactive = param.interactive === true ? true : false;
+
+  let can_add = true;
+
+  // console.log(content)
+
+
+
+
+
+  function mouseenter(event) {
+    if (!can_add) return;
+
+    createElements();
+
+    popper_content.innerHTML = content;
+
+    popper.appendChild(popper_content);
+    popper.appendChild(popper_arrow);
+
+
+    show();
+
+    toolstore.set({
+      show: true,
+      content: Test,
+    })
+
+    // toolstore.set({ 'test': param.content })
+    // toolstore.set = param.content
+
+    setPlacement();
   }
 
-  element.addEventListener('mouseover', mouseOver);
-  element.addEventListener('mouseleave', mouseLeave);
-  element.addEventListener('mousemove', mouseMove);
+  function mouseleave() {
+    can_add = false;
+    document.addEventListener('mousemove', mousemove);
+  }
+
+
+  function show() {
+    document.body.appendChild(popper);
+  }
+
+  function hide() {
+    document.body.removeChild(popper);
+    can_add = true;
+  }
+
+
+
+  function createElements() {
+    popper = document.createElement('div');
+    popper.classList.add(
+      "absolute",
+      "rounded",
+      "bg-white",
+      "shadow-md",
+      "ring-1",
+      "ring-gray-900",
+      "ring-opacity-5",
+    );
+
+    popper_content = document.createElement('div');
+    popper_content.classList.add(
+      "-mb-2",
+      "px-3",
+      "pt-2",
+      "pb-4",
+      "text-gray-700",
+    );
+
+    popper_arrow = document.createElement('div');
+    popper_arrow.classList.add(
+      "absolute",
+      "h-[12px]",
+      "w-[12px]",
+      "bg-gray-300",
+      "-rotate-45",
+      "after:absolute",
+      "after:bottom-[1px]",
+      "after:left-[1px]",
+      "after:h-[12px]",
+      "after:w-[12px]",
+      "after:bg-white",
+    );
+  }
+
+
+
+  function setPlacement() {
+    computePosition(trigger, popper, {
+      placement: "top",
+      middleware: [
+        offset(8),
+        flip(),
+        shift({ padding: 5 }),
+        flarrow({ element: popper_arrow }),
+      ],
+    }).then(({ x, y, placement, middlewareData }) => {
+      Object.assign(popper.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+      });
+
+      const { x: arrowX, y: arrowY } = middlewareData.arrow;
+
+      const staticSide = {
+        top: "bottom",
+        right: "left",
+        bottom: "top",
+        left: "right",
+      }[placement.split("-")[0]];
+
+      Object.assign(popper_arrow.style, {
+        left: arrowX != null ? `${arrowX}px` : "",
+        top: arrowY != null ? `${arrowY}px` : "",
+        right: "",
+        bottom: "",
+        [staticSide]: "-6px",
+      });
+    });
+  }
+
+
+
+  function mousemove(e) {
+    const target = e.target;
+    const cursor_on_trigger = trigger.contains(target);
+    const cursor_on_popper = popper.contains(target);
+
+    if (interactive) {
+      if (cursor_on_trigger || cursor_on_popper) return;
+    } else {
+      if (cursor_on_trigger) return;
+    }
+
+    document.removeEventListener('mousemove', mousemove);
+
+    hide();
+
+  }
+
+
+
+
+
+
+
+  trigger.addEventListener('mouseenter', mouseenter);
+  trigger.addEventListener('mouseleave', mouseleave);
 
   return {
     destroy() {
-      element.removeEventListener('mouseover', mouseOver);
-      element.removeEventListener('mouseleave', mouseLeave);
-      element.removeEventListener('mousemove', mouseMove);
+      trigger.removeEventListener('mouseenter', mouseenter);
+      trigger.removeEventListener('mouseleave', mouseleave);
+      document.removeEventListener('mousemove', mousemove);
     }
   }
 }
+
+

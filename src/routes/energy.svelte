@@ -33,6 +33,8 @@
   import { stringify } from "postcss";
   import ImpactBar from "$lib/ImpactBar.svelte";
 
+  import { tooltip as tooltiptest } from "$lib/tooltip";
+
   let energyMix = {};
   let entities = [];
   let selected = null;
@@ -307,7 +309,7 @@
     return arr;
   }
 
-  let tooltip;
+  let tooltipje;
   let arrow;
 
   let relative = false;
@@ -413,12 +415,12 @@
           <tr>
             <td class="font-medium">{key}</td>
             <td
-              ><Ref to="test">
+              ><Ref to="calculations-test">
                 {value.a}%
               </Ref></td
             >
             <td>?</td>
-            <td><Ref to="test">{value.maximum}%</Ref></td>
+            <td><Ref to="calculations-test">{value.maximum}%</Ref></td>
           </tr>
         {/each}
       </tbody>
@@ -438,7 +440,7 @@
         {#each Object.entries(energy_sources_lifespan) as [key, value]}
           <tr>
             <td class="font-medium">{key}</td>
-            <td><Ref to="test">{value}</Ref></td>
+            <td><Ref to="calculations-test">{value}</Ref></td>
           </tr>
         {/each}
       </tbody>
@@ -495,7 +497,7 @@
                 highlightKey={highlightSource}
                 activeKey={activeSource}
                 title="test"
-                {tooltip}
+                {tooltipje}
                 {arrow}
                 bind:tooltip_data
               />
@@ -539,7 +541,7 @@
                 highlightKey={highlightSource}
                 activeKey={activeSource}
                 title="test"
-                {tooltip}
+                {tooltipje}
                 {arrow}
                 bind:tooltip_data
               />
@@ -708,7 +710,7 @@
                       highlightKey={highlightSource}
                       activeKey={activeSource}
                       title={item.country}
-                      {tooltip}
+                      {tooltipje}
                       {arrow}
                       bind:tooltip_data
                     />
@@ -824,7 +826,7 @@
 
 <div
   class="pointer-events-none absolute hidden rounded bg-white shadow-md ring-1 ring-gray-900 ring-opacity-5"
-  bind:this={tooltip}
+  bind:this={tooltipje}
 >
   <div id="tooltip-html" class="py-2 px-3">
     {#if "title" in tooltip_data}
