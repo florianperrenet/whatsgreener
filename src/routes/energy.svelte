@@ -30,18 +30,12 @@
     descendingOnKey2,
     descendingOnKey3,
   } from "$lib/utils";
-  import { stringify } from "postcss";
-  import ImpactBar from "$lib/ImpactBar.svelte";
-
-  import { tooltip as tooltiptest } from "$lib/tooltip";
 
   let energyMix = {};
   let entities = [];
   let selected = null;
 
   let _years = [];
-
-  let tooltip_data = {};
 
   let tableYear = "2019";
 
@@ -309,9 +303,6 @@
     return arr;
   }
 
-  let tooltipje;
-  let arrow;
-
   let relative = false;
   function toggleRelative() {
     relative = !relative;
@@ -497,9 +488,6 @@
                 highlightKey={highlightSource}
                 activeKey={activeSource}
                 title="test"
-                {tooltipje}
-                {arrow}
-                bind:tooltip_data
               />
             </td>
           </tr>
@@ -541,9 +529,6 @@
                 highlightKey={highlightSource}
                 activeKey={activeSource}
                 title="test"
-                {tooltipje}
-                {arrow}
-                bind:tooltip_data
               />
             </td>
           </tr>
@@ -710,9 +695,6 @@
                       highlightKey={highlightSource}
                       activeKey={activeSource}
                       title={item.country}
-                      {tooltipje}
-                      {arrow}
-                      bind:tooltip_data
                     />
                   </div>
                   <div class="opacity-50">
@@ -823,40 +805,3 @@
 -->
   </div>
 </ContainerLayout>
-
-<div
-  class="pointer-events-none absolute hidden rounded bg-white shadow-md ring-1 ring-gray-900 ring-opacity-5"
-  bind:this={tooltipje}
->
-  <div id="tooltip-html" class="py-2 px-3">
-    {#if "title" in tooltip_data}
-      <div class="mb-1 text-sm font-bold">{tooltip_data.title}</div>
-    {/if}
-    {#if "table" in tooltip_data}
-      <table class="text-xs">
-        <tbody>
-          {#each tooltip_data.table.rows as row}
-            <tr
-              class={row.opacity === 1 ? "font-semibold" : ""}
-              style="opacity: {row.opacity};"
-            >
-              <td class="flex items-center pr-2">
-                <div
-                  class="mr-1 h-2 w-2"
-                  style="background-color: {row.color};"
-                />
-                <span>{row.key}</span>
-              </td>
-              <td class="text-right">{row.value.toFixed(2)}</td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    {/if}
-  </div>
-  <div
-    class="absolute bg-white"
-    style="width: 8px; height: 8px; transform: rotate(45deg);"
-    bind:this={arrow}
-  />
-</div>
