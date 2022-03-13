@@ -6,9 +6,6 @@ import {
   arrow as flarrow,
 } from "@floating-ui/dom";
 
-import { tooltip as toolstore } from "$lib/store"
-
-import Test from "$lib/Test.svelte"
 
 
 export function tooltip(trigger, param) {
@@ -21,8 +18,6 @@ export function tooltip(trigger, param) {
   let interactive = param.interactive === true ? true : false;
 
   let can_add = true;
-
-  // console.log(content)
 
 
 
@@ -41,13 +36,6 @@ export function tooltip(trigger, param) {
 
     show();
 
-    toolstore.set({
-      show: true,
-      content: Test,
-    })
-
-    // toolstore.set({ 'test': param.content })
-    // toolstore.set = param.content
 
     setPlacement();
   }
