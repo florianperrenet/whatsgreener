@@ -80,6 +80,7 @@ export function tooltip(trigger, param) {
 
     popper_arrow = document.createElement('div');
     popper_arrow.classList.add(
+      // "pointer-events-none",
       "absolute",
       "h-[12px]",
       "w-[12px]",

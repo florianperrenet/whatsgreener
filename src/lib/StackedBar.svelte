@@ -1,18 +1,5 @@
 <script>
-  import { dec, chartColors } from "$lib/utils";
-  import * as d3 from "d3";
-
   import { tooltip } from "$lib/tooltip";
-
-  // import { createPopper } from "@popperjs/core";
-  import {
-    computePosition,
-    flip,
-    shift,
-    offset,
-    arrow as flarrow,
-  } from "@floating-ui/dom";
-  import { svg } from "d3";
 
   export let values;
   export let colors;
@@ -20,152 +7,8 @@
 
   export let title = null;
 
-  export let tooltipje = null;
-  export let arrow = null;
-
   export let highlightKey = null;
   export let activeKey = null;
-
-  export let tooltip_data = null;
-
-  import { onMount } from "svelte";
-
-  let stackedBar;
-
-  // console.log(values);
-
-  // function getColor(value) {
-  //   let color;
-  //   if (value.lte(dec("10"))) color = "green";
-  //   else if (value.lte(dec("50"))) color = "orange";
-  //   else color = "red";
-  //   return color;
-  //   return `bg-${color}-600`;
-  // }
-
-  // function getBars(val) {
-  //   let valueRem = value;
-
-  //   const bars = [];
-
-  //   while (valueRem.gt(dec("0"))) {
-  //     const gt100 = valueRem.gt(dec("100"));
-  //     const width = gt100 ? dec("100") : valueRem;
-
-  //     bars.push([width, gt100]);
-
-  //     valueRem = valueRem.minus(dec("100"));
-  //   }
-
-  //   return bars;
-  // }
-
-  // let tooltip;
-  let bar;
-
-  // createPopper(bar, tooltip, {
-  //   placement: "top",
-  //   modifiers: [
-  //     {
-  //       name: "offset",
-  //       options: {
-  //         offset: [0, 8],
-  //       },
-  //     },
-  //   ],
-  // });
-
-  // onMount(() => {
-  //   if (!tooltip) return;
-
-  //   computePosition(bar, tooltip).then(({ x, y }) => {
-  //     Object.assign(tooltip.style, {
-  //       left: `${x}px`,
-  //       top: `${y}px`,
-  //     });
-  //   });
-  // });
-
-  function onMouseEnter(e, key, values) {
-    if (!tooltipje) return;
-
-    tooltipje.style.display = "block";
-
-    const _tooltip_data = {
-      title,
-      table: {
-        columns: [],
-        rows: [],
-      },
-    };
-    let index = 0;
-    for (const [valkey, valval] of Object.entries(values)) {
-      const color = colors[index++];
-      const _opacity = opacity(valkey, key, null, 0.4);
-      _tooltip_data.table.rows.push({
-        color,
-        opacity: _opacity,
-        key: valkey,
-        value: valval,
-      });
-    }
-
-    tooltip_data = _tooltip_data;
-
-    // let trs = "";
-    // let index = 0;
-    // for (const [valkey, valval] of Object.entries(values)) {
-    //   const color = colors[index++];
-    //   const _opacity = opacity(valkey, key, null, 0.4);
-    //   trs += `<tr style="opacity: ${_opacity};">
-    //       <td style="background-color: ${color}; width: 10px; height: 10px; display: inline-block; margin-right: 2px;"></td>
-    //         <td style="padding-right: 0.8em;">${valkey}</td>
-    //         <td style="text-align: right; white-space: nowrap;">${valval.toFixed(
-    //           2
-    //         )}</td>
-    //       </tr>`;
-    // }
-    // const tooltip_html_el = tooltip.querySelector("#tooltip-html");
-    // tooltip_html_el.innerHTML = `<table><thead><tr><td colspan="3" style="padding-bottom: 5px;"><strong>${title}</strong></td></tr></thead><tbody>${trs}</tbody></table>`;
-
-    computePosition(e.target, tooltipje, {
-      placement: "top",
-      middleware: [
-        offset(6),
-        flip(),
-        shift({ padding: 5 }),
-        flarrow({ element: arrow }),
-      ],
-    }).then(({ x, y, placement, middlewareData }) => {
-      Object.assign(tooltipje.style, {
-        left: `${x}px`,
-        top: `${y}px`,
-      });
-
-      const { x: arrowX, y: arrowY } = middlewareData.arrow;
-
-      const staticSide = {
-        top: "bottom",
-        right: "left",
-        bottom: "top",
-        left: "right",
-      }[placement.split("-")[0]];
-
-      Object.assign(arrow.style, {
-        left: arrowX != null ? `${arrowX}px` : "",
-        top: arrowY != null ? `${arrowY}px` : "",
-        right: "",
-        bottom: "",
-        [staticSide]: "-4px",
-      });
-    });
-  }
-
-  function onMouseLeave(e) {
-    if (!tooltipje) return;
-
-    tooltipje.style.display = "";
-  }
 
   $: show = (key) => {
     const isActive = key === activeKey;
@@ -189,39 +32,43 @@
     return lowestOpacity;
   };
 
-  onMount(() => {
-    const el = d3.select(stackedBar);
-    const svg = el
-      .append("svg")
-      .attr("width", "100%")
-      .attr("height", "10")
-      .append("g");
-
-    let index = 0;
-    let x = 0;
-    for (const [key, value] of Object.entries(values)) {
-      const color = colors[index++];
-      const _opacity = opacity(key, highlightKey, activeKey, 0.1);
-      svg
-        .append("rect")
-        .attr("width", `${value}%`)
-        .attr("height", "10")
-        .attr("fill", color)
-        .attr("opacity", _opacity)
-        .attr("x", `${x}%`)
-        .on("mouseenter", (e) => onMouseEnter(e, key, values))
-        .on("mouseleave", onMouseLeave);
-
-      x += value;
-    }
-  });
-
   function getContent(key, values) {
-    return "something";
+    let trs = "";
+    let index = 0;
+    for (const [valkey, val] of Object.entries(values)) {
+      const color = colors[index++];
+      const _opacity = opacity(valkey, key, null, 0.4);
+
+      let tr = `
+        <tr
+          class="${_opacity === 1 ? "font-semibold" : ""}"
+          style="opacity: ${_opacity};"
+        >
+          <td class="flex items-center pr-2">
+            <div
+              class="mr-1 h-2 w-2"
+              style="background-color: ${color};"
+            ></div>
+            <span>${valkey}</span>
+          </td>
+          <td class="text-right">${val.toFixed(2)}</td>
+        </tr>
+      `;
+
+      trs += tr;
+    }
+
+    return `
+      <div class="mb-1 text-sm font-bold">${title}</div>
+      <table class="text-xs">
+      <tbody>
+        ${trs}
+      </tbody>
+    </table>
+
+    `;
   }
 </script>
-
-<!-- <div bind:this={stackedBar} /> -->
 
 <div class="overflow-hidden">
   <div class="flex w-full flex-row bg-gray-100 {height}">
@@ -235,29 +82,9 @@
             activeKey,
             0.1
           )}; width: {value}%;"
-          use:tooltip={{ content: getContent(key, value, index) }}
+          use:tooltip={{ content: getContent(key, values) }}
         />
-
-        <!-- <div
-          class={height}
-          style="background-color: {colors[index]}; opacity: {opacity(
-            key,
-            highlightKey,
-            activeKey,
-            0.1
-          )}; width: {value}%;"
-          on:mouseenter={(e) => onMouseEnter(e, key, values)}
-          on:mouseleave={onMouseLeave}
-        /> -->
       {/if}
     {/each}
   </div>
 </div>
-
-<!-- <svg class="w-full h-3">
-  {#each Object.entries(values) as [key, value], index}
-    {#if show(key)}
-      <rect width="{value}%" height="10" x="calc({value}%)" />
-    {/if}
-  {/each}
-</svg> -->
