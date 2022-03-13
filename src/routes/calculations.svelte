@@ -98,7 +98,7 @@
             idx += 1;
           } else if (num > level) {
             let tmp = helper(num);
-            console.log(res);
+            // console.log(res);
             res[res.length - 1].children.push(...tmp);
           } else {
             return res;
