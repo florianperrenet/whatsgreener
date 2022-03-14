@@ -75,7 +75,7 @@
                 <li>
                   <a
                     href="#test"
-                    class="mx-4 mt-2 flex cursor-pointer items-center overflow-x-hidden rounded-lg bg-gray-100 py-2 px-5 hover:bg-gray-200"
+                    class="mx-4 mt-2 flex cursor-pointer items-center justify-between overflow-x-hidden rounded-lg bg-gray-100 py-2 px-5 hover:bg-gray-200"
                   >
                     <div
                       class="mr-5 rounded-lg border border-gray-300 bg-white p-1 text-gray-400"
@@ -93,9 +93,11 @@
                         />
                       </svg>
                     </div>
-                    <div class="overflow-x-hidden">
+                    <div class="grow overflow-x-hidden">
                       <div class="hidden">{hit.id}</div>
-                      <div class="meilisearch-formatted mb-0.5 truncate">
+                      <div
+                        class="meilisearch-formatted mb-0.5 truncate text-gray-700"
+                      >
                         {@html hit._formatted.title}
                       </div>
                       <div class="hidden">{hit.parent}</div>
@@ -161,5 +163,8 @@
     font-weight: bold;
     /* border-bottom: 2px solid blue; */
     text-decoration: underline;
+    text-decoration-thickness: 2px;
+    font-style: normal;
+    color: black;
   }
 </style>
