@@ -38,7 +38,7 @@
     return title.toLowerCase().replace(/\W/g, "_");
   }
 
-  let search;
+  let search = "";
   let search_result;
 
   $: if (search) {
@@ -198,4 +198,4 @@
   </div>
 </SidebarLayout>
 
-<ComboBox bind:search bind:search_result bind:show={combobox_show} />
+<ComboBox bind:search {search_result} bind:show={combobox_show} />
