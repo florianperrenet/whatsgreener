@@ -22,9 +22,35 @@
   import SidebarLayout from "$lib/SidebarLayout.svelte";
   import Input from "$lib/Input.svelte";
   import ComboBox from "$lib/components/ComboBox.svelte";
+  import { MeiliSearch } from "meilisearch";
+
+  const meilisearch_apikey =
+    "XZEH8BS98d4f2cef44a4d29a97af21020348f08a6942ff07c2e905d064177d766676e1fb";
+
+  const meilisearch_client = new MeiliSearch({
+    host: "https://search.whatsgreener.xyz",
+    apiKey: meilisearch_apikey,
+  });
+
+  const search_index = meilisearch_client.index("calculations");
 
   function titleToId(title) {
     return title.toLowerCase().replace(/\W/g, "_");
+  }
+
+  let search;
+  let search_result;
+
+  $: if (search) {
+    search_index
+      .search(search, {
+        attributesToHighlight: ["title", "content"],
+      })
+      .then((res) => {
+        search_result = res;
+      });
+  } else {
+    search_result = null;
   }
 
   let headings = [];
@@ -174,4 +200,4 @@
   </div>
 </SidebarLayout>
 
-<ComboBox bind:show={combobox_show} />
+<ComboBox bind:search bind:search_result bind:show={combobox_show} />
