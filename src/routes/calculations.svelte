@@ -49,8 +49,6 @@
       .then((res) => {
         search_result = res;
       });
-  } else {
-    search_result = null;
   }
 
   let headings = [];

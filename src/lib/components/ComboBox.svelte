@@ -64,7 +64,7 @@
         <div class="rounded-md border p-1 text-xs font-bold shadow-sm">esc</div>
       </div>
       <div class="px-4 py-6">
-        {#if search_result}
+        {#if search && search_result}
           {#if search_result.nbHits}
             <div class="mb-4 text-lg font-semibold">
               {search_result.hits[0].parent}
