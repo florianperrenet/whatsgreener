@@ -23,6 +23,13 @@
     }
   }
 
+  function relevantPart(s) {
+    const pos = s.indexOf("<em>");
+    if (!pos) return s;
+    s = "..." + s.substring(pos - 20, s.length);
+    return s;
+  }
+
   // jumpTo
 </script>
 
@@ -67,7 +74,8 @@
         {#if search && search_result}
           {#if search_result.nbHits}
             <div class="mb-4 px-4 text-lg font-semibold">
-              {search_result.hits[0].parent}
+              <!-- {search_result.hits[0].parent} -->
+              Results
             </div>
 
             <ul class="">
@@ -104,7 +112,7 @@
                       <div
                         class="meilisearch-formatted truncate text-sm text-gray-400"
                       >
-                        {@html hit._formatted.content}
+                        {@html relevantPart(hit._formatted.content)}
                       </div>
                     </div>
                     <div class="ml-5">

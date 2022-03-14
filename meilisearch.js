@@ -17,9 +17,51 @@ function titleToId(title) {
 }
 
 
-const headings = [
+const heading_tags = [
   'h1', 'h2', 'h3', 'h4', 'h5', 'h6'
 ];
+
+const headingSelector = "main :where(h1, h2, h3, h4, h5, h6)";
+
+
+
+function get_nested($, arr) {
+  let idx = 0;
+  let level = 2;
+
+  function helper(level) {
+    let res = [];
+
+    while (idx < arr.length) {
+      let item = arr[idx];
+      let num = headingLevel(item.name);
+
+      if (num == level) {
+        res.push({
+          id: titleToId($(item).text()),
+          item,
+          level,
+          children: [],
+        });
+        idx += 1;
+      } else if (num > level) {
+        let tmp = helper(num);
+        // console.log(res);
+        res[res.length - 1].children.push(...tmp);
+      } else {
+        return res;
+      }
+    }
+
+    return res;
+  }
+
+  return helper(level);
+}
+
+function headingLevel(tag) {
+  return tag[1];
+}
 
 
 const getCalculations = async () => {
@@ -33,6 +75,17 @@ const getCalculations = async () => {
   });
 
   const content = $('div[slot=content]');
+
+  const headings = $(headingSelector);
+
+
+
+  const toc = get_nested($, headings)
+  console.log(toc)
+
+  // console.log(headings)
+
+  return;
 
   content.children().each((i, el) => {
 
