@@ -9,16 +9,20 @@
 
   $: if (show && input_el) {
     input_el.focus();
+
+    document.body.classList.add("overflow-hidden");
   }
 
   function reset() {
+    show = false;
     search = "";
     search_result = null;
+
+    document.body.classList.remove("overflow-hidden");
   }
 
   function handleKeyDown(e) {
     if (e.key === "Escape") {
-      show = false;
       reset();
     }
   }
@@ -42,7 +46,7 @@
     <div
       class="mx-auto w-full max-w-[47rem] overflow-y-auto rounded-xl bg-white"
       use:clickOutside
-      on:click_outside={() => (show = false)}
+      on:click_outside={reset}
     >
       <div class="flex items-center border-b border-gray-100 px-4">
         <svg
@@ -84,6 +88,9 @@
                   <a
                     href="#test"
                     class="mx-4 mt-2 flex cursor-pointer items-center justify-between overflow-x-hidden rounded-lg bg-gray-100 py-2 px-5 hover:bg-gray-200"
+                    on:click={(e) => {
+                      e.preventDefault();
+                    }}
                   >
                     <div
                       class="mr-5 rounded-lg border border-gray-300 bg-white p-1 text-gray-400"
