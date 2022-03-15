@@ -18,6 +18,7 @@
   import Chart from "$lib/Chart.svelte";
   import Toggle from "$lib/Toggle.svelte";
   import Ref from "$lib/components/Ref.svelte";
+  import RefOrEdit from "$lib/components/RefOrEdit.svelte";
   import TableData from "$lib/components/TableData.svelte";
 
   import {
@@ -405,13 +406,14 @@
         {#each Object.entries(energy_source_efficiency) as [key, value]}
           <tr>
             <td class="font-medium">{key}</td>
+            <td><RefOrEdit to="calculations-test" value={value.a} />%</td>
             <td
-              ><Ref to="calculations-test">
-                {value.a}%
-              </Ref></td
+              ><RefOrEdit
+                to="calculations-test"
+                value={value.max_achieved}
+              />%</td
             >
-            <td><Ref to="calculations-test">{value.max_achieved}%</Ref></td>
-            <td><Ref to="calculations-test">{value.maximum}%</Ref></td>
+            <td><RefOrEdit to="calculations-test" value={value.maximum} />%</td>
           </tr>
         {/each}
       </tbody>
@@ -431,7 +433,7 @@
         {#each Object.entries(energy_sources_lifespan) as [key, value]}
           <tr>
             <td class="font-medium">{key}</td>
-            <td><Ref to="calculations-test">{value}</Ref></td>
+            <td><RefOrEdit to="calculations-test" {value} /></td>
           </tr>
         {/each}
       </tbody>
@@ -467,6 +469,7 @@
       If we were to use all proven reserves to generate electricity, how much
       would that produce?
     </p>
+    <p>World energy demand</p>
     <table class="table-fixed">
       <TableData />
       <thead>

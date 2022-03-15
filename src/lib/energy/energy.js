@@ -16,26 +16,26 @@ export const energy_source_efficiency = {
   // https://geospatial.blogs.com/geospatial/2010/01/energy-efficiency-of-fossil-fuel-power-generation.html#:~:text=The%20average%20efficiencies%20of%20power,up%20the%20stack%22%20as%20heat.
   oil: {
     a: dec("38"),
-    max_achieved: '?',
-    maximum: '?',
+    max_achieved: undefined,
+    maximum: undefined,
   },
 
   // Life_Cycle_Assessment_of_Fossil_and_Biomass_Power_
   // 19/74
   coal: {
     a: dec("43"), // 46<->40
-    max_achieved: '?',
-    maximum: '?',
+    max_achieved: undefined,
+    maximum: undefined,
   },
   lignite: {
     a: dec("40"),
-    max_achieved: '?',
-    maximum: '?',
+    max_achieved: undefined,
+    maximum: undefined,
   },
   natural_gas: {
     a: dec("59"),
-    max_achieved: '?',
-    maximum: '?',
+    max_achieved: undefined,
+    maximum: undefined,
   },
 
   // https://en.wikipedia.org/wiki/Solar_cell_efficiency
@@ -46,7 +46,7 @@ export const energy_source_efficiency = {
   },
   wind: {
     a: dec("30"),
-    max_achieved: '?',
+    max_achieved: undefined,
     maximum: dec('59'),
   },
 };
@@ -88,56 +88,56 @@ export const energy_source_scarcity = (() => {
       unit: 'thousand million tonnes',
       used: dec('182241').div('1000'),
       use_rate: dec('4017.5').div('1000'),  // million tonnes
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
     gas: {
       proven_reserves: energy_source_proven_reserves.gas,
       unit: 'trillion cubic meters',
       used: dec('118471').div(1000),
       use_rate: dec('3822.8').div('1000'),  // billion cubic meters
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
     coal: {
       proven_reserves: energy_source_proven_reserves.coal,
       unit: 'million tonnes',
       used: dec('5705').times('1_000_000_000_000').div('29.3').div(1000_000_000),
       use_rate: dec('151.42').times('1_000_000_000_000').div('29.3').div(1000_000_000),  // exajoules
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
     cobalt: {
       proven_reserves: energy_source_proven_reserves.cobalt,
       unit: 'thousand tonnes',
-      used: '?',
+      used: undefined,
       use_rate: dec('127.7'),
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
     lithium: {
       proven_reserves: energy_source_proven_reserves.lithium,
       unit: 'thousand tonnes',
-      used: '?',
+      used: undefined,
       use_rate: dec('86.3'),
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
     uranium: {
       proven_reserves: energy_source_proven_reserves.uranium,
       unit: 'million tonnes',
-      used: '?',
+      used: undefined,
       use_rate: dec('66500').div('1000000'),  // tonnes https://en.wikipedia.org/wiki/Peak_uranium
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
     graphite: {
       proven_reserves: energy_source_proven_reserves.graphite,
       unit: 'thousand tonnes',
-      used: '?',
+      used: undefined,
       use_rate: dec('906.7'),
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
 
     // https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-silver.pdf
@@ -148,8 +148,8 @@ export const energy_source_scarcity = (() => {
       unit: 'tonnes',
       used: dec('1_740_000'),
       use_rate: dec('27000'),
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
     // https://lisbdnet.com/when-will-we-run-out-of-metal/
     gold: {
@@ -157,8 +157,8 @@ export const energy_source_scarcity = (() => {
       unit: 'tonnes',
       used: dec('190_000'),
       use_rate: dec('1800'),
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
 
     // https://www.freeingenergy.com/do-we-have-enough-materials-to-make-the-solar-panels-needed-for-a-clean-energy-future/
@@ -166,10 +166,10 @@ export const energy_source_scarcity = (() => {
     copper: {
       proven_reserves: dec('2_000_000_000'),  // tonnes
       unit: 'tonnes',
-      used: '?',
+      used: undefined,
       use_rate: dec('20_000_000'),
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
 
     // https://en.wikipedia.org/wiki/List_of_countries_by_silicon_production
@@ -178,10 +178,10 @@ export const energy_source_scarcity = (() => {
     silicon: {
       proven_reserves: dec('0'),  // tonnes
       unit: 'tonnes',
-      used: '?',
+      used: undefined,
       use_rate: dec('0'),
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
 
     // https://pubs.usgs.gov/periodicals/mcs2022/mcs2022.pdf
@@ -189,27 +189,27 @@ export const energy_source_scarcity = (() => {
     bauxite: {
       proven_reserves: dec('55_000_000_000'),  // tonnes
       unit: 'tonnes',
-      used: '?',
+      used: undefined,
       use_rate: dec('0'),
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
 
     solar: {
       proven_reserves: dec('0'),
       unit: '? year',
-      used: '?',
+      used: undefined,
       use_rate: dec('0'),
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
     wind: {
       proven_reserves: dec('0'),
       unit: '? year',
-      used: '?',
+      used: undefined,
       use_rate: dec('0'),
-      regain_rate: '?',
-      left: '?',
+      regain_rate: undefined,
+      left: undefined,
     },
   };
 
