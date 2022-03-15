@@ -41,10 +41,10 @@
 
 {#if show}
   <div
-    class="fixed top-0 left-0 z-50 flex h-full w-full bg-[rgb(0,0,0,0.2)] p-[12vh] backdrop-blur-sm"
+    class="fixed top-0 left-0 z-50 flex h-full w-full flex-col bg-[rgb(0,0,0,0.2)] p-[12vh] backdrop-blur-sm"
   >
     <div
-      class="mx-auto w-full max-w-[47rem] overflow-y-auto rounded-xl bg-white"
+      class="mx-auto w-full max-w-[47rem] flex-col overflow-y-auto rounded-xl bg-white"
       use:clickOutside
       on:click_outside={reset}
     >

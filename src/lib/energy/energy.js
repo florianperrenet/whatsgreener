@@ -16,6 +16,7 @@ export const energy_source_efficiency = {
   // https://geospatial.blogs.com/geospatial/2010/01/energy-efficiency-of-fossil-fuel-power-generation.html#:~:text=The%20average%20efficiencies%20of%20power,up%20the%20stack%22%20as%20heat.
   oil: {
     a: dec("38"),
+    max_achieved: '?',
     maximum: '?',
   },
 
@@ -23,24 +24,29 @@ export const energy_source_efficiency = {
   // 19/74
   coal: {
     a: dec("43"), // 46<->40
+    max_achieved: '?',
     maximum: '?',
   },
   lignite: {
     a: dec("40"),
+    max_achieved: '?',
     maximum: '?',
   },
   natural_gas: {
     a: dec("59"),
+    max_achieved: '?',
     maximum: '?',
   },
 
   // https://en.wikipedia.org/wiki/Solar_cell_efficiency
   solar: {
     a: dec("25"), // 47.1<->12.6
+    max_achieved: dec('47.1'),
     maximum: dec('68.7'), // https://en.wikipedia.org/wiki/Shockley%E2%80%93Queisser_limit
   },
   wind: {
     a: dec("30"),
+    max_achieved: '?',
     maximum: dec('59'),
   },
 };

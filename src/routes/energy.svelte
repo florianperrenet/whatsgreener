@@ -179,7 +179,7 @@
       x: 100,
       height: 1200,
       xlabel: "Year",
-      ylabel: "TWh",
+      ylabel: "kwh",
     };
 
     // chart({
@@ -212,7 +212,7 @@
       series: d,
       x: energyMix.years,
       xlabel: "Year",
-      ylabel: "TWh",
+      ylabel: "kWh",
     };
   }
 
@@ -236,7 +236,7 @@
       series: series,
       x: energyMix.years,
       xlabel: "Year",
-      ylabel: "TWh",
+      ylabel: "kwh",
     };
   }
 
@@ -410,7 +410,7 @@
                 {value.a}%
               </Ref></td
             >
-            <td>?</td>
+            <td><Ref to="calculations-test">{value.max_achieved}%</Ref></td>
             <td><Ref to="calculations-test">{value.maximum}%</Ref></td>
           </tr>
         {/each}
@@ -506,7 +506,10 @@
       to make an actual fair comparison.
     </p>
 
-    <h2>What releases more energy, oil through solar panels or directly oil</h2>
+    <h2>
+      Are we still reliant on fossil fuels after switching completely to
+      renewables
+    </h2>
 
     <h2>For how long could the proven reserves power our consumption</h2>
     <p>How many years could we power our consumption with current supply.</p>
@@ -520,8 +523,8 @@
       <tbody>
         {#each Object.entries(resource_world_consumption.values) as [key, value]}
           <tr>
-            <td>{key}</td>
-            <td>{value.toFixed(0)}</td>
+            <td class="font-medium">{key}</td>
+            <td> <Ref to="calculations-test">{value.toFixed(0)}</Ref></td>
             <td>
               <StackedBar
                 values={{ key: value }}
@@ -609,7 +612,7 @@
       />
     </div>
 
-    <div class="flex items-center gap-4">
+    <div class="flex flex-wrap items-center gap-4">
       <button
         class="rounded-md border bg-white px-4 py-2 text-sm font-medium"
         on:click={sortOnSource(activeSource)}
