@@ -91,6 +91,25 @@
 
 <h3>Factors to take into account</h3>
 <ul>
+  <li>Scarcity</li>
+  <li>Product lifetime</li>
+  <li>Reusability / Recycleability</li>
+  <li>Depedence (how dependend are we on a certain resource)</li>
+  <li>Work environment (mining etc.)</li>
+  <li>Cost to produce</li>
+  <li>Land destruction</li>
+  <li>Pollution</li>
+  <ul>
+    <li>Waste</li>
+    <li>Water</li>
+    <li>Land</li>
+    <li>Air</li>
+  </ul>
+  <li>Consumes</li>
+  <li>Emits</li>
+  <li>Other pros</li>
+  <li>Other cons</li>
+
   <li>In</li>
   <li>Outs</li>
   <li>Product lifetime</li>

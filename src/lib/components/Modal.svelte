@@ -2,6 +2,7 @@
   import { clickOutside } from "$lib/clickOutside";
 
   import Input from "$lib/Input.svelte";
+  import Button from "$lib/components/Button.svelte";
 
   export let show = false;
 
@@ -37,9 +38,7 @@
       on:click_outside={reset}
     >
       <div class="flex items-center border-b border-gray-100 px-4 py-4">
-        <div class="grow text-lg font-semibold">
-          Make a suggestion for: lalaloepsie
-        </div>
+        <div class="grow text-lg font-semibold">Make a suggestion for: xx</div>
         <div class="rounded-md border p-1 text-xs font-bold shadow-sm">esc</div>
       </div>
       <div class="px-4 py-6">
@@ -60,7 +59,9 @@
         <div>optional: email</div>
         <Input type="email" />
 
-        <button>Submit</button>
+        <div>Thank you for your contribution</div>
+
+        <Button>Submit</Button>
       </div>
     </div>
   </div>
