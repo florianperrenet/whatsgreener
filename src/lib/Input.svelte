@@ -39,14 +39,14 @@
     else if (e.code === "ArrowDown") onArrowDown();
   }
 
-  $: if (focus) {
+  $: if (focus && Input) {
     Input.focus();
   }
 </script>
 
 <label for={inputId} class="block">
   {#if label}
-    <span class="block text-sm font-medium text-gray-700 mb-1">{label}</span>
+    <span class="mb-1 block text-sm font-medium text-gray-700">{label}</span>
   {/if}
   {#if type === "number"}
     <!-- {:else if type === "number"} -->
@@ -57,7 +57,7 @@
       value={initialValue}
       bind:this={Input}
       on:input={handleNumberChange}
-      class="text-sm block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      class="block w-full rounded-md border-gray-300 text-sm shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
       {placeholder}
       {focus}
       {autocomplete}

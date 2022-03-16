@@ -446,6 +446,7 @@
       particular source. Combined will be a weird and unfair calculation, who
       can use what.
     </p>
+    <p>At current consumption rates</p>
     <table>
       <TableData />
       <thead>
