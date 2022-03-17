@@ -406,14 +406,14 @@
         {#each Object.entries(energy_source_efficiency) as [key, value]}
           <tr>
             <td class="font-medium">{key}</td>
-            <td><RefOrEdit to="calculations-test" value={value.a} />%</td>
+            <td><RefOrEdit to="calculations-ref" value={value.a} />%</td>
             <td
               ><RefOrEdit
-                to="calculations-test"
+                to="calculations-ref"
                 value={value.max_achieved}
               />%</td
             >
-            <td><RefOrEdit to="calculations-test" value={value.maximum} />%</td>
+            <td><RefOrEdit to="calculations-ref" value={value.maximum} />%</td>
           </tr>
         {/each}
       </tbody>
@@ -433,7 +433,7 @@
         {#each Object.entries(energy_sources_lifespan) as [key, value]}
           <tr>
             <td class="font-medium">{key}</td>
-            <td><RefOrEdit to="calculations-test" {value} /></td>
+            <td><RefOrEdit to="calculations-ref" {value} /></td>
           </tr>
         {/each}
       </tbody>
@@ -441,12 +441,8 @@
 
     <h2>Energy sources possible usage timespan</h2>
     <p>
-      For how long can we still use an energy source due to resource scarcity.
-      Although, this would only work if all resources are used for that
-      particular source. Combined will be a weird and unfair calculation, who
-      can use what.
+      For how long can we still use an energy source due to resource scarcity at current consumption rates.
     </p>
-    <p>At current consumption rates</p>
     <table>
       <TableData />
       <thead>
@@ -528,7 +524,7 @@
         {#each Object.entries(resource_world_consumption.values) as [key, value]}
           <tr>
             <td class="font-medium">{key}</td>
-            <td> <Ref to="calculations-test">{value.toFixed(0)}</Ref></td>
+            <td> <Ref to="calculations-ref">{value.toFixed(0)}</Ref></td>
             <td>
               <StackedBar
                 values={{ key: value }}
@@ -723,7 +719,7 @@
               {#if showDetails[item.country]}
                 <tr class="">
                   <td colspan="3">
-                    <div class="p-5">
+                    <div class="p-5 max-w-4xl mx-auto">
                       <div class="mb-5">
                         <StackedBar
                           values={unpack(item.values, stackedBarKey)}

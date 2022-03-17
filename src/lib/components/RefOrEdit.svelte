@@ -22,6 +22,8 @@
   `;
 </script>
 
+<Modal bind:show={show_modal} />
+
 {#if value === undefined}
   <Tooltip>
     <span
@@ -57,20 +59,3 @@
 {:else}
   <Ref {to}>{value}</Ref>
 {/if}
-
-<!-- {#if value === undefined}
-  <span
-    class="cursor-default border-b-2 border-dotted border-gray-400 no-underline {show_modal
-      ? 'bg-yellow-300'
-      : ''}"
-    on:click={() => (show_modal = true)}
-    use:tooltip={{
-      content,
-      interactive: true,
-    }}>?</span
-  >
-{:else}
-  <Ref {to}>{value}</Ref>
-{/if} -->
-
-<Modal bind:show={show_modal} />

@@ -21,7 +21,7 @@
   import CalculationContent from "$lib/CalculationContent.svelte";
   import SidebarLayout from "$lib/SidebarLayout.svelte";
   import Input from "$lib/Input.svelte";
-  import ComboBox from "$lib/components/ComboBox.svelte";
+  import SearchBox from "$lib/components/SearchBox.svelte";
   import { MeiliSearch } from "meilisearch";
 
   const meilisearch_apikey =
@@ -148,7 +148,7 @@
     }
   }
 
-  let combobox_show = false;
+  let searchbox_show = false;
 </script>
 
 <svelte:head>
@@ -169,7 +169,7 @@
       <div class="bg-gray-50">
         <button
           class="relative flex w-full items-center rounded-md bg-white py-1.5 pl-2 pr-3 text-sm leading-6 text-gray-400 shadow-sm ring-1 ring-slate-900/10 hover:ring-gray-300"
-          on:click={() => (combobox_show = true)}
+          on:click={() => (searchbox_show = true)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -198,4 +198,4 @@
   </div>
 </SidebarLayout>
 
-<ComboBox bind:search {search_result} bind:show={combobox_show} />
+<SearchBox bind:search {search_result} bind:show={searchbox_show} />

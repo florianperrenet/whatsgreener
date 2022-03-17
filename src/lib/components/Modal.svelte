@@ -42,26 +42,41 @@
         <div class="rounded-md border p-1 text-xs font-bold shadow-sm">esc</div>
       </div>
       <div class="px-4 py-6">
-        <div>Github or community chat</div>
+        <div class="mb-5">It's also possible to give feedback on <a href="#">Github</a> or on our <a href="#">Community chat</a>.</div>
 
-        <div>Current value is xx</div>
-        <div>Your suggestion:</div>
-        <Input type="text" focus={suggestion_input_focus} />
+        <!-- <div class="mb-5 block text-md font-medium text-gray-700">Current value is xx</div> -->
 
-        <div>Add a description</div>
-        <Input type="text" />
+        <div class="mb-3">
+          <Input type="text" label="What do you suggest?" focus={suggestion_input_focus} />
+        </div>
 
-        <div>Sources to backup your suggestion</div>
-        <div>Add as many links as you like</div>
-        <Input type="text" />
-        <Input type="text" />
+        <div class="mb-3">
+          <span class="mb-1 block text-sm font-medium text-gray-700">Provide some details</span>
+          <textarea class="
+                      mt-1
+                      block
+                      w-full
+                      rounded-md
+                      border-gray-300
+                      shadow-sm
+                      focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50
+                    " rows="3"></textarea>
+        </div>
 
-        <div>optional: email</div>
-        <Input type="email" />
+        <div class="mb-3">
+          <Input type="text" label="Sources" placeholder="Link or text" />
+          <div class="text-sm text-blue-600 mt-2 mb-3">add +</div>
+        </div>
 
-        <div>Thank you for your contribution</div>
+        <div class="mb-5">
+          <Input type="email" label="Email" placeholder="Optional" />
+        </div>
 
-        <Button>Submit</Button>
+        <!-- <div>Thank you for your contribution</div> -->
+
+        <div>
+          <Button>Submit</Button>
+        </div>
       </div>
     </div>
   </div>

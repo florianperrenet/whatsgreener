@@ -110,7 +110,7 @@
   <li>Other pros</li>
   <li>Other cons</li>
 
-  <li>In</li>
+ <!--  <li>In</li>
   <li>Outs</li>
   <li>Product lifetime</li>
   <li>Reusability (recycling)</li>
@@ -132,7 +132,7 @@
     </ul>
   </ul>
   <li>Other Pros</li>
-  <li>Other Cons</li>
+  <li>Other Cons</li> -->
 </ul>
 
 <h3>Non-greenhouse gases</h3>

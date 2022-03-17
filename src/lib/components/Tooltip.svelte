@@ -54,10 +54,7 @@
   bind:this={trigger}
   on:mouseenter={() => (show_popover = true)}
   on:mouseleave={() => (show_popover = false)}
->
-  <slot name="trigger" />
-
-  {#if show_popover}
+><slot name="trigger" />{#if show_popover}
     <div
       bind:this={popover}
       class="{pointer_events
@@ -69,7 +66,7 @@
         style="transform: rotate(-45deg);"
         bind:this={popover_arrow}
       />
-      <div class="bg-red -mb-2 px-3 pt-2 pb-4">
+      <div class="-mb-2 px-3 pt-2 pb-4">
         <slot name="content" />
       </div>
     </div>
