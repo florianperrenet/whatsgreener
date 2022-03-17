@@ -1,5 +1,6 @@
 <script>
   import ContainerLayout from "$lib/ContainerLayout.svelte";
+  import RefOrEdit from "$lib/components/RefOrEdit.svelte";
   import { earth_resources } from "$lib/earth_resources/index.js";
 
   import Input from "$lib/Input.svelte";
@@ -16,10 +17,10 @@
 <ContainerLayout>
   <div class="prose max-w-full">
     <h1>Earth resources</h1>
-    <p>
+    <!-- <p>
       This excludes unproven reserves. It is likely to find some more reserves
       and so the time till depletion could increase slighty chart with prove.
-    </p>
+    </p> -->
 
     <h2>Natural resources</h2>
     <Input placeholder="Filter source" />
@@ -40,6 +41,9 @@
         <th>Reusability</th>
         <th>Extraction impact</th>
         <th>Peak reached</th>
+        <th>Resources in use</th>
+        <th>Resources available</th>
+        <!-- in omloop -->
       </thead>
       <tbody class="divide-y">
         {#each Object.entries(earth_resources) as [key, value]}
@@ -50,12 +54,12 @@
                 ? 'font-medium text-red-500'
                 : ''} text-right">{value.time_till_depletion_readable} years</td
             >
-            <td>{value.unit}</td>
-            <td>{value.used}</td>
-            <td>{value.proven_reserves}</td>
-            <td>?</td>
-            <td>{value.use_rate}</td>
-            <td>{value.regain_rate}</td>
+            <td><RefOrEdit to="calculations-ref" value={value.unit} /></td>
+            <td><RefOrEdit to="calculations-ref" value={value.used} /></td>
+            <td><RefOrEdit to="calculations-ref" value={value.proven_reserves} /></td>
+            <td><RefOrEdit to="calculations-ref" value={undefined} /></td>
+            <td><RefOrEdit to="calculations-ref" value={value.use_rate} /></td>
+            <td><RefOrEdit to="calculations-ref" value={value.regain_rate} /></td>
           </tr>
         {/each}
         <!-- {#each Object.entries(energy_source_efficiency) as [key, value]}
