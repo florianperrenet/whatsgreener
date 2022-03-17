@@ -506,10 +506,10 @@
       to make an actual fair comparison.
     </p>
 
-    <h2>
+    <!-- <h2>
       Are we still reliant on fossil fuels after switching completely to
       renewables
-    </h2>
+    </h2> -->
 
     <h2>For how long could the proven reserves power our consumption</h2>
     <p>How many years could we power our consumption with current supply.</p>
